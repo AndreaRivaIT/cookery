@@ -56,4 +56,10 @@ public class MyRecipesFragment extends Fragment {
         /*associo alla gridView l'adapter creato sopra */
         myRecipiesGridView.setAdapter(adapter);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+    }
 }
