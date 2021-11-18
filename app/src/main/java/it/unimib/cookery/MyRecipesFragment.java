@@ -46,7 +46,7 @@ public class MyRecipesFragment extends Fragment {
         ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
 
         /* aggiungo gli elementi alla gridView */
-        for(int i=0; i<=10; i++){
+        for(int i=0; i<=20; i++){
             recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.ic_baseline_add_24));
         }
 
