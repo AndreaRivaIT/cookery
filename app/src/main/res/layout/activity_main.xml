@@ -11,13 +11,28 @@
         android:id="@+id/frameFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topNavView"
-        android:backgroundTint="@color/white">
+        app:layout_constraintTop_toBottomOf="@+id/topNavView" >
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="409dp"
+            android:layout_height="613dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,14 +62,12 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="COOKERY"
-            android:textColor="#343434"
-            android:textSize="34sp"
-            android:visibility="visible" />
-
+            android:textSize="34sp" />
     </com.google.android.material.appbar.AppBarLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
