@@ -14,29 +14,46 @@ import java.util.ArrayList;
 
 public class AdapterClass extends ArrayAdapter<Recipe>{
 
-    public AdapterClass(@NonNull Context context, ArrayList<Recipe> courseModelArrayList) {
-        super(context, 0, courseModelArrayList);
+    private ArrayList<Recipe> RecipeArrayList;
+
+
+
+    public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
+        super(context, 0, recipesArrayList);
+
+        RecipeArrayList = recipesArrayList;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View listitemView = convertView;
-        if (listitemView == null) {
+       //View listitemView = convertView;
+        if (convertView == null) {
             // Layout Inflater inflates each item to be displayed in GridView.
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
         }
+
+        /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
+        ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
+        .setText(RecipeArrayList.get(position).getName());
+
+        /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
+        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+                .setImageResource(RecipeArrayList.get(position).getImgId());
+
+       /*
         /* ottengo la posizione dell'oggetto */
-        Recipe recipe = getItem(position);
+        //Recipe recipe = getItem(position);
         /* associa la textView della card per le ricette */
-        TextView textViewCardRicetta = listitemView.findViewById(R.id.TextViewCardRicetta);
+       // TextView textViewCardRicetta = convertView.findViewById(R.id.TextViewCardRicetta);
         /* associa l' ImageView della card per le ricette */
-        ImageView imageViewCardRicetta = listitemView.findViewById(R.id.ImageViewCardRicetta);
+       // ImageView imageViewCardRicetta = convertView.findViewById(R.id.ImageViewCardRicetta);
         /* setto il nome della ricetta nella card */
-        textViewCardRicetta.setText(recipe.getName());
+        //textViewCardRicetta.setText(recipe.getName());
         /* setto l'immagine nella card */
-        imageViewCardRicetta.setImageResource(recipe.getImgId());
-        return listitemView;
+        //imageViewCardRicetta.setImageResource(recipe.getImgId());
+        return convertView;
     }
 
 }
