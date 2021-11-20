@@ -21,13 +21,20 @@ public class MyRecipesFragment extends Fragment {
     private GridView  myRecipiesGridView;
     private String nomeRicettaTest =" pasta al forno";
     private  static  final  String TAG = "premuto";
+    private AdapterClass adapter;
 
+    /* crea l'array list di elementi da mostrare nell gridView */
+    ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
+
+    /* creo un array list di backup per quando distruggo e ricreo la view */
+   // ArrayList<Recipe> recipeArrayListBackup = new ArrayList<Recipe>();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+         /* ripristino l'array list di partenza */
+       // recipeArrayList= (ArrayList<Recipe>) recipeArrayListBackup.clone();
     }
 
     @Override
@@ -40,25 +47,24 @@ public class MyRecipesFragment extends Fragment {
         /* ottengo la view */
         myRecipiesGridView = view.findViewById(R.id.gridView);
 
-        /* crea l'array list di elementi da mostrare nell gridView */
-        ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
+
 
         /* aggiungo gli elementi alla gridView */
-        for(int i=0; i<20; i++){
-            recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.ic_baseline_add_24));
+       for(int i=0; i<=20; i++){
+           recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.ic_baseline_add_24));
         }
 
 
         /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
-        AdapterClass adapter = new AdapterClass(getContext(), recipeArrayList);
+         adapter = new AdapterClass(getContext(), recipeArrayList);
 
         /*associo alla gridView l'adapter creato sopra */
-        myRecipiesGridView.setAdapter(adapter);
+       myRecipiesGridView.setAdapter(adapter);
 
 
         /* serve per intercettare l'oggetto premuto */
         myRecipiesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
+           @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
                 Log.d(TAG, "PREMUTO "+recipeArrayList.get(position));
@@ -74,15 +80,20 @@ public class MyRecipesFragment extends Fragment {
     }
 
 
-    /*quando la vista è stata creata */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onDestroy() {
+        super.onDestroy();
 
+        Log.d("on destroy", "chiamato on destroy fragment");
 
-
+        /* creo una copia dell'array list di ricette prima di svuotarla */
+      // recipeArrayListBackup = (ArrayList<Recipe>) recipeArrayList.clone();
+       /* svuoto l'array list */
+      // recipeArrayList.clear();
+       /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
+        // adapter = new AdapterClass(getContext(), recipeArrayList);
+        /*associo alla gridView l'adapter creato sopra */
+       // myRecipiesGridView.setAdapter(adapter);
 
     }
-
-
 }
