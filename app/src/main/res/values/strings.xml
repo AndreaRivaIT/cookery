@@ -3,5 +3,6 @@
     <string name="home">Home</string>
     <string name="fridge">Fridge</string>
     <string name="recipe">Recipe</string>
+    <string name="Ready_to_cook">Ready to cook</string>
 
 </resources>
