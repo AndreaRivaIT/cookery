@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
-public class AdapterClass extends ArrayAdapter<Recipe>{
+public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     private ArrayList<Recipe> RecipeArrayList;
+    private ArrayList<Recipe> RecipeArrayListFiltered;
 
 
 
@@ -56,4 +60,52 @@ public class AdapterClass extends ArrayAdapter<Recipe>{
         return convertView;
     }
 
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults filterResults = new FilterResults();
+
+                if(constraint == null || constraint.length() == 0){
+
+                    filterResults.count = RecipeArrayList.size();
+                    filterResults.values = RecipeArrayList;
+                } else {
+
+                    String searchStr = constraint.toString().toLowerCase();
+                    ArrayList<Recipe> resultData = new ArrayList<>();
+
+                    for(Recipe recipe: RecipeArrayList) {
+                       String nameLowerCase= recipe.getName().toLowerCase();
+                        if (nameLowerCase.contains(searchStr)){
+                            resultData.add(recipe);
+
+                        }
+                        filterResults.count = resultData.size();
+                        filterResults.values= resultData;
+                    }
+
+                }
+
+
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                RecipeArrayListFiltered = (ArrayList<Recipe>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+
+
+        return filter;
+
+    }
 }

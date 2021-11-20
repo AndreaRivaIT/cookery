@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.widget.AdapterView;
+import android.widget.Filter;
 import android.widget.GridView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+
 import java.util.ArrayList;
 
 
@@ -22,6 +25,8 @@ public class MyRecipesFragment extends Fragment {
     private String nomeRicettaTest =" pasta al forno";
     private  static  final  String TAG = "premuto";
     private AdapterClass adapter;
+    private SearchView searchView;
+
 
     /* crea l'array list di elementi da mostrare nell gridView */
     ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
@@ -44,15 +49,21 @@ public class MyRecipesFragment extends Fragment {
        /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
 
-        /* ottengo la view */
+        // --- inizio codice gridview --
+
+        /* ottengo la Gridview */
         myRecipiesGridView = view.findViewById(R.id.gridView);
 
 
-
         /* aggiungo gli elementi alla gridView */
-       for(int i=0; i<=20; i++){
-           recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.prova));
-        }
+
+
+           for (int i = 0; i <= 20; i++) {
+               if (i % 2 == 0)
+                   recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.spoonacular));
+               else
+                   recipeArrayList.add(new Recipe("arrosto", R.drawable.spoonacular));
+           }
 
 
         /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
@@ -60,6 +71,7 @@ public class MyRecipesFragment extends Fragment {
 
         /*associo alla gridView l'adapter creato sopra */
        myRecipiesGridView.setAdapter(adapter);
+
 
 
         /* serve per intercettare l'oggetto premuto */
@@ -71,6 +83,31 @@ public class MyRecipesFragment extends Fragment {
             }
         });
 
+        //-- fine codice grid view
+
+        //-- inizio codice searchView
+
+        /* ottengo la search view */
+        searchView = view.findViewById(R.id.searchViewMyRecipes);
+
+        /* listener per la query */
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                 adapter.getFilter().filter(newText);
+
+                return true;
+            }
+        });
+
+        //-- fine codice searchView
+
         // Inflate the layout for this fragment
         return view;
 
@@ -78,6 +115,8 @@ public class MyRecipesFragment extends Fragment {
 
 
     }
+
+
 
 
     @Override
@@ -89,11 +128,11 @@ public class MyRecipesFragment extends Fragment {
         /* creo una copia dell'array list di ricette prima di svuotarla */
       // recipeArrayListBackup = (ArrayList<Recipe>) recipeArrayList.clone();
        /* svuoto l'array list */
-      // recipeArrayList.clear();
+        recipeArrayList.clear();
        /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
-        // adapter = new AdapterClass(getContext(), recipeArrayList);
+        adapter = new AdapterClass(getContext(), recipeArrayList);
         /*associo alla gridView l'adapter creato sopra */
-       // myRecipiesGridView.setAdapter(adapter);
+       myRecipiesGridView.setAdapter(adapter);
 
     }
 }
