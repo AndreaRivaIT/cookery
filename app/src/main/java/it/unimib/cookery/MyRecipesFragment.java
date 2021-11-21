@@ -15,31 +15,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+
 import java.util.ArrayList;
 
 
 public class MyRecipesFragment extends Fragment {
 
+
+   /* robe di comodo */
+   private String nomeRicettaTest =" pasta al forno";
+    private  static  final  String TAG = "premuto";
+
+    /* fine robe di comodo */
+
+
     /* dichiaro un oggetto di tipoGridView */
     private GridView  myRecipiesGridView;
-    private String nomeRicettaTest =" pasta al forno";
-    private  static  final  String TAG = "premuto";
+
+    /* dichiaro un oggetto di tipo adapter */
     private AdapterClass adapter;
-    private SearchView searchView;
+
+    /* dichiaro un oggetto di tipo SearchView */
+    private SearchView recipiesSearch;
 
 
     /* crea l'array list di elementi da mostrare nell gridView */
     ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
 
-    /* creo un array list di backup per quando distruggo e ricreo la view */
-   // ArrayList<Recipe> recipeArrayListBackup = new ArrayList<Recipe>();
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         /* ripristino l'array list di partenza */
-       // recipeArrayList= (ArrayList<Recipe>) recipeArrayListBackup.clone();
+
     }
 
     @Override
@@ -57,7 +66,6 @@ public class MyRecipesFragment extends Fragment {
 
         /* aggiungo gli elementi alla gridView */
 
-
            for (int i = 0; i <= 20; i++) {
                if (i % 2 == 0)
                    recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.spoonacular));
@@ -66,7 +74,7 @@ public class MyRecipesFragment extends Fragment {
            }
 
 
-        /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
+           /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
          adapter = new AdapterClass(getContext(), recipeArrayList);
 
         /*associo alla gridView l'adapter creato sopra */
@@ -83,16 +91,17 @@ public class MyRecipesFragment extends Fragment {
             }
         });
 
-        //-- fine codice grid view
+        //-- fine codice grid view --
 
-        //-- inizio codice searchView
+
+        //-- inizio codice searchView --
 
         /* ottengo la search view */
-        searchView = view.findViewById(R.id.searchViewMyRecipes);
+        recipiesSearch = view.findViewById(R.id.searchViewMyRecipes);
 
         /* listener per la query */
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        recipiesSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -102,20 +111,16 @@ public class MyRecipesFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                  adapter.getFilter().filter(newText);
 
-                return true;
+                return false;
             }
         });
 
-        //-- fine codice searchView
+        //-- fine codice searchView--
 
         // Inflate the layout for this fragment
         return view;
 
-
-
-
     }
-
 
 
 
@@ -125,14 +130,6 @@ public class MyRecipesFragment extends Fragment {
 
         Log.d("on destroy", "chiamato on destroy fragment");
 
-        /* creo una copia dell'array list di ricette prima di svuotarla */
-      // recipeArrayListBackup = (ArrayList<Recipe>) recipeArrayList.clone();
-       /* svuoto l'array list */
-        recipeArrayList.clear();
-       /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
-        adapter = new AdapterClass(getContext(), recipeArrayList);
-        /*associo alla gridView l'adapter creato sopra */
-       myRecipiesGridView.setAdapter(adapter);
 
     }
 }

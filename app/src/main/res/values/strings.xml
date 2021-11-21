@@ -7,5 +7,7 @@
        <font size="20">My Recipes</font>
     </string>
 
+    <string name="filter_string"> filter </string>
+
 
 </resources>

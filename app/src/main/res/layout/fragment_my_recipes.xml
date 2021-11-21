@@ -63,12 +63,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
-                android:text="Button"
+                android:text="@string/filter_string"
+                android:textColor="@color/black"
+                app:icon="@drawable/ic_baseline_filter_list_24"
+                app:iconTint="?attr/colorOnSecondary"
+                app:rippleColor="?attr/colorOnSecondary"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 app:layout_constraintStart_toEndOf="@+id/searchViewMyRecipes"
                 app:layout_constraintTop_toTopOf="parent" />
 
+           <!-- app:rippleColor="?attr/colorOnSecondary" cambia colore pressione -->
+
+
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
+                android:id="@+id/addChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

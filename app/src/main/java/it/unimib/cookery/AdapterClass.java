@@ -17,15 +17,18 @@ import java.util.Locale;
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
-    private ArrayList<Recipe> RecipeArrayList;
-    private ArrayList<Recipe> RecipeArrayListFiltered;
+    private ArrayList<Recipe> listdata;
+    private ArrayList<Recipe> filterData;
+
+
 
 
 
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
 
-        RecipeArrayList = recipesArrayList;
+        listdata = recipesArrayList;
+        filterData = new ArrayList<>(listdata);
 
     }
 
@@ -40,11 +43,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
-        .setText(RecipeArrayList.get(position).getName());
+        .setText(listdata.get(position).getName());
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
         ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-                .setImageResource(RecipeArrayList.get(position).getImgId());
+                .setImageResource(listdata.get(position).getImgId());
 
        /*
         /* ottengo la posizione dell'oggetto */
@@ -61,51 +64,53 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
-    @NonNull
-    @Override
-    public Filter getFilter() {
+    public Filter getFilter(){
+        return filterNotification;
+    }
 
-        Filter filter = new Filter() {
+
+    private Filter filterNotification = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
-                FilterResults filterResults = new FilterResults();
+                ArrayList<Recipe> filterList = new ArrayList<>();
 
                 if(constraint == null || constraint.length() == 0){
 
-                    filterResults.count = RecipeArrayList.size();
-                    filterResults.values = RecipeArrayList;
+                    filterList.addAll(filterData);
+
                 } else {
 
-                    String searchStr = constraint.toString().toLowerCase();
+                    String searchStr = constraint.toString().toLowerCase().trim();
                     ArrayList<Recipe> resultData = new ArrayList<>();
 
-                    for(Recipe recipe: RecipeArrayList) {
+                    for(Recipe recipe: filterData) {
                        String nameLowerCase= recipe.getName().toLowerCase();
                         if (nameLowerCase.contains(searchStr)){
-                            resultData.add(recipe);
+                            filterList.add(recipe);
 
                         }
-                        filterResults.count = resultData.size();
-                        filterResults.values= resultData;
+
                     }
 
                 }
 
+                FilterResults results = new FilterResults();
+                results.values = filterList;
 
-
-                return filterResults;
+                return results;
             }
 
             @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                RecipeArrayListFiltered = (ArrayList<Recipe>) results.values;
+            protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+                listdata.clear();
+                listdata.addAll((ArrayList<Recipe>)filterResults.values);
                 notifyDataSetChanged();
             }
         };
 
 
-        return filter;
+
 
     }
-}
+
