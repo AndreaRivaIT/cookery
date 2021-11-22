@@ -1,6 +1,7 @@
 package it.unimib.cookery;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,10 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
 
+    // array list per le ricette che non hanno categoria desiderata dall'utente
+    private ArrayList<Recipe> Removed = new ArrayList<>();
+
+
 
 
 
@@ -28,9 +34,20 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         super(context, 0, recipesArrayList);
 
         listdata = recipesArrayList;
-        filterData = new ArrayList<>(listdata);
+       filterData = new ArrayList<>(listdata);
 
     }
+
+
+    public void addRecipe(){
+
+        filterData.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+        notifyDataSetChanged();
+    }
+
+
+
+
 
     @NonNull
     @Override
@@ -64,6 +81,32 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
+    public void applyFilter(ArrayList<String> arr){
+
+        listdata.addAll(Removed);
+        filterData.addAll(Removed);
+        Removed.clear();
+
+        if(arr.size() > 0) {
+            for (int i = 0; i < listdata.size(); i++) {
+                Recipe r = listdata.get(i);
+                String category = r.getCategory();
+                if (!arr.contains(category)) {
+                    Removed.add(r);
+                }
+            }
+            listdata.removeAll(Removed);
+            filterData.removeAll(Removed);
+        }
+        notifyDataSetChanged();
+
+    }
+
+
+
+
+
+
     public Filter getFilter(){
         return filterNotification;
     }
@@ -78,6 +121,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                 if(constraint == null || constraint.length() == 0){
 
                     filterList.addAll(filterData);
+
 
                 } else {
 

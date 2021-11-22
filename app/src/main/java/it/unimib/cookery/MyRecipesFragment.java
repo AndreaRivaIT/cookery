@@ -32,6 +32,16 @@ public class MyRecipesFragment extends Fragment {
 
     /* fine robe di comodo */
 
+    /* costanti */
+
+    public static final String FILTER0 = "stuzzichini";
+    public static final String FILTER1 = "primi";
+    public static final String FILTER2 = "secondi";
+    public static final String FILTER3 = "contorni ";
+    public static final String FILTER4 = "dolci";
+
+
+
 
     /* dichiaro un oggetto di tipoGridView */
     private GridView  myRecipiesGridView;
@@ -52,7 +62,8 @@ public class MyRecipesFragment extends Fragment {
     ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
 
     /* array list per i filtri */
-    ArrayList<Integer> filterList = new ArrayList<>();
+    ArrayList<String> filterList = new ArrayList<>();
+
 
 
 
@@ -67,7 +78,7 @@ public class MyRecipesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-       /* creo un elemento di tipo view */
+        /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
 
         // --- inizio codice gridview --
@@ -78,16 +89,12 @@ public class MyRecipesFragment extends Fragment {
 
         /* aggiungo gli elementi alla gridView */
 
-           for (int i = 0; i <= 20; i++) {
-               if (i % 2 == 0)
-                   recipeArrayList.add(new Recipe(nomeRicettaTest, R.drawable.spoonacular));
-               else
-                   recipeArrayList.add(new Recipe("arrosto", R.drawable.spoonacular));
-           }
+          Recipe prova = new Recipe();
+          recipeArrayList=prova.getArrayList();
 
 
            /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
-         adapter = new AdapterClass(getContext(), recipeArrayList);
+         adapter = new AdapterClass(getContext(), recipeArrayList); /* al posto di recipeArrayList si metterà il risultato della query al database */
 
         /*associo alla gridView l'adapter creato sopra */
        myRecipiesGridView.setAdapter(adapter);
@@ -121,7 +128,7 @@ public class MyRecipesFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                 adapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText);
 
                 return false;
             }
@@ -141,6 +148,10 @@ public class MyRecipesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("premuto", "premuto chip add");
+                recipeArrayList.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+                adapter.addRecipe();
+
+
             }
         });
 
@@ -151,7 +162,7 @@ public class MyRecipesFragment extends Fragment {
         // --inizio codice button filter --
 
         // array di nomi che verranno mostrati sulla dialog
-        String[] filterArray = {"stuzzichini","primi","secondi","contorni","dolci"};
+        String[] filterArray = {FILTER0,FILTER1,FILTER2,FILTER3,FILTER4};
 
         // serve per salvare se un elemento è selezionato o meno
         boolean[] selectedFilter = new boolean[filterArray.length];
@@ -180,22 +191,29 @@ public class MyRecipesFragment extends Fragment {
                 builder.setMultiChoiceItems(filterArray, selectedFilter, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+
+                        String filter = "";
+                        switch (i){
+                            case 0: filter=FILTER0; break;
+                            case 1: filter=FILTER1; break;
+                            case 2: filter=FILTER2; break;
+                            case 3: filter=FILTER3; break;
+                            case 4: filter=FILTER4; break;
+
+                        }
+
+
                         // check condition
                         if (b) {
                             // quando la checkbox è selezionata
                             // creo l'elemento da aggiungere
-                            Integer element = i;
                             // lo aggiungo
-                            filterList.add(element);
+                            filterList.add(filter);
+
 
                         } else {
-                            // quando deseleziono la checkbox
-                            // creo l'elemento da rimuovere
-                            Integer element = i;
-                           // trovo il suo indice nell'array list
-                            int index = filterList.indexOf(element);
-                            // lo rimuovo dalla lista
-                            filterList.remove(index);
+                            // quando deseleziono la checkbox rimuovo l'oggetto dalla lista
+                            filterList.remove(filter);
 
                         }
                     }
@@ -206,6 +224,9 @@ public class MyRecipesFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                             // se premuto ok far partire la ricerca
+                       adapter.applyFilter(filterList);
+
+
                     }
 
                 });
