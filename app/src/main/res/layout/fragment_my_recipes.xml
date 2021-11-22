@@ -67,7 +67,7 @@
                 android:textColor="@color/black"
                 app:icon="@drawable/ic_baseline_filter_list_24"
                 app:iconTint="?attr/colorOnSecondary"
-                app:rippleColor="?attr/colorOnSecondary"
+                app:rippleColor="@color/main_color"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 app:layout_constraintStart_toEndOf="@+id/searchViewMyRecipes"
                 app:layout_constraintTop_toTopOf="parent" />

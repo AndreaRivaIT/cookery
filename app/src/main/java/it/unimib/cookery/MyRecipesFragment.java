@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import java.util.Collections;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -107,6 +108,7 @@ public class MyRecipesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
                 Log.d(TAG, "PREMUTO "+recipeArrayList.get(position));
+
             }
         });
 

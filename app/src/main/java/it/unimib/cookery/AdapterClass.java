@@ -11,6 +11,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
@@ -19,8 +21,11 @@ import java.util.Locale;
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
+    /* array list per i filtri */
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
+
+    private static final String  NO_RESULT_FOUND = "No result found";
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
@@ -33,6 +38,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
 
+
+        Log.d("qui", "adapter class");
         listdata = recipesArrayList;
        filterData = new ArrayList<>(listdata);
 
@@ -41,7 +48,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     public void addRecipe(){
 
+      Log.d("qui", "add recipe");
+
+       // aggiungo la nuova ricetta all'array list filter data
         filterData.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+        // notifico del cambiamento del dato per aggiornare la grid view
         notifyDataSetChanged();
     }
 
@@ -66,27 +77,20 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
                 .setImageResource(listdata.get(position).getImgId());
 
-       /*
-        /* ottengo la posizione dell'oggetto */
-        //Recipe recipe = getItem(position);
-        /* associa la textView della card per le ricette */
-       // TextView textViewCardRicetta = convertView.findViewById(R.id.TextViewCardRicetta);
-        /* associa l' ImageView della card per le ricette */
-       // ImageView imageViewCardRicetta = convertView.findViewById(R.id.ImageViewCardRicetta);
-        /* setto il nome della ricetta nella card */
-        //textViewCardRicetta.setText(recipe.getName());
-        /* setto l'immagine nella card */
-        //imageViewCardRicetta.setImageResource(recipe.getImgId());
         return convertView;
     }
 
 
     public void applyFilter(ArrayList<String> arr){
 
+        // serve per resettare i filtri
         listdata.addAll(Removed);
         filterData.addAll(Removed);
         Removed.clear();
 
+        // se c'è almeno un filtro selezionato trovo tutte le ricette che non rispettano i filtri
+        // e le sottraggo dalle due array list e le aggiungo all'array list Removed che serve
+        // per il ripristino
         if(arr.size() > 0) {
             for (int i = 0; i < listdata.size(); i++) {
                 Recipe r = listdata.get(i);
@@ -98,6 +102,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             listdata.removeAll(Removed);
             filterData.removeAll(Removed);
         }
+        // notifico del cambiamento del dato per aggiornare la grid view
         notifyDataSetChanged();
 
     }
@@ -147,13 +152,22 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+
+
                 listdata.clear();
-                listdata.addAll((ArrayList<Recipe>)filterResults.values);
-                notifyDataSetChanged();
+                listdata.addAll((ArrayList<Recipe>) filterResults.values);
+
+
+                // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
+                if(listdata.size()==0) {
+                    Toast.makeText(getContext(), NO_RESULT_FOUND, Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }else {
+                    notifyDataSetChanged();
+                }
+
             }
         };
-
-
 
 
     }
