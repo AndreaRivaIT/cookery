@@ -89,9 +89,20 @@ public class MyRecipesFragment extends Fragment {
 
 
         /* aggiungo gli elementi alla gridView */
+        // recipeArrayList = risultato query database
 
-          Recipe prova = new Recipe();
-          recipeArrayList=prova.getArrayList();
+
+        //  solo per prova //
+
+        recipeArrayList.add(new Recipe("pasta al forno", "primi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("risotto", "primi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("arrosto", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+
+
+        // fine codice solo per prova //
+
+
 
 
            /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
@@ -150,8 +161,15 @@ public class MyRecipesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("premuto", "premuto chip add");
-                recipeArrayList.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
-                adapter.addRecipe();
+
+                /* fare update database*/
+
+                // aggiungo la ricetta e la mostro sulla gridview
+                recipeArrayList.add(new Recipe("aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+
+                adapter=new AdapterClass(getContext(), recipeArrayList);
+                myRecipiesGridView.setAdapter(adapter);
+
 
 
             }
@@ -265,7 +283,6 @@ public class MyRecipesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        Log.d("on destroy", "chiamato on destroy fragment");
 
 
     }

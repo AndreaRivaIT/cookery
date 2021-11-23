@@ -38,6 +38,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
 
+        for(Recipe r: recipesArrayList)
+            Log.d("stampa", ""+r.getName());
+
 
         Log.d("qui", "adapter class");
         listdata = recipesArrayList;
@@ -46,17 +49,15 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
-    public void addRecipe(){
+   public void notifyChange(){
 
-      Log.d("qui", "add recipe");
+     // Log.d("qui", "add recipe");
 
        // aggiungo la nuova ricetta all'array list filter data
-        filterData.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+        //filterData.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
         // notifico del cambiamento del dato per aggiornare la grid view
-        notifyDataSetChanged();
+       notifyDataSetChanged();
     }
-
-
 
 
 
@@ -84,9 +85,15 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     public void applyFilter(ArrayList<String> arr){
 
         // serve per resettare i filtri
-        listdata.addAll(Removed);
-        filterData.addAll(Removed);
-        Removed.clear();
+        if(Removed.size() >0) {
+            for (Recipe r : Removed) {
+                if (!listdata.contains(r))
+                    listdata.add(r);
+                if (!filterData.contains(r))
+                    filterData.add(r);
+            }
+                Removed.clear();
+            }
 
         // se c'è almeno un filtro selezionato trovo tutte le ricette che non rispettano i filtri
         // e le sottraggo dalle due array list e le aggiungo all'array list Removed che serve
@@ -153,10 +160,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             @Override
             protected void publishResults(CharSequence constraint, FilterResults filterResults) {
 
-
                 listdata.clear();
                 listdata.addAll((ArrayList<Recipe>) filterResults.values);
-
 
                 // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
                 if(listdata.size()==0) {
