@@ -1,10 +1,16 @@
 package it.unimib.cookery;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+//import android.widget.Toolbar;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,11 +19,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HomeFragment homeF = new HomeFragment();
-        FragmentManager managerF = getSupportFragmentManager();
-        FragmentTransaction fragmentT = managerF.beginTransaction();
-        fragmentT.add(R.id.mainContainer, homeF);
-        fragmentT.commit();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.homeFragmentContainerView);
+        NavController navController = navHostFragment.getNavController();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
+
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+       // Toolbar toolbar = findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
 
     }
 }
