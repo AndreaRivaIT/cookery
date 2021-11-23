@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alimentarPreferences"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AlimentarPreferenceFragment">
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/checkboxContainerIntollerances"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/intollerance_string"
+                android:id="@+id/IntollerancesTextView"
+                android:layout_marginLeft="5dp"
+                />
+
+            <CheckBox
+            android:id="@+id/checkBoxIntolleranceGluten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gluten_intolerance"
+                android:layout_below="@id/IntollerancesTextView"
+
+                />
+
+        <CheckBox
+            android:id="@+id/checkBoxIntolleranceLactose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lactose_intollerance"
+            android:layout_below="@id/checkBoxIntolleranceGluten"
+            />
+
+            <CheckBox
+                android:id="@+id/checkBoxIntolleranceNuts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nust_intollerance"
+                android:layout_below="@id/checkBoxIntolleranceLactose"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        android:id="@+id/checkboxContainerPreferences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkboxContainerIntollerances"
+        android:layout_marginTop="20dp"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/preferences_string"
+                android:id="@+id/PreferencesTextView"
+                android:layout_marginLeft="5dp"
+                />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxPreferencesVegetarian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vegetarian_string"
+                android:layout_below="@id/PreferencesTextView"/>
+
+            <CheckBox
+                android:id="@+id/checkboxPreferencesVegan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vegan_string"
+                android:layout_below="@id/checkBoxPreferencesVegetarian"
+                />
+
+            <CheckBox
+                android:id="@+id/checkBoxPreferencesPescetarian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pescetarian_string"
+                android:layout_below="@id/checkboxPreferencesVegan"
+                />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/main_color"
+        android:textColor="@color/black"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/save_string"
+
+        />
+</RelativeLayout>

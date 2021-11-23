@@ -10,5 +10,17 @@
     <string name="filter_string"> filter </string>
     <string name="MyRecipes_chips_string"> add recipe</string>
 
+    <string name="intollerance_string">Intollerance</string>
+    <string name="preferences_string">Preferences</string>
 
+    <string name="gluten_intolerance">Gluten</string>
+    <string name="lactose_intollerance">Lactose</string>
+    <string name="nust_intollerance">Nuts</string>
+
+
+    <string name="vegan_string">Vegan</string>
+    <string name="vegetarian_string">Vegetarian</string>
+    <string name="pescetarian_string">Pescetarian</string>
+
+    <string name="save_string">Save</string>
 </resources>

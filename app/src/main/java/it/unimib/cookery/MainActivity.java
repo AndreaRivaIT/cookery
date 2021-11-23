@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* questo codice serve solo per caricare il fragmnet che sto progettando*/
 
-        MyRecipesFragment f1 = new MyRecipesFragment();
+        AlimentarPreferenceFragment f1 = new AlimentarPreferenceFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.mainContainer, f1);
