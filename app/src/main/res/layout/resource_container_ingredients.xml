@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewTipeIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTipeIngredients">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente 500g" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingre 850g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente 500g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parole 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parole 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parola"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parole 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piu parole di fila 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piu parole di fila 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piu parole di fila 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sale marino delle ande 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piu parole di fila 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piu parole di fila 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Media lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingrediente lungo 5000g"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corto 5000g"/>
+    </com.google.android.material.chip.ChipGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>

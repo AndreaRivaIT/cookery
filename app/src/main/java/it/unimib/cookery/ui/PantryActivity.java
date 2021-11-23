@@ -1,14 +1,16 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import it.unimib.cookery.R;
+
+public class PantryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pantry);
     }
 }
