@@ -246,7 +246,6 @@ public class MyRecipesFragment extends Fragment {
                             // se premuto ok far partire la ricerca
                        adapter.applyFilter(filterList);
 
-
                     }
 
                 });
@@ -263,6 +262,7 @@ public class MyRecipesFragment extends Fragment {
 
                 // mostra l'alert dialog
                 builder.show();
+
 
             }
         });
