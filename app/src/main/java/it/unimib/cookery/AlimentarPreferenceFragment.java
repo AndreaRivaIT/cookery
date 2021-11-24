@@ -67,7 +67,7 @@ public class AlimentarPreferenceFragment extends Fragment {
             public void onClick(View v) {
                 Log.d("premuto", "premuto bottone save");
 
-                // svuoto gli array list che memorizzano intolleranze e preferenze alimentari 
+                // svuoto gli array list che memorizzano intolleranze e preferenze alimentari
                 intolleranceChoosen.clear();
                 preferencesChoosen.clear();
 
