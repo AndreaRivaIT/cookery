@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +22,20 @@ import it.unimib.cookery.models.Recipe;
 
 public class HomeFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     ArrayList<Recipe> recipeArrayList;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView1);
 
         // TEST_ARRAY
 
@@ -43,20 +49,12 @@ public class HomeFragment extends Fragment {
 
         // END OF TEST_ARRAY
 
-        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeArrayList);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeArrayList);
         recyclerView.setAdapter(recipeAdapter);
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
         return view;
     }
-
 }
