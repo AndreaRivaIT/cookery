@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
+
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -28,13 +29,9 @@ import it.unimib.cookery.adapters.AdapterClass;
 public class MyRecipesFragment extends Fragment {
 
 
-  //test
-
-
-
-   /* robe di comodo */
-   private String nomeRicettaTest =" pasta al forno";
-    private  static  final  String TAG = "premuto";
+    /* robe di comodo */
+    private String nomeRicettaTest = " pasta al forno";
+    private static final String TAG = "premuto";
 
     /* fine robe di comodo */
 
@@ -47,10 +44,8 @@ public class MyRecipesFragment extends Fragment {
     public static final String FILTER4 = "dolci";
 
 
-
-
     /* dichiaro un oggetto di tipoGridView */
-    private GridView  myRecipiesGridView;
+    private GridView myRecipiesGridView;
 
     /* dichiaro un oggetto di tipo adapter */
     private AdapterClass adapter;
@@ -69,9 +64,6 @@ public class MyRecipesFragment extends Fragment {
 
     /* array list per i filtri */
     ArrayList<String> filterList = new ArrayList<>();
-
-
-
 
 
     @Override
@@ -117,21 +109,20 @@ public class MyRecipesFragment extends Fragment {
 
 
 
-           /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
-         adapter = new AdapterClass(getContext(), recipeArrayList); /* al posto di recipeArrayList si metterà il risultato della query al database */
+        /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
+        adapter = new AdapterClass(getContext(), recipeArrayList); /* al posto di recipeArrayList si metterà il risultato della query al database */
 
         /*associo alla gridView l'adapter creato sopra */
-       myRecipiesGridView.setAdapter(adapter);
+        myRecipiesGridView.setAdapter(adapter);
 
 
 
         /* serve per intercettare l'oggetto premuto */
         myRecipiesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
+            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
-                Log.d(TAG, "PREMUTO "+recipeArrayList.get(position).getName());
-
+                Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getName());
 
 
             }
@@ -143,7 +134,7 @@ public class MyRecipesFragment extends Fragment {
         //-- inizio codice searchView --
 
         /* ottengo la search view */
-         recipiesSearch = view.findViewById(R.id.searchViewMyRecipes);
+        recipiesSearch = view.findViewById(R.id.searchViewMyRecipes);
 
         /* listener per la query */
 
@@ -164,15 +155,13 @@ public class MyRecipesFragment extends Fragment {
         //-- fine codice searchView--
 
 
-       // -- inizio codice chip --
+        // -- inizio codice chip --
 
         /* ottengo l'elemento chip */
-       chip = view.findViewById(R.id.addChip);
-
-       /* listener dell'oggetto chip*/
+        chip = view.findViewById(R.id.addChip);
 
 
-
+        /* listener dell'oggetto chip*/
         chip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,39 +172,37 @@ public class MyRecipesFragment extends Fragment {
                 // aggiungo la ricetta e la mostro sulla gridview
                 recipeArrayList.add(new Recipe("aggiunta", "dolci", R.drawable.ic_baseline_add_24));
 
-               // adapter=new AdapterClass(getContext(), recipeArrayList);
+                // adapter=new AdapterClass(getContext(), recipeArrayList);
                 myRecipiesGridView.setAdapter(adapter);
-
 
 
             }
         });
 
-       // -- fine codice chip --
-
+        // -- fine codice chip --
 
 
         // --inizio codice button filter --
 
         // array di nomi che verranno mostrati sulla dialog
-        String[] filterArray = {FILTER0,FILTER1,FILTER2,FILTER3,FILTER4};
+        String[] filterArray = {FILTER0, FILTER1, FILTER2, FILTER3, FILTER4};
 
         // serve per salvare se un elemento è selezionato o meno
         boolean[] selectedFilter = new boolean[filterArray.length];
 
 
         /* ottengo l'oggetto button */
-       buttonFilter = view.findViewById(R.id.buttonFilter);
+        buttonFilter = view.findViewById(R.id.buttonFilter);
+
 
         /* listener dell'oggetto buttonFilter */
-
-       buttonFilter.setOnClickListener(new View.OnClickListener() {
+        buttonFilter.setOnClickListener(new View.OnClickListener() {
             @Override
-           public void onClick(View v) {
+            public void onClick(View v) {
                 Log.d("premuto", "premuto button filter");
 
                 // inizializza l'alert dialog
-               AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 // setta il titolo
                 builder.setTitle("Select recipe type");
@@ -229,12 +216,22 @@ public class MyRecipesFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
 
                         String filter = "";
-                        switch (i){
-                            case 0: filter=FILTER0; break;
-                            case 1: filter=FILTER1; break;
-                            case 2: filter=FILTER2; break;
-                            case 3: filter=FILTER3; break;
-                            case 4: filter=FILTER4; break;
+                        switch (i) {
+                            case 0:
+                                filter = FILTER0;
+                                break;
+                            case 1:
+                                filter = FILTER1;
+                                break;
+                            case 2:
+                                filter = FILTER2;
+                                break;
+                            case 3:
+                                filter = FILTER3;
+                                break;
+                            case 4:
+                                filter = FILTER4;
+                                break;
 
                         }
 
@@ -259,8 +256,8 @@ public class MyRecipesFragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                            // se premuto ok far partire la ricerca
-                       adapter.applyFilter(filterList);
+                        // se premuto ok far partire la ricerca
+                        adapter.applyFilter(filterList);
 
                     }
 
@@ -284,8 +281,7 @@ public class MyRecipesFragment extends Fragment {
         });
 
 
- // -- fine codice button filter --
-
+        // -- fine codice button filter --
 
 
         // Inflate the layout for this fragment
@@ -294,19 +290,10 @@ public class MyRecipesFragment extends Fragment {
     }
 
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        // anche facendo così ogni volta che giro lo schermo
-        // rimane una gridview sotto
-        Log.d("qui", "on destroy fragment");
-        recipeArrayList.clear();
-        adapter = new AdapterClass(getContext(), recipeArrayList);
-        myRecipiesGridView.setAdapter(adapter);
-        //adapter.delete();
-        myRecipiesGridView.destroyDrawingCache();
 
     }
 }

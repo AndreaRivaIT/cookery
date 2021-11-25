@@ -4,8 +4,6 @@ package it.unimib.cookery.models;
 import java.util.ArrayList;
 
 
-
-
 /*creata la classe della ricetta sia per il frgamnt delle ricette dell'utente, e ci servirà in seguito */
 public class Recipe {
 
@@ -14,26 +12,26 @@ public class Recipe {
     private String category;
 
 
+    // serve per prova
+    public Recipe() {
+    }
 
-   // serve per prova
-   public Recipe(){}
-
-    public Recipe(String name, String category, int imgId){
-        this.name=name;
-        this.category=category;
-        this.imgId=imgId;
+    public Recipe(String name, String category, int imgId) {
+        this.name = name;
+        this.category = category;
+        this.imgId = imgId;
     }
 
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getCategory(){
+    public String getCategory() {
         return category;
     }
 
-    public int getImgId(){
+    public int getImgId() {
         return imgId;
     }
 

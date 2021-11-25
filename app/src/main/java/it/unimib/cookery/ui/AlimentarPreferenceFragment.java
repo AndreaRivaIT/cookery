@@ -23,22 +23,21 @@ public class AlimentarPreferenceFragment extends Fragment {
     /* dichiaro gli oggetti checkbox */
     private CheckBox gluten, lactose, nuts, vegetarian, vegan, pescetarian;
 
-    private ArrayList<String> intolleranceChoosen= new ArrayList<>();
-    private ArrayList<String> preferencesChoosen= new ArrayList<>();
+    private ArrayList<String> intolleranceChoosen = new ArrayList<>();
+    private ArrayList<String> preferencesChoosen = new ArrayList<>();
 
     /* stringhe costanti*/
-    private static final String GLUTEN= "gluten";
-    private static final String LACTOSE= "lactose";
-    private static final String NUTS= "nuts";
-    private static final String VEGAN= "vegan";
-    private static final String VEGETARIAN= "vegetarian";
-    private static final String PESCETARIAN= "pescetarian";
+    private static final String GLUTEN = "gluten";
+    private static final String LACTOSE = "lactose";
+    private static final String NUTS = "nuts";
+    private static final String VEGAN = "vegan";
+    private static final String VEGETARIAN = "vegetarian";
+    private static final String PESCETARIAN = "pescetarian";
 
 
     public AlimentarPreferenceFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -75,33 +74,30 @@ public class AlimentarPreferenceFragment extends Fragment {
 
                 // se gli elementi sono selezionati gli aggiungo agli array list
 
-                if(gluten.isChecked())
+                if (gluten.isChecked())
                     intolleranceChoosen.add(GLUTEN);
 
-                if(lactose.isChecked())
+                if (lactose.isChecked())
                     intolleranceChoosen.add(LACTOSE);
 
-                if(nuts.isChecked())
+                if (nuts.isChecked())
                     intolleranceChoosen.add(NUTS);
 
-                if(vegan.isChecked())
+                if (vegan.isChecked())
                     preferencesChoosen.add(VEGAN);
 
-                if(vegetarian.isChecked())
+                if (vegetarian.isChecked())
                     preferencesChoosen.add(VEGETARIAN);
 
-                if(pescetarian.isChecked())
+                if (pescetarian.isChecked())
                     preferencesChoosen.add(PESCETARIAN);
 
 
+                for (String s : intolleranceChoosen)
+                    Log.d("stampa", "intollerance " + s);
 
-            for(String s : intolleranceChoosen)
-                Log.d("stampa", "intollerance "+s);
-
-                for(String s : preferencesChoosen)
-                    Log.d("stampa", "preferences "+s);
-
-
+                for (String s : preferencesChoosen)
+                    Log.d("stampa", "preferences " + s);
 
 
             }
