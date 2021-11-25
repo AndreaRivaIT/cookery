@@ -3,7 +3,9 @@ package it.unimib.cookery.ui;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.Adapter;
@@ -15,32 +17,23 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
+
 import it.unimib.cookery.adapters.RecipeAdapter;
 import it.unimib.cookery.models.Recipe;
 
 
 public class HomeFragment extends Fragment {
 
-    private RecipeAdapter recipeAdapter;
-    private RecyclerView recipeContainer;
-    ArrayList<Recipe> recipeArrayList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    ArrayList<Recipe> recipeArrayList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View homeView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        recipeContainer = homeView.findViewById(R.id.recyclerView1);
 
         // TEST_ARRAY
 
+        recipeArrayList = new ArrayList<>();
         recipeArrayList.add(new Recipe("TEST_FOOD_NAME_1", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
         recipeArrayList.add(new Recipe("TEST_FOOD_NAME_2", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
         recipeArrayList.add(new Recipe("TEST_FOOD_NAME_3", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
@@ -50,11 +43,20 @@ public class HomeFragment extends Fragment {
 
         // END OF TEST_ARRAY
 
-        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayList);
+        RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeArrayList);
 
-        recipeContainer.setAdapter(recipeAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        return homeView;
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(recipeAdapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
 
 }
