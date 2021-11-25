@@ -3,6 +3,7 @@ package it.unimib.cookery.ui;
 import android.os.Bundle;
 import android.content.DialogInterface;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
@@ -25,6 +26,10 @@ import it.unimib.cookery.adapters.AdapterClass;
 
 
 public class MyRecipesFragment extends Fragment {
+
+
+  //test
+
 
 
    /* robe di comodo */
@@ -98,6 +103,13 @@ public class MyRecipesFragment extends Fragment {
         recipeArrayList.add(new Recipe("risotto", "primi", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("arrosto", "secondi", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
 
 
         // fine codice solo per prova //
@@ -118,7 +130,9 @@ public class MyRecipesFragment extends Fragment {
            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
-                Log.d(TAG, "PREMUTO "+recipeArrayList.get(position));
+                Log.d(TAG, "PREMUTO "+recipeArrayList.get(position).getName());
+
+
 
             }
         });
@@ -129,7 +143,7 @@ public class MyRecipesFragment extends Fragment {
         //-- inizio codice searchView --
 
         /* ottengo la search view */
-        recipiesSearch = view.findViewById(R.id.searchViewMyRecipes);
+         recipiesSearch = view.findViewById(R.id.searchViewMyRecipes);
 
         /* listener per la query */
 
@@ -157,6 +171,8 @@ public class MyRecipesFragment extends Fragment {
 
        /* listener dell'oggetto chip*/
 
+
+
         chip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +183,7 @@ public class MyRecipesFragment extends Fragment {
                 // aggiungo la ricetta e la mostro sulla gridview
                 recipeArrayList.add(new Recipe("aggiunta", "dolci", R.drawable.ic_baseline_add_24));
 
-                adapter=new AdapterClass(getContext(), recipeArrayList);
+               // adapter=new AdapterClass(getContext(), recipeArrayList);
                 myRecipiesGridView.setAdapter(adapter);
 
 
@@ -189,17 +205,17 @@ public class MyRecipesFragment extends Fragment {
 
 
         /* ottengo l'oggetto button */
-        buttonFilter = view.findViewById(R.id.buttonFilter);
+       buttonFilter = view.findViewById(R.id.buttonFilter);
 
         /* listener dell'oggetto buttonFilter */
 
-        buttonFilter.setOnClickListener(new View.OnClickListener() {
+       buttonFilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+           public void onClick(View v) {
                 Log.d("premuto", "premuto button filter");
 
                 // inizializza l'alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+               AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 // setta il titolo
                 builder.setTitle("Select recipe type");
@@ -283,7 +299,14 @@ public class MyRecipesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-
+        // anche facendo così ogni volta che giro lo schermo
+        // rimane una gridview sotto
+        Log.d("qui", "on destroy fragment");
+        recipeArrayList.clear();
+        adapter = new AdapterClass(getContext(), recipeArrayList);
+        myRecipiesGridView.setAdapter(adapter);
+        //adapter.delete();
+        myRecipiesGridView.destroyDrawingCache();
 
     }
 }

@@ -36,6 +36,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
 
+
+
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
 
@@ -50,15 +52,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
-   public void notifyChange(){
 
-     // Log.d("qui", "add recipe");
-
-       // aggiungo la nuova ricetta all'array list filter data
-        //filterData.add(new Recipe("prova aggiunta", "dolci", R.drawable.ic_baseline_add_24));
-        // notifico del cambiamento del dato per aggiornare la grid view
-       notifyDataSetChanged();
-    }
 
 
 
@@ -107,6 +101,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                     Removed.add(r);
                 }
             }
+
+           // rimuovo da entrambe le liste gli elementi che non rispecchiano i filtri
             listdata.removeAll(Removed);
             filterData.removeAll(Removed);
         }
@@ -139,7 +135,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                 } else {
 
                     String searchStr = constraint.toString().toLowerCase().trim();
-                    ArrayList<Recipe> resultData = new ArrayList<>();
 
                     for(Recipe recipe: filterData) {
                        String nameLowerCase= recipe.getName().toLowerCase();
