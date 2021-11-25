@@ -1,4 +1,4 @@
-package it.unimib.cookery;
+package it.unimib.cookery.models;
 
 
 import java.util.ArrayList;

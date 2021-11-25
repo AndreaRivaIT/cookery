@@ -1,4 +1,4 @@
-package it.unimib.cookery;
+package it.unimib.cookery.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,14 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Locale;
+
+import it.unimib.cookery.R;
+import it.unimib.cookery.models.Recipe;
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {

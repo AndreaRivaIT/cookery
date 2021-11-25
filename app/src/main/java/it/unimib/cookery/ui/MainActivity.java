@@ -1,10 +1,13 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
+import it.unimib.cookery.R;
+import it.unimib.cookery.ui.MyRecipesFragment;
 
 
 public class MainActivity extends AppCompatActivity {

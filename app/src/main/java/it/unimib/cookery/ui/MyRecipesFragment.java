@@ -1,17 +1,13 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import android.os.Bundle;
 import android.content.DialogInterface;
-import java.util.Collections;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Filter;
 import android.widget.GridView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +18,10 @@ import android.widget.SearchView;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
+
+import it.unimib.cookery.R;
+import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.adapters.AdapterClass;
 
 
 public class MyRecipesFragment extends Fragment {

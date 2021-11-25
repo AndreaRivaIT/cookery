@@ -1,4 +1,4 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import android.os.Bundle;
 
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import java.util.ArrayList;
+
+import it.unimib.cookery.R;
 
 
 public class AlimentarPreferenceFragment extends Fragment {

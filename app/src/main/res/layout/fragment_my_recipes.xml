@@ -5,7 +5,7 @@
     android:id="@+id/MyRecepisFragmentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyRecipesFragment"
+    tools:context=".ui.MyRecipesFragment"
     tools:visibility="visible">
 
     <androidx.cardview.widget.CardView
