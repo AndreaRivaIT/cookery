@@ -1,4 +1,4 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.os.Bundle;
 //import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import it.unimib.cookery.R;
 
 public class MainActivity extends AppCompatActivity {
 

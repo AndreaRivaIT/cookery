@@ -1,4 +1,4 @@
-package it.unimib.cookery;
+package it.unimib.cookery.ui;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import it.unimib.cookery.R;
 
 public class RecipeFragment extends Fragment {
 

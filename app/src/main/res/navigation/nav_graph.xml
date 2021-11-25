@@ -8,17 +8,17 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="it.unimib.cookery.HomeFragment"
+        android:name="it.unimib.cookery.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/recipe"
-        android:name="it.unimib.cookery.RecipeFragment"
+        android:name="it.unimib.cookery.ui.RecipeFragment"
         android:label="fragment_recipe"
         tools:layout="@layout/fragment_recipe" />
     <fragment
         android:id="@+id/fridge"
-        android:name="it.unimib.cookery.FridgeFragment"
+        android:name="it.unimib.cookery.ui.FridgeFragment"
         android:label="fragment_fridge"
         tools:layout="@layout/fragment_fridge" />
 

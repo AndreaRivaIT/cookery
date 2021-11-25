@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/cookery_blue"
     android:foregroundTint="@color/cookery_blue"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
