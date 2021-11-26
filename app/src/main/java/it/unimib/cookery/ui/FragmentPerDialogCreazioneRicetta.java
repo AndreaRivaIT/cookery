@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,12 +104,11 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                             ingredientDialog.dismiss();
                         } else {
                             Toast.makeText(getContext(), "impossible to insert this quantity", Toast.LENGTH_SHORT).show();
+                            quantità = 0;
                             // chiude la dialog
                             ingredientDialog.dismiss();
 
                         }
-                        Log.d("debug", "quantità" + quantità);
-
                     }
                 });
 
@@ -119,10 +120,10 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        quantità = 0;
                         // chiude la dialog
                         ingredientDialog.dismiss();
 
-                        Log.d("debug", "" + quantità);
                     }
                 });
 
@@ -132,6 +133,31 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
 
             }
         });
+
+        Button addStepButton = view.findViewById(R.id.buttonStep);
+
+        addStepButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // crea una dialog
+                Dialog stepDialog = new Dialog(getContext());
+
+                // elimina il titolo dalla dialog che non serve
+                stepDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                // permette l'uscita dalla dialog solo se si preme cancella
+                stepDialog.setCancelable(false);
+
+                // setta il layout che poi verrà mostrato nella dialog
+                stepDialog.setContentView(R.layout.layout_step_dialog);
+
+                stepDialog.show();
+            }
+        });
+
+
+
+
 
 
     }
