@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import it.unimib.cookery.R;
 import it.unimib.cookery.models.Recipe;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
+public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubcard.Viewholder>{
 
     private Context context;
     private ArrayList<Recipe> recipeArrayList;
 
-    public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
+    public RecipeAdapterSubcard(Context context, ArrayList<Recipe> recipeArrayList) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
     }
@@ -30,20 +30,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textViewTest);
-            imageView = itemView.findViewById(R.id.imageViewTest);
+            textView = itemView.findViewById(R.id.textViewTestS);
+            imageView = itemView.findViewById(R.id.imageViewTestS);
         }
     }
 
     @NonNull
     @Override
-    public RecipeAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_card, parent, false);
+    public RecipeAdapterSubcard.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_subcard, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeAdapterSubcard.Viewholder holder, int position) {
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
         holder.imageView.setImageResource(model.getImageId());
