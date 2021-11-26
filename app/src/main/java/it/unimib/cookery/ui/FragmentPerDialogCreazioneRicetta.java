@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import it.unimib.cookery.R;
 
 
@@ -29,7 +32,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     private Button aggiungiStep;
 
     /* dichiaro una una variabile per ottenere la quantità dalla dialog */
-    private int quantità;
+    private int quantità = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,59 +53,80 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /* da mettere commenti */
-
+        // bottone che serve solo per invocare la dialog per aggiungere l'ingrediente poi da cancellare
         aggiungiIngrediente = view.findViewById(R.id.buttonIngrediente);
 
+        // listener per il bottone per creare la dialog per aggiungere un ingrediente, da cancellare
         aggiungiIngrediente.setOnClickListener(new View.OnClickListener() {
             @Override
+            // da cancellare onClick
             public void onClick(View v) {
 
+                // crea una dialog
                 Dialog ingredientDialog = new Dialog(getContext());
 
+                // elimina il titolo dalla dialog che non serve
                 ingredientDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+                // permette l'uscita dalla dialog solo se si preme cancella
                 ingredientDialog.setCancelable(false);
 
+                // setta il layout che poi verrà mostrato nella dialog
                 ingredientDialog.setContentView(R.layout.layout_ingredient_dialog);
 
+                // creo e trovo l'oggetto textView nella dialog
                 TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
 
+                // setto il teso della dialog la stringa andrà poi sostituita col nome dell'ingrediente da aggiungere
                 ingredientName.setText("nome ingrediente");
 
-
+                // creo e trovo l'oggetto editText dove l'utente inserisce la quantità
                 EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
 
                 Log.d("debug", "" + editText);
 
+                // creo e trovo il bottone per aggiungere l'ingrediente
                 Button addButton = ingredientDialog.findViewById(R.id.addButton);
 
+                //listener per il bottone per aggiungere l'ingrediente
                 addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // prendo la quantità scritta nel text edit se non è vuota la converto in stringa e poi in intero
+                        // se è > 0 la salvo mentre se è = 0 mostro il toast
+                        // l'edit text è già settata solo per accettare numeri interi positivi
 
-                        if ((Integer.parseInt(editText.getText().toString())) > 0)
+                        if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
                             quantità = Integer.parseInt(editText.getText().toString());
-                        else
+                            // chiude la dialog
+                            ingredientDialog.dismiss();
+                        } else {
                             Toast.makeText(getContext(), "impossible to insert this quantity", Toast.LENGTH_SHORT).show();
+                            // chiude la dialog
+                            ingredientDialog.dismiss();
 
+                        }
                         Log.d("debug", "quantità" + quantità);
 
                     }
                 });
 
 
+                // creo e ottengo l'oggetto per il bottono di delete
                 Button deleteButton = ingredientDialog.findViewById(R.id.deleteButton);
 
+                // listener del bottone di delete
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // chiude la dialog
                         ingredientDialog.dismiss();
 
                         Log.d("debug", "" + quantità);
                     }
                 });
 
+                // mostra la dialog
                 ingredientDialog.show();
 
 
