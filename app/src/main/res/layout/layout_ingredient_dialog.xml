@@ -19,8 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                />
+                android:layout_marginTop="10dp" />
 
 
             <Button
@@ -33,7 +32,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:minHeight="48dp"
-                android:text="add" />
+                android:text="@string/add_button" />
 
 
             <Button
@@ -44,7 +43,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toLeftOf="@id/addIngredientButton"
-                android:text="delete" />
+                android:text="@string/delete_button" />
 
             <EditText
                 android:id="@+id/IngredientEditText"
@@ -56,12 +55,10 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_shape"
-                android:hint="inserisci la quantità"
+                android:hint="@string/ingredient_hint_string"
                 android:inputType="number"
                 android:minHeight="48dp"
-                android:paddingLeft="4dp"
-
-                />
+                android:paddingLeft="4dp" />
 
 
         </RelativeLayout>
