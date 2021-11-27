@@ -33,8 +33,10 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     private Button aggiungiIngrediente;
     private Button aggiungiStep;
 
-    /* dichiaro una una variabile per ottenere la quantità dalla dialog */
+    /* dichiaro una una variabile per ottenere la quantità dalla dialog e una per ottenere il testo dello step */
     private int quantità = 0;
+    private String stepString = "";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,9 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        /* -- inizio codice dialog aggiunta ingrediente --*/
 
         // bottone che serve solo per invocare la dialog per aggiungere l'ingrediente poi da cancellare
         aggiungiIngrediente = view.findViewById(R.id.buttonIngrediente);
@@ -80,7 +85,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
 
                 // setto il teso della dialog la stringa andrà poi sostituita col nome dell'ingrediente da aggiungere
-                ingredientName.setText("nome ingrediente");
+                ingredientName.setText("nome ingrediente da modificare");
 
                 // creo e trovo l'oggetto editText dove l'utente inserisce la quantità
                 EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
@@ -88,7 +93,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 Log.d("debug", "" + editText);
 
                 // creo e trovo il bottone per aggiungere l'ingrediente
-                Button addButton = ingredientDialog.findViewById(R.id.addButton);
+                Button addButton = ingredientDialog.findViewById(R.id.addIngredientButton);
 
                 //listener per il bottone per aggiungere l'ingrediente
                 addButton.setOnClickListener(new View.OnClickListener() {
@@ -99,27 +104,26 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                         // l'edit text è già settata solo per accettare numeri interi positivi
 
                         if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
+                            // salvo la quantità inserita
                             quantità = Integer.parseInt(editText.getText().toString());
                             // chiude la dialog
                             ingredientDialog.dismiss();
                         } else {
+                            // stampa un toast di errore
                             Toast.makeText(getContext(), "impossible to insert this quantity", Toast.LENGTH_SHORT).show();
-                            quantità = 0;
-                            // chiude la dialog
-                            ingredientDialog.dismiss();
-
                         }
                     }
                 });
 
 
                 // creo e ottengo l'oggetto per il bottono di delete
-                Button deleteButton = ingredientDialog.findViewById(R.id.deleteButton);
+                Button deleteButton = ingredientDialog.findViewById(R.id.deleteIngredientButton);
 
                 // listener del bottone di delete
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // pr sicurezza setto la quantità a 0
                         quantità = 0;
                         // chiude la dialog
                         ingredientDialog.dismiss();
@@ -127,16 +131,21 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                     }
                 });
 
-                // mostra la dialog
+                // mostra la dialog a schermo
                 ingredientDialog.show();
 
 
             }
         });
 
-        Button addStepButton = view.findViewById(R.id.buttonStep);
+        /* -- fine codice dialog aggiunta ingrediente -- */
 
-        addStepButton.setOnClickListener(new View.OnClickListener() {
+
+        /* -- inizio codice dialog aggiunta step --*/
+
+        aggiungiStep = view.findViewById(R.id.buttonStep);
+
+        aggiungiStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // crea una dialog
@@ -151,13 +160,50 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 // setta il layout che poi verrà mostrato nella dialog
                 stepDialog.setContentView(R.layout.layout_step_dialog);
 
+                // creo e ottengo il riferimento all'edit text nel file layout
+                EditText editTextStep = stepDialog.findViewById(R.id.StepEditText);
+
+                // creo e ottengo il riferimento al bottone per aggiungere gli step
+                Button addButton = stepDialog.findViewById(R.id.addStepButton);
+
+                // listener per il bottone per aggiungere lo step
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        // controllo che quando viene premuto il bottone il contenuto scritto non sia vuoto
+                        if (!editTextStep.getText().toString().equals("")) {
+
+                            // salvo il contenuto dello step e chiudo la dialog
+                            stepString = editTextStep.getText().toString();
+                            stepDialog.dismiss();
+
+                        } else {
+                            // stampa un toast di errore
+                            Toast.makeText(getContext(), "impossible add an empty step", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+
+                // creo e ottengo il bottone per cancellare lo step scritto
+                Button deleteButton = stepDialog.findViewById(R.id.deleteStepButton);
+
+                // listener del bottone per cancellare
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // per sicurezza setto la stringa a stringa vuota e chiudo la dialog
+                        stepString = "";
+                        stepDialog.dismiss();
+                    }
+                });
+
+                // mostra la dialog a schermo
                 stepDialog.show();
             }
         });
-
-
-
-
 
 
     }
