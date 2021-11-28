@@ -35,13 +35,14 @@ public class MyRecipesFragment extends Fragment {
 
     /* fine robe di comodo */
 
-    /* costanti */
+    /* ottengo le stringhe costanti per dialog filtri */
 
-    public static final String FILTER0 = "stuzzichini";
-    public static final String FILTER1 = "primi";
-    public static final String FILTER2 = "secondi";
-    public static final String FILTER3 = "contorni ";
-    public static final String FILTER4 = "dolci";
+    private static final String FILTER0 = "Appetizers";
+    private static final String FILTER1 = "First course";
+    private static final String FILTER2 = "Main meal";
+    private static final String FILTER3 = "Side dish";
+    private static final String FILTER4 = "Desserts";
+    private static final String dialogTitle = "Select recipe type";
 
 
     /* dichiaro un oggetto di tipoGridView */
@@ -91,17 +92,17 @@ public class MyRecipesFragment extends Fragment {
 
         //  solo per prova //
 
-        recipeArrayList.add(new Recipe("pasta al forno", "primi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("risotto", "primi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("arrosto", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "secondi", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("pasta al forno", "First course", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("risotto", "First course", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("arrosto", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
 
 
         // fine codice solo per prova //
@@ -170,7 +171,7 @@ public class MyRecipesFragment extends Fragment {
                 /* fare update database*/
 
                 // aggiungo la ricetta e la mostro sulla gridview
-                recipeArrayList.add(new Recipe("aggiunta", "dolci", R.drawable.ic_baseline_add_24));
+                recipeArrayList.add(new Recipe("aggiunta", "Desserts", R.drawable.ic_baseline_add_24));
 
                 // adapter=new AdapterClass(getContext(), recipeArrayList);
                 myRecipiesGridView.setAdapter(adapter);
@@ -205,7 +206,7 @@ public class MyRecipesFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 // setta il titolo
-                builder.setTitle("Select recipe type");
+                builder.setTitle(dialogTitle);
 
                 // messo a false non permette di uscire dalla dialog se non premendo sul tasto close
                 builder.setCancelable(false);

@@ -26,13 +26,14 @@ public class AlimentarPreferenceFragment extends Fragment {
     private ArrayList<String> intolleranceChoosen = new ArrayList<>();
     private ArrayList<String> preferencesChoosen = new ArrayList<>();
 
-    /* stringhe costanti*/
-    private static final String GLUTEN = "gluten";
-    private static final String LACTOSE = "lactose";
-    private static final String NUTS = "nuts";
-    private static final String VEGAN = "vegan";
-    private static final String VEGETARIAN = "vegetarian";
-    private static final String PESCETARIAN = "pescetarian";
+    /* stringhe costanti per check box */
+
+     private static final String GLUTEN = "Gluten";
+     private static final String LACTOSE = "Lactose";
+     private static final String NUTS = "Nuts";
+     private static final String VEGAN= "Vegan";
+     private static final String VEGETARIAN = "Vegetarian";
+     private static final String PESCETARIAN = "Pescetarian";
 
 
     public AlimentarPreferenceFragment() {

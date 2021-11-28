@@ -33,6 +33,15 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     private Button aggiungiIngrediente;
     private Button aggiungiStep;
 
+   /* stringhe costanti */
+
+    private static final String ingrdientZeroQuantity = "Impossible to insert this quantity";
+
+            //getString(R.string.zero_ingredient_quantity); non va non so perchè
+
+    private static final String voidStep = "Impossible to add an empty step";
+
+
     /* dichiaro una una variabile per ottenere la quantità dalla dialog e una per ottenere il testo dello step */
     private int quantità = 0;
     private String stepString = "";
@@ -110,7 +119,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                             ingredientDialog.dismiss();
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), "impossible to insert this quantity", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), ingrdientZeroQuantity, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -180,7 +189,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
 
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), "impossible add an empty step", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), voidStep, Toast.LENGTH_SHORT).show();
 
                         }
 

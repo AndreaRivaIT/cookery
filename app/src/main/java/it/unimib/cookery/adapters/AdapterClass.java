@@ -27,7 +27,12 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
 
-    private static final String NO_RESULT_FOUND = "No result found";
+
+    /* stringa costante per messaggio di nessuna ricetta trovata */
+
+    private String NO_RESULT_FOUND = "No results found";
+
+            //getContext().getString(R.string.no_results_found); non va non so perchè
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
