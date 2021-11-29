@@ -1,15 +1,18 @@
 package it.unimib.cookery.models;
 
-import android.graphics.drawable.Drawable;
+import java.util.ArrayList;
 
+
+/*creata la classe della ricetta sia per il frgamnt delle ricette dell'utente, e ci servirà in seguito */
 public class Recipe {
 
     private String name;
-    private String category;
     private int imageId;
+    private String category;
 
+
+    // serve per prova
     public Recipe() {
-        // default constructor
     }
 
     public Recipe(String name, String category, int imageId) {
@@ -18,6 +21,7 @@ public class Recipe {
         this.imageId = imageId;
     }
 
+
     public String getName() {
         return name;
     }
@@ -25,6 +29,7 @@ public class Recipe {
     public String getCategory() {
         return category;
     }
+
 
     public int getImageId() {
         return imageId;
