@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 
 
 public class AlimentarPreferenceFragment extends Fragment {
@@ -26,14 +27,10 @@ public class AlimentarPreferenceFragment extends Fragment {
     private ArrayList<String> intolleranceChoosen = new ArrayList<>();
     private ArrayList<String> preferencesChoosen = new ArrayList<>();
 
-    /* stringhe costanti per check box */
 
-     private static final String GLUTEN = "Gluten";
-     private static final String LACTOSE = "Lactose";
-     private static final String NUTS = "Nuts";
-     private static final String VEGAN= "Vegan";
-     private static final String VEGETARIAN = "Vegetarian";
-     private static final String PESCETARIAN = "Pescetarian";
+
+    // oggetto classe Costants per accedere alle costanti
+     private Costants alimentarPreferenceCostants = new Costants();
 
 
     public AlimentarPreferenceFragment() {
@@ -76,22 +73,22 @@ public class AlimentarPreferenceFragment extends Fragment {
                 // se gli elementi sono selezionati gli aggiungo agli array list
 
                 if (gluten.isChecked())
-                    intolleranceChoosen.add(GLUTEN);
+                    intolleranceChoosen.add(alimentarPreferenceCostants.GLUTEN);
 
                 if (lactose.isChecked())
-                    intolleranceChoosen.add(LACTOSE);
+                    intolleranceChoosen.add(alimentarPreferenceCostants.LACTOSE);
 
                 if (nuts.isChecked())
-                    intolleranceChoosen.add(NUTS);
+                    intolleranceChoosen.add(alimentarPreferenceCostants.NUTS);
 
                 if (vegan.isChecked())
-                    preferencesChoosen.add(VEGAN);
+                    preferencesChoosen.add(alimentarPreferenceCostants.VEGAN);
 
                 if (vegetarian.isChecked())
-                    preferencesChoosen.add(VEGETARIAN);
+                    preferencesChoosen.add(alimentarPreferenceCostants.VEGETARIAN);
 
                 if (pescetarian.isChecked())
-                    preferencesChoosen.add(PESCETARIAN);
+                    preferencesChoosen.add(alimentarPreferenceCostants.PESCETARIAN);
 
 
                 for (String s : intolleranceChoosen)

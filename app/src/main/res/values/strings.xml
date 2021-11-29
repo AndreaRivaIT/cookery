@@ -2,63 +2,38 @@
     <string name="app_name">Cookery</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- strings per fragment my recipe -->
     <string name="search_string">Search Here</string>
     <string name="My_recipes_string">
        <font size="20">My Recipes</font>
     </string>
-
-
-    <!-- strings per fragment my recipe -->
-
     <string name="filter_string"> Filter </string>
     <string name="MyRecipes_chips_string"> Add Recipe</string>
-
-    <string name="filter0">Appetizers</string>
-    <string name="filter1">First course</string>
-    <string name="filter2">Main meal</string>
-    <string name="filter3">Side dish</string>
-    <string name="filter4">Desserts</string>
-    <string name="dialog_title">Select recipe type</string>
-
     <!-- fine strings per fragment my recipe -->
 
-    <!-- inizio strings per grid view adapter MyRecipesFragment -->
-
-    <string name="no_results_found">No results found</string>
-
-    <!-- fine strings per grid view adapter MyRecipesFragment -->
-    
-    
-    
     
     <!-- strings per fragment alimentar preferences  -->
     <string name="intollerance_string">Intollerance</string>
     <string name="preferences_string">Preferences</string>
-
     <string name="gluten_intolerance">Gluten</string>
     <string name="lactose_intollerance">Lactose</string>
     <string name="nust_intollerance">Nuts</string>
-
-
     <string name="vegan_string">Vegan</string>
     <string name="vegetarian_string">Vegetarian</string>
     <string name="pescetarian_string">Pescetarian</string>
-
     <string name="save_string">Save</string>
 
     <!-- fine strings per fragment alimentar preferences  -->
 
 
     <!-- strings per dialog aggiunta ingredienti e step -->
-
     <string name="step_string">Step</string>
     <string name="add_button">Add</string>
     <string name="delete_button">Delete</string>
     <string name="step_hint_string">Write a step</string>
     <string name="ingredient_hint_string">Insert a quantity</string>
-    <string name="zero_ingredient_quantity">Impossible to insert this quantity</string>
-    <string name="void_step">Impossible add an empty step</string>
-
     <!-- fine strings per dialog aggiunta ingredienti e step -->
 
 

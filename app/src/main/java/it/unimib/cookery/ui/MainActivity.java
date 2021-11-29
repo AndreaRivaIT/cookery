@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* questo codice serve solo per caricare il fragmnet che sto progettando*/
 
-        AlimentarPreferenceFragment f1 = new AlimentarPreferenceFragment();
+        FragmentPerDialogCreazioneRicetta f1 = new FragmentPerDialogCreazioneRicetta();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.mainContainer, f1);

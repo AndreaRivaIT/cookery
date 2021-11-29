@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 
 
 public class FragmentPerDialogCreazioneRicetta extends Fragment {
@@ -33,14 +34,8 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     private Button aggiungiIngrediente;
     private Button aggiungiStep;
 
-   /* stringhe costanti */
-
-    private static final String ingrdientZeroQuantity = "Impossible to insert this quantity";
-
-            //getString(R.string.zero_ingredient_quantity); non va non so perchè
-
-    private static final String voidStep = "Impossible to add an empty step";
-
+    // oggetto classe costants per accedere alle costanti
+    private Costants stepAndIngredientCostants = new Costants();
 
     /* dichiaro una una variabile per ottenere la quantità dalla dialog e una per ottenere il testo dello step */
     private int quantità = 0;
@@ -119,7 +114,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                             ingredientDialog.dismiss();
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), ingrdientZeroQuantity, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), stepAndIngredientCostants.ingrdientZeroQuantity, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -189,7 +184,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
 
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), voidStep, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), stepAndIngredientCostants.voidStep , Toast.LENGTH_SHORT).show();
 
                         }
 

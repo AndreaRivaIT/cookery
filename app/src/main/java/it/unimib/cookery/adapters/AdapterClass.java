@@ -18,7 +18,9 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.costants.Costants;
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
@@ -27,12 +29,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
 
+    /*creo l'oggetto costants per accedere alle costanti */
+   private Costants adapterCostants = new Costants();
 
-    /* stringa costante per messaggio di nessuna ricetta trovata */
-
-    private String NO_RESULT_FOUND = "No results found";
-
-            //getContext().getString(R.string.no_results_found); non va non so perchè
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
@@ -152,7 +151,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
             // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
             if (listdata.size() == 0) {
-                Toast.makeText(getContext(), NO_RESULT_FOUND, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), adapterCostants.NO_RESULT_FOUND, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
             } else {
                 notifyDataSetChanged();

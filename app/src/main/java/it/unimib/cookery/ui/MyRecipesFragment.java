@@ -22,6 +22,7 @@ import com.google.android.material.chip.Chip;
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.adapters.AdapterClass;
 
@@ -36,13 +37,7 @@ public class MyRecipesFragment extends Fragment {
     /* fine robe di comodo */
 
     /* ottengo le stringhe costanti per dialog filtri */
-
-    private static final String FILTER0 = "Appetizers";
-    private static final String FILTER1 = "First course";
-    private static final String FILTER2 = "Main meal";
-    private static final String FILTER3 = "Side dish";
-    private static final String FILTER4 = "Desserts";
-    private static final String dialogTitle = "Select recipe type";
+    private Costants myRecipeCostants = new Costants();
 
 
     /* dichiaro un oggetto di tipoGridView */
@@ -186,7 +181,8 @@ public class MyRecipesFragment extends Fragment {
         // --inizio codice button filter --
 
         // array di nomi che verranno mostrati sulla dialog
-        String[] filterArray = {FILTER0, FILTER1, FILTER2, FILTER3, FILTER4};
+        String[] filterArray = {myRecipeCostants.FILTER0, myRecipeCostants.FILTER1, myRecipeCostants.FILTER2,
+                myRecipeCostants.FILTER3, myRecipeCostants.FILTER4};
 
         // serve per salvare se un elemento è selezionato o meno
         boolean[] selectedFilter = new boolean[filterArray.length];
@@ -206,7 +202,7 @@ public class MyRecipesFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 // setta il titolo
-                builder.setTitle(dialogTitle);
+                builder.setTitle(myRecipeCostants.dialogTitle);
 
                 // messo a false non permette di uscire dalla dialog se non premendo sul tasto close
                 builder.setCancelable(false);
@@ -219,19 +215,19 @@ public class MyRecipesFragment extends Fragment {
                         String filter = "";
                         switch (i) {
                             case 0:
-                                filter = FILTER0;
+                                filter = myRecipeCostants.FILTER0;
                                 break;
                             case 1:
-                                filter = FILTER1;
+                                filter = myRecipeCostants.FILTER1;
                                 break;
                             case 2:
-                                filter = FILTER2;
+                                filter = myRecipeCostants.FILTER2;
                                 break;
                             case 3:
-                                filter = FILTER3;
+                                filter = myRecipeCostants.FILTER3;
                                 break;
                             case 4:
-                                filter = FILTER4;
+                                filter = myRecipeCostants.FILTER4;
                                 break;
 
                         }
