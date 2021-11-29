@@ -13,7 +13,6 @@ public class Recipe {
     ArrayList<Ingredient> ingredientList= new ArrayList<>();
 
     public  void setnPerson(int n){
-
         for(int i = 0; i < ingredientList.size(); i++){
            int qBase = ingredientList.get(i).getQuantity() / nPerson;
            ingredientList.get(i).setQuantity(qBase * n);
