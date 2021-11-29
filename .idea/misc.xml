@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-    
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_adam.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_fridge.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_recipe.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_scrolling.xml" value="0.33" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_card.xml" value="0.22" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/drawable/ic_baseline_filter_list_24.xml" value="0.175" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/drawable/rounded_shape.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/layout/activity_main.xml" value="0.33559782608695654" />
@@ -16,20 +23,13 @@
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/layout/layout_step_dialog.xml" value="0.32116788321167883" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/layout/round_shape_border.xml" value="0.33559782608695654" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2101851851851852" />
-        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2101851851851852" />   
-        
-        
-        
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_adam.xml" value="0.275" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_fridge.xml" value="0.275" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_recipe.xml" value="0.275" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_scrolling.xml" value="0.33" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_card.xml" value="0.22" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.275" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
-      
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-hdpi/border_radius_style.xml" value="0.1" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-hdpi/btnclick_add_style.xml" value="0.14375" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-xxxhdpi/pressed.xml" value="0.15572916666666667" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-xxxhdpi/pressed_remove.xml" value="0.15572916666666667" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.1" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/item_step_recipe.xml" value="0.1" />
       </map>
     </option>
   </component>

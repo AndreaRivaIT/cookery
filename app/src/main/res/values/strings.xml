@@ -40,6 +40,11 @@
     <string name="fridge">Fridge</string>
     <string name="recipe">Recipe</string>
     <string name="Ready_to_cook">Ready to cook</string>
-    
+    <string name="img_recipe">img_recipe</string>
+    <string name="like">like</string>
+    <string name="crea_una_lista_della_spesa">Crea una lista della spesa</string>
+    <string name="my_pantry">My pantry</string>
+    <string name="my_fridge">My fridge</string>
+
 
 </resources>
