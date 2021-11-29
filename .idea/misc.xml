@@ -6,19 +6,33 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adami/Desktop/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.536" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-anydpi/ic_action_add.xml" value="0.1259259259259259" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-anydpi/ic_action_add_press.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-anydpi/ic_action_heart.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-xxhdpi/border_radius_click_btnAdd.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/border_radius_btnclick_one.xml" value="0.26205128205128203" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/border_radius_style.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/border_radius_style_btn.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/btn_add_remover_style.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/btnclick_add_style.xml" value="0.1953125" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/btnclick_remove_style.xml" value="0.1953125" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/btnclicl_remove_style.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/pressed.xml" value="0.1259259259259259" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable/pressed_remove.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/activity_pantry.xml" value="0.264" />
-        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.2" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.22959183673469388" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/fragment_blank.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/fragment_pantry.xml" value="0.1381340579710145" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/fragment_scrolling.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/fragment_single_recipe.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/fragment_steps.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/header_layout_single_recipe.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/header_recipe.xml" value="0.1408514492753623" />
-        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/item_step_recipe.xml" value="0.536" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/item_chip.xml" value="0.536" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/item_chip_ingredient.xml" value="0.536" />
+        <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/item_step_recipe.xml" value="0.4329159212880143" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/resource_container_ingredients.xml" value="0.264" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/layout/step_recipe_item.xml" value="0.234375" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14895833333333333" />

@@ -67,16 +67,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lasagna"
-                    android:textSize="45sp"
+                    android:textSize="45dp"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe" />
+                    app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe"
+                    android:fontFamily="@font/poppins_bold"/>
 
                 <ImageButton
                     android:id="@+id/ButtonDeleteRecipe"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
                     android:minHeight="48dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +91,7 @@
                     android:id="@+id/ButtonEditRecipe"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
                     android:minHeight="48dp"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
@@ -110,9 +112,12 @@
             android:layout_height="wrap_content"
             app:cardElevation="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewIngredients"
@@ -120,64 +125,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Ingredients:"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="30sp" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcv_chips"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewIngredients">
+                    android:layout_marginStart="10dp">
+                </androidx.recyclerview.widget.RecyclerView>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pomodoro 250g" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pasta sfoglia 350g" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Basilico" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Besciamella" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Carne macinata" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Grana padano" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mozzarella" />
-
-                </com.google.android.material.chip.ChipGroup>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -186,55 +143,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
             app:cardElevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:background="@drawable/border_radius_style">
 
                 <TextView
-                    android:id="@+id/textViewAmount"
+                    android:id="@+id/tv_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginBottom="18dp"
-                    android:text="5 Persone"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="2 Persone"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/ButtonActionRemove"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="200dp"
+                    android:id="@+id/btn_remove"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:backgroundTint="@android:color/transparent"
                     android:contentDescription="TODO"
-                    app:layout_constraintBottom_toBottomOf="@+id/textViewAmount"
-                    app:layout_constraintStart_toEndOf="@+id/textViewAmount"
-                    app:layout_constraintTop_toTopOf="@+id/textViewAmount"
-                    app:layout_constraintVertical_bias="0.535"
-                    app:srcCompat="@drawable/ic_action_remove"
-                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_add"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/btnclick_remove_style" />
 
                 <ImageButton
-                    android:id="@+id/ButtonActionAdd"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="10dp"
+                    android:id="@+id/btn_add"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginEnd="5dp"
                     android:backgroundTint="@android:color/transparent"
                     android:contentDescription="@string/todo"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ButtonActionRemove"
-                    app:layout_constraintTop_toTopOf="@+id/ButtonActionRemove"
-                    app:srcCompat="@drawable/ic_action_add"
-                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,TouchTargetSizeCheck" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/btnclick_add_style" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -242,11 +195,17 @@
         <Button
             android:id="@+id/buttonListIngredients"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/crea_una_lista_della_spesa" />
+            android:layout_marginBottom="12dp"
+
+            android:backgroundTint="@color/cookery_blue"
+            android:text="@string/crea_una_lista_della_spesa"
+            android:textColor="#E80000"
+            app:iconTint="@color/cookery_blue" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_steps"
             android:layout_width="wrap_content"

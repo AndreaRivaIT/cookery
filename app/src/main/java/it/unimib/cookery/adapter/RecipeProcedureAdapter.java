@@ -30,13 +30,10 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
 
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
-
         RecipeStep recipeStep = mListStep.get(position);
         if(recipeStep == null){ return;}
-
-        holder.tvNStep.setText("Step: "+ recipeStep.getnStep());
+        holder.tvNStep.setText("Step "+ recipeStep.getnStep()+" :");
         holder.tvDescription.setText(recipeStep.getDescription());
-
     }
 
     @Override
@@ -50,10 +47,8 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
     public class StepViewHolder extends RecyclerView.ViewHolder{
         private TextView tvNStep;
         private TextView tvDescription;
-
         public StepViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tvNStep = itemView.findViewById(R.id.tv_n_step);
             tvDescription = itemView.findViewById(R.id.tv_descripion);
         }

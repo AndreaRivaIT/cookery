@@ -10,13 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cookery">
         <activity
-            android:name=".ui.PantryActivity"
+            android:name=".ui.SingleRecipeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.SingleRecipeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

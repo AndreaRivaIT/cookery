@@ -1,81 +1,64 @@
 package it.unimib.cookery.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Recipe {
     private String name;
     private int imgId;
-    private Ingredient[] ingredients = new Ingredient[5];
-    private RecipeStep[] steps = new RecipeStep[5];
-
+    private int nPerson;
     ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    ArrayList<Ingredient> ingredientList= new ArrayList<>();
+
+    public  void setnPerson(int n){
+
+        for(int i = 0; i < ingredientList.size(); i++){
+           int qBase = ingredientList.get(i).getQuantity() / nPerson;
+           ingredientList.get(i).setQuantity(qBase * n);
+           Log.d("test","nome:" + ingredientList.get(i).getIngredientName()+"- quantita:"+ingredientList.get(i).getQuantity());
+        }
+        nPerson = n;
+    }
 
     public void setStepsList(RecipeStep stepsList) {
+
         this.stepsList.add(stepsList);
     }
 
     public ArrayList<RecipeStep> getStepsList() {
+
         return stepsList;
+    }
+
+    public void setIngredientList(Ingredient ingredientList) {
+        this.ingredientList.add(ingredientList);
+    }
+
+    public ArrayList<Ingredient> getIngredientList() {
+
+        return ingredientList;
     }
 
     public Recipe(String name, int imgId){
         this.name = name;
         this.imgId = imgId;
+        this.nPerson = 2;
     }
 
-    //aggiungi ingrediente alla ricetta
-    public boolean addIngredient(Ingredient ingredient) {
-        if (ingredient == null)
-            return false;
-        //aggiungi ingrediente all'ultima voce dell'array
-        for (int i = 0; i < ingredients.length; i++) {
-            if (ingredients[i] == null) {
-                ingredients[i] = ingredient;
-                return true;
-            }
-        }
-        return false;
-    }
 
-    //aggiungi step alla ricetta
-    public boolean addStep(RecipeStep recipeStep) {
-        if (recipeStep == null)
-            return false;
-        //aggiungi ingrediente all'ultima voce dell'array
-        for (int i = 0; i < steps.length; i++) {
-            if (steps[i] == null) {
-                steps[i] = recipeStep;
-                return true;
-            }
-        }
-        return false;
-    }
 
     public String getName(){
+
         return name;
     }
     public int getImgId(){
+
         return imgId;
     }
-    public  Ingredient[] getIngredients(){
-        return ingredients;
-    }
-    public  RecipeStep[] getSteps(){
-        return steps;
-    }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "name = '" + name + '\'' +
-                ", imgId= " + imgId +
-                ", ingredients = " + ingredients[0].getIngredientName() +" "+ ingredients[1].getIngredientName()+" " +
-                ingredients[2].getIngredientName()+" "+ingredients[3].getIngredientName()+" "+ingredients[4].getIngredientName()+
-                '}';
-    }
-    public String toStringRecipe(){
-        return"Steps: "+steps[0].getDescription() +" "+steps[1].getDescription() +" "+steps[2].getDescription() +" "+
-                steps[3].getDescription() +" "+steps[4].getDescription() +" ";
+    public  int getnPerson(){
+        return nPerson;
     }
 }

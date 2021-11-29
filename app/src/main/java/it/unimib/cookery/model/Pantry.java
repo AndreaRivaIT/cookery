@@ -1,17 +1,28 @@
 package it.unimib.cookery.model;
 
+import java.util.ArrayList;
+
 public class Pantry {
-     private Ingredient[] ingredients;
 
-     public Pantry(int numIngredients) {
-          ingredients = new Ingredient[numIngredients];
+     ArrayList<Ingredient> ingredientList = new ArrayList<>();
+
+     public Pantry(ArrayList<Ingredient> ingredientList) {
+          this.ingredientList = ingredientList;
      }
 
-     public Ingredient[] getIngredients() {
-          return ingredients;
+     public Pantry(Ingredient ingredient) {
+          this.ingredientList.add(ingredient);
      }
 
-     public void setIngredients(Ingredient[] ingredients) {
-          this.ingredients = ingredients;
+     public ArrayList<Ingredient> getIngredientList() {
+          return ingredientList;
      }
+
+     public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+          this.ingredientList = ingredientList;
+     }
+     public void setIngredient(Ingredient ingredient) {
+          this.ingredientList.add(ingredient);
+     }
+
 }
