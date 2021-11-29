@@ -1,6 +1,5 @@
 package it.unimib.cookery.models;
 
-
 import java.util.ArrayList;
 
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 public class Recipe {
 
     private String name;
-    private int imgId;
+    private int imageId;
     private String category;
 
 
@@ -16,10 +15,10 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name, String category, int imgId) {
+    public Recipe(String name, String category, int imageId) {
         this.name = name;
         this.category = category;
-        this.imgId = imgId;
+        this.imageId = imageId;
     }
 
 
@@ -31,9 +30,21 @@ public class Recipe {
         return category;
     }
 
-    public int getImgId() {
-        return imgId;
+
+    public int getImageId() {
+        return imageId;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
 
 }

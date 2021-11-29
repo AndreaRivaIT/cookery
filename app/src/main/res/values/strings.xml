@@ -36,5 +36,10 @@
     <string name="ingredient_hint_string">Insert a quantity</string>
     <!-- fine strings per dialog aggiunta ingredienti e step -->
 
+    <string name="home">Home</string>
+    <string name="fridge">Fridge</string>
+    <string name="recipe">Recipe</string>
+    <string name="Ready_to_cook">Ready to cook</string>
+    
 
 </resources>
