@@ -102,7 +102,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/main_color"
+        android:backgroundTint="@color/cookery_blue"
         android:text="@string/save_string"
         android:textColor="@color/black" />
 </RelativeLayout>
