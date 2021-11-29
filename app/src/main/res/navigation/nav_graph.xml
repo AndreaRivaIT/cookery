@@ -13,8 +13,8 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/recipe"
-        android:name="it.unimib.cookery.ui.RecipeFragment"
-        android:label="fragment_recipe"
+        android:name="it.unimib.cookery.ui.MyRecipesFragment"
+        android:label="fragment_my_recipes"
         tools:layout="@layout/fragment_my_recipes" />
     <fragment
         android:id="@+id/fridge"
