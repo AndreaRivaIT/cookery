@@ -82,9 +82,8 @@ public class MyRecipesFragment extends Fragment {
         /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
 
-       // cambia il titolo nella action bar
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("My recipe");
 
+        
         // --- inizio codice gridview --
 
         /* ottengo la Gridview */
