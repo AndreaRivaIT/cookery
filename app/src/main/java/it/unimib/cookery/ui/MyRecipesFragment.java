@@ -83,7 +83,7 @@ public class MyRecipesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
 
 
-        
+
         // --- inizio codice gridview --
 
         /* ottengo la Gridview */
