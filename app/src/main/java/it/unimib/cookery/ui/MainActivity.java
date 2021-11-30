@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
        Toolbar toolbar = findViewById(R.id.toolbar);
        setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayShowTitleEnabled(false);
+     // getSupportActionBar().setDisplayShowTitleEnabled(false);
+     // setta il titolo della toolbar
+      getSupportActionBar().setTitle("Coockery");
 
         /*FragmentPerDialogCreazioneRicetta f1 = new FragmentPerDialogCreazioneRicetta();
         FragmentManager fm = getSupportFragmentManager();

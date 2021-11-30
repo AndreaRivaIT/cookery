@@ -3,6 +3,9 @@ package it.unimib.cookery.ui;
 import android.os.Bundle;
 import android.content.DialogInterface;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toolbar;
 
 
 import com.google.android.material.chip.Chip;
@@ -66,7 +70,10 @@ public class MyRecipesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,6 +81,9 @@ public class MyRecipesFragment extends Fragment {
 
         /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
+
+       // cambia il titolo nella action bar
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("My recipe");
 
         // --- inizio codice gridview --
 
