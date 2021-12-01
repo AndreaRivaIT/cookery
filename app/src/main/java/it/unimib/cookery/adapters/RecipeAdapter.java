@@ -1,6 +1,7 @@
 package it.unimib.cookery.adapters;
 
 import android.content.Context;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
     private Context context;
     private ArrayList<Recipe> recipeArrayList;
+
 
     public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
         this.context = context;
@@ -47,7 +49,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
         holder.imageView.setImageResource(model.getImageId());
+
     }
+
 
     @Override
     public int getItemCount() {

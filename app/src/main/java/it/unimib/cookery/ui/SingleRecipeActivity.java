@@ -1,9 +1,14 @@
 package it.unimib.cookery.ui;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +59,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
         setRicettaAppoggio();
         createChips();
 
+        // ottengo l'oggetto textView interessato
+        TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
+
+
+
         //Inflate degli steps procedimento della ricetta
         rcvSteps = findViewById(R.id.rcv_steps);
         recipeProcedureAdapter = new RecipeProcedureAdapter();
@@ -92,6 +102,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
             createChips();
         });
     }
+
+
     private void createChips(){
         // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne
         rcvChips = findViewById(R.id.rcv_chips);

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.widget.AdapterView;
@@ -128,6 +129,13 @@ public class MyRecipesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
                 Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getName());
+
+
+
+                // quando viene premuta una card mi porta all'acitvity della ricetta
+                // aggiungendola in automatico all back stack
+                Navigation.findNavController(view).navigate(
+                        R.id.action_recipe_to_singleRecipeActivity);
 
 
             }

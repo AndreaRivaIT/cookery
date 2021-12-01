@@ -10,16 +10,29 @@
         android:id="@+id/home"
         android:name="it.unimib.cookery.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_singleRecipeActivity"
+            app:destination="@id/singleRecipeActivity" />
+    </fragment>
     <fragment
         android:id="@+id/recipe"
         android:name="it.unimib.cookery.ui.MyRecipesFragment"
         android:label="fragment_my_recipes"
-        tools:layout="@layout/fragment_my_recipes" />
+        tools:layout="@layout/fragment_my_recipes" >
+        <action
+            android:id="@+id/action_recipe_to_singleRecipeActivity"
+            app:destination="@id/singleRecipeActivity" />
+    </fragment>
     <fragment
         android:id="@+id/fridge"
         android:name="it.unimib.cookery.ui.FridgeFragment"
         android:label="fragment_fridge"
         tools:layout="@layout/fragment_fridge" />
+    <activity
+        android:id="@+id/singleRecipeActivity"
+        android:name="it.unimib.cookery.ui.SingleRecipeActivity"
+        android:label="activity_single_recipe"
+        tools:layout="@layout/activity_single_recipe" />
 
 </navigation>
