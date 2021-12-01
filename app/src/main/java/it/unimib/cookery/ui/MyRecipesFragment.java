@@ -1,5 +1,6 @@
 package it.unimib.cookery.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.content.DialogInterface;
 
@@ -130,12 +131,14 @@ public class MyRecipesFragment extends Fragment {
                 /* stampa di debug */
                 Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getName());
 
-
-
-                // quando viene premuta una card mi porta all'acitvity della ricetta
-                // aggiungendola in automatico all back stack
-                Navigation.findNavController(view).navigate(
-                        R.id.action_recipe_to_singleRecipeActivity);
+                // quando schiaccio una card crea l'intent e salva le
+                // informazioni da passare all'activity SingleRecipeActivity il back stack è gestito in automatico
+                Intent intent = new Intent(getActivity(), SingleRecipeActivity.class);
+                // da aggiungere passaggio id ricetta
+                intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName() );
+                intent.putExtra(myRecipeCostants.EDITABLE, "true");
+                // starta l'activity
+                startActivity(intent);
 
 
             }

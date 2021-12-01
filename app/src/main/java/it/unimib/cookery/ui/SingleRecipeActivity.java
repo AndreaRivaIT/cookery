@@ -1,8 +1,10 @@
 package it.unimib.cookery.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import it.unimib.cookery.R;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
@@ -52,6 +55,12 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView tvQuantity;
     private int nPerson;
 
+    // varibile per moidificare la ricetta
+    private String editable;
+
+    // oggetto per le costanti
+    private Costants costants = new Costants();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +68,27 @@ public class SingleRecipeActivity extends AppCompatActivity {
         setRicettaAppoggio();
         createChips();
 
+        // ottengo l'intent che ha avviato l'activity
+        Intent intent = getIntent();
+
         // ottengo l'oggetto textView interessato
         TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
+        // setto il nome della ricetta
+        textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
 
+        // ottengo la stringa che mi dice se la ricetta è modificabile
+        editable = intent.getStringExtra(costants.EDITABLE);
+
+
+        // non trova i bottoni non so perchè
+        // se la ricetta è modificabile mostro i bottoni
+        if (editable.equals("true")) {
+            // ottengo i bottoni per modificare/eliminare la ricetta
+            ImageButton modifyRecipe = findViewById(R.id.ButtonEditRecipe);
+            ImageButton deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
+            modifyRecipe.setVisibility(View.VISIBLE);
+            deleteRecipe.setVisibility(View.VISIBLE);
+             }
 
 
         //Inflate degli steps procedimento della ricetta
@@ -77,6 +104,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add);
         btnRemove = findViewById(R.id.btn_remove);
         tvAmountPeople = findViewById(R.id.tv_amount);
+
+
 
 
 
@@ -101,8 +130,21 @@ public class SingleRecipeActivity extends AppCompatActivity {
             }
             createChips();
         });
+
+
+
+
+
+
+
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     private void createChips(){
         // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne

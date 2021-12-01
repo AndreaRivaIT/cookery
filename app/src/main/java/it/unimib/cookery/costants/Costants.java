@@ -43,6 +43,16 @@ public class Costants {
 
     /* fine  strnghe costanti Adapter class  */
 
+
+    /* stringhe tag per intent */
+
+    public static final String RECIPE_NAME="Recipe name";
+    public static final String EDITABLE="editable";
+    public static final String RECIPE_ID="Recipe id";
+
+
+
+
     public Costants(){
 
     }
