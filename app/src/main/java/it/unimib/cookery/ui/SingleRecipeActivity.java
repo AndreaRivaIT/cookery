@@ -84,16 +84,33 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo la stringa che mi dice se la ricetta è modificabile
         editable = intent.getStringExtra(costants.EDITABLE);
 
-
+        modifyRecipe = findViewById(R.id.ButtonEditRecipe);
+        deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
         // non trova i bottoni non so perchè
         // se la ricetta è modificabile mostro i bottoni
         if (editable.equals("true")) {
             // ottengo i bottoni per modificare/eliminare la ricetta
-             modifyRecipe = findViewById(R.id.ButtonEditRecipe);
-            deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
             modifyRecipe.setVisibility(View.VISIBLE);
             deleteRecipe.setVisibility(View.VISIBLE);
+            modifyRecipe.setClickable(true);
+            deleteRecipe.setClickable(true);
              }
+
+
+        modifyRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("premuto", "modifyRecipe");
+            }
+        });
+
+
+        deleteRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("premuto", "deleteRecipe");
+            }
+        });
 
 
         //Inflate degli steps procedimento della ricetta

@@ -11,16 +11,13 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
-
 import it.unimib.cookery.R;
-import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.costants.Costants;
+
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
@@ -29,8 +26,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
 
-    /*creo l'oggetto costants per accedere alle costanti */
-   private Costants adapterCostants = new Costants();
 
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
@@ -151,7 +146,10 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
             // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
             if (listdata.size() == 0) {
-                Toast.makeText(getContext(), adapterCostants.NO_RESULT_FOUND, Toast.LENGTH_SHORT).show();
+               // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
+                //Snackbar.make(getContext(), "prova", Snackbar.LENGTH_SHORT).show();
+
+                Toast.makeText(getContext(), R.string.result_not_found, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
             } else {
                 notifyDataSetChanged();

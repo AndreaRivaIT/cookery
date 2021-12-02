@@ -11,6 +11,8 @@
     </string>
     <string name="filter_string"> Filter </string>
     <string name="MyRecipes_chips_string"> Add Recipe</string>
+    <string name="result_not_found">Result not found</string>
+
     <!-- fine strings per fragment my recipe -->
 
     
@@ -34,6 +36,8 @@
     <string name="delete_button">Delete</string>
     <string name="step_hint_string">Write a step</string>
     <string name="ingredient_hint_string">Insert a quantity</string>
+    <string name="invalid_quantity">Impossible to add this quantity</string>
+    <string name="invalid_step">Impossible to add an empty step</string>
     <!-- fine strings per dialog aggiunta ingredienti e step -->
 
     <string name="home">Home</string>

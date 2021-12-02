@@ -3,7 +3,7 @@ package it.unimib.cookery.costants;
 public class Costants {
 
 
-    /* inizio strnghe costanti Alimentar Prefences Fragment */
+    /* inizio stringhe costanti Alimentar Prefences Fragment */
 
     public static final String GLUTEN = "Gluten";
     public static final String LACTOSE = "Lactose";
@@ -13,18 +13,11 @@ public class Costants {
     public static final String PESCETARIAN = "Pescetarian";
 
 
-    /* fine  strnghe costanti Alimentar Prefences Fragment */
+    /* fine  stringhe costanti Alimentar Prefences Fragment */
 
 
-    /* inizio strnghe costanti dialog aggiunta step e ingredienti  */
 
-    public static final String ingrdientZeroQuantity = "Impossible to insert this quantity";
-    public static final String voidStep = "Impossible to add an empty step";
-
-    /* fine inizio strnghe costanti dialog aggiunta step e ingredienti  */
-
-
-    /* inizio strnghe costanti My Recipes Fragment */
+    /* inizio stringhe costanti My Recipes Fragment */
 
     public static final String FILTER0 = "Appetizers";
     public static final String FILTER1 = "First course";
@@ -33,15 +26,9 @@ public class Costants {
     public static final String FILTER4 = "Desserts";
     public static final String dialogTitle = "Select recipe type";
 
-    /* fine strnghe costanti My Recipes Fragment */
+    /* fine stringhe costanti My Recipes Fragment */
 
 
-    /* inizio strnghe costanti Adapter class  */
-
-    public static final String NO_RESULT_FOUND = "No results found";
-
-
-    /* fine  strnghe costanti Adapter class  */
 
 
     /* stringhe tag per intent */
