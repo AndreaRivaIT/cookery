@@ -36,6 +36,11 @@ import it.unimib.cookery.adapters.AdapterClass;
 public class MyRecipesFragment extends Fragment {
 
 
+
+
+
+
+
     /* robe di comodo */
     private String nomeRicettaTest = " pasta al forno";
     private static final String TAG = "premuto";
@@ -83,7 +88,6 @@ public class MyRecipesFragment extends Fragment {
 
         /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
-
 
 
         // --- inizio codice gridview --

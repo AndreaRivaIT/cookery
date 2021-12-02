@@ -61,6 +61,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
     // oggetto per le costanti
     private Costants costants = new Costants();
 
+
+    // bottoni per modifica e creazione ricetta
+    private ImageButton modifyRecipe;
+    private ImageButton deleteRecipe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +89,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // se la ricetta è modificabile mostro i bottoni
         if (editable.equals("true")) {
             // ottengo i bottoni per modificare/eliminare la ricetta
-            ImageButton modifyRecipe = findViewById(R.id.ButtonEditRecipe);
-            ImageButton deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
+             modifyRecipe = findViewById(R.id.ButtonEditRecipe);
+            deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
             modifyRecipe.setVisibility(View.VISIBLE);
             deleteRecipe.setVisibility(View.VISIBLE);
              }
