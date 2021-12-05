@@ -45,6 +45,8 @@
     <string name="crea_una_lista_della_spesa">Crea una lista della spesa</string>
     <string name="my_pantry">My pantry</string>
     <string name="my_fridge">My fridge</string>
+    <string name="close">close</string>
+    <string name="open">open</string>
 
 
 </resources>
