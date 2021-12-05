@@ -33,12 +33,5 @@ public class MainActivity extends AppCompatActivity {
        setSupportActionBar(toolbar);
        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        /*FragmentPerDialogCreazioneRicetta f1 = new FragmentPerDialogCreazioneRicetta();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.mainContainer, f1);
-        ft.commit();*/
-
-
     }
 }
