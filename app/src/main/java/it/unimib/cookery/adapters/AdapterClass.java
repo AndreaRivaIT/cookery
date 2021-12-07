@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import it.unimib.cookery.R;
@@ -26,6 +28,14 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private ArrayList<Recipe> listdata;
     private ArrayList<Recipe> filterData;
 
+    /* salvo il contesto */
+    private Context context;
+
+
+    /* url costante per prova glide */
+
+    private static final String imgUrl= "https://spoonacular.com/recipeImages/716429-312x231.jpg";
+
 
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
@@ -34,6 +44,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
+
+        this.context = context;
 
         for (Recipe r : recipesArrayList)
             Log.d("stampa", "" + r.getName());
@@ -44,6 +56,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         filterData = new ArrayList<>(listdata);
 
     }
+
+
+
 
 
     @NonNull
@@ -58,9 +73,23 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
                 .setText(listdata.get(position).getName());
 
+
+        /* ottengo l'url dell'immagine */
+        // String imgUrl = listdata.get(position).getImageUrl();
+
+
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-                .setImageResource(listdata.get(position).getImageId());
+      ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+       .setImageResource(listdata.get(position).getImageId());
+
+
+
+
+
+
+
+
+
 
         return convertView;
     }

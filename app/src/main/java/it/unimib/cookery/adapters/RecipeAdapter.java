@@ -11,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.ui.HomeFragment;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
@@ -68,7 +71,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
     public void onBindViewHolder(@NonNull RecipeAdapter.Viewholder holder, int position) {
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
-        holder.imageView.setImageResource(model.getImageId());
+
+        // String url = model.getImageUrl();
+        //serve a caricare l'immagine mediante un url
+        //Glide.with(context)
+               // .load("https://spoonacular.com/recipeImages/716429-312x231.jpg")
+               // .into(holder.imageView);
+
+       holder.imageView.setImageResource(model.getImageId());
 
     }
 

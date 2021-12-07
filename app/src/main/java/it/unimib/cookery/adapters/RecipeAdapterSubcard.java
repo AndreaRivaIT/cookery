@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import it.unimib.cookery.R;
@@ -66,6 +68,13 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
         holder.imageView.setImageResource(model.getImageId());
+
+        // String url = model.getImageUrl();
+
+        // serve a caricare l'immagine mediante un url
+      //  Glide.with(context)
+              //  .load("https://spoonacular.com/recipeImages/716429-312x231.jpg")
+               // .into(holder.imageView);
     }
 
     @Override
