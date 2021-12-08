@@ -37,10 +37,6 @@ public class MyRecipesFragment extends Fragment {
 
 
 
-
-
-
-
     /* robe di comodo */
     private String nomeRicettaTest = " pasta al forno";
     private static final String TAG = "premuto";
@@ -79,12 +75,16 @@ public class MyRecipesFragment extends Fragment {
 
 
     }
-
-
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.d("state", "on create view");
+
+       // pulizia preventiva perchè a volte le duplica non so perchè
+        recipeArrayList.clear();
 
         /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);

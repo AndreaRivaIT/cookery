@@ -7,17 +7,21 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.adapters.AdapterClass;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
@@ -53,6 +57,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private ImageButton btnRemove;
     private TextView tvAmountPeople;
     private TextView tvQuantity;
+    private ImageView recipeImage;
     private int nPerson;
 
     // varibile per moidificare la ricetta
@@ -65,6 +70,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
     // bottoni per modifica e creazione ricetta
     private ImageButton modifyRecipe;
     private ImageButton deleteRecipe;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // setto il nome della ricetta
         textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
 
+        recipeImage = findViewById(R.id.image_single_recipe);
+
         // ottengo la stringa che mi dice se la ricetta è modificabile
         editable = intent.getStringExtra(costants.EDITABLE);
 
@@ -94,7 +104,18 @@ public class SingleRecipeActivity extends AppCompatActivity {
             deleteRecipe.setVisibility(View.VISIBLE);
             modifyRecipe.setClickable(true);
             deleteRecipe.setClickable(true);
-             }
+            // caricare immagine ottenuta da query database
+
+        }
+         else {
+
+             // caricherà immagine ottenuta da Api
+
+            Glide.with(this).load("https://spoonacular.com/recipeImages/716429-312x231.jpg").
+                    into(recipeImage);
+        }
+
+
 
 
         modifyRecipe.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +129,10 @@ public class SingleRecipeActivity extends AppCompatActivity {
         deleteRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // non so come tornare indetro al fragment
+
+
                 Log.d("premuto", "deleteRecipe");
             }
         });

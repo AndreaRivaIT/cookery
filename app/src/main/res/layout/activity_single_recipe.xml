@@ -31,7 +31,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/lasagne" />
+                    app:srcCompat="@drawable/lasagne"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
 
                 <ImageButton
                     android:id="@+id/imageButtonLike"

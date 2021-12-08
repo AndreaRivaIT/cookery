@@ -61,6 +61,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
 
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -52,6 +52,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     // da passare l'id della ricetta
+                    // da passare url immagine
                      intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getName());
                      intent.putExtra(costants.EDITABLE, "false");
                      context.startActivity(intent);
