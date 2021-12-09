@@ -84,6 +84,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
 
+
         // ottengo l'oggetto textView interessato
         TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
         // setto il nome della ricetta

@@ -75,7 +75,7 @@ public class MyRecipesFragment extends Fragment {
 
 
     }
-    
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
