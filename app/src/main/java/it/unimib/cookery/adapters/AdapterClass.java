@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.costants.Costants;
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
