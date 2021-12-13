@@ -38,6 +38,11 @@ public class Costants {
     public static final String RECIPE_ID="Recipe id";
 
 
+    /* stringhe costanti per intent */
+
+    public static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME ="dbCookery";
+
 
 
     public Costants(){
