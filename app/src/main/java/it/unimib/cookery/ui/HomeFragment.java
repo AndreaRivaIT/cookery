@@ -72,6 +72,12 @@ public class HomeFragment extends Fragment {
         recyclerViewHome3.setAdapter(recipeAdapterSubcard);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard);
 
+
+
+
+
+
+
         return view;
     }
 }

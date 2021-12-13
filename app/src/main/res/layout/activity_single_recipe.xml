@@ -31,7 +31,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/lasagne" />
+                    app:srcCompat="@drawable/lasagne"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
 
                 <ImageButton
                     android:id="@+id/imageButtonLike"
@@ -66,8 +68,7 @@
                     android:id="@+id/textView_title_recipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lasagna"
-                    android:textSize="45dp"
+                    android:textSize="35dp"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,11 +82,14 @@
                     android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
                     android:minHeight="48dp"
+                    android:clickable="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ButtonEditRecipe"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_action_delete"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:foreground="?android:selectableItemBackground"
+                    android:visibility="gone"/>
 
                 <ImageButton
                     android:id="@+id/ButtonEditRecipe"
@@ -94,12 +98,15 @@
                     android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
                     android:minHeight="48dp"
+                    android:clickable="false"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/ic_action_edit"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    tools:ignore="SpeakableTextPresentCheck"
+                    android:foreground="?android:selectableItemBackground"
+                    android:visibility="gone"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

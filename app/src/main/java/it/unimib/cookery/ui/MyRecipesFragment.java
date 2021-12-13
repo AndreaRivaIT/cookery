@@ -1,11 +1,16 @@
 package it.unimib.cookery.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.content.DialogInterface;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AlertDialog;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.widget.AdapterView;
@@ -15,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toolbar;
 
 
 import com.google.android.material.chip.Chip;
@@ -28,6 +34,7 @@ import it.unimib.cookery.adapters.AdapterClass;
 
 
 public class MyRecipesFragment extends Fragment {
+
 
 
     /* robe di comodo */
@@ -66,14 +73,22 @@ public class MyRecipesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.d("state", "on create view");
+
+       // pulizia preventiva perchè a volte le duplica non so perchè
+        recipeArrayList.clear();
+
         /* creo un elemento di tipo view */
         View view = inflater.inflate(R.layout.fragment_my_recipes, container, false);
+
 
         // --- inizio codice gridview --
 
@@ -119,6 +134,15 @@ public class MyRecipesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
                 Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getName());
+
+                // quando schiaccio una card crea l'intent e salva le
+                // informazioni da passare all'activity SingleRecipeActivity il back stack è gestito in automatico
+                Intent intent = new Intent(getActivity(), SingleRecipeActivity.class);
+                // da aggiungere passaggio id ricetta
+                intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName() );
+                intent.putExtra(myRecipeCostants.EDITABLE, "true");
+                // starta l'activity
+                startActivity(intent);
 
 
             }
