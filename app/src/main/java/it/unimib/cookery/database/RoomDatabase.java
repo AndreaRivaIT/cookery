@@ -16,8 +16,8 @@ import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeIngredientCrossRef;
 import it.unimib.cookery.models.RecipeStep;
 
-@Database(entities = {Recipe.class, RecipeStep.class, RecipeIngredientCrossRef.class,
-        Ingredient.class, IngredientPantry.class, Pantry.class}, version = Costants.DATABASE_VERSION)
+//@Database(entities = {Recipe.class, RecipeStep.class, RecipeIngredientCrossRef.class,
+  //      Ingredient.class, IngredientPantry.class, Pantry.class}, version = Costants.DATABASE_VERSION)
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
 
     public abstract RecipeDao recipeDao();
