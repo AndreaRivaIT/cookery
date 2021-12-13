@@ -15,7 +15,7 @@
 
     <!-- fine strings per fragment my recipe -->
 
-    
+
     <!-- strings per fragment alimentar preferences  -->
     <string name="intollerance_string">Intollerance</string>
     <string name="preferences_string">Preferences</string>
@@ -49,6 +49,24 @@
     <string name="crea_una_lista_della_spesa">Crea una lista della spesa</string>
     <string name="my_pantry">My pantry</string>
     <string name="my_fridge">My fridge</string>
+
+
+    <!-- strings MyProfileFragment -->
+
+    <string name="changeImageButton">Change image</string>
+    <string name="user">Username</string>
+    <string name="name">Nome</string>
+    <string name="surname">Surname</string>
+    <string name="mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="save">Save</string>
+    <string name="profile_image">Profile image</string>
+    <string name="passError">Password is not valid</string>
+
+
+    <!-- fine strings MyProfileFragment -->
+
+
 
 
 </resources>
