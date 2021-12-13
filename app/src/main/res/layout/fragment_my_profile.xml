@@ -149,6 +149,7 @@
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:hint="@string/password"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
