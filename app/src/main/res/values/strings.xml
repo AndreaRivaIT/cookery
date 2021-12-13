@@ -11,9 +11,11 @@
     </string>
     <string name="filter_string"> Filter </string>
     <string name="MyRecipes_chips_string"> Add Recipe</string>
+    <string name="result_not_found">Result not found</string>
+
     <!-- fine strings per fragment my recipe -->
 
-    
+
     <!-- strings per fragment alimentar preferences  -->
     <string name="intollerance_string">Intollerance</string>
     <string name="preferences_string">Preferences</string>
@@ -34,6 +36,8 @@
     <string name="delete_button">Delete</string>
     <string name="step_hint_string">Write a step</string>
     <string name="ingredient_hint_string">Insert a quantity</string>
+    <string name="invalid_quantity">Impossible to add this quantity</string>
+    <string name="invalid_step">Impossible to add an empty step</string>
     <!-- fine strings per dialog aggiunta ingredienti e step -->
 
     <string name="home">Home</string>
@@ -45,6 +49,24 @@
     <string name="crea_una_lista_della_spesa">Crea una lista della spesa</string>
     <string name="my_pantry">My pantry</string>
     <string name="my_fridge">My fridge</string>
+
+
+    <!-- strings MyProfileFragment -->
+
+    <string name="changeImageButton">Change image</string>
+    <string name="user">Username</string>
+    <string name="name">Nome</string>
+    <string name="surname">Surname</string>
+    <string name="mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="save">Save</string>
+    <string name="profile_image">Profile image</string>
+    <string name="passError">Password is not valid</string>
+
+
+    <!-- fine strings MyProfileFragment -->
+
+
 
 
 </resources>

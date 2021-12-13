@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Recipe {
 
     private String name;
+    // imageId andrà sostituito con una stringa per l'url dell'immagine
     private int imageId;
     private String category;
     private int nPerson;

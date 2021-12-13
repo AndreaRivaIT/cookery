@@ -34,8 +34,6 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
     private Button aggiungiIngrediente;
     private Button aggiungiStep;
 
-    // oggetto classe costants per accedere alle costanti
-    private Costants stepAndIngredientCostants = new Costants();
 
     /* dichiaro una una variabile per ottenere la quantità dalla dialog e una per ottenere il testo dello step */
     private int quantità = 0;
@@ -114,7 +112,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                             ingredientDialog.dismiss();
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), stepAndIngredientCostants.ingrdientZeroQuantity, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.invalid_quantity, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -184,7 +182,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
 
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), stepAndIngredientCostants.voidStep , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.invalid_step , Toast.LENGTH_SHORT).show();
 
                         }
 

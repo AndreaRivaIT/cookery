@@ -1,18 +1,30 @@
 package it.unimib.cookery.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.adapters.AdapterClass;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
@@ -45,7 +57,22 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private ImageButton btnRemove;
     private TextView tvAmountPeople;
     private TextView tvQuantity;
+    private ImageView recipeImage;
     private int nPerson;
+
+    // varibile per moidificare la ricetta
+    private String editable;
+
+    // oggetto per le costanti
+    private Costants costants = new Costants();
+
+
+    // bottoni per modifica e creazione ricetta
+    private ImageButton modifyRecipe;
+    private ImageButton deleteRecipe;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +80,64 @@ public class SingleRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_recipe);
         setRicettaAppoggio();
         createChips();
+
+        // ottengo l'intent che ha avviato l'activity
+        Intent intent = getIntent();
+
+
+        // ottengo l'oggetto textView interessato
+        TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
+        // setto il nome della ricetta
+        textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
+
+        recipeImage = findViewById(R.id.image_single_recipe);
+
+        // ottengo la stringa che mi dice se la ricetta è modificabile
+        editable = intent.getStringExtra(costants.EDITABLE);
+
+        modifyRecipe = findViewById(R.id.ButtonEditRecipe);
+        deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
+        // non trova i bottoni non so perchè
+        // se la ricetta è modificabile mostro i bottoni
+        if (editable.equals("true")) {
+            // ottengo i bottoni per modificare/eliminare la ricetta
+            modifyRecipe.setVisibility(View.VISIBLE);
+            deleteRecipe.setVisibility(View.VISIBLE);
+            modifyRecipe.setClickable(true);
+            deleteRecipe.setClickable(true);
+            // caricare immagine ottenuta da query database
+
+        }
+         else {
+
+             // caricherà immagine ottenuta da Api
+
+            Glide.with(this).load("https://spoonacular.com/recipeImages/716429-312x231.jpg").
+                    into(recipeImage);
+        }
+
+
+
+
+        modifyRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("premuto", "modifyRecipe");
+            }
+        });
+
+
+        deleteRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // non so come tornare indetro al fragment
+
+
+                Log.d("premuto", "deleteRecipe");
+            }
+        });
+
 
         //Inflate degli steps procedimento della ricetta
         rcvSteps = findViewById(R.id.rcv_steps);
@@ -67,6 +152,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btn_add);
         btnRemove = findViewById(R.id.btn_remove);
         tvAmountPeople = findViewById(R.id.tv_amount);
+
+
 
 
 
@@ -91,7 +178,22 @@ public class SingleRecipeActivity extends AppCompatActivity {
             }
             createChips();
         });
+
+
+
+
+
+
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     private void createChips(){
         // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne
         rcvChips = findViewById(R.id.rcv_chips);
