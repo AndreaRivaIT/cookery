@@ -1,45 +1,70 @@
 package it.unimib.cookery.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import it.unimib.cookery.R;
-import it.unimib.cookery.ui.MyRecipesFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
-//import android.widget.Toolbar;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DrawerLayout mDrawerLayout;
+    private NavHostFragment mNavHostFragment;
+    private NavController mNavController;
+    private NavigationView mNavMenu;
+    private boolean logged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //NavHostController configuration and homeFragment set as startupFragment
+        mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.homeFragmentContainerView);
+        mNavController = mNavHostFragment.getNavController();
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.homeFragmentContainerView);
-        NavController navController = navHostFragment.getNavController();
-
+        //BottomNavView configuration
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
+        NavigationUI.setupWithNavController(bottomNavigationView, mNavController);
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        //DrawerLayout configuration
+        mDrawerLayout = findViewById(R.id.drawerLayout);
+
 
        Toolbar toolbar = findViewById(R.id.toolbar);
        setSupportActionBar(toolbar);
       getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        /*FragmentPerDialogCreazioneRicetta f1 = new FragmentPerDialogCreazioneRicetta();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.mainContainer, f1);
-        ft.commit();*/
+        //Hamburger icon listener
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
 
+        setDrawerMenu();
+
+    }
+
+    //(Not that dynamic) Dynamic Drawer menu that changes when user login or logout
+    public void setDrawerMenu() {
+        mNavMenu = findViewById(R.id.navigationView);
+        if (logged) {
+            mNavMenu.getMenu().clear();
+            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+        } else {
+            mNavMenu.getMenu().clear();
+            mNavMenu.inflateMenu(R.menu.drawer_menu_not_logged);
+        }
     }
 }
