@@ -2,6 +2,7 @@ package it.unimib.cookery.repository;
 
 import android.util.Log;
 
+import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.service.SpoonacularApiService;
 import it.unimib.cookery.utils.ResponseCallbackApi;
@@ -11,8 +12,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecipeRepository {
-
-    private static final String ERROR_STRING = "Something went wrong, pleas check your connection";
 
    private SpoonacularApiService spoonacularApiService;
     private ResponseCallbackApi responseCallback;
@@ -43,7 +42,7 @@ public class RecipeRepository {
                 if(response.body() != null && response.isSuccessful())
                     responseCallback.onResponseRandomRecipe(response.body());
                 else
-                    responseCallback.onFailure("Error in retrieving data");
+                    responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
@@ -52,7 +51,7 @@ public class RecipeRepository {
 
                 Log.d("retrofit", "on Failure "+ t);
 
-                responseCallback.onFailure(ERROR_STRING);
+                responseCallback.onFailure(R.string.connectionError);
             }
         });
 
@@ -75,13 +74,13 @@ public class RecipeRepository {
                     //  Log.d("retrofit", ""+response.body());
                     responseCallback.onResponseGetStep(response.body());
                 else
-                    responseCallback.onFailure("Error in retrieving data");
+                    responseCallback.onFailure(R.string.errorRetriveData);
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
 
-                responseCallback.onFailure(ERROR_STRING);
+                responseCallback.onFailure(R.string.connectionError);
             }
         });
 

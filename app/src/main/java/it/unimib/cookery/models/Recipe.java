@@ -10,6 +10,7 @@ public class Recipe {
 
     private String name;
     // imageId andrà sostituito con una stringa per l'url dell'immagine
+    private String ImageUrl;
     private int imageId;
     private String category;
     private int nPerson;

@@ -67,6 +67,12 @@
     <!-- fine strings MyProfileFragment -->
 
 
+    <!-- string retrofit -->
+
+    <string name="errorRetriveData">Error in retrieving data</string>
+    <string name="connectionError"> Something went wrong, pleas check your connection</string>
+
+
 
 
 </resources>
