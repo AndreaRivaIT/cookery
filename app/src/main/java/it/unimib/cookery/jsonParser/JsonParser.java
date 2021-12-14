@@ -49,11 +49,11 @@ public class JsonParser {
             RecipeImgUrl = obj.getString("image");
 
 
-            Log.d("print", " " + RecipeId);
-            Log.d("print", " " + RecipeName);
-            Log.d("print", " " + RecipeImgUrl);
+           Recipe r = new Recipe(RecipeId, RecipeImgUrl, RecipeName);
 
-            return new Recipe(RecipeId, RecipeImgUrl, RecipeName);
+            Log.d("stampar", ""+r.toString());
+
+            return r;
 
             // return Recipe(.....)
         } catch (Exception e) {

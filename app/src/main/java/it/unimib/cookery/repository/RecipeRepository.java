@@ -40,8 +40,7 @@ public class RecipeRepository {
                     spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, allTags);}
 
 
-
-        RandomRecipeString.enqueue(new Callback<String>() {
+        RandomRecipeString.enqueue(new Callback<String>() {  // con enqueue è asincrona con execute è sincrona
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
@@ -145,7 +144,7 @@ public class RecipeRepository {
 
 
     }
-    
+
 
     public void getRandomRecipe(String tags) {
 
@@ -183,11 +182,6 @@ public class RecipeRepository {
 
 
     }
-
-
-
-
-
 
 
     public void getRecipeInfo() {
