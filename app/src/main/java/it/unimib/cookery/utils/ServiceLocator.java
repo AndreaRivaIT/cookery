@@ -1,8 +1,13 @@
 package it.unimib.cookery.utils;
 
 import android.app.Application;
+import android.provider.SyncStateContract;
 
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.database.RoomDatabase;
+import it.unimib.cookery.service.SpoonacularApiService;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 /**
@@ -12,6 +17,7 @@ import it.unimib.cookery.database.RoomDatabase;
 public class ServiceLocator {
 
     private static ServiceLocator instance = null;
+    private Costants costants = new Costants();
 
     private ServiceLocator() {}
 
@@ -24,6 +30,11 @@ public class ServiceLocator {
         return instance;
     }
 
+    public SpoonacularApiService getSpoonacularApiService() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(costants.BASE_URL).
+                addConverterFactory(ScalarsConverterFactory.create()).build();
+        return retrofit.create(SpoonacularApiService.class);
+    }
 
 
     public RoomDatabase getDao(Application application) {
