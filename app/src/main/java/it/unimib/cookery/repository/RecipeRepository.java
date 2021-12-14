@@ -152,10 +152,10 @@ public class RecipeRepository {
 
        if(tags.equals("")){
          RandomRecipeString =
-                spoonacularApiService.getRandomRecipeStringNoTags(costants.API_KEY, 10);}
+                spoonacularApiService.getRandomRecipeStringNoTags(costants.API_KEY, 7);}
        else{
            RandomRecipeString =
-                   spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, tags);}
+                   spoonacularApiService.getRandomRecipeString(costants.API_KEY, 7, tags);}
 
 
         RandomRecipeString.enqueue(new Callback<String>() {
@@ -164,6 +164,7 @@ public class RecipeRepository {
 
                 Log.d("body", ""+response.raw().request().url());
                 Log.d("body", "" + response.body());
+                Log.d("body", "lunghezza " + response.body().length());
 
 
                 // non scarica l'intero json ma solo un pezzo e quindi a
