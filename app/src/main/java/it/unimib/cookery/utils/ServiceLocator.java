@@ -32,7 +32,8 @@ public class ServiceLocator {
 
     public SpoonacularApiService getSpoonacularApiService() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(costants.BASE_URL).
-                addConverterFactory(ScalarsConverterFactory.create()).build();
+                addConverterFactory(ScalarsConverterFactory.create())
+                .build();
         return retrofit.create(SpoonacularApiService.class);
     }
 

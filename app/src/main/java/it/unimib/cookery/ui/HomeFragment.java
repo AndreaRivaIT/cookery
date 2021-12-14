@@ -47,6 +47,22 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        recyclerViewRTC = view.findViewById(R.id.recyclerViewRTC);
+        recyclerViewHome2 = view.findViewById(R.id.recyclerViewHome2);
+        recyclerViewHome3 = view.findViewById(R.id.recyclerViewHome3);
+        recyclerViewHome4 = view.findViewById(R.id.recyclerViewHome4);
+
+
         // da recuperare e passare le preferenze dell'utente per inserire le
         // preferenze
         // da mettere tag a tutti metodi
@@ -64,22 +80,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListDessert = new ArrayList<>();
         recipeArrayListMainCourse = new ArrayList<>();
         recipeArrayListFirstCourse = new ArrayList<>();
-
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        recyclerViewRTC = view.findViewById(R.id.recyclerViewRTC);
-        recyclerViewHome2 = view.findViewById(R.id.recyclerViewHome2);
-        recyclerViewHome3 = view.findViewById(R.id.recyclerViewHome3);
-        recyclerViewHome4 = view.findViewById(R.id.recyclerViewHome4);
-
-
 
 
 

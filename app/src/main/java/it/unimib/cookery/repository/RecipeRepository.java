@@ -162,7 +162,12 @@ public class RecipeRepository {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                  Log.d("rr", "" + response.body());
+                Log.d("body", ""+response.raw().request().url());
+                Log.d("body", "" + response.body());
+
+
+                // non scarica l'intero json ma solo un pezzo e quindi a
+                // volte perde delle ricette
 
                 if(response.body() != null && response.isSuccessful())
                     responseCallback.onResponseRandomRecipe(response.body());

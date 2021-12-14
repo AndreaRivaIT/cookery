@@ -51,7 +51,7 @@ public class JsonParser {
 
            Recipe r = new Recipe(RecipeId, RecipeImgUrl, RecipeName);
 
-            Log.d("stampar", ""+r.toString());
+            Log.d("body", ""+r.toString());
 
             return r;
 

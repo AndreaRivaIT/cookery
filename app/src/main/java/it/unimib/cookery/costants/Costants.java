@@ -44,9 +44,12 @@ public class Costants {
     public static final String DATABASE_NAME ="dbCookery";
 
 
-    /* stringhe costanti per retrofit */
+    /* stringhe costanti  retrofit */
 
-    public static final String API_KEY="8b2514bd6d21482e8b4330863ee719b8";
+   private static final String genericApiKey= "8b2514bd6d21482e8b4330863ee719b8";
+   private static final String myApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
+
+    public static final String API_KEY=myApiKey;
     public static final String BASE_URL="https://api.spoonacular.com/recipes/";
 
 
