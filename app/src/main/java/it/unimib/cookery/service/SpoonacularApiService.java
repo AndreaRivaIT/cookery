@@ -12,6 +12,9 @@ public interface SpoonacularApiService {
     @GET("random")
     Call<String> getRandomRecipeString (@Query("apiKey") String apiKey, @Query("number") int number, @Query("tags") String tags);
 
+    @GET("random")
+    Call<String> getRandomRecipeStringNoTags (@Query("apiKey") String apiKey, @Query("number") int number);
+
 // https://api.spoonacular.com/recipes/324694/analyzedInstructions
 
     @GET("{id}/analyzedInstructions")

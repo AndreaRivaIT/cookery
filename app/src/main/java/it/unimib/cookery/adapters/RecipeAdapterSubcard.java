@@ -67,14 +67,14 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
     public void onBindViewHolder(@NonNull RecipeAdapterSubcard.Viewholder holder, int position) {
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
-        holder.imageView.setImageResource(model.getImageId());
+      //  holder.imageView.setImageResource(model.getImageId());
 
-        // String url = model.getImageUrl();
+         String url = model.getImageUrl();
 
         // serve a caricare l'immagine mediante un url
-      //  Glide.with(context)
-              //  .load("https://spoonacular.com/recipeImages/716429-312x231.jpg")
-               // .into(holder.imageView);
+        Glide.with(context)
+               .load(url)
+                .into(holder.imageView);
     }
 
     @Override

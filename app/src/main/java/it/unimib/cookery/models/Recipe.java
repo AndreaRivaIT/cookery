@@ -10,7 +10,8 @@ public class Recipe {
 
     private String name;
     // imageId andrà sostituito con una stringa per l'url dell'immagine
-    private String ImageUrl;
+    private String imageUrl;
+    private int id;
     private int imageId;
     private String category;
     private int nPerson;
@@ -19,6 +20,13 @@ public class Recipe {
 
     // serve per prova
     public Recipe() {
+    }
+
+
+    public Recipe(int id, String imageUrl, String name){
+        this.id =id;
+        this.imageUrl = imageUrl;
+        this.name = name;
     }
 
 
@@ -51,6 +59,19 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public String getImageUrl(){
+        return imageUrl;
     }
 
     public String getCategory() {

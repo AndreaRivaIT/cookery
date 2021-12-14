@@ -6,6 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import java.util.ArrayList;
+
+import it.unimib.cookery.models.Recipe;
+
 public class JsonParser {
 
 
@@ -14,7 +19,7 @@ public class JsonParser {
     }
 
     // metodo che serve per creare il file jason data la stringa passata dalla main activity
-    private static JSONObject getJsonObject(String jsonFile) {
+    private static synchronized JSONObject getJsonObject(String jsonFile) {
         try {
             JSONObject obj = new JSONObject(jsonFile);
             return obj;
@@ -27,7 +32,7 @@ public class JsonParser {
 
 
     // dovrebbe ritornare una ricetta
-    private static void extractInfo(JSONObject obj) {
+    private static synchronized Recipe extractInfo(JSONObject obj) {
         int RecipeId = 0;
         String RecipeImgUrl = "";
         String RecipeName = "";
@@ -48,16 +53,19 @@ public class JsonParser {
             Log.d("print", " " + RecipeName);
             Log.d("print", " " + RecipeImgUrl);
 
+            return new Recipe(RecipeId, RecipeImgUrl, RecipeName);
+
             // return Recipe(.....)
         } catch (Exception e) {
 
         }
+        return null;
     }
 
     // ritorna un arrayList di ricetta
-    public static void parseRandomRecipe(String jsonFile) {
+    public static synchronized ArrayList<Recipe> parseRandomRecipe(String jsonFile) {
 
-        // Arraylist <Recipe> RandomRecipe = new Arraylist<>();
+         ArrayList <Recipe> RandomRecipe = new ArrayList<>();
 
         try {
             JSONObject obj = getJsonObject(jsonFile);
@@ -69,11 +77,14 @@ public class JsonParser {
 
                 //RandomRecipe.add(extractInfo(arr.getJSONObject(i));
                 // ottengo id, nome e url dell'immagine dal metodo sopra
-                extractInfo(arr.getJSONObject(i));
+                RandomRecipe.add(extractInfo(arr.getJSONObject(i)));
 
             }
-        } catch (Exception e) {
 
+            return RandomRecipe;
+
+        } catch (Exception e) {
+             return null;
         }
 
         // return RandomRecipe

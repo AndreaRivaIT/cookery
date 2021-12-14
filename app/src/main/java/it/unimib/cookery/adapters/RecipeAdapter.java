@@ -3,6 +3,7 @@ package it.unimib.cookery.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.telecom.Call;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
     public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
+
+        for(Recipe r: recipeArrayList)
+            Log.d("recipeAdapter", ""+ r.toString());
 
     }
 
@@ -73,13 +77,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
         Recipe model = recipeArrayList.get(position);
         holder.textView.setText(model.getName());
 
-        // String url = model.getImageUrl();
-        //serve a caricare l'immagine mediante un url
-        //Glide.with(context)
-               // .load("https://spoonacular.com/recipeImages/716429-312x231.jpg")
-               // .into(holder.imageView);
+        String url = model.getImageUrl();
 
-       holder.imageView.setImageResource(model.getImageId());
+        Log.d("recipeAdapter", ""+ url);
+        //serve a caricare l'immagine mediante un url
+        Glide.with(context)
+                .load(url)
+                .into(holder.imageView);
+
+      // holder.imageView.setImageResource(model.getImageId());
 
     }
 
