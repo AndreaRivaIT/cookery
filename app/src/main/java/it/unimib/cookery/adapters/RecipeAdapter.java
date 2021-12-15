@@ -56,8 +56,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
-                    // da passare l'id della ricetta
-                    // da passare url immagine
+                    intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
+                    intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                      intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                      intent.putExtra(costants.EDITABLE, "false");
                      context.startActivity(intent);
@@ -80,11 +80,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
         String url = model.getImage();
 
-        Log.d("recipeAdapter", ""+ url);
+        if(url == null){
+            holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
+        }else{
+
         //serve a caricare l'immagine mediante un url
         Glide.with(context)
                 .load(url)
                 .into(holder.imageView);
+        }
 
       // holder.imageView.setImageResource(model.getImageId());
 

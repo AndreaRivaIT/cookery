@@ -63,6 +63,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
     // varibile per moidificare la ricetta
     private String editable;
 
+    // variabile per ottenere info ricetta
+    private String imageUrl;
+    private String recipeId;
+
+
     // oggetto per le costanti
     private Costants costants = new Costants();
 
@@ -94,6 +99,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         // ottengo la stringa che mi dice se la ricetta è modificabile
         editable = intent.getStringExtra(costants.EDITABLE);
+        imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
+        recipeId = intent.getStringExtra(costants.RECIPE_ID);
 
         modifyRecipe = findViewById(R.id.ButtonEditRecipe);
         deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
@@ -110,10 +117,14 @@ public class SingleRecipeActivity extends AppCompatActivity {
         }
          else {
 
-             // caricherà immagine ottenuta da Api
+             if(imageUrl == null){
+                 recipeImage.setImageResource(R.drawable.ic_baseline_broken_image_24);
+             }else {
 
-            Glide.with(this).load("https://spoonacular.com/recipeImages/716429-312x231.jpg").
-                    into(recipeImage);
+                 // chiamate Api per ottenere ingredienti e step
+                 Glide.with(this).load(imageUrl).
+                         into(recipeImage);
+             }
         }
 
 

@@ -49,6 +49,8 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     // da aggiungere il passaggio dell'id della ricetta
+                    intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
+                    intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.EDITABLE, "false");
                     context.startActivity(intent);
@@ -68,14 +70,17 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
     public void onBindViewHolder(@NonNull RecipeAdapterSubcard.Viewholder holder, int position) {
         RecipeApi model = recipeArrayList.get(position);
         holder.textView.setText(model.getTitle());
-       //holder.imageView.setImageResource(model.getImageId());
+
 
         String url = model.getImage();
 
-        // serve a caricare l'immagine mediante un url
-        Glide.with(context)
-               .load(url)
-                .into(holder.imageView);
+        if(url == null){
+            holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
+        }else {
+            Glide.with(context)
+                    .load(url)
+                    .into(holder.imageView);
+        }
     }
 
     @Override
