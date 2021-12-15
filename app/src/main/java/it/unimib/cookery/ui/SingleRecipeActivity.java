@@ -1,27 +1,23 @@
 package it.unimib.cookery.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
+import java.util.ArrayList;
+
 import it.unimib.cookery.R;
-import it.unimib.cookery.adapters.AdapterClass;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
@@ -65,7 +61,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     // variabile per ottenere info ricetta
     private String imageUrl;
-    private String recipeId;
+    private int recipeId;
 
 
     // oggetto per le costanti
@@ -77,6 +73,11 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private ImageButton deleteRecipe;
 
 
+    // codice di test
+
+    ArrayList<String> stepRecived;
+
+
 
 
     @Override
@@ -85,6 +86,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_recipe);
         setRicettaAppoggio();
         createChips();
+
+
 
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
@@ -100,11 +103,24 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo la stringa che mi dice se la ricetta è modificabile
         editable = intent.getStringExtra(costants.EDITABLE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
-        recipeId = intent.getStringExtra(costants.RECIPE_ID);
+
+       // da controllare
+        recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
+
+        /*codice di test funzionante */
+
+        stepRecived = intent.getStringArrayListExtra("ArrayList");
+
+      //  Log.d("SingleRecipe", ""+stepRecived.get(0));
+
 
         modifyRecipe = findViewById(R.id.ButtonEditRecipe);
         deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
-        // non trova i bottoni non so perchè
+
+
+
+
+
         // se la ricetta è modificabile mostro i bottoni
         if (editable.equals("true")) {
             // ottengo i bottoni per modificare/eliminare la ricetta
@@ -191,12 +207,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
     }
 
     @Override
@@ -252,4 +262,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
         recipe.setIngredientList(pepeB);
         recipe.setIngredientList(besciamella);
     }
+
+
 }

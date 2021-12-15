@@ -2,7 +2,7 @@ package it.unimib.cookery.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.telecom.Call;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +18,14 @@ import java.util.ArrayList;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
-import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeApi;
-import it.unimib.cookery.ui.HomeFragment;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
 
     private Context context;
     private ArrayList<RecipeApi> recipeArrayList;
+
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
@@ -55,12 +54,26 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                   ArrayList<String> step = new ArrayList<>();
+                   step.add("dati passati");
+
+
+
+
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                      intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                      intent.putExtra(costants.EDITABLE, "false");
+
+                     // codice di test funzionante
+                     intent.putStringArrayListExtra("ArrayList", step);
+
+
                      context.startActivity(intent);
+
+
                 }
             });
         }

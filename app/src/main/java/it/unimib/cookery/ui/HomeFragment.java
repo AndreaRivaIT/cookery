@@ -61,10 +61,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
 
         // ho problemi di concorrenza
-        recipeRepository.getRandomRecipe("");
+       // recipeRepository.getRandomRecipe("");
         recipeRepository.getRandomRecipeFirstCourse("");
-        recipeRepository.getRandomRecipeMainCourse("");
-        recipeRepository.getRandomRecipeDessert("");
+       // recipeRepository.getRandomRecipeMainCourse("");
+       // recipeRepository.getRandomRecipeDessert("");
 
 
 
@@ -161,6 +161,9 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         //recipeArrayListFirstCourse = JsonParser.parseRandomRecipe(jsonFile);
         recipeArrayListFirstCourse.clear();
         recipeArrayListFirstCourse.addAll(recipes);
+
+        for(RecipeApi r: recipeArrayListFirstCourse)
+            Log.d("Gson", "FirstCourse " +r.toString());
 
         RecipeAdapterSubcard recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);

@@ -136,7 +136,7 @@ public class RecipeRepository {
             @Override
             public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
 
-                  Log.d("lll", "" + response.body());
+                  Log.d("lll", "" + response.raw().request().url());
 
                 if(response.body() != null && response.isSuccessful()) {
                     RecipeApiListFirstCourse = response.body().getRecipes();
