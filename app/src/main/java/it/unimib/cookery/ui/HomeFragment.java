@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManagerHome2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
         recyclerViewRTC.setLayoutManager(linearLayoutManagerRTC);
         recyclerViewHome2.setLayoutManager(linearLayoutManagerHome2);
         recyclerViewHome3.setLayoutManager(linearLayoutManagerHome3);
@@ -67,16 +68,11 @@ public class HomeFragment extends Fragment {
 
         RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeArrayList);
         RecipeAdapterSubcard recipeAdapterSubcard = new RecipeAdapterSubcard(getContext(), recipeArrayList);
+
         recyclerViewRTC.setAdapter(recipeAdapter);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard);
         recyclerViewHome3.setAdapter(recipeAdapterSubcard);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard);
-
-
-
-
-
-
 
         return view;
     }

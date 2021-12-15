@@ -45,7 +45,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private  RecipeStep step4;
     private  RecipeStep step5;
 
-
     //variabili per il caricamento dinamico degli steps e degli ingredienti
     private RecyclerView rcvSteps;
     private RecipeProcedureAdapter recipeProcedureAdapter;
@@ -84,9 +83,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
 
-
         // ottengo l'oggetto textView interessato
         TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
+
         // setto il nome della ricetta
         textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
 
@@ -97,6 +96,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         modifyRecipe = findViewById(R.id.ButtonEditRecipe);
         deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
+
         // non trova i bottoni non so perchè
         // se la ricetta è modificabile mostro i bottoni
         if (editable.equals("true")) {

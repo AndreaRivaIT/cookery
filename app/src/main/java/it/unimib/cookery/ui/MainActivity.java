@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         //DrawerLayout configuration
         mDrawerLayout = findViewById(R.id.drawerLayout);
 
-
-        // Toolbar toolbar = findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
-        // getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
         //Hamburger icon listener
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,18 +45,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mNavMenu = findViewById(R.id.navigationView);
 
         setDrawerMenu();
 
     }
 
-    //(Not that dynamic) Dynamic Drawer menu that changes when user login or logout
+    //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
-        mNavMenu = findViewById(R.id.navigationView);
-        if (logged) {
+
+        View view = mNavMenu.getHeaderView(0);
+
+        if(logged) {
+            if(view.equals(null)) {
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header);
+            } else {
+                mNavMenu.removeHeaderView(view);
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header);
+            }
+
             mNavMenu.getMenu().clear();
             mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+
+
         } else {
+            if(view.equals(null)) {
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header_not_logged);
+            } else {
+                mNavMenu.removeHeaderView(view);
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header_not_logged);
+            }
+
             mNavMenu.getMenu().clear();
             mNavMenu.inflateMenu(R.menu.drawer_menu_not_logged);
         }
