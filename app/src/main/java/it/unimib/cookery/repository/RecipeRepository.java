@@ -2,8 +2,12 @@ package it.unimib.cookery.repository;
 
 import android.util.Log;
 
+import java.util.List;
+
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.models.RecipeApi;
+import it.unimib.cookery.models.ResponseRecipe;
 import it.unimib.cookery.service.SpoonacularApiService;
 import it.unimib.cookery.utils.ResponseCallbackApi;
 import it.unimib.cookery.utils.ServiceLocator;
@@ -15,6 +19,12 @@ public class RecipeRepository {
 
    private SpoonacularApiService spoonacularApiService;
     private ResponseCallbackApi responseCallback;
+    private List<RecipeApi> RecipeApiList;
+    private List<RecipeApi> RecipeApiListDessert;
+    private List<RecipeApi> RecipeApiListMainCourse;
+    private List<RecipeApi> RecipeApiListFirstCourse;
+
+
 
     private Costants costants = new Costants();
 
@@ -30,31 +40,32 @@ public class RecipeRepository {
     public void getRandomRecipeDessert(String tags) {
 
         String allTags = tags+",dessert";
-        Call<String> RandomRecipeString;
+        Call<ResponseRecipe> RandomRecipeDessert;
 
         if(tags.equals("")){
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, "dessert");}
+            RandomRecipeDessert =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, "dessert");}
         else{
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, allTags);}
+            RandomRecipeDessert =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, allTags);}
 
 
-        RandomRecipeString.enqueue(new Callback<String>() {  // con enqueue è asincrona con execute è sincrona
+        RandomRecipeDessert.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
 
                 //  Log.d("retrofit", "" + response.raw().request().url());
 
-                if(response.body() != null && response.isSuccessful())
-                    responseCallback.onResponseRandomRecipeDessert(response.body());
-                else
+                if(response.body() != null && response.isSuccessful()) {
+                    RecipeApiListDessert = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipeDessert(RecipeApiListDessert);
+                }else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
 
                 Log.d("retrofit", "on Failure "+ t);
 
@@ -68,31 +79,32 @@ public class RecipeRepository {
     public void getRandomRecipeMainCourse(String tags) {
 
         String allTags = tags+",main course";
-        Call<String> RandomRecipeString;
+        Call<ResponseRecipe> RandomRecipeMainCourse;
 
         if(tags.equals("")){
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, "main course");}
+            RandomRecipeMainCourse =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, "main course");}
         else{
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, allTags);}
+            RandomRecipeMainCourse =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, allTags);}
 
 
-        RandomRecipeString.enqueue(new Callback<String>() {
+        RandomRecipeMainCourse.enqueue(new Callback<ResponseRecipe>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
 
                 //  Log.d("retrofit", "" + response.raw().request().url());
 
-                if(response.body() != null && response.isSuccessful())
-                    responseCallback.onResponseRandomRecipeMainCourse(response.body());
-                else
+                if(response.body() != null && response.isSuccessful()) {
+                    RecipeApiListMainCourse = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipeMainCourse(RecipeApiListMainCourse);
+                }else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
 
                 Log.d("retrofit", "on Failure "+ t);
 
@@ -108,33 +120,34 @@ public class RecipeRepository {
 
 
         String allTags = tags+",side dish";
-        Call<String> RandomRecipeString;
+        Call<ResponseRecipe> RandomRecipeFirstCourse;
 
         if(tags.equals("")){
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, "side dish");}
+            RandomRecipeFirstCourse =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, "side dish");}
         else{
-            RandomRecipeString =
-                    spoonacularApiService.getRandomRecipeString(costants.API_KEY, 10, allTags);}
+            RandomRecipeFirstCourse =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, allTags);}
 
 
 
 
-        RandomRecipeString.enqueue(new Callback<String>() {
+        RandomRecipeFirstCourse.enqueue(new Callback<ResponseRecipe>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
 
                   Log.d("lll", "" + response.body());
 
-                if(response.body() != null && response.isSuccessful())
-                    responseCallback.onResponseRandomRecipeFirstCourse(response.body());
-                else
+                if(response.body() != null && response.isSuccessful()) {
+                    RecipeApiListFirstCourse = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipeFirstCourse(RecipeApiListFirstCourse);
+                } else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
 
                 Log.d("retrofit", "on Failure "+ t);
 
@@ -146,39 +159,42 @@ public class RecipeRepository {
     }
 
 
-    public void getRandomRecipe(String tags) {
+    public void  getRandomRecipe(String tags) {
 
-        Call<String> RandomRecipeString;
+        Call<ResponseRecipe> RandomRecipe;
 
        if(tags.equals("")){
-         RandomRecipeString =
-                spoonacularApiService.getRandomRecipeStringNoTags(costants.API_KEY, 7);}
+         RandomRecipe =
+                spoonacularApiService.getRandomRecipeNoTags(costants.API_KEY, 10);}
        else{
-           RandomRecipeString =
-                   spoonacularApiService.getRandomRecipeString(costants.API_KEY, 7, tags);}
+           RandomRecipe =
+                   spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, tags);}
 
 
-        RandomRecipeString.enqueue(new Callback<String>() {
+        RandomRecipe.enqueue(new Callback<ResponseRecipe>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
 
-                Log.d("body", ""+response.raw().request().url());
-                Log.d("body", "" + response.body());
-                Log.d("body", "lunghezza " + response.body().length());
+                //Log.d("body", ""+response.raw().request().url());
+                //Log.d("body", "" + response.body());
+
 
 
                 // non scarica l'intero json ma solo un pezzo e quindi a
                 // volte perde delle ricette
 
-                if(response.body() != null && response.isSuccessful())
-                    responseCallback.onResponseRandomRecipe(response.body());
-                else
+                if(response.body() != null && response.isSuccessful()) {
+
+                    RecipeApiList = response.body().getRecipes();
+
+                    responseCallback.onResponseRandomRecipe(RecipeApiList);
+                }else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
 
                 Log.d("retrofit", "on Failure "+ t);
 

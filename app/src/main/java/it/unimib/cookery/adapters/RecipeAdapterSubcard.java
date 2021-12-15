@@ -17,17 +17,18 @@ import java.util.ArrayList;
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
 public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubcard.Viewholder>{
 
     private Context context;
-    private ArrayList<Recipe> recipeArrayList;
+    private ArrayList<RecipeApi> recipeArrayList;
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
 
-    public RecipeAdapterSubcard(Context context, ArrayList<Recipe> recipeArrayList) {
+    public RecipeAdapterSubcard(Context context, ArrayList<RecipeApi> recipeArrayList) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
     }
@@ -48,7 +49,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                 public void onClick(View v) {
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     // da aggiungere il passaggio dell'id della ricetta
-                    intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getName());
+                    intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.EDITABLE, "false");
                     context.startActivity(intent);
                 }
@@ -65,11 +66,11 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
 
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapterSubcard.Viewholder holder, int position) {
-        Recipe model = recipeArrayList.get(position);
-        holder.textView.setText(model.getName());
-       holder.imageView.setImageResource(model.getImageId());
+        RecipeApi model = recipeArrayList.get(position);
+        holder.textView.setText(model.getTitle());
+       //holder.imageView.setImageResource(model.getImageId());
 
-        String url = model.getImageUrl();
+        String url = model.getImage();
 
         // serve a caricare l'immagine mediante un url
         Glide.with(context)

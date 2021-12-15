@@ -19,23 +19,24 @@ import java.util.ArrayList;
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.HomeFragment;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
 
     private Context context;
-    private ArrayList<Recipe> recipeArrayList;
+    private ArrayList<RecipeApi> recipeArrayList;
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
 
 
-    public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
+    public RecipeAdapter(Context context, ArrayList<RecipeApi> recipeArrayList) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
 
-        for(Recipe r: recipeArrayList)
+        for(RecipeApi r: recipeArrayList)
             Log.d("recipeAdapter", ""+ r.toString());
 
     }
@@ -57,7 +58,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     // da passare l'id della ricetta
                     // da passare url immagine
-                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getName());
+                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                      intent.putExtra(costants.EDITABLE, "false");
                      context.startActivity(intent);
                 }
@@ -74,10 +75,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.Viewholder holder, int position) {
-        Recipe model = recipeArrayList.get(position);
-        holder.textView.setText(model.getName());
+        RecipeApi model = recipeArrayList.get(position);
+        holder.textView.setText(model.getTitle());
 
-        String url = model.getImageUrl();
+        String url = model.getImage();
 
         Log.d("recipeAdapter", ""+ url);
         //serve a caricare l'immagine mediante un url

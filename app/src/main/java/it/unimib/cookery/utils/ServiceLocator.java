@@ -7,7 +7,8 @@ import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.database.RoomDatabase;
 import it.unimib.cookery.service.SpoonacularApiService;
 import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+//import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 /**
@@ -32,7 +33,7 @@ public class ServiceLocator {
 
     public SpoonacularApiService getSpoonacularApiService() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(costants.BASE_URL).
-                addConverterFactory(ScalarsConverterFactory.create())
+                addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(SpoonacularApiService.class);
     }

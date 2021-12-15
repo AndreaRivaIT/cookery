@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.unimib.cookery.R;
 
@@ -22,16 +23,17 @@ import it.unimib.cookery.adapters.RecipeAdapter;
 import it.unimib.cookery.adapters.RecipeAdapterSubcard;
 import it.unimib.cookery.jsonParser.JsonParser;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.repository.RecipeRepository;
 import it.unimib.cookery.utils.ResponseCallbackApi;
 
 
 public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
-   private ArrayList<Recipe> recipeArrayListReadyToCoock;
-    private ArrayList<Recipe> recipeArrayListDessert;
-    private ArrayList<Recipe> recipeArrayListMainCourse;
-    private ArrayList<Recipe> recipeArrayListFirstCourse;
+   private ArrayList<RecipeApi> recipeArrayListReadyToCoock;
+    private ArrayList<RecipeApi> recipeArrayListDessert;
+    private ArrayList<RecipeApi> recipeArrayListMainCourse;
+    private ArrayList<RecipeApi> recipeArrayListFirstCourse;
 
 
 
@@ -46,6 +48,27 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // da recuperare e passare le preferenze dell'utente per inserire le
+        // preferenze
+        // da mettere tag a tutti metodi
+
+
+        recipeArrayListReadyToCoock = new ArrayList<>();
+        recipeArrayListDessert = new ArrayList<>();
+        recipeArrayListMainCourse = new ArrayList<>();
+        recipeArrayListFirstCourse = new ArrayList<>();
+
+
+        // ho problemi di concorrenza
+        recipeRepository.getRandomRecipe("");
+        recipeRepository.getRandomRecipeFirstCourse("");
+        recipeRepository.getRandomRecipeMainCourse("");
+        recipeRepository.getRandomRecipeDessert("");
+
+
+
+
 
 
     }
@@ -63,23 +86,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recyclerViewHome4 = view.findViewById(R.id.recyclerViewHome4);
 
 
-        // da recuperare e passare le preferenze dell'utente per inserire le
-        // preferenze
-        // da mettere tag a tutti metodi
-        recipeRepository.getRandomRecipe("");
 
-
-
-        /*
-        recipeRepository.getRandomRecipeDessert("");
-        recipeRepository.getRandomRecipeMainCourse("");
-        recipeRepository.getRandomRecipeFirstCourse("");*/
-
-
-        recipeArrayListReadyToCoock = new ArrayList<>();
-        recipeArrayListDessert = new ArrayList<>();
-        recipeArrayListMainCourse = new ArrayList<>();
-        recipeArrayListFirstCourse = new ArrayList<>();
 
 
 
@@ -113,35 +120,49 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
 
     @Override
-    public void onResponseRandomRecipe(String jsonFile) {
+    public void onResponseRandomRecipe(List<RecipeApi> recipes) {
 
-        recipeArrayListReadyToCoock = JsonParser.parseRandomRecipe(jsonFile);
+        //recipeArrayListReadyToCoock = JsonParser.parseRandomRecipe(jsonFile);
+        recipeArrayListReadyToCoock.clear();
+        recipeArrayListReadyToCoock.addAll(recipes);
+
+
+
         RecipeAdapter recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
         recyclerViewRTC.setAdapter(recipeAdapter);
 
     }
 
     @Override
-    public void onResponseRandomRecipeDessert(String jsonFile) {
+    public void onResponseRandomRecipeDessert(List<RecipeApi> recipes) {
 
-        recipeArrayListDessert = JsonParser.parseRandomRecipe(jsonFile);
+        //recipeArrayListDessert = JsonParser.parseRandomRecipe(jsonFile);
+        recipeArrayListDessert.clear();
+        recipeArrayListDessert.addAll(recipes);
+
         RecipeAdapterSubcard recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
 
     }
 
     @Override
-    public void onResponseRandomRecipeMainCourse(String jsonFile) {
-        recipeArrayListMainCourse = JsonParser.parseRandomRecipe(jsonFile);
+    public void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes) {
+       // recipeArrayListMainCourse = JsonParser.parseRandomRecipe(jsonFile);
+        recipeArrayListMainCourse.clear();
+        recipeArrayListMainCourse.addAll(recipes);
         RecipeAdapterSubcard recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse);
         recyclerViewHome3.setAdapter(recipeAdapterSubcard2);
+
     }
 
     @Override
-    public void onResponseRandomRecipeFirstCourse(String jsonFile) {
+    public void onResponseRandomRecipeFirstCourse(List<RecipeApi> recipes) {
 
-        recipeArrayListFirstCourse = JsonParser.parseRandomRecipe(jsonFile);
-         RecipeAdapterSubcard recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
+        //recipeArrayListFirstCourse = JsonParser.parseRandomRecipe(jsonFile);
+        recipeArrayListFirstCourse.clear();
+        recipeArrayListFirstCourse.addAll(recipes);
+
+        RecipeAdapterSubcard recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
 
     }
