@@ -179,6 +179,10 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
                 //Snackbar.make(getContext(), "prova", Snackbar.LENGTH_SHORT).show();
 
+
+
+              // Snackbar.make(, "fffffff", Snackbar.LENGTH_SHORT).show();
+
                 Toast.makeText(getContext(), R.string.result_not_found, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
             } else {

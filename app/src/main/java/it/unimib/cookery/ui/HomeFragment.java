@@ -182,6 +182,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     @Override
     public void onFailure(int errorMessage) {
 
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        Snackbar.make(requireActivity().findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_SHORT).show();
     }
 }

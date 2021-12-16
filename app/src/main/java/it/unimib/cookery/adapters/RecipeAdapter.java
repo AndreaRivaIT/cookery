@@ -65,7 +65,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                      intent.putExtra(costants.EDITABLE, "false");
 
                      // codice di test funzionante
-                     intent.putStringArrayListExtra("ArrayList", step);
+                     intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
 
 
                      context.startActivity(intent);

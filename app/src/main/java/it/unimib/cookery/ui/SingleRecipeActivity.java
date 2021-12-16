@@ -109,7 +109,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         /*codice di test funzionante */
 
-        stepRecived = intent.getStringArrayListExtra("ArrayList");
+        stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
 
       //  Log.d("SingleRecipe", ""+stepRecived.get(0));
 

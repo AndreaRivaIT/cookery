@@ -46,7 +46,7 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
 
                 if(mListStep.size()==0){
 
-                    holder.tvNStep.setText("NOT STEPS FOUND");
+                    holder.tvNStep.setText(R.string.noStepFoundString);
                     holder.tvDescription.setText("");
 
                 }else {

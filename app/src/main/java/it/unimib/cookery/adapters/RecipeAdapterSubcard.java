@@ -57,8 +57,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.EDITABLE, "false");
-                    intent.putStringArrayListExtra("ArrayList", step);
-
+                    intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
                     context.startActivity(intent);
                 }
             });
