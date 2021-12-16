@@ -56,10 +56,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                 public void onClick(View v) {
 
                    ArrayList<String> step = new ArrayList<>();
-                   step.add("dati passati");
-
-
-
+                   step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
 
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());

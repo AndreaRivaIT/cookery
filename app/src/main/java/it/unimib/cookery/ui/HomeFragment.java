@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +63,12 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
 
         // ho problemi di concorrenza
-       // recipeRepository.getRandomRecipe("");
+        recipeRepository.getRandomRecipe("");
         recipeRepository.getRandomRecipeFirstCourse("");
-       // recipeRepository.getRandomRecipeMainCourse("");
-       // recipeRepository.getRandomRecipeDessert("");
+       recipeRepository.getRandomRecipeMainCourse("");
+        recipeRepository.getRandomRecipeDessert("");
 
-
+        //Snackbar.make(requireActivity().findViewById(android.R.id.content), "fffffff", Snackbar.LENGTH_SHORT).show();
 
 
 

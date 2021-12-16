@@ -86,7 +86,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_recipe);
         setRicettaAppoggio();
         createChips();
-
+        stepRecived = new ArrayList<>();
 
 
         // ottengo l'intent che ha avviato l'activity
@@ -160,6 +160,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
                 // non so come tornare indetro al fragment
 
+                onBackPressed();
 
                 Log.d("premuto", "deleteRecipe");
             }
@@ -173,7 +174,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         rcvSteps.setLayoutManager(linearLayoutManager);
         rcvSteps.setFocusable(false);
         rcvSteps.setNestedScrollingEnabled(false);
-        recipeProcedureAdapter.setData(recipe.getStepsList());
+        recipeProcedureAdapter.setData(stepRecived);
         rcvSteps.setAdapter(recipeProcedureAdapter);
 
         btnAdd = findViewById(R.id.btn_add);

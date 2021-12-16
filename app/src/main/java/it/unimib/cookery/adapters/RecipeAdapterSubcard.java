@@ -47,12 +47,18 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    ArrayList<String> step = new ArrayList<>();
+                    step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
+
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     // da aggiungere il passaggio dell'id della ricetta
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.EDITABLE, "false");
+                    intent.putStringArrayListExtra("ArrayList", step);
+
                     context.startActivity(intent);
                 }
             });
