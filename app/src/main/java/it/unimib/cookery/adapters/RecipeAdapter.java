@@ -3,6 +3,7 @@ package it.unimib.cookery.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
@@ -35,8 +37,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
         this.context = context;
         this.recipeArrayList = recipeArrayList;
 
-        for(RecipeApi r: recipeArrayList)
-            Log.d("recipeAdapter", ""+ r.toString());
+       /* for(RecipeApi r: recipeArrayList)
+            Log.d("recipeAdapter", ""+ r.toString());*/
 
     }
 
@@ -62,10 +64,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                      intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
+                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
                      intent.putExtra(costants.EDITABLE, "false");
 
                      // codice di test funzionante
                      intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
+
+                       for(IngredientApi ing: recipeArrayList.get(getAdapterPosition()).getExtendedIngredients()){
+                           Log.d("Ingredient", ""+ing.toString());
+                       }
+
+                        intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
+                            get(getAdapterPosition()).getExtendedIngredients());
 
 
                      context.startActivity(intent);

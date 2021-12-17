@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListFirstCourse = new ArrayList<>();
 
 
-        // ho problemi di concorrenza
+
         recipeRepository.getRandomRecipe("");
         recipeRepository.getRandomRecipeFirstCourse("");
        recipeRepository.getRandomRecipeMainCourse("");

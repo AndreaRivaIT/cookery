@@ -13,11 +13,12 @@ import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.models.Ingredient;
+import it.unimib.cookery.models.IngredientApi;
 
 public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAdapter.IngredientViewHolder>{
-    private List<Ingredient> mListIngredients;
+    private List<IngredientApi> mListIngredients;
     private  int k = 0;
-    public  void setData( List<Ingredient> list ){
+    public  void setData( List<IngredientApi> list ){
         this.mListIngredients = list;
         notifyDataSetChanged();
     }
@@ -33,12 +34,27 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
 
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
-        Ingredient ingredient = mListIngredients.get(position);
+        IngredientApi ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
 
-        holder.tvIngredient.setText(ingredient.getIngredientName()+":");
-        Log.d("test","quantità" + ingredient.getQuantity());
-        holder.tvQuantity.setText(" "+ingredient.getQuantity() + "g");
+
+        holder.tvIngredient.setText(ingredient.getName()+":");
+
+       switch (ingredient.getUnit()){
+
+           case "teaspoons": holder.tvQuantity.setText(" "+ingredient.getAmount()+ " tsps"); break;
+           case "teaspoon":  holder.tvQuantity.setText(" "+ingredient.getAmount()+ " tsp"); break;
+           case "Teaspoons":  holder.tvQuantity.setText(" "+ingredient.getAmount()+ " tsps"); break;
+           case "Teaspoon":  holder.tvQuantity.setText(" "+ingredient.getAmount()+ " tsp"); break;
+           case "Tablespoons": holder.tvQuantity.setText(" "+ingredient.getAmount()+ " Tbsps"); break;
+           case "Tablespoon": holder.tvQuantity.setText(" "+ingredient.getAmount()+ " Tbsp"); break;
+           case "tablespoons": holder.tvQuantity.setText(" "+ingredient.getAmount()+ " Tbsps"); break;
+           case "tablespoon": holder.tvQuantity.setText(" "+ingredient.getAmount()+ " Tbsp"); break;
+           default:  holder.tvQuantity.setText(" "+ingredient.getAmount()+ " "+ ingredient.getUnit());break;
+
+       }
+
+
     }
 
     @Override

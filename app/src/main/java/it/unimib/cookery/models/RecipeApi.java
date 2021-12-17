@@ -1,5 +1,7 @@
 package it.unimib.cookery.models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +11,27 @@ public class RecipeApi {
     private int id;
     private String title;
     private String image;
+    private int servings;
     private List<StepList> analyzedInstructions;
+    private List<IngredientApi> extendedIngredients;
 
     public RecipeApi(){}
 
-    public RecipeApi(int id, String title, String image, List<StepList> analyzedInstructions){
+    public RecipeApi(int id, String title, String image, int servings ,List<StepList> analyzedInstructions, List<IngredientApi> extendedIngredients){
 
         this.id=id;
         this.title = title;
         this.image = image;
+        this.servings = servings;
+        this.analyzedInstructions = analyzedInstructions;
+        this.extendedIngredients = extendedIngredients;
+    }
+
+    public List<StepList> getAnalyzedInstructions() {
+        return analyzedInstructions;
+    }
+
+    public void setAnalyzedInstructions(List<StepList> analyzedInstructions) {
         this.analyzedInstructions = analyzedInstructions;
     }
 
@@ -27,15 +41,26 @@ public class RecipeApi {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +
+                ", servings=" + servings +
+                ", analyzedInstructions=" + analyzedInstructions +
+                ", extendedIngredients=" + extendedIngredients +
                 '}';
     }
 
-    public List<StepList> getAnalyzedInstructions() {
-        return analyzedInstructions;
+    public int getServings() {
+        return servings;
     }
 
-    public void setAnalyzedInstructions(List<StepList> analyzedInstructions) {
-        this.analyzedInstructions = analyzedInstructions;
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public List<IngredientApi> getExtendedIngredients() {
+        return extendedIngredients;
+    }
+
+    public void setExtendedIngredients(List<IngredientApi> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
     }
 
     public int getId() {
@@ -87,7 +112,6 @@ public class RecipeApi {
         return steps;
 
     }
-
 
 
 }

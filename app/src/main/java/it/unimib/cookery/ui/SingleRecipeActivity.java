@@ -1,5 +1,7 @@
 package it.unimib.cookery.ui;
 
+import static java.lang.Math.round;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Ingredient;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
 
@@ -62,6 +65,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
     // variabile per ottenere info ricetta
     private String imageUrl;
     private int recipeId;
+    private int servings;
 
 
     // oggetto per le costanti
@@ -75,7 +79,10 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     // codice di test
 
-    ArrayList<String> stepRecived;
+    private ArrayList<String> stepRecived;
+    private ArrayList<IngredientApi> ingredienteRecived;
+
+
 
 
 
@@ -85,8 +92,9 @@ public class SingleRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
         setRicettaAppoggio();
-        createChips();
+
         stepRecived = new ArrayList<>();
+        ingredienteRecived = new ArrayList<>();
 
 
         // ottengo l'intent che ha avviato l'activity
@@ -103,6 +111,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo la stringa che mi dice se la ricetta è modificabile
         editable = intent.getStringExtra(costants.EDITABLE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
+        servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
 
        // da controllare
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
@@ -110,8 +119,33 @@ public class SingleRecipeActivity extends AppCompatActivity {
         /*codice di test funzionante */
 
         stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
+        ingredienteRecived=intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
 
-      //  Log.d("SingleRecipe", ""+stepRecived.get(0));
+        Log.d("servings", ""+servings);
+
+        tvAmountPeople = findViewById(R.id.tv_amount);
+        btnRemove = findViewById(R.id.btn_remove);
+
+        setnPerson(servings);
+        if(servings > 1)
+            tvAmountPeople.setText(servings + costants.PEOPLE);
+        else {
+            tvAmountPeople.setText(servings + costants.PERSON);
+            btnRemove.setEnabled(false);
+        }
+
+
+        createChips();
+
+
+        Log.d("SingleRecipe", "size "+ingredienteRecived.size());
+
+        for(IngredientApi ing: ingredienteRecived){
+            Log.d("SingleRecipe", ""+ing.toString());
+        }
+
+
+        //  Log.d("SingleRecipe", ""+stepRecived.get(0));
 
 
         modifyRecipe = findViewById(R.id.ButtonEditRecipe);
@@ -178,31 +212,35 @@ public class SingleRecipeActivity extends AppCompatActivity {
         rcvSteps.setAdapter(recipeProcedureAdapter);
 
         btnAdd = findViewById(R.id.btn_add);
-        btnRemove = findViewById(R.id.btn_remove);
-        tvAmountPeople = findViewById(R.id.tv_amount);
+
+
 
 
 
 
 
         btnAdd.setOnClickListener(v -> {
-            recipe.setnPerson(recipe.getnPerson() + 1);
-            if ( recipe.getnPerson() == 1){
-                tvAmountPeople.setText(recipe.getnPerson() +" Persona");
+            setnPerson(servings + 1);
+            if ( servings == 1){
+                tvAmountPeople.setText(servings + costants.PERSON);
+                btnRemove.setEnabled(false);
             }
             else{
-                tvAmountPeople.setText(recipe.getnPerson() +" Persone");
+                tvAmountPeople.setText(servings + costants.PEOPLE);
+                btnRemove.setEnabled(true);
                 createChips();
             }
 
         });
         btnRemove.setOnClickListener(v -> {
-            if(recipe.getnPerson() > 1){
-                recipe.setnPerson(recipe.getnPerson() - 1);;
-                if (recipe.getnPerson() == 1)
-                    tvAmountPeople.setText(recipe.getnPerson() +" Persona");
+            if(servings > 1){
+                setnPerson(servings - 1);
+                if (servings == 1) {
+                    tvAmountPeople.setText(servings + costants.PERSON);
+                    btnRemove.setEnabled(false);
+                }
                 else
-                    tvAmountPeople.setText(recipe.getnPerson() +" Persone");
+                    tvAmountPeople.setText(servings + costants.PEOPLE);
             }
             createChips();
         });
@@ -224,7 +262,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-        ingredientChipAdapter.setData(recipe.getIngredientList());
+        ingredientChipAdapter.setData(ingredienteRecived);
         rcvChips.setAdapter(ingredientChipAdapter);
 
     }
@@ -262,6 +300,17 @@ public class SingleRecipeActivity extends AppCompatActivity {
         recipe.setIngredientList(pepeA);
         recipe.setIngredientList(pepeB);
         recipe.setIngredientList(besciamella);
+    }
+
+
+    private  void setnPerson(int n){
+        for(int i = 0; i < ingredienteRecived.size(); i++){
+            double qBase = ingredienteRecived.get(i).getAmount() / servings;
+            // da sistemare la precisione del double in qualche modo
+            ingredienteRecived.get(i).setAmount(round(qBase * n));
+            Log.d("test","nome:" + ingredienteRecived.get(i).getName()+"- quantita:"+ingredienteRecived.get(i).getAmount());
+        }
+        servings = n;
     }
 
 

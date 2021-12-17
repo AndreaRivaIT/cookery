@@ -26,6 +26,7 @@ public class Costants {
     public static final String FILTER4 = "Desserts";
     public static final String dialogTitle = "Select recipe type";
 
+
     /* fine stringhe costanti My Recipes Fragment */
 
 
@@ -38,13 +39,17 @@ public class Costants {
     public static final String EDITABLE="editable";
     public static final String RECIPE_ID="Recipe id";
     public static final String RECIPE_IMAGE="Recipe image";
-    public static final String STEP_ARRAYLIST = "Arraylist";
+    public static final String STEP_ARRAYLIST = "StepArraylist";
+    public static final String INGREDIENT_ARRAYLIST = "IngredientArraylist";
+    public static final String RECIPE_SERVINGS="Servings";
+
 
     /* stringhe costanti per intent */
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME ="dbCookery";
 
+    /* fine stringhe costanti per intent */
 
     /* stringhe costanti  retrofit */
 
@@ -54,6 +59,13 @@ public class Costants {
     public static final String API_KEY=myApiKey;
     public static final String BASE_URL="https://api.spoonacular.com/recipes/";
 
+    /* fine stringhe costanti per reftrofit */
+
+
+    /* stringhe per singleRecipeActivity */
+
+    public static final String PEOPLE =" People";
+    public static final String PERSON =" Person";
 
 
     public Costants(){
