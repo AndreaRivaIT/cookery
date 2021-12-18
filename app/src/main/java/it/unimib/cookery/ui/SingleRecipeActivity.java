@@ -1,6 +1,6 @@
 package it.unimib.cookery.ui;
 
-import static java.lang.Math.round;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
-
 import java.util.ArrayList;
-
 import it.unimib.cookery.R;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
@@ -81,9 +77,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     private ArrayList<String> stepRecived;
     private ArrayList<IngredientApi> ingredienteRecived;
-
-
-
 
 
 
@@ -192,7 +185,8 @@ public class SingleRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // non so come tornare indetro al fragment
+
+                // cancellare ricetta da database
 
                 onBackPressed();
 
@@ -307,7 +301,17 @@ public class SingleRecipeActivity extends AppCompatActivity {
         for(int i = 0; i < ingredienteRecived.size(); i++){
             double qBase = ingredienteRecived.get(i).getAmount() / servings;
             // da sistemare la precisione del double in qualche modo
-            ingredienteRecived.get(i).setAmount(round(qBase * n));
+
+               if(ingredienteRecived.get(i).getUnit().equals("") ||
+                       ingredienteRecived.get(i).getUnit().equalsIgnoreCase("large") ||
+                       ingredienteRecived.get(i).getUnit().equalsIgnoreCase("serving") ||
+                       ingredienteRecived.get(i).getUnit().equalsIgnoreCase("medium")
+               )
+                   ingredienteRecived.get(i).setAmount(Math.round(qBase*n));
+               else
+                   ingredienteRecived.get(i).setAmount(Math.round((qBase * n)*100.0)/100.0);
+
+
             Log.d("test","nome:" + ingredienteRecived.get(i).getName()+"- quantita:"+ingredienteRecived.get(i).getAmount());
         }
         servings = n;

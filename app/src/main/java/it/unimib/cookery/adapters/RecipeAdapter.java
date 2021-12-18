@@ -107,6 +107,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
         //serve a caricare l'immagine mediante un url
         Glide.with(context)
                 .load(url)
+                .placeholder(R.drawable.ic_baseline_cloud_download_24)
                 .into(holder.imageView);
         }
 

@@ -18,6 +18,6 @@ public interface SpoonacularApiService {
 
 // https://api.spoonacular.com/recipes/324694/analyzedInstructions
 
-    @GET("{id}/analyzedInstructions")
-    Call<String> getRecipeDetails (@Path("id") int id, @Query("apiKey") String apiKey);
+   // @GET("{id}/analyzedInstructions")
+   // Call<String> getRecipeDetails (@Path("id") int id, @Query("apiKey") String apiKey);
 }

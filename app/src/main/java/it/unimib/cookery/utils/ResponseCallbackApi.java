@@ -10,6 +10,5 @@ public interface ResponseCallbackApi {
     void onResponseRandomRecipeDessert(List<RecipeApi> recipes);
     void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes);
     void onResponseRandomRecipeFirstCourse(List<RecipeApi> recipes);
-    void onResponseGetStep(String jsonFile);
     void onFailure(int errorMessage);
 }

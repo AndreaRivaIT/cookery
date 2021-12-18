@@ -88,6 +88,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
         }else {
             Glide.with(context)
                     .load(url)
+                    .placeholder(R.drawable.ic_baseline_cloud_download_24)
                     .into(holder.imageView);
         }
     }
