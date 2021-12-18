@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +24,7 @@ import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder> {
 
     private Context context;
     private ArrayList<RecipeApi> recipeArrayList;
@@ -57,28 +58,28 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                 @Override
                 public void onClick(View v) {
 
-                   ArrayList<String> step = new ArrayList<>();
-                   step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
+                    ArrayList<String> step = new ArrayList<>();
+                    step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
 
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
-                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
-                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
-                     intent.putExtra(costants.EDITABLE, "false");
+                    intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
+                    intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
+                    intent.putExtra(costants.EDITABLE, "false");
 
-                     // codice di test funzionante
-                     intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
+                    // codice di test funzionante
+                    intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
 
-                       for(IngredientApi ing: recipeArrayList.get(getAdapterPosition()).getExtendedIngredients()){
-                           Log.d("Ingredient", ""+ing.toString());
-                       }
+                    for (IngredientApi ing : recipeArrayList.get(getAdapterPosition()).getExtendedIngredients()) {
+                        Log.d("Ingredient", "" + ing.toString());
+                    }
 
-                        intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
+                    intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
                             get(getAdapterPosition()).getExtendedIngredients());
 
 
-                     context.startActivity(intent);
+                    context.startActivity(intent);
 
 
                 }
@@ -100,18 +101,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
         String url = model.getImage();
 
-        if(url == null){
+        if (url == null) {
             holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
-        }else{
+        } else {
 
-        //serve a caricare l'immagine mediante un url
-        Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_baseline_cloud_download_24)
-                .into(holder.imageView);
+            //serve a caricare l'immagine mediante un url
+            Glide.with(context)
+                    .load(url)
+                    .placeholder(R.drawable.ic_baseline_cloud_download_24)
+                    .into(holder.imageView);
         }
 
-      // holder.imageView.setImageResource(model.getImageId());
+        // holder.imageView.setImageResource(model.getImageId());
 
     }
 

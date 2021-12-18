@@ -8,7 +8,8 @@ public class StepList {
     private List<StepApi> steps;
 
 
-    public StepList(){}
+    public StepList() {
+    }
 
     public StepList(String name, List<StepApi> steps) {
         this.name = name;

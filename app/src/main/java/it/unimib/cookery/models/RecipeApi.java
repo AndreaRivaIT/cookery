@@ -15,11 +15,12 @@ public class RecipeApi {
     private List<StepList> analyzedInstructions;
     private List<IngredientApi> extendedIngredients;
 
-    public RecipeApi(){}
+    public RecipeApi() {
+    }
 
-    public RecipeApi(int id, String title, String image, int servings ,List<StepList> analyzedInstructions, List<IngredientApi> extendedIngredients){
+    public RecipeApi(int id, String title, String image, int servings, List<StepList> analyzedInstructions, List<IngredientApi> extendedIngredients) {
 
-        this.id=id;
+        this.id = id;
         this.title = title;
         this.image = image;
         this.servings = servings;
@@ -87,26 +88,25 @@ public class RecipeApi {
         this.image = image;
     }
 
-    public ArrayList<String> extractSteps(){
+    public ArrayList<String> extractSteps() {
 
         ArrayList<String> steps = new ArrayList<>();
 
         ArrayList<StepList> stepLists = (ArrayList<StepList>) analyzedInstructions;
 
-        for(int i=0; i< stepLists.size(); i++){
+        for (int i = 0; i < stepLists.size(); i++) {
 
             StepList list = stepLists.get(i);
 
             ArrayList<StepApi> stepApi = (ArrayList<StepApi>) list.getSteps();
 
 
-                for(int j=0; j< stepApi.size(); j++){
+            for (int j = 0; j < stepApi.size(); j++) {
 
-                    steps.add(stepApi.get(j).getStep());
+                steps.add(stepApi.get(j).getStep());
 
             }
         }
-
 
 
         return steps;

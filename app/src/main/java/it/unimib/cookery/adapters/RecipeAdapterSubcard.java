@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
-public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubcard.Viewholder>{
+public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubcard.Viewholder> {
 
     private Context context;
     private ArrayList<RecipeApi> recipeArrayList;
@@ -83,9 +84,9 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
 
         String url = model.getImage();
 
-        if(url == null){
+        if (url == null) {
             holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
-        }else {
+        } else {
             Glide.with(context)
                     .load(url)
                     .placeholder(R.drawable.ic_baseline_cloud_download_24)

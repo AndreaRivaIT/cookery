@@ -6,9 +6,10 @@ public class ResponseRecipe {
 
     List<RecipeApi> recipes;
 
-    public ResponseRecipe(){}
+    public ResponseRecipe() {
+    }
 
-    public ResponseRecipe(List<RecipeApi> recipes){
+    public ResponseRecipe(List<RecipeApi> recipes) {
         this.recipes = recipes;
     }
 

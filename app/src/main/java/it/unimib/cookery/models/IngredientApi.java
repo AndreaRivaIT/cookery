@@ -11,7 +11,7 @@ public class IngredientApi implements Parcelable {
     private String unit;
 
     public IngredientApi(int id, String name, double amount, String unit) {
-        this.id=id;
+        this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;

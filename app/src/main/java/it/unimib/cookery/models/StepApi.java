@@ -3,13 +3,12 @@ package it.unimib.cookery.models;
 public class StepApi {
 
 
-
-
     private int number;
     private String step;
 
 
-    public StepApi(){}
+    public StepApi() {
+    }
 
     public StepApi(int number, String step) {
         this.number = number;
@@ -40,7 +39,6 @@ public class StepApi {
     public void setStep(String steps) {
         this.step = steps;
     }
-
 
 
 }

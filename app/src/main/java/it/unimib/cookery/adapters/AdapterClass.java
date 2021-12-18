@@ -11,15 +11,17 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
+
 import it.unimib.cookery.R;
 import it.unimib.cookery.models.Recipe;
-
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
@@ -34,8 +36,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     /* url costante per prova glide */
 
-    private static final String imgUrl= "https://spoonacular.com/recipeImages/716429-312x231.jpg";
-
+    private static final String imgUrl = "https://spoonacular.com/recipeImages/716429-312x231.jpg";
 
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
@@ -58,10 +59,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
-
-
-
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -80,16 +77,8 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-      ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-       .setImageResource(listdata.get(position).getImageId());
-
-
-
-
-
-
-
-
+        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+                .setImageResource(listdata.get(position).getImageId());
 
 
         return convertView;
@@ -176,12 +165,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
             // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
             if (listdata.size() == 0) {
-               // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
+                // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
                 //Snackbar.make(getContext(), "prova", Snackbar.LENGTH_SHORT).show();
 
 
-
-              // Snackbar.make(, "fffffff", Snackbar.LENGTH_SHORT).show();
+                // Snackbar.make(, "fffffff", Snackbar.LENGTH_SHORT).show();
 
                 Toast.makeText(getContext(), R.string.result_not_found, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
