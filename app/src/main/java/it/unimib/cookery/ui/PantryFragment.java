@@ -96,7 +96,7 @@ public class PantryFragment extends Fragment {
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-        ingredientChipAdapter.setData(pantry.getIngredientList());
+        //ingredientChipAdapter.setData(pantry.getIngredientList());
         rcvChips.setAdapter(ingredientChipAdapter);
     }
     //da cancellare solo per lo sviluppo

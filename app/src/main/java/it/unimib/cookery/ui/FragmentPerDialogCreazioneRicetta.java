@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,7 +114,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                             ingredientDialog.dismiss();
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), R.string.invalid_quantity, Toast.LENGTH_SHORT).show();
+                            Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.invalid_quantity, Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -182,7 +184,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
 
                         } else {
                             // stampa un toast di errore
-                            Toast.makeText(getContext(), R.string.invalid_step , Toast.LENGTH_SHORT).show();
+                            Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.invalid_step, Snackbar.LENGTH_SHORT).show();
 
                         }
 

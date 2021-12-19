@@ -2,12 +2,15 @@ package it.unimib.cookery.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.telecom.Call;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,22 +20,26 @@ import java.util.ArrayList;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
-import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.ui.HomeFragment;
+import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.ui.SingleRecipeActivity;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder> {
 
     private Context context;
-    private ArrayList<Recipe> recipeArrayList;
+    private ArrayList<RecipeApi> recipeArrayList;
+
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
 
 
-    public RecipeAdapter(Context context, ArrayList<Recipe> recipeArrayList) {
+    public RecipeAdapter(Context context, ArrayList<RecipeApi> recipeArrayList) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
+
+       /* for(RecipeApi r: recipeArrayList)
+            Log.d("recipeAdapter", ""+ r.toString());*/
 
     }
 
@@ -50,12 +57,31 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    ArrayList<String> step = new ArrayList<>();
+                    step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
+
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
-                    // da passare l'id della ricetta
-                    // da passare url immagine
-                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getName());
-                     intent.putExtra(costants.EDITABLE, "false");
-                     context.startActivity(intent);
+                    intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
+                    intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
+                    intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
+                    intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
+                    intent.putExtra(costants.EDITABLE, "false");
+
+                    // codice di test funzionante
+                    intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
+
+                    for (IngredientApi ing : recipeArrayList.get(getAdapterPosition()).getExtendedIngredients()) {
+                        Log.d("Ingredient", "" + ing.toString());
+                    }
+
+                    intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
+                            get(getAdapterPosition()).getExtendedIngredients());
+
+
+                    context.startActivity(intent);
+
+
                 }
             });
         }
@@ -70,16 +96,23 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull RecipeAdapter.Viewholder holder, int position) {
-        Recipe model = recipeArrayList.get(position);
-        holder.textView.setText(model.getName());
+        RecipeApi model = recipeArrayList.get(position);
+        holder.textView.setText(model.getTitle());
 
-        // String url = model.getImageUrl();
-        //serve a caricare l'immagine mediante un url
-        //Glide.with(context)
-               // .load("https://spoonacular.com/recipeImages/716429-312x231.jpg")
-               // .into(holder.imageView);
+        String url = model.getImage();
 
-       holder.imageView.setImageResource(model.getImageId());
+        if (url == null) {
+            holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
+        } else {
+
+            //serve a caricare l'immagine mediante un url
+            Glide.with(context)
+                    .load(url)
+                    .placeholder(R.drawable.ic_baseline_cloud_download_24)
+                    .into(holder.imageView);
+        }
+
+        // holder.imageView.setImageResource(model.getImageId());
 
     }
 
