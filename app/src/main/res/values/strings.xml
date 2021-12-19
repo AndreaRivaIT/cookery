@@ -62,6 +62,8 @@
     <string name="save">Save</string>
     <string name="profile_image">Profile image</string>
     <string name="passError">Password is not valid</string>
+    <string name="add_pantry">Add Pantry</string>
+    <string name="invalid_name">complie the camp</string>
 
 
     <!-- fine strings MyProfileFragment -->

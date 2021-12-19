@@ -69,11 +69,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             // Layout Inflater inflates each item to be displayed in GridView.
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
         }
-
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
                 .setText(listdata.get(position).getName());
-
 
         /* ottengo l'url dell'immagine */
         // String imgUrl = listdata.get(position).getImageUrl();
@@ -83,21 +81,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
       ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
        .setImageResource(listdata.get(position).getImageId());
 
-
-
-
-
-
-
-
-
-
         return convertView;
     }
 
 
     public void applyFilter(ArrayList<String> arr) {
-
         // serve per resettare i filtri
         if (Removed.size() > 0) {
             for (Recipe r : Removed) {
@@ -108,7 +96,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             }
             Removed.clear();
         }
-
         // se c'è almeno un filtro selezionato trovo tutte le ricette che non rispettano i filtri
         // e le sottraggo dalle due array list e le aggiungo all'array list Removed che serve
         // per il ripristino
@@ -139,18 +126,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Filter filterNotification = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
             ArrayList<Recipe> filterList = new ArrayList<>();
-
             if (constraint == null || constraint.length() == 0) {
-
                 filterList.addAll(filterData);
-
-
             } else {
-
                 String searchStr = constraint.toString().toLowerCase().trim();
-
                 for (Recipe recipe : filterData) {
                     String nameLowerCase = recipe.getName().toLowerCase();
                     if (nameLowerCase.contains(searchStr)) {

@@ -109,15 +109,10 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
         }
          else {
-
              // caricherà immagine ottenuta da Api
-
             Glide.with(this).load("https://spoonacular.com/recipeImages/716429-312x231.jpg").
                     into(recipeImage);
         }
-
-
-
 
         modifyRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +120,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
                 Log.d("premuto", "modifyRecipe");
             }
         });
-
-
         deleteRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,30 +151,26 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
 
         btnAdd.setOnClickListener(v -> {
-            recipe.setnPerson(recipe.getnPerson() + 1);
-            if ( recipe.getnPerson() == 1){
-                tvAmountPeople.setText(recipe.getnPerson() +" Persona");
+            recipe.setNPerson(recipe.getNPerson() + 1);
+            if ( recipe.getNPerson() == 1){
+                tvAmountPeople.setText(recipe.getNPerson() +" Persona");
             }
             else{
-                tvAmountPeople.setText(recipe.getnPerson() +" Persone");
+                tvAmountPeople.setText(recipe.getNPerson() +" Persone");
                 createChips();
             }
 
         });
         btnRemove.setOnClickListener(v -> {
-            if(recipe.getnPerson() > 1){
-                recipe.setnPerson(recipe.getnPerson() - 1);;
-                if (recipe.getnPerson() == 1)
-                    tvAmountPeople.setText(recipe.getnPerson() +" Persona");
+            if(recipe.getNPerson() > 1){
+                recipe.setNPerson(recipe.getNPerson() - 1);;
+                if (recipe.getNPerson() == 1)
+                    tvAmountPeople.setText(recipe.getNPerson() +" Persona");
                 else
-                    tvAmountPeople.setText(recipe.getnPerson() +" Persone");
+                    tvAmountPeople.setText(recipe.getNPerson() +" Persone");
             }
             createChips();
         });
-
-
-
-
 
 
 
@@ -202,7 +191,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-        ingredientChipAdapter.setData(recipe.getIngredientList());
+        //ingredientChipAdapter.setData(recipe.getIngredientList());
         rcvChips.setAdapter(ingredientChipAdapter);
 
     }

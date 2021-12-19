@@ -1,6 +1,5 @@
 package it.unimib.cookery.adapters;
 
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +16,20 @@ import it.unimib.cookery.R;
 import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientPantry;
 
-public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAdapter.IngredientViewHolder>{
-    private ArrayList<Ingredient> mListIngredients = new ArrayList<>();
+public class IngredientChipAdapterPantry extends RecyclerView.Adapter<IngredientChipAdapterPantry.IngredientViewHolder>{
+    private List<IngredientPantry> mListIngredients = new ArrayList<>();
     private  int k = 0;
 
 
-    public  void setData( List<Ingredient> list){
-        list.removeAll(mListIngredients);
-        this.mListIngredients.addAll(list);
+    public  void setData( List<IngredientPantry> list){
+        this.mListIngredients = list;
+        Log.d("test"," PantryAdapter ---");
+        for(int k=0 ; k <list.size(); k++){
+            Log.d("test"," PantryAdapter " +list.get(k).getIngredientName()+"-"+list.get(k).getQuantity());
+        }
+        Log.d("test"," PantryAdapter --- Fine");
+        notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override

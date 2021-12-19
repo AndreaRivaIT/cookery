@@ -1,52 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layouStepDialog"
+    android:id="@+id/layout_ingredient_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/stepCardContainer"
+        android:id="@+id/dialogIngredientCard"
         android:layout_width="match_parent"
-        android:layout_height="260dp">
-
+        android:layout_height="165dp">
 
         <RelativeLayout
+            android:id="@+id/layoutIngredientAddIngredient"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/stepTextView"
+                android:id="@+id/IngredientName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/step_string" />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="New Pantry Box"
+                android:textSize="18dp"
+                android:fontFamily="@font/poppins_bold"/>
 
 
             <EditText
-                android:id="@+id/StepEditText"
+                android:id="@+id/add_pantry"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@id/stepTextView"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/IngredientName"
                 android:layout_marginVertical="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_shape"
-                android:gravity="top"
-                android:hint="@string/step_hint_string"
-                android:inputType="textMultiLine"
-                android:maxHeight="48dp"
+                android:hint="Insert name"
                 android:minHeight="48dp"
-                android:paddingLeft="4dp"
-                android:paddingTop="6dp"
-                android:scrollbars="vertical" />
-
-
+                android:paddingLeft="4dp" />
             <Button
-                android:id="@+id/yesButton"
+                android:id="@+id/addIngredientButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -59,17 +52,17 @@
 
 
             <Button
-                android:id="@+id/noButton"
+                android:id="@+id/deleteIngredientButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toLeftOf="@id/yesButton"
+                android:layout_toLeftOf="@id/addIngredientButton"
                 android:text="@string/delete_button" />
 
-        </RelativeLayout>
 
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
