@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity{
 
         //DrawerLayout configuration
         mDrawerLayout = findViewById(R.id.drawerLayout);
+
         //Hamburger icon listener
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override

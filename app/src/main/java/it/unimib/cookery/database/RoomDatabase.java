@@ -13,7 +13,9 @@ import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.models.PantryWithIngredientPantry;
 
+
 @Database(entities = {Pantry.class, IngredientPantry.class}, version = Costants.DATABASE_VERSION)
+
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
 
     public abstract PantryDao PantryDao();

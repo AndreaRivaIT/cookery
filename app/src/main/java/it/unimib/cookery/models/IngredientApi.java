@@ -4,13 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class IngredientApi implements Parcelable {
+
     private int id;
     private String name;
     private double amount;
     private String unit;
 
     public IngredientApi(int id, String name, double amount, String unit) {
-        this.id=id;
+
+        this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
@@ -52,7 +54,8 @@ public class IngredientApi implements Parcelable {
         return amount;
     }
 
-    public void setAmount(int amount) {
+
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -95,5 +98,5 @@ public class IngredientApi implements Parcelable {
         dest.writeString(unit);
     }
 
-
 }
+

@@ -69,6 +69,18 @@
     <!-- fine strings MyProfileFragment -->
 
 
+    <!-- string retrofit -->
+
+    <string name="errorRetriveData">Error in retrieving data</string>
+    <string name="connectionError"> Something went wrong, pleas check your connection</string>
+
+    <!-- fine string retrofit -->
 
 
+    <!-- string singleRecipeActivity -->
+
+    <string name="noStepFoundString">NO STEP FOUND FOR THIS RECIPE</string>
+
+
+    <!-- fine string singleRecipeActivity -->
 </resources>
