@@ -11,6 +11,7 @@ public class IngredientApi implements Parcelable {
     private String unit;
 
     public IngredientApi(int id, String name, double amount, String unit) {
+
         this.id = id;
         this.name = name;
         this.amount = amount;
@@ -52,6 +53,7 @@ public class IngredientApi implements Parcelable {
     public double getAmount() {
         return amount;
     }
+
 
     public void setAmount(double amount) {
         this.amount = amount;
@@ -96,5 +98,5 @@ public class IngredientApi implements Parcelable {
         dest.writeString(unit);
     }
 
-
 }
+

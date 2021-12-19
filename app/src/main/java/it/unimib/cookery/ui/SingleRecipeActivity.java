@@ -156,6 +156,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
             deleteRecipe.setClickable(true);
             // caricare immagine ottenuta da query database
 
+
         } else {
 
             if (imageUrl == null) {
@@ -168,15 +169,12 @@ public class SingleRecipeActivity extends AppCompatActivity {
             }
         }
 
-
         modifyRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("premuto", "modifyRecipe");
             }
         });
-
-
         deleteRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +225,6 @@ public class SingleRecipeActivity extends AppCompatActivity {
             }
             createChips();
         });
-
 
     }
 

@@ -2,6 +2,8 @@ package it.unimib.cookery.models;
 
 import android.util.Log;
 
+import androidx.room.Ignore;
+
 import java.util.ArrayList;
 
 
@@ -15,7 +17,11 @@ public class Recipe {
     private int imageId;
     private String category;
     private int nPerson;
+
+
+    @Ignore
     ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    @Ignore
     ArrayList<Ingredient> ingredientList= new ArrayList<>();
 
     // serve per prova
@@ -37,7 +43,7 @@ public class Recipe {
         this.imageId = imageId;
         this.nPerson = 2;
     }
-    public  void setnPerson(int n){
+    public  void setNPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
             int qBase = ingredientList.get(i).getQuantity() / nPerson;
             ingredientList.get(i).setQuantity(qBase * n);
@@ -82,7 +88,7 @@ public class Recipe {
     public int getImageId() {
         return imageId;
     }
-    public  int getnPerson(){
+    public  int getNPerson(){
         return nPerson;
     }
 

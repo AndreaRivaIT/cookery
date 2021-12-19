@@ -18,9 +18,9 @@
         tools:layout="@layout/fragment_my_recipes" />
     <fragment
         android:id="@+id/fridge"
-        android:name="it.unimib.cookery.ui.FridgeFragment"
-        android:label="fragment_fridge"
-        tools:layout="@layout/fragment_fridge" />
+        android:name="it.unimib.cookery.ui.PantryFragment"
+        android:label="fragment_pantry"
+        tools:layout="@layout/fragment_pantry" />
     <activity
         android:id="@+id/singleRecipeActivity"
         android:name="it.unimib.cookery.ui.SingleRecipeActivity"

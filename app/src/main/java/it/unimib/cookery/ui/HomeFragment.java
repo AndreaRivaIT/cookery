@@ -156,6 +156,9 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
         recyclerViewRTC.setAdapter(recipeAdapter);
 
+
+        return view;
+
     }
 
     @Override
@@ -194,7 +197,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
 
     }
-
 
 
 

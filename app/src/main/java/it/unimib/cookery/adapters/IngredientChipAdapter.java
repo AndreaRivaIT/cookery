@@ -1,5 +1,6 @@
 package it.unimib.cookery.adapters;
 
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
@@ -22,6 +24,7 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     public void setData(List<IngredientApi> list) {
         this.mListIngredients = list;
         notifyDataSetChanged();
+
     }
 
 
@@ -30,11 +33,14 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chip_ingredient, parent, false);
 
+
         return new IngredientViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
+
         IngredientApi ingredient = mListIngredients.get(position);
         if (ingredient == null) {
             return;
@@ -75,7 +81,6 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
 
         }
 
-
     }
 
     @Override
@@ -95,5 +100,6 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
             tvIngredient = itemView.findViewById(R.id.tv_ingredient);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
         }
+
     }
 }
