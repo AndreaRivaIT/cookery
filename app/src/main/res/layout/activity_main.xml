@@ -22,30 +22,31 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@color/cookery_blue"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingEnd="15dp"
+            android:orientation="horizontal"
             android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-             <ImageView
-                 android:id="@+id/imageMenu"
-                 android:layout_width="30dp"
-                 android:layout_height="30dp"
-                 android:contentDescription="@string/app_name"
-                 android:src="@drawable/hamburger"/>
+            <ImageView
+                android:id="@+id/imageMenu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/hamburger" />
 
             <TextView
                 android:id="@+id/textTitle"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginStart="25dp"
-                android:text="COOKERY"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:textSize="30sp"
-                android:textColor="@color/black"/>
+                android:text="COOKERY"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
         </LinearLayout>
 

@@ -1,5 +1,6 @@
 package it.unimib.cookery.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -7,7 +8,11 @@ import it.unimib.cookery.R;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Menu drawerMenu;
     private DrawerLayout mDrawerLayout;
     private NavHostFragment mNavHostFragment;
     private NavController mNavController;
@@ -45,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //NavigationMenu config
         mNavMenu = findViewById(R.id.navigationView);
-
         setDrawerMenu();
 
     }
@@ -78,6 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
             mNavMenu.getMenu().clear();
             mNavMenu.inflateMenu(R.menu.drawer_menu_not_logged);
+            mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.login_drawer:
+                            startActivity(new Intent(getApplicationContext(), login_register_user.class));
+                    }
+                    return false;
+                }
+            });
         }
     }
 }
