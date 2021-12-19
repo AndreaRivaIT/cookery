@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawerLayout);
 
 
-       //Toolbar toolbar = findViewById(R.id.toolbar);
-      // setSupportActionBar(toolbar);
-     // getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 
         //Hamburger icon listener
