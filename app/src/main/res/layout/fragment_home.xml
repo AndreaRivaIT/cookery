@@ -64,7 +64,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Main course"
+                android:text="Main courses"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 

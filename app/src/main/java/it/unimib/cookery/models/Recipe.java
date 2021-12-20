@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Recipe {
 
     private String name;
+    // imageId andrà sostituito con una stringa per l'url dell'immagine
     private int imageId;
     private String category;
     private int nPerson;
@@ -19,14 +20,13 @@ public class Recipe {
     public Recipe() {
     }
 
-
-
     public Recipe(String name, String category, int imageId) {
         this.name = name;
         this.category = category;
         this.imageId = imageId;
         this.nPerson = 2;
     }
+
     public  void setnPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
             int qBase = ingredientList.get(i).getQuantity() / nPerson;
@@ -39,8 +39,6 @@ public class Recipe {
     public ArrayList<RecipeStep> getStepsList() {
         return stepsList;
     }
-
-
 
     public ArrayList<Ingredient> getIngredientList() {
 
@@ -55,10 +53,10 @@ public class Recipe {
         return category;
     }
 
-
     public int getImageId() {
         return imageId;
     }
+
     public  int getnPerson(){
         return nPerson;
     }
