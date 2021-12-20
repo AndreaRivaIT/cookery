@@ -5,11 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import it.unimib.cookery.R;
-import it.unimib.cookery.costants.Costants;
 
 
 public class FragmentPerDialogCreazioneRicetta extends Fragment {
@@ -168,7 +166,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 EditText editTextStep = stepDialog.findViewById(R.id.StepEditText);
 
                 // creo e ottengo il riferimento al bottone per aggiungere gli step
-                Button addButton = stepDialog.findViewById(R.id.addStepButton);
+                Button addButton = stepDialog.findViewById(R.id.yesButton);
 
                 // listener per il bottone per aggiungere lo step
                 addButton.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +190,7 @@ public class FragmentPerDialogCreazioneRicetta extends Fragment {
                 });
 
                 // creo e ottengo il bottone per cancellare lo step scritto
-                Button deleteButton = stepDialog.findViewById(R.id.deleteStepButton);
+                Button deleteButton = stepDialog.findViewById(R.id.noButton);
 
                 // listener del bottone per cancellare
                 deleteButton.setOnClickListener(new View.OnClickListener() {

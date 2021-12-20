@@ -46,7 +46,7 @@
 
 
             <Button
-                android:id="@+id/addStepButton"
+                android:id="@+id/yesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -59,13 +59,13 @@
 
 
             <Button
-                android:id="@+id/deleteStepButton"
+                android:id="@+id/noButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toLeftOf="@id/addStepButton"
+                android:layout_toLeftOf="@id/yesButton"
                 android:text="@string/delete_button" />
 
         </RelativeLayout>

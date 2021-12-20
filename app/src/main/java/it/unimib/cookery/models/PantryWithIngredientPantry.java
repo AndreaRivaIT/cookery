@@ -1,17 +1,16 @@
 package it.unimib.cookery.models;
 
 import androidx.room.Embedded;
+import androidx.room.Entity;
 import androidx.room.Relation;
 
 import java.util.List;
 
 public class PantryWithIngredientPantry {
-    @Embedded
-    public Recipe Recipe;
+    @Embedded public Pantry pantry;
     @Relation(
             parentColumn = "idPantry",
             entityColumn = "pantryId"
-            //associateBy = @Junction(RecipeStepsCrossRef.class)
     )
-    public List<RecipeStep> stepsList;
+    public List<IngredientPantry> ingredientPantry;
 }
