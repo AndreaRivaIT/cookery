@@ -112,7 +112,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
 
         /*codice di test funzionante */
-
+        
         stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
         ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
 
@@ -155,6 +155,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
             modifyRecipe.setClickable(true);
             deleteRecipe.setClickable(true);
             // caricare immagine ottenuta da query database
+            // con ingredienti e step
 
         } else {
 
