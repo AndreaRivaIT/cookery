@@ -168,7 +168,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
        recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
 
-        
+
 
     }
 
