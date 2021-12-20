@@ -119,6 +119,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         LinearLayoutManager linearLayoutManagerHome2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
         recyclerViewRTC.setLayoutManager(linearLayoutManagerRTC);
         recyclerViewHome2.setLayoutManager(linearLayoutManagerHome2);
         recyclerViewHome3.setLayoutManager(linearLayoutManagerHome3);
