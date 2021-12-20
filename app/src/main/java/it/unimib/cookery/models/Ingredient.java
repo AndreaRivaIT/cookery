@@ -1,6 +1,10 @@
 package it.unimib.cookery.models;
 
+import androidx.room.Entity;
+
+@Entity
 public class Ingredient {
+
     private int idIngredient;
     private String ingredientName;
     private int quantity;

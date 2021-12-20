@@ -11,15 +11,17 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
+
 import it.unimib.cookery.R;
 import it.unimib.cookery.models.Recipe;
-
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
@@ -34,8 +36,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     /* url costante per prova glide */
 
-    private static final String imgUrl= "https://spoonacular.com/recipeImages/716429-312x231.jpg";
-
+    private static final String imgUrl = "https://spoonacular.com/recipeImages/716429-312x231.jpg";
 
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
@@ -58,10 +59,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     }
 
 
-
-
-
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -69,26 +66,18 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             // Layout Inflater inflates each item to be displayed in GridView.
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
         }
-
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
                 .setText(listdata.get(position).getName());
-
 
         /* ottengo l'url dell'immagine */
         // String imgUrl = listdata.get(position).getImageUrl();
 
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-      ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-       .setImageResource(listdata.get(position).getImageId());
 
-
-
-
-
-
-
+        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+                .setImageResource(listdata.get(position).getImageId());
 
 
 
@@ -97,7 +86,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
     public void applyFilter(ArrayList<String> arr) {
-
         // serve per resettare i filtri
         if (Removed.size() > 0) {
             for (Recipe r : Removed) {
@@ -108,7 +96,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             }
             Removed.clear();
         }
-
         // se c'è almeno un filtro selezionato trovo tutte le ricette che non rispettano i filtri
         // e le sottraggo dalle due array list e le aggiungo all'array list Removed che serve
         // per il ripristino
@@ -139,18 +126,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Filter filterNotification = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
             ArrayList<Recipe> filterList = new ArrayList<>();
-
             if (constraint == null || constraint.length() == 0) {
-
                 filterList.addAll(filterData);
-
-
             } else {
-
                 String searchStr = constraint.toString().toLowerCase().trim();
-
                 for (Recipe recipe : filterData) {
                     String nameLowerCase = recipe.getName().toLowerCase();
                     if (nameLowerCase.contains(searchStr)) {
@@ -176,8 +156,11 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
             // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
             if (listdata.size() == 0) {
-               // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
+                // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
                 //Snackbar.make(getContext(), "prova", Snackbar.LENGTH_SHORT).show();
+
+
+                // Snackbar.make(, "fffffff", Snackbar.LENGTH_SHORT).show();
 
                 Toast.makeText(getContext(), R.string.result_not_found, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();

@@ -18,7 +18,7 @@ import it.unimib.cookery.models.RecipeStep;
  */
 @Dao
 public interface RecipeDao {
-    @Query("SELECT * FROM recipe")
+    /*@Query("SELECT * FROM recipe")
     List<Recipe> getAll();
 
     @Insert
@@ -41,6 +41,6 @@ public interface RecipeDao {
 
 
     @Delete
-    void deleteAllWithoutQuery(Recipe... recipe);
+    void deleteAllWithoutQuery(Recipe... recipe);*/
 }
 

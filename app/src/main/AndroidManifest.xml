@@ -22,7 +22,8 @@
 
         <activity
             android:name=".ui.SingleRecipeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
