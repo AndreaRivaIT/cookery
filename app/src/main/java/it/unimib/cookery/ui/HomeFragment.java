@@ -154,12 +154,8 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
 
 
-       recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
         recyclerViewRTC.setAdapter(recipeAdapter);
-
-
-        return view;
-
     }
 
     @Override
