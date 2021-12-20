@@ -2,6 +2,8 @@ package it.unimib.cookery.models;
 
 import android.util.Log;
 
+import androidx.room.Ignore;
+
 import java.util.ArrayList;
 
 
@@ -10,15 +12,30 @@ public class Recipe {
 
     private String name;
     // imageId andrà sostituito con una stringa per l'url dell'immagine
+    private String imageUrl;
+    private int id;
     private int imageId;
     private String category;
     private int nPerson;
+
+
+    @Ignore
     ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    @Ignore
     ArrayList<Ingredient> ingredientList= new ArrayList<>();
 
     // serve per prova
     public Recipe() {
     }
+
+
+    public Recipe(int id, String imageUrl, String name){
+        this.id =id;
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+
 
     public Recipe(String name, String category, int imageId) {
         this.name = name;
@@ -26,8 +43,7 @@ public class Recipe {
         this.imageId = imageId;
         this.nPerson = 2;
     }
-
-    public  void setnPerson(int n){
+    public  void setNPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
             int qBase = ingredientList.get(i).getQuantity() / nPerson;
             ingredientList.get(i).setQuantity(qBase * n);
@@ -40,6 +56,8 @@ public class Recipe {
         return stepsList;
     }
 
+
+
     public ArrayList<Ingredient> getIngredientList() {
 
         return ingredientList;
@@ -49,15 +67,28 @@ public class Recipe {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public String getImageUrl(){
+        return imageUrl;
+    }
+
     public String getCategory() {
         return category;
     }
 
+
     public int getImageId() {
         return imageId;
     }
-
-    public  int getnPerson(){
+    public  int getNPerson(){
         return nPerson;
     }
 
