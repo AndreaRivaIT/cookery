@@ -49,8 +49,6 @@
     <string name="crea_una_lista_della_spesa">Crea una lista della spesa</string>
     <string name="my_pantry">My pantry</string>
     <string name="my_fridge">My fridge</string>
-    <string name="close">close</string>
-    <string name="open">open</string>
 
 
     <!-- strings MyProfileFragment -->
@@ -64,18 +62,25 @@
     <string name="save">Save</string>
     <string name="profile_image">Profile image</string>
     <string name="passError">Password is not valid</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="add_pantry">Add Pantry</string>
+    <string name="invalid_name">complie the camp</string>
 
 
     <!-- fine strings MyProfileFragment -->
 
 
+    <!-- string retrofit -->
+
+    <string name="errorRetriveData">Error in retrieving data</string>
+    <string name="connectionError"> Something went wrong, pleas check your connection</string>
+
+    <!-- fine string retrofit -->
+
+
+    <!-- string singleRecipeActivity -->
+
+    <string name="noStepFoundString">NO STEP FOUND FOR THIS RECIPE</string>
+
+
+    <!-- fine string singleRecipeActivity -->
 </resources>
