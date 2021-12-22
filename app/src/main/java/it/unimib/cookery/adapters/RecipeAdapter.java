@@ -65,7 +65,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
-                    intent.putExtra(costants.TYPE, "readyToCoock");
+                    intent.putExtra(costants.TYPE, costants.READY_TO_COOCK);
+                    intent.putParcelableArrayListExtra(costants.MISSING_INGREDIENTS, (ArrayList<? extends Parcelable>) recipeArrayList.
+                            get(getAdapterPosition()).getMissedIngredients());
 
                     // codice di test funzionante
 

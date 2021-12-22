@@ -12,20 +12,42 @@ public class RecipeApi {
     private String title;
     private String image;
     private int servings;
+    private int missedIngredientCount;
     private List<StepList> analyzedInstructions;
     private List<IngredientApi> extendedIngredients;
+    private List<IngredientApi> missedIngredients;
 
     public RecipeApi() {
     }
 
-    public RecipeApi(int id, String title, String image, int servings, List<StepList> analyzedInstructions, List<IngredientApi> extendedIngredients) {
+    public RecipeApi(int id, String title, String image, int servings, int missedIngredientCount, List<StepList> analyzedInstructions, List<IngredientApi> extendedIngredients,
+                     List<IngredientApi> missedIngredients) {
 
         this.id = id;
         this.title = title;
         this.image = image;
         this.servings = servings;
+        this.missedIngredientCount = missedIngredientCount;
         this.analyzedInstructions = analyzedInstructions;
         this.extendedIngredients = extendedIngredients;
+        this.missedIngredients = missedIngredients;
+    }
+
+
+    public int getMissedIngredientCount() {
+        return missedIngredientCount;
+    }
+
+    public void setMissedIngredientCount(int missedIngredientCount) {
+        this.missedIngredientCount = missedIngredientCount;
+    }
+
+    public List<IngredientApi> getMissedIngredients() {
+        return missedIngredients;
+    }
+
+    public void setMissedIngredients(List<IngredientApi> missedIngredients) {
+        this.missedIngredients = missedIngredients;
     }
 
     public List<StepList> getAnalyzedInstructions() {

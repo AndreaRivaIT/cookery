@@ -2,10 +2,12 @@ package it.unimib.cookery.repository;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.ResponseRecipe;
 import it.unimib.cookery.service.SpoonacularApiService;
@@ -23,6 +25,7 @@ public class RecipeRepository {
     private List<RecipeApi> RecipeApiListDessert;
     private List<RecipeApi> RecipeApiListMainCourse;
     private List<RecipeApi> RecipeApiListFirstCourse;
+
 
 
     private Costants costants = new Costants();
@@ -171,7 +174,8 @@ public class RecipeRepository {
 
                 if(response.body() != null && response.isSuccessful()) {
 
-                    RecipeApiList = response.body();
+                    RecipeApiList = sort((ArrayList<RecipeApi>) response.body());
+
 
                     for(RecipeApi r: RecipeApiList)
                         Log.d("retrofit", " "+r.toString());
@@ -193,5 +197,36 @@ public class RecipeRepository {
 
 
     }
+
+
+    private ArrayList<RecipeApi> sort(ArrayList<RecipeApi> unsortedList){
+
+        ArrayList<RecipeApi> sortedList = new ArrayList<>();
+
+        int length = unsortedList.size();
+
+        for(int i=0; i<length; i++){
+
+            int min = 100000;
+            RecipeApi rec = null;
+
+            for(int j=0; j < unsortedList.size(); j++){
+                if(unsortedList.get(j).getMissedIngredientCount() <= min) {
+                    min = unsortedList.get(j).getMissedIngredientCount();
+                    rec = unsortedList.get(j);
+
+                }
+            }
+
+            unsortedList.remove(rec);
+            sortedList.add(rec);
+
+        }
+
+        return sortedList;
+    }
+
+
+
 
 }

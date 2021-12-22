@@ -10,7 +10,7 @@ public interface ResponseCallbackStepAndIngredients {
 
     void onResponseRecipeSteps(List<StepApi> steps);
     void onResponseRecipeIngredients(List<IngredientApi> ingredients, int servings);
-    void onFailureIngredientAndStep(String errorMessage);
+    void onFailureIngredientAndStep(int errorMessage);
 
 
 }

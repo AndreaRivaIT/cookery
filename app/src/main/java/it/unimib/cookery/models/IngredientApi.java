@@ -3,6 +3,8 @@ package it.unimib.cookery.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class IngredientApi implements Parcelable {
 
     private int id;
@@ -84,6 +86,16 @@ public class IngredientApi implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IngredientApi)) return false;
+        IngredientApi that = (IngredientApi) o;
+        return id == that.id && Objects.equals(name, that.name);
+    }
+
 
     @Override
     public int describeContents() {

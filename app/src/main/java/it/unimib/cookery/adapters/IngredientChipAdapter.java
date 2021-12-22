@@ -1,5 +1,6 @@
 package it.unimib.cookery.adapters;
 
+import android.graphics.Color;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +20,19 @@ import it.unimib.cookery.models.IngredientApi;
 
 public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAdapter.IngredientViewHolder> {
     private List<IngredientApi> mListIngredients;
+    private ArrayList<IngredientApi> missingIngredients;
     private int k = 0;
+
 
     public void setData(List<IngredientApi> list) {
         this.mListIngredients = list;
+        notifyDataSetChanged();
+
+    }
+
+    public void setData(List<IngredientApi> list, ArrayList<IngredientApi> missingIngredients ) {
+        this.mListIngredients = list;
+        this.missingIngredients = missingIngredients;
         notifyDataSetChanged();
 
     }
@@ -41,13 +51,28 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
 
+        // per ora parzialmente funzionante
+        // da sistemare bene con richiesta database
+        boolean missing = false;
+
         IngredientApi ingredient = mListIngredients.get(position);
         if (ingredient == null) {
             return;
         }
 
 
+        if(missingIngredients != null && missingIngredients.contains(ingredient)) {
+
+           missing = true;
+
+
+        }
+
+
+
         holder.tvIngredient.setText(ingredient.getName() + ":");
+
+
 
         switch (ingredient.getUnit()) {
 
@@ -79,6 +104,12 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
                 holder.tvQuantity.setText(" " + ingredient.getAmount() + " " + ingredient.getUnit());
                 break;
 
+        }
+
+
+        if(missing) {
+              holder.tvIngredient.setTextColor(Color.RED);
+            holder.tvQuantity.setTextColor(Color.RED);
         }
 
     }

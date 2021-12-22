@@ -23,6 +23,8 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
 
     public void setData(ArrayList<String> list) {
         this.mListStep = list;
+
+
         notifyDataSetChanged();
     }
 
@@ -33,31 +35,22 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
         return new StepViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
         //  RecipeStep recipeStep = mListStep.get(position);
 
 
-        int prova = 1;
-
-        // for(String s: mListStep) {
-        Log.d("adapter", "" + prova + " " + mListStep.get(position));
-        prova++;
-        // }
+    // se la mList è vuoto non viene mai chiamato
 
 
-        if (mListStep.size() == 0) {
 
-            holder.tvNStep.setText(R.string.noStepFoundString);
-            holder.tvDescription.setText("");
+       // holder.tvNStep.setText(R.string.noStepFoundString);
+           // holder.tvDescription.setText("");
 
-        } else {
             holder.tvNStep.setText("Step " + (position + 1) + ": ");
             holder.tvDescription.setText(mListStep.get(position));
-        }
 
-
-        //  if(recipeStep == null){ return;}
 
 
     }
@@ -69,6 +62,8 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
         }
         return 0;
     }
+
+
 
     public class StepViewHolder extends RecyclerView.ViewHolder {
         private TextView tvNStep;

@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.StepApi;
@@ -24,8 +26,9 @@ public class IngredientAndStepReopistory {
     private List<StepApi> stepApis;
     private List<IngredientApi> ingredientApis;
     private int servings;
+    private Costants costants = new Costants();
     private static final String ERROR_STRING = "Something went wrong, pleas check your connection";
-    public static final String APIKEY = "dabd7cf0ddb04d2dbfe85a7597c4067b";
+
 
     public IngredientAndStepReopistory(ResponseCallbackStepAndIngredients responseCallbackStepAndIngredients) {
         this.responseCallbackStepAndIngredients = responseCallbackStepAndIngredients;
@@ -38,7 +41,7 @@ public class IngredientAndStepReopistory {
 
 
         Call<List<StepList>> RecipeSteps =
-                spoonacularApiService.getRecipeSteps(id, APIKEY);
+                spoonacularApiService.getRecipeSteps(id, costants.API_KEY);
 
         RecipeSteps.enqueue(new Callback<List<StepList>>() {
             @Override
@@ -59,18 +62,18 @@ public class IngredientAndStepReopistory {
                     }
                     //  Log.d("retrofit", "sssss "+stepApis.size());
 
-                    Log.d("retrofit", ""+stepApis.toString());
+                //    Log.d("retrofit", ""+stepApis.toString());
 
                     responseCallbackStepAndIngredients.onResponseRecipeSteps(stepApis);
                 }else
-                    responseCallbackStepAndIngredients.onFailureIngredientAndStep("Error in retrieving data");
+                    responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.errorRetriveData);
             }
 
 
             @Override
             public void onFailure(Call<List<StepList>> call, Throwable t) {
 
-                responseCallbackStepAndIngredients.onFailureIngredientAndStep(ERROR_STRING);
+                responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.connectionError);
             }
         });
 
@@ -80,7 +83,7 @@ public class IngredientAndStepReopistory {
     public void getRecipeIngredients(int id, boolean nutrition){
 
         Call<RecipeApi> RecipeIngredient =
-                spoonacularApiService.getRecipeIngredients(id, APIKEY, nutrition);
+                spoonacularApiService.getRecipeIngredients(id, costants.API_KEY, nutrition);
 
         RecipeIngredient.enqueue(new Callback<RecipeApi>() {
             @Override
@@ -97,14 +100,14 @@ public class IngredientAndStepReopistory {
                 }
                 //  Log.d("retrofit", "sssss "+stepApis.size());
                 else
-                    responseCallbackStepAndIngredients.onFailureIngredientAndStep("Error in retrieving data");
+                    responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.errorRetriveData);
 
             }
 
             @Override
             public void onFailure(Call<RecipeApi> call, Throwable t) {
 
-                responseCallbackStepAndIngredients.onFailureIngredientAndStep(ERROR_STRING);
+                responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.connectionError);
             }
         });
 

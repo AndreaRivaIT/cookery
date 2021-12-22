@@ -42,6 +42,9 @@ public class Costants {
     public static final String STEP_ARRAYLIST = "StepArraylist";
     public static final String INGREDIENT_ARRAYLIST = "IngredientArraylist";
     public static final String RECIPE_SERVINGS = "Servings";
+    public static final String MISSING_INGREDIENTS="missingIngredients";
+    public static final String READY_TO_COOCK="readyToCoock";
+    public static final String OTHER="other";
 
 
     /* stringhe costanti per intent */
@@ -56,7 +59,7 @@ public class Costants {
     private static final String genericApiKey = "8b2514bd6d21482e8b4330863ee719b8";
     private static final String myApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
 
-    public static final String API_KEY = myApiKey;
+    public static final String API_KEY = genericApiKey;
     public static final String BASE_URL = "https://api.spoonacular.com/recipes/";
 
     /* fine stringhe costanti per reftrofit */

@@ -58,7 +58,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
-                    intent.putExtra(costants.TYPE, "other");
+                    intent.putExtra(costants.TYPE, costants.OTHER);
                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
                     intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
                     intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.

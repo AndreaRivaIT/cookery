@@ -74,7 +74,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     private ArrayList<IngredientApi> ingredienteRecived;
     private IngredientAndStepReopistory ingredientAndStepReopistory =
             new IngredientAndStepReopistory(this);
-
+    private ArrayList<IngredientApi> missingIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,11 +124,13 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             else {
                 tvAmountPeople.setText(servings + costants.PERSON);
                 btnRemove.setEnabled(false);
-                
+
             }
 
 
-        } else if(type.equals("readyToCoock")){
+        } else if(type.equals(costants.READY_TO_COOCK)){
+            missingIngredients = new ArrayList<>();
+            missingIngredients = intent.getParcelableArrayListExtra(costants.MISSING_INGREDIENTS);
             loadImage();
             ingredientAndStepReopistory.getRecipeIngredients(recipeId, false);
             ingredientAndStepReopistory.getRecipeSteps(recipeId);
@@ -221,7 +223,12 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-        ingredientChipAdapter.setData(ingredienteRecived);
+
+        if(missingIngredients == null)
+            ingredientChipAdapter.setData(ingredienteRecived);
+        else
+            ingredientChipAdapter.setData(ingredienteRecived, missingIngredients);
+
         rcvChips.setAdapter(ingredientChipAdapter);
 
     }
@@ -265,8 +272,15 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
         ArrayList<String> stringSteps = new ArrayList<>();
 
-        for (StepApi st : steps)
-            stringSteps.add(st.getStep());
+
+        if(steps != null) {
+
+            for (int i = 0; i < steps.size(); i++)
+                stringSteps.add(steps.get(i).getStep());
+        }
+
+      /*  for (StepApi st : steps)
+            stringSteps.add(st.getStep());*/
 
 
         stepRecived = stringSteps;
@@ -291,7 +305,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     }
 
     @Override
-    public void onFailureIngredientAndStep(String errorMessage) {
+    public void onFailureIngredientAndStep(int errorMessage) {
 
         Snackbar.make(findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_SHORT).show();
     }
