@@ -124,6 +124,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             else {
                 tvAmountPeople.setText(servings + costants.PERSON);
                 btnRemove.setEnabled(false);
+                
             }
 
 
