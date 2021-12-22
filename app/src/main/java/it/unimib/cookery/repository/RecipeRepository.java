@@ -157,44 +157,35 @@ public class RecipeRepository {
     }
 
 
-    public void getRandomRecipe(String tags) {
+    public void getRecipeByIngredient(String ingredients){
 
-        Call<ResponseRecipe> RandomRecipe;
-
-        if (tags.equals("")) {
-            RandomRecipe =
-                    spoonacularApiService.getRandomRecipeNoTags(costants.API_KEY, 10);
-        } else {
-            RandomRecipe =
-                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, tags);
-        }
+        Call<List<RecipeApi>> RecipeByIngredients =
+                spoonacularApiService.getRecipeByIngredient(costants.API_KEY, ingredients, 10);
 
 
-        RandomRecipe.enqueue(new Callback<ResponseRecipe>() {
+        RecipeByIngredients.enqueue(new Callback<List<RecipeApi>>() {
             @Override
-            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
+            public void onResponse(Call<List<RecipeApi>> call, Response<List<RecipeApi>> response) {
 
-                //Log.d("body", ""+response.raw().request().url());
-                //Log.d("body", "" + response.body());
+                Log.d("retrofit", "" + response.raw().request().url());
 
+                if(response.body() != null && response.isSuccessful()) {
 
-                // non scarica l'intero json ma solo un pezzo e quindi a
-                // volte perde delle ricette
+                    RecipeApiList = response.body();
 
-                if (response.body() != null && response.isSuccessful()) {
+                    for(RecipeApi r: RecipeApiList)
+                        Log.d("retrofit", " "+r.toString());
 
-                    RecipeApiList = response.body().getRecipes();
-
-                    responseCallback.onResponseRandomRecipe(RecipeApiList);
-                } else
+                    responseCallback.onResponseRecipeByIngredient(RecipeApiList);
+                }else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
+            public void onFailure(Call<List<RecipeApi>> call, Throwable t) {
 
-                Log.d("retrofit", "on Failure " + t);
+                Log.d("retrofit", "on Failure "+ t);
 
                 responseCallback.onFailure(R.string.connectionError);
             }
@@ -202,34 +193,5 @@ public class RecipeRepository {
 
 
     }
-
-/*
-    public void getRecipeInfo() {
-
-
-        Call<String> RecipeDetails =
-                spoonacularApiService.getRecipeDetails(324694, costants.API_KEY);
-
-        RecipeDetails.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-                if(response.body() != null && response.isSuccessful())
-                    // Log.d("retrofit", ""+response.raw().request().url());
-                    //  Log.d("retrofit", ""+response.body());
-                    responseCallback.onResponseGetStep(response.body());
-                else
-                    responseCallback.onFailure(R.string.errorRetriveData);
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-                responseCallback.onFailure(R.string.connectionError);
-            }
-        });
-
-    }*/
-
 
 }

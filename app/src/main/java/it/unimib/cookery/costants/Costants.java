@@ -36,7 +36,7 @@ public class Costants {
     /* stringhe tag per intent */
 
     public static final String RECIPE_NAME = "Recipe name";
-    public static final String EDITABLE = "editable";
+    public static final String TYPE = "Type";
     public static final String RECIPE_ID = "Recipe id";
     public static final String RECIPE_IMAGE = "Recipe image";
     public static final String STEP_ARRAYLIST = "StepArraylist";

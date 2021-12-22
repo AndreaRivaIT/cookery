@@ -68,7 +68,8 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListMainCourse = new ArrayList<>();
         recipeArrayListFirstCourse = new ArrayList<>();
 
-        recipeRepository.getRandomRecipe("");
+
+        recipeRepository.getRecipeByIngredient("pasta,egg");
         recipeRepository.getRandomRecipeFirstCourse("");
        recipeRepository.getRandomRecipeMainCourse("");
         recipeRepository.getRandomRecipeDessert("");
@@ -145,18 +146,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     }
 
 
-    @Override
-    public void onResponseRandomRecipe(List<RecipeApi> recipes) {
 
-
-        recipeArrayListReadyToCoock.clear();
-        recipeArrayListReadyToCoock.addAll(recipes);
-
-
-
-        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
-        recyclerViewRTC.setAdapter(recipeAdapter);
-    }
 
     @Override
     public void onResponseRandomRecipeDessert(List<RecipeApi> recipes) {
@@ -197,6 +187,16 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
     }
 
+    @Override
+    public void onResponseRecipeByIngredient(List<RecipeApi> recipes) {
+
+        recipeArrayListReadyToCoock.clear();
+        recipeArrayListReadyToCoock.addAll(recipes);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
+        recyclerViewRTC.setAdapter(recipeAdapter);
+
+        // da fare sorting
+    }
 
 
     @Override
