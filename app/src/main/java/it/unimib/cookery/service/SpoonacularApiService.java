@@ -14,10 +14,10 @@ import retrofit2.http.Query;
 
 public interface SpoonacularApiService {
 
-    @GET("random")
+    @GET("recipes/random")
     Call<ResponseRecipe> getRandomRecipe (@Query("apiKey") String apiKey, @Query("number") int number, @Query("tags") String tags);
 
-    @GET("random")
+    @GET("recipes/random")
     Call<ResponseRecipe> getRandomRecipeNoTags (@Query("apiKey") String apiKey, @Query("number") int number);
 
 // https://api.spoonacular.com/recipes/324694/analyzedInstructions
@@ -25,14 +25,14 @@ public interface SpoonacularApiService {
    // @GET("{id}/analyzedInstructions")
    // Call<String> getRecipeDetails (@Path("id") int id, @Query("apiKey") String apiKey);
 
-   @GET("findByIngredients")
+   @GET("recipes/findByIngredients")
    Call<List<RecipeApi>> getRecipeByIngredient(@Query("apiKey") String apiKey, @Query("ingredients") String ingredients, @Query("number") int number);
 
-    @GET("{id}/analyzedInstructions")
+    @GET("recipes/{id}/analyzedInstructions")
     Call<List<StepList>> getRecipeSteps (@Path("id") int id, @Query("apiKey") String apiKey);
 
     //https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
 
-    @GET("{id}/information")
+    @GET("recipes/{id}/information")
     Call<RecipeApi> getRecipeIngredients (@Path("id") int id, @Query("apiKey") String apiKey, @Query("includeNutrition") boolean includeNutrition );
 }
