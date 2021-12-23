@@ -48,6 +48,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     private TextView tvQuantity;
     private ImageView recipeImage;
     private TextView textView_title_recipe;
+    private TextView noSteps;
     private int nPerson;
 
     // varibile per moidificare la ricetta
@@ -96,6 +97,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
         recipeImage = findViewById(R.id.image_single_recipe);
         btnAdd = findViewById(R.id.btn_add);
+        noSteps = findViewById(R.id.voidStep);
 
         // setto il nome della ricetta
         textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
@@ -110,7 +112,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
 
 
-        if (type.equals("other")) {
+        if (type.equals(costants.OTHER)) {
             stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
             ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
             servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
@@ -132,8 +134,9 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             missingIngredients = new ArrayList<>();
             missingIngredients = intent.getParcelableArrayListExtra(costants.MISSING_INGREDIENTS);
             loadImage();
-            ingredientAndStepReopistory.getRecipeIngredients(recipeId, false);
             ingredientAndStepReopistory.getRecipeSteps(recipeId);
+            ingredientAndStepReopistory.getRecipeIngredients(recipeId, false);
+
 
 
         }else {
@@ -234,15 +237,20 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     }
 
     private void setStepAdapter() {
-        //Inflate degli steps procedimento della ricetta
-        rcvSteps = findViewById(R.id.rcv_steps);
-        recipeProcedureAdapter = new RecipeProcedureAdapter();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rcvSteps.setLayoutManager(linearLayoutManager);
-        rcvSteps.setFocusable(false);
-        rcvSteps.setNestedScrollingEnabled(false);
-        recipeProcedureAdapter.setData(stepRecived);
-        rcvSteps.setAdapter(recipeProcedureAdapter);
+
+       if(stepRecived.size()==0)
+           noSteps.setVisibility(View.VISIBLE);
+       else {
+           //Inflate degli steps procedimento della ricetta
+           rcvSteps = findViewById(R.id.rcv_steps);
+           recipeProcedureAdapter = new RecipeProcedureAdapter();
+           LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+           rcvSteps.setLayoutManager(linearLayoutManager);
+           rcvSteps.setFocusable(false);
+           rcvSteps.setNestedScrollingEnabled(false);
+           recipeProcedureAdapter.setData(stepRecived);
+           rcvSteps.setAdapter(recipeProcedureAdapter);
+       }
     }
 
 

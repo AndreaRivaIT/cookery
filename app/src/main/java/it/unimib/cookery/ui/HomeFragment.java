@@ -70,6 +70,8 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
 
         recipeRepository.getRecipeByIngredient("apples,flour,sugar");
+
+       // recipeRepository.getRecipeByIngredient("meat");
         recipeRepository.getRandomRecipeFirstCourse("");
        recipeRepository.getRandomRecipeMainCourse("");
         recipeRepository.getRandomRecipeDessert("");

@@ -38,15 +38,7 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
 
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
-        //  RecipeStep recipeStep = mListStep.get(position);
 
-
-    // se la mList è vuoto non viene mai chiamato
-
-
-
-       // holder.tvNStep.setText(R.string.noStepFoundString);
-           // holder.tvDescription.setText("");
 
             holder.tvNStep.setText("Step " + (position + 1) + ": ");
             holder.tvDescription.setText(mListStep.get(position));
