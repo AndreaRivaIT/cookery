@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         super.onCreate(savedInstanceState);
 
 
-
+        recipeRepository =  new RecipeRepository(getActivity().getApplication(),this);
 
         // da recuperare e passare le preferenze dell'utente per inserire le
         // preferenze

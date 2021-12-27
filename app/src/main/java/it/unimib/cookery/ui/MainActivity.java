@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         Recipe recipeTestL = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestM = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         db = new RecipeRepository(getApplication(),this);
-        /*db.createRecipe(recipeTest);
+       /* db.createRecipe(recipeTest);
         db.createRecipe(recipeTestA);
         db.createRecipe(recipeTestB);
         db.createRecipe(recipeTestC);
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
         DatabasePantryRepository dbIngredient;
         dbIngredient = new DatabasePantryRepository(getApplication(),this);
+
         /*dbIngredient.create(ingredientApi);
         dbIngredient.create(ingredientApiA);
         dbIngredient.create(ingredientApiB);
