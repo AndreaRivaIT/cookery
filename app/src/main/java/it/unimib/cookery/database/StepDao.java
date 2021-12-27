@@ -3,10 +3,12 @@ package it.unimib.cookery.database;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
 
+import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
 
@@ -18,6 +20,9 @@ import it.unimib.cookery.models.RecipeStep;
  */
 @Dao
 public interface StepDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertStep(RecipeStep... step);
     /*@Query("SELECT * FROM RecipeStep")
     List<RecipeStep> getAll();
 

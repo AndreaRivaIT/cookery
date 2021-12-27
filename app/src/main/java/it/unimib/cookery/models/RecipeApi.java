@@ -89,7 +89,6 @@ public class RecipeApi {
     }
 
     public ArrayList<String> extractSteps() {
-
         ArrayList<String> steps = new ArrayList<>();
 
         ArrayList<StepList> stepLists = (ArrayList<StepList>) analyzedInstructions;

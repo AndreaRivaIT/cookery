@@ -3,25 +3,31 @@ package it.unimib.cookery.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class IngredientApi implements Parcelable {
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+
+@Entity(tableName = "ingredient_api")
+public class IngredientApi implements Parcelable {
+    @PrimaryKey
     private int id;
     private String name;
+    @Ignore
     private double amount;
+    @Ignore
     private String unit;
 
-    public IngredientApi(int id, String name, double amount, String unit) {
-
+    public IngredientApi(int id, String name) {
         this.id = id;
         this.name = name;
-        this.amount = amount;
-        this.unit = unit;
     }
 
+    @Ignore
     public IngredientApi() {
     }
 
-
+    @Ignore
     protected IngredientApi(Parcel in) {
         id = in.readInt();
         name = in.readString();

@@ -2,20 +2,34 @@ package it.unimib.cookery.models;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 
-
+@Entity
 /*creata la classe della ricetta sia per il frgamnt delle ricette dell'utente, e ci servirà in seguito */
 public class Recipe {
 
-    private String name;
-    // imageId andrà sostituito con una stringa per l'url dell'immagine
-    private String imageUrl;
+    @PrimaryKey(autoGenerate = true)
+    private int idDb;
+
+
+
     private int id;
+    private String name;
+
+    @ColumnInfo(name = "image_url")
+    private String imageUrl;
+
+    @ColumnInfo(name = "image_id")
     private int imageId;
+
     private String category;
+
+    @ColumnInfo(name = "n_person")
     private int nPerson;
 
 
@@ -23,10 +37,6 @@ public class Recipe {
     ArrayList<RecipeStep> stepsList = new ArrayList<>();
     @Ignore
     ArrayList<Ingredient> ingredientList= new ArrayList<>();
-
-    // serve per prova
-    public Recipe() {
-    }
 
 
     public Recipe(int id, String imageUrl, String name){
@@ -36,12 +46,19 @@ public class Recipe {
     }
 
 
-
+    @Ignore
     public Recipe(String name, String category, int imageId) {
         this.name = name;
         this.category = category;
         this.imageId = imageId;
         this.nPerson = 2;
+    }
+    public int getIdDb() {
+        return idDb;
+    }
+
+    public void setIdDb(int idDb) {
+        this.idDb = idDb;
     }
     public  void setNPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
@@ -113,5 +130,23 @@ public class Recipe {
         this.stepsList.add(stepsList);
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getnPerson() {
+        return nPerson;
+    }
+
+    public void setnPerson(int nPerson) {
+        this.nPerson = nPerson;
+    }
 }

@@ -1,5 +1,6 @@
 package it.unimib.cookery.ui;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     private RecyclerView recyclerViewHome2;
     private RecyclerView recyclerViewHome3;
     private RecyclerView recyclerViewHome4;
-    private RecipeRepository recipeRepository = new RecipeRepository(this);
+    private RecipeRepository recipeRepository;
 
     private RecipeAdapter recipeAdapter;
     private RecipeAdapterSubcard recipeAdapterSubcard1;
@@ -68,9 +69,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListMainCourse = new ArrayList<>();
         recipeArrayListFirstCourse = new ArrayList<>();
 
+        recipeRepository = new RecipeRepository(getActivity().getApplication(),this);
         recipeRepository.getRandomRecipe("");
         recipeRepository.getRandomRecipeFirstCourse("");
-       recipeRepository.getRandomRecipeMainCourse("");
+        recipeRepository.getRandomRecipeMainCourse("");
         recipeRepository.getRandomRecipeDessert("");
 
         //Snackbar.make(requireActivity().findViewById(android.R.id.content), "fffffff", Snackbar.LENGTH_SHORT).show();
@@ -83,24 +85,12 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-
         Log.d("state", "onCreateView");
-
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
         recyclerViewRTC = view.findViewById(R.id.recyclerViewRTC);
         recyclerViewHome2 = view.findViewById(R.id.recyclerViewHome2);
         recyclerViewHome3 = view.findViewById(R.id.recyclerViewHome3);
         recyclerViewHome4 = view.findViewById(R.id.recyclerViewHome4);
-
-
-
-
 
         // TEST_ARRAY recipe adapter
 /*
@@ -119,13 +109,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         LinearLayoutManager linearLayoutManagerHome2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
         recyclerViewRTC.setLayoutManager(linearLayoutManagerRTC);
         recyclerViewHome2.setLayoutManager(linearLayoutManagerHome2);
         recyclerViewHome3.setLayoutManager(linearLayoutManagerHome3);
         recyclerViewHome4.setLayoutManager(linearLayoutManagerHome4);
-
-
         if(recipeArrayListReadyToCoock.size()>0 && recipeArrayListDessert.size()>0 &&
                 recipeArrayListMainCourse.size()>0 && recipeArrayListFirstCourse.size()>0
         ){
@@ -137,9 +124,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
             recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
             recyclerViewHome3.setAdapter(recipeAdapterSubcard2);
             recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
-
         }
-
 
         return view;
     }
@@ -160,42 +145,32 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
 
     @Override
     public void onResponseRandomRecipeDessert(List<RecipeApi> recipes) {
-
-
         recipeArrayListDessert.clear();
         recipeArrayListDessert.addAll(recipes);
-
-       recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
+        recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
 
     }
 
     @Override
     public void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes) {
-
         recipeArrayListMainCourse.clear();
         recipeArrayListMainCourse.addAll(recipes);
-      recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse);
+        recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse);
         recyclerViewHome3.setAdapter(recipeAdapterSubcard2);
 
     }
 
     @Override
     public void onResponseRandomRecipeFirstCourse(List<RecipeApi> recipes) {
-
-
         recipeArrayListFirstCourse.clear();
         recipeArrayListFirstCourse.addAll(recipes);
-
         for(RecipeApi r: recipeArrayListFirstCourse)
             Log.d("Gson", "FirstCourse " +r.toString());
-
         recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
 
     }
-
-
 
     @Override
     public void onFailure(int errorMessage) {
