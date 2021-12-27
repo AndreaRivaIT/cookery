@@ -58,26 +58,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                 @Override
                 public void onClick(View v) {
 
-                    ArrayList<String> step = new ArrayList<>();
-                    step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
+
 
                     Intent intent = new Intent(context, SingleRecipeActivity.class);
                     intent.putExtra(costants.RECIPE_ID, recipeArrayList.get(getAdapterPosition()).getId());
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
-                    intent.putExtra(costants.EDITABLE, "false");
+                    intent.putExtra(costants.TYPE, costants.READY_TO_COOCK);
+                    intent.putParcelableArrayListExtra(costants.MISSING_INGREDIENTS, (ArrayList<? extends Parcelable>) recipeArrayList.
+                            get(getAdapterPosition()).getMissedIngredients());
 
                     // codice di test funzionante
-                    intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
-
-                    for (IngredientApi ing : recipeArrayList.get(getAdapterPosition()).getExtendedIngredients()) {
-                        Log.d("Ingredient", "" + ing.toString());
-                    }
-
-                    intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
-                            get(getAdapterPosition()).getExtendedIngredients());
-
 
                     context.startActivity(intent);
 

@@ -140,7 +140,7 @@ public class MyRecipesFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), SingleRecipeActivity.class);
                 // da aggiungere passaggio id ricetta
                 intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName() );
-                intent.putExtra(myRecipeCostants.EDITABLE, "true");
+                intent.putExtra(myRecipeCostants.TYPE, "true");
                 // starta l'activity
                 startActivity(intent);
 

@@ -6,9 +6,10 @@ import it.unimib.cookery.models.RecipeApi;
 
 public interface ResponseCallbackApi {
 
-    void onResponseRandomRecipe(List<RecipeApi> recipes);
+
     void onResponseRandomRecipeDessert(List<RecipeApi> recipes);
     void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes);
     void onResponseRandomRecipeFirstCourse(List<RecipeApi> recipes);
+    void onResponseRecipeByIngredient(List<RecipeApi> recipes);
     void onFailure(int errorMessage);
 }
