@@ -3,9 +3,11 @@ package it.unimib.cookery.repository;
 import android.app.Application;
 import android.util.Log;
 
+import it.unimib.cookery.database.IngredientApiDao;
 import it.unimib.cookery.database.IngredientPantryDao;
 import it.unimib.cookery.database.PantryDao;
 import it.unimib.cookery.database.RoomDatabase;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.utils.ResponseCallbackDb;
@@ -16,12 +18,13 @@ import it.unimib.cookery.utils.ServiceLocator;
  * Repository to get the news using the API
  * provided by NewsApi.org (https://newsapi.org).
  */
-public class DatabasePantryRepository {
 
+public class DatabasePantryRepository {
     private static final String TAG = "DatabasePantryRepository";
 
     private final Application mApplication;
     private final PantryDao mPantryDao;
+    private final IngredientApiDao mIngredientApi;
     private final IngredientPantryDao ingredientPantryDao;
     private final ResponseCallbackDb mResponseCallbackDb;
 
@@ -31,11 +34,10 @@ public class DatabasePantryRepository {
         RoomDatabase roomDatabase = ServiceLocator.getInstance().getDao(application);
 
         //gestione Pantry
-        this.mPantryDao = roomDatabase.PantryDao();
-        this.ingredientPantryDao = roomDatabase.IngredientPantryDao();
-        //this.mRecipeDao = newsRoomDatabase.recipeDao();
-        //this.mStepDao = newsRoomDatabase.stepDao();
+        this.mPantryDao = roomDatabase.pantryDao();
+        this.ingredientPantryDao = roomDatabase.ingredientPantryDao();
         this.mResponseCallbackDb = responseCallback;
+        this.mIngredientApi = roomDatabase.ingredientApiDao();
     }
 
     //Crud
@@ -55,6 +57,8 @@ public class DatabasePantryRepository {
                 else if(obj instanceof IngredientPantry){
                     Log.d("test","ingrediente");
                     ingredientPantryDao.insertIngredientPantry((IngredientPantry) obj);
+                }else if(obj instanceof  IngredientApi){
+                    mIngredientApi.insertIngredientApi((IngredientApi) obj);
                 }
                 //notificare l'aggiornamento
                 synchronized(DatabasePantryRepository.this){
@@ -67,17 +71,11 @@ public class DatabasePantryRepository {
     }
 
     //Read
-
-    public void read(Object obj){
-        readObj(obj);
-    }
-
-
-    private void readObj(Object obj) {
+    public void readIngredientApi(String name){
         Runnable runnable = new Runnable() {
             @Override
             public void  run() {
-                mResponseCallbackDb.onResponse(mPantryDao.pantryWithIngredientPantry(1));
+                mResponseCallbackDb.onResponseSearchIngredient(mIngredientApi.findIngredientsWithName(name));
             }
         };
         new Thread(runnable).start();
@@ -94,6 +92,19 @@ public class DatabasePantryRepository {
     }
 
     //Update
+    public void update(Object obj){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                if(obj instanceof IngredientPantry) {
+                    ingredientPantryDao.update((IngredientPantry) obj);
+                }
+            }
+        };
+        new Thread(runnable).start();
 
+
+
+    }
     //Delete
 }

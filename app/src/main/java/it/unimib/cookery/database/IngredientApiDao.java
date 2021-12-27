@@ -4,14 +4,12 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
-import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.models.Pantry;
-import it.unimib.cookery.models.PantryWithIngredientPantry;
 
 
 /**
@@ -20,15 +18,16 @@ import it.unimib.cookery.models.PantryWithIngredientPantry;
  * https://developer.android.com/training/data-storage/room/accessing-data
  */
 @Dao
-public interface IngredientPantryDao {
+public interface IngredientApiDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertIngredientPantry(IngredientPantry... pantry);
+    void insertIngredientApi(IngredientApi... ingredientApi);
 
-    @Query("SELECT * FROM  ingredient_pantry")
-    public List<IngredientPantry> ingredientPantryALL();
+   @Query("SELECT * FROM  ingredient_api")
+    public List<IngredientApi> ingredientApiALL();
 
-    @Update
-    public void update(IngredientPantry... users);
+    @Query("SELECT * FROM ingredient_api WHERE name LIKE '%' || :search || '%' ")
+    public List<IngredientApi> findIngredientsWithName(String search);
+
 }
 

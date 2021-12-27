@@ -28,14 +28,15 @@ import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.models.Ingredient;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.ui.PantryFragment;
 
 public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.IngredientViewHolder>{
-    private List<Ingredient> mListIngredients;
+    private List<IngredientApi> mListIngredients;
     private  int k = 0;
-    public  void setData( List<Ingredient> list){
+    public  void setData( List<IngredientApi> list){
         this.mListIngredients = list;
         notifydata();
 
@@ -54,9 +55,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
 
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
-        Ingredient ingredient = mListIngredients.get(position);
+        IngredientApi ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
-        holder.chipIngredient.setText(ingredient.getIngredientName()+":");
+        holder.chipIngredient.setText(ingredient.getName()+":");
         holder.chipIngredient.setId(position);
         holder.chipIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +86,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
         }
     }
 
-    public void openDialogAddProduct(View itemView, int id, List<Ingredient> list){
+    public void openDialogAddProduct(View itemView, int id, List<IngredientApi> list){
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
         // crea una dialog
         Dialog ingredientDialog = new Dialog(itemView.getContext());
@@ -98,13 +99,13 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
         // creo e trovo l'oggetto textView nella dialog
         TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
         // setto il teso della dialog la stringa andrà poi sostituita col nome dell'ingrediente da aggiungere
-        ingredientName.setText(list.get(id).getIngredientName());
+        ingredientName.setText(list.get(id).getName());
         // creo e trovo l'oggetto editText dove l'utente inserisce la quantità
         EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
         //Spinner fors select tipe of pantry
         Spinner spinner = (Spinner)ingredientDialog.findViewById(R.id.tipe_pantry_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(itemView.getContext(),R.array.planets_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(itemView.getContext(),R.array.pantry_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -130,7 +131,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                         //Log.d("test", "test:- " + text);
                         pantryPosition = 3;
                     }
-                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getIdIngredient(),list.get(id).getIngredientName(),Integer.parseInt(editText.getText().toString()),12, pantryPosition);
+                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),12, pantryPosition);
                     PantryFragment.savedb(ingredientPantry);
                     ingredientDialog.dismiss();
                 } else {
@@ -142,7 +143,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
             }
 
         });
-        // creo e ottengo l'oggetto per il bottono di delete
+        // creo e ottengo l'oggetto per il bottone di delete
         Button deleteButton = ingredientDialog.findViewById(R.id.deleteIngredientButton);
         // listener del bottone di delete
         deleteButton.setOnClickListener(new View.OnClickListener() {

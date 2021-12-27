@@ -19,8 +19,10 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Recipe;
 
 
@@ -34,23 +36,30 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Context context;
 
 
+
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
 
 
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
-
         this.context = context;
-
         for (Recipe r : recipesArrayList)
             Log.d("stampa", "" + r.getName());
-
-
         Log.d("qui", "adapter class");
         listdata = recipesArrayList;
         filterData = new ArrayList<>(listdata);
 
+    }
+    public  void setData( ArrayList<Recipe> list){
+        this.listdata = list;
+        for(int i=0; i < listdata.size();i++){
+            Log.i("test", "Adapter" + listdata.get(i).getName());
+        }
+        filterData = new ArrayList<>(listdata);
+        Log.i("test", "Adapter" + listdata.size());
+        Log.i("test", "----------------------------------------------");
+        notifyDataSetChanged();
     }
 
 
@@ -74,9 +83,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
                 .setImageResource(listdata.get(position).getImageId());
-
-
-
         return convertView;
     }
 
@@ -103,16 +109,13 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                     Removed.add(r);
                 }
             }
-
             // rimuovo da entrambe le liste gli elementi che non rispecchiano i filtri
             listdata.removeAll(Removed);
             filterData.removeAll(Removed);
         }
         // notifico del cambiamento del dato per aggiornare la grid view
         notifyDataSetChanged();
-
     }
-
 
     public Filter getFilter() {
         return filterNotification;
@@ -131,22 +134,16 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                     String nameLowerCase = recipe.getName().toLowerCase();
                     if (nameLowerCase.contains(searchStr)) {
                         filterList.add(recipe);
-
                     }
-
                 }
-
             }
-
             FilterResults results = new FilterResults();
             results.values = filterList;
-
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults filterResults) {
-
             listdata.clear();
             listdata.addAll((ArrayList<Recipe>) filterResults.values);
 

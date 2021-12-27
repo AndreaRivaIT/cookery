@@ -26,15 +26,18 @@ import android.widget.Toolbar;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.adapters.AdapterClass;
+import it.unimib.cookery.repository.DatabasePantryRepository;
+import it.unimib.cookery.repository.RecipeRepository;
+import it.unimib.cookery.utils.ResponseCallbackDb;
 
 
-public class MyRecipesFragment extends Fragment {
-
+public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
 
 
     /* robe di comodo */
@@ -68,6 +71,7 @@ public class MyRecipesFragment extends Fragment {
     /* array list per i filtri */
     ArrayList<String> filterList = new ArrayList<>();
 
+    static private RecipeRepository db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,8 +86,11 @@ public class MyRecipesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         Log.d("state", "on create view");
+        //connessione al db e caricamento delle ricette
+        db = new RecipeRepository(requireActivity().getApplication(), this);
+        db.readAllRecipe();
 
-       // pulizia preventiva perchè a volte le duplica non so perchè
+        // pulizia preventiva perchè a volte le duplica non so perchè
         recipeArrayList.clear();
 
         /* creo un elemento di tipo view */
@@ -102,7 +109,7 @@ public class MyRecipesFragment extends Fragment {
 
         //  solo per prova //
 
-        recipeArrayList.add(new Recipe("pasta al forno", "First course", R.drawable.spoonacular));
+       /* recipeArrayList.add(new Recipe("pasta al forno", "First course", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("risotto", "First course", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("arrosto", "Main meal", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
@@ -112,7 +119,7 @@ public class MyRecipesFragment extends Fragment {
         recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
         recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
+        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));*/
 
 
         // fine codice solo per prova //
@@ -139,8 +146,10 @@ public class MyRecipesFragment extends Fragment {
                 // informazioni da passare all'activity SingleRecipeActivity il back stack è gestito in automatico
                 Intent intent = new Intent(getActivity(), SingleRecipeActivity.class);
                 // da aggiungere passaggio id ricetta
+
                 intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName() );
                 intent.putExtra(myRecipeCostants.TYPE, "true");
+
                 // starta l'activity
                 startActivity(intent);
 
@@ -188,9 +197,9 @@ public class MyRecipesFragment extends Fragment {
                 Log.d("premuto", "premuto chip add");
 
                 /* fare update database*/
-
+                //creazione della ricetta
                 // aggiungo la ricetta e la mostro sulla gridview
-                recipeArrayList.add(new Recipe("aggiunta", "Desserts", R.drawable.ic_baseline_add_24));
+                //recipeArrayList.add(new Recipe("aggiunta", "Desserts", R.drawable.ic_baseline_add_24));
 
                 // adapter=new AdapterClass(getContext(), recipeArrayList);
                 myRecipiesGridView.setAdapter(adapter);
@@ -303,8 +312,6 @@ public class MyRecipesFragment extends Fragment {
 
 
         // -- fine codice button filter --
-
-
         // Inflate the layout for this fragment
         return view;
 
@@ -315,6 +322,41 @@ public class MyRecipesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
+
+    }
+
+    @Override
+    public void onResponse(Object obj) {
+        if (obj != null) {
+            if (obj instanceof List) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        recipeArrayList.clear();
+                        recipeArrayList = (ArrayList) obj;
+                        for(int i=0; i < recipeArrayList.size();i++){
+                            Log.i("test", "RecipeFragment" + recipeArrayList.get(i).getName());
+                        }
+                        Log.i("test", "RecipeFragment" + recipeArrayList.size());
+                        Log.i("test", "----------------------------------------------");
+                        adapter = new AdapterClass(getContext(), recipeArrayList);
+                        myRecipiesGridView.setAdapter(adapter);
+                    }
+                });
+            }
+        }
+
+
+    }
+
+    @Override
+    public void onResponseSearchIngredient(Object obj) {
+
+    }
+
+
+    @Override
+    public void onFailure(String errorMessage) {
 
     }
 }
