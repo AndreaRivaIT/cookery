@@ -69,8 +69,12 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListMainCourse = new ArrayList<>();
         recipeArrayListFirstCourse = new ArrayList<>();
 
-        recipeRepository = new RecipeRepository(getActivity().getApplication(),this);
-        recipeRepository.getRandomRecipe("");
+
+
+        recipeRepository.getRecipeByIngredient("apples,flour,sugar");
+
+       // recipeRepository.getRecipeByIngredient("meat");
+
         recipeRepository.getRandomRecipeFirstCourse("");
         recipeRepository.getRandomRecipeMainCourse("");
         recipeRepository.getRandomRecipeDessert("");
@@ -130,18 +134,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
     }
 
 
-    @Override
-    public void onResponseRandomRecipe(List<RecipeApi> recipes) {
 
-
-        recipeArrayListReadyToCoock.clear();
-        recipeArrayListReadyToCoock.addAll(recipes);
-
-
-
-        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
-        recyclerViewRTC.setAdapter(recipeAdapter);
-    }
 
     @Override
     public void onResponseRandomRecipeDessert(List<RecipeApi> recipes) {
@@ -149,6 +142,8 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeArrayListDessert.addAll(recipes);
         recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
+
+
 
     }
 
@@ -170,6 +165,18 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi {
         recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
 
+    }
+
+
+    @Override
+    public void onResponseRecipeByIngredient(List<RecipeApi> recipes) {
+
+        recipeArrayListReadyToCoock.clear();
+        recipeArrayListReadyToCoock.addAll(recipes);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock);
+        recyclerViewRTC.setAdapter(recipeAdapter);
+
+        // da fare sorting
     }
 
     @Override

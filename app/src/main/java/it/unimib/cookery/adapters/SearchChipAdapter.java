@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -135,7 +136,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                     ingredientDialog.dismiss();
                 } else {
                     // stampa un toast di errore
+
                     Toast.makeText(itemView.getContext(), R.string.invalid_quantity, Toast.LENGTH_SHORT).show();
+
                 }
             }
 

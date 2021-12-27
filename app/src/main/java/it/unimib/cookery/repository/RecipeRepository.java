@@ -3,10 +3,12 @@ package it.unimib.cookery.repository;
 import android.app.Application;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+
 import it.unimib.cookery.database.RecipeDao;
 import it.unimib.cookery.database.RoomDatabase;
 import it.unimib.cookery.database.StepDao;
@@ -15,6 +17,9 @@ import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.models.Recipe;
+
+import it.unimib.cookery.models.IngredientApi;
+
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.RecipeStep;
 import it.unimib.cookery.models.ResponseRecipe;
@@ -34,6 +39,7 @@ public class RecipeRepository {
     private List<RecipeApi> RecipeApiListDessert;
     private List<RecipeApi> RecipeApiListMainCourse;
     private List<RecipeApi> RecipeApiListFirstCourse;
+
 
 
     private Costants costants = new Costants();
@@ -169,44 +175,40 @@ public class RecipeRepository {
 
 
     }
-    public void getRandomRecipe(String tags) {
-
-        Call<ResponseRecipe> RandomRecipe;
-
-        if (tags.equals("")) {
-            RandomRecipe =
-                    spoonacularApiService.getRandomRecipeNoTags(costants.API_KEY, 10);
-        } else {
-            RandomRecipe =
-                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, tags);
-        }
 
 
-        RandomRecipe.enqueue(new Callback<ResponseRecipe>() {
+
+    public void getRecipeByIngredient(String ingredients){
+
+
+        Call<List<RecipeApi>> RecipeByIngredients =
+                spoonacularApiService.getRecipeByIngredient(costants.API_KEY, ingredients, 10);
+
+
+        RecipeByIngredients.enqueue(new Callback<List<RecipeApi>>() {
             @Override
-            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
+            public void onResponse(Call<List<RecipeApi>> call, Response<List<RecipeApi>> response) {
 
-                //Log.d("body", ""+response.raw().request().url());
-                //Log.d("body", "" + response.body());
+                Log.d("retrofit", "" + response.raw().request().url());
+
+                if(response.body() != null && response.isSuccessful()) {
+
+                    RecipeApiList = sort((ArrayList<RecipeApi>) response.body());
 
 
-                // non scarica l'intero json ma solo un pezzo e quindi a
-                // volte perde delle ricette
+                    for(RecipeApi r: RecipeApiList)
+                        Log.d("retrofit", " "+r.toString());
 
-                if (response.body() != null && response.isSuccessful()) {
-
-                    RecipeApiList = response.body().getRecipes();
-
-                    responseCallback.onResponseRandomRecipe(RecipeApiList);
-                } else
+                    responseCallback.onResponseRecipeByIngredient(RecipeApiList);
+                }else
                     responseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
             @Override
-            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
+            public void onFailure(Call<List<RecipeApi>> call, Throwable t) {
 
-                Log.d("retrofit", "on Failure " + t);
+                Log.d("retrofit", "on Failure "+ t);
 
                 responseCallback.onFailure(R.string.connectionError);
             }
@@ -215,33 +217,35 @@ public class RecipeRepository {
 
     }
 
-/*
-    public void getRecipeInfo() {
 
+    private ArrayList<RecipeApi> sort(ArrayList<RecipeApi> unsortedList){
 
-        Call<String> RecipeDetails =
-                spoonacularApiService.getRecipeDetails(324694, costants.API_KEY);
+        ArrayList<RecipeApi> sortedList = new ArrayList<>();
 
-        RecipeDetails.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+        int length = unsortedList.size();
 
-                if(response.body() != null && response.isSuccessful())
-                    // Log.d("retrofit", ""+response.raw().request().url());
-                    //  Log.d("retrofit", ""+response.body());
-                    responseCallback.onResponseGetStep(response.body());
-                else
-                    responseCallback.onFailure(R.string.errorRetriveData);
+        for(int i=0; i<length; i++){
+
+            int min = 100000;
+            RecipeApi rec = null;
+
+            for(int j=0; j < unsortedList.size(); j++){
+                if(unsortedList.get(j).getMissedIngredientCount() <= min) {
+                    min = unsortedList.get(j).getMissedIngredientCount();
+                    rec = unsortedList.get(j);
+
+                }
             }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            unsortedList.remove(rec);
+            sortedList.add(rec);
 
-                responseCallback.onFailure(R.string.connectionError);
-            }
-        });
+        }
 
-    }*/
+        return sortedList;
+    }
+
+
 
     public void createRecipe(Object obj){
     saveObj(obj);

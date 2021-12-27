@@ -36,9 +36,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Context context;
 
 
-    /* url costante per prova glide */
-
-    private static final String imgUrl = "https://spoonacular.com/recipeImages/716429-312x231.jpg";
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
@@ -72,6 +69,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         if (convertView == null) {
             // Layout Inflater inflates each item to be displayed in GridView.
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+
         }
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))

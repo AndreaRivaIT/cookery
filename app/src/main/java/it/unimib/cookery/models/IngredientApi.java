@@ -3,9 +3,14 @@ package it.unimib.cookery.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+
+import java.util.Objects;
+
 
 
 @Entity(tableName = "ingredient_api")
@@ -90,6 +95,16 @@ public class IngredientApi implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IngredientApi)) return false;
+        IngredientApi that = (IngredientApi) o;
+        return id == that.id && Objects.equals(name, that.name);
+    }
+
 
     @Override
     public int describeContents() {

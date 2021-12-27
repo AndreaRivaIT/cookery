@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
@@ -26,22 +28,12 @@ import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
+import it.unimib.cookery.models.StepApi;
+import it.unimib.cookery.repository.IngredientAndStepReopistory;
+import it.unimib.cookery.repository.RecipeRepository;
+import it.unimib.cookery.utils.ResponseCallbackStepAndIngredients;
 
-public class SingleRecipeActivity extends AppCompatActivity {
-    public Recipe recipe;
-    private Ingredient pasta;
-    private Ingredient pomodoro;
-    private Ingredient carciofi;
-    private Ingredient sale;
-    private Ingredient pepeA;
-    private Ingredient pepeB;
-    private Ingredient besciamella;
-
-    private RecipeStep step1;
-    private RecipeStep step2;
-    private RecipeStep step3;
-    private RecipeStep step4;
-    private RecipeStep step5;
+public class SingleRecipeActivity extends AppCompatActivity implements ResponseCallbackStepAndIngredients {
 
     //variabili per il caricamento dinamico degli steps e degli ingredienti
     private RecyclerView rcvSteps;
@@ -55,10 +47,12 @@ public class SingleRecipeActivity extends AppCompatActivity {
     private TextView tvAmountPeople;
     private TextView tvQuantity;
     private ImageView recipeImage;
+    private TextView textView_title_recipe;
+    private TextView noSteps;
     private int nPerson;
 
     // varibile per moidificare la ricetta
-    private String editable;
+    private String type;
 
     // variabile per ottenere info ricetta
     private String imageUrl;
@@ -79,13 +73,14 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     private ArrayList<String> stepRecived;
     private ArrayList<IngredientApi> ingredienteRecived;
-
+    private IngredientAndStepReopistory ingredientAndStepReopistory =
+            new IngredientAndStepReopistory(this);
+    private ArrayList<IngredientApi> missingIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
-        setRicettaAppoggio();
 
         stepRecived = new ArrayList<>();
         ingredienteRecived = new ArrayList<>();
@@ -94,77 +89,65 @@ public class SingleRecipeActivity extends AppCompatActivity {
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
 
-        // ottengo l'oggetto textView interessato
-        TextView textView_title_recipe = findViewById(R.id.textView_title_recipe);
+        // ottengo i riferimenti ai vari elementi della ui
+        textView_title_recipe = findViewById(R.id.textView_title_recipe);
+        tvAmountPeople = findViewById(R.id.tv_amount);
+        btnRemove = findViewById(R.id.btn_remove);
+        modifyRecipe = findViewById(R.id.ButtonEditRecipe);
+        deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
+        recipeImage = findViewById(R.id.image_single_recipe);
+        btnAdd = findViewById(R.id.btn_add);
+        noSteps = findViewById(R.id.voidStep);
 
         // setto il nome della ricetta
         textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
 
-        recipeImage = findViewById(R.id.image_single_recipe);
 
-        // ottengo la stringa che mi dice se la ricetta è modificabile
-        editable = intent.getStringExtra(costants.EDITABLE);
+        // ottengo parametri comuni dall'intent
+
+        type = intent.getStringExtra(costants.TYPE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
-        servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
-
-        // da controllare
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
 
-        /*codice di test funzionante */
-
-        stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
-        ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
-
-        Log.d("servings", "" + servings);
-
-        tvAmountPeople = findViewById(R.id.tv_amount);
-        btnRemove = findViewById(R.id.btn_remove);
-
-        setnPerson(servings);
-        if (servings > 1)
-            tvAmountPeople.setText(servings + costants.PEOPLE);
-        else {
-            tvAmountPeople.setText(servings + costants.PERSON);
-            btnRemove.setEnabled(false);
-        }
 
 
-        createChips();
+
+        if (type.equals(costants.OTHER)) {
+            stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
+            ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
+            servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
+            loadImage();
+            setStepAdapter();
+            createChips();
+            setnPerson(servings);
+
+            if (servings > 1)
+                tvAmountPeople.setText(servings + costants.PEOPLE);
+            else {
+                tvAmountPeople.setText(servings + costants.PERSON);
+                btnRemove.setEnabled(false);
+
+            }
 
 
-        Log.d("SingleRecipe", "size " + ingredienteRecived.size());
-
-        for (IngredientApi ing : ingredienteRecived) {
-            Log.d("SingleRecipe", "" + ing.toString());
-        }
-
-
-        //  Log.d("SingleRecipe", ""+stepRecived.get(0));
+        } else if(type.equals(costants.READY_TO_COOCK)){
+            missingIngredients = new ArrayList<>();
+            missingIngredients = intent.getParcelableArrayListExtra(costants.MISSING_INGREDIENTS);
+            loadImage();
+            ingredientAndStepReopistory.getRecipeSteps(recipeId);
+            ingredientAndStepReopistory.getRecipeIngredients(recipeId, false);
 
 
-        modifyRecipe = findViewById(R.id.ButtonEditRecipe);
-        deleteRecipe = findViewById(R.id.ButtonDeleteRecipe);
 
-        // se la ricetta è modificabile mostro i bottoni
-        if (editable.equals("true")) {
+        }else {
             // ottengo i bottoni per modificare/eliminare la ricetta
             modifyRecipe.setVisibility(View.VISIBLE);
             deleteRecipe.setVisibility(View.VISIBLE);
             modifyRecipe.setClickable(true);
             deleteRecipe.setClickable(true);
-            // caricare immagine ottenuta da query database
 
+            // le informazioni ottenute dal database
 
-        } else {
-
-            if (imageUrl == null) {
-                recipeImage.setImageResource(R.drawable.ic_baseline_broken_image_24);
-            } else {
-
-                // chiamate Api per ottenere ingredienti e step
-                Glide.with(this).load(imageUrl).
-                        into(recipeImage);
-            }
         }
 
         modifyRecipe.setOnClickListener(new View.OnClickListener() {
@@ -187,17 +170,7 @@ public class SingleRecipeActivity extends AppCompatActivity {
         });
 
 
-        //Inflate degli steps procedimento della ricetta
-        rcvSteps = findViewById(R.id.rcv_steps);
-        recipeProcedureAdapter = new RecipeProcedureAdapter();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rcvSteps.setLayoutManager(linearLayoutManager);
-        rcvSteps.setFocusable(false);
-        rcvSteps.setNestedScrollingEnabled(false);
-        recipeProcedureAdapter.setData(stepRecived);
-        rcvSteps.setAdapter(recipeProcedureAdapter);
 
-        btnAdd = findViewById(R.id.btn_add);
 
 
         btnAdd.setOnClickListener(v -> {
@@ -232,6 +205,19 @@ public class SingleRecipeActivity extends AppCompatActivity {
 
     }
 
+    private void loadImage(){
+
+        if (imageUrl == null) {
+            recipeImage.setImageResource(R.drawable.ic_baseline_broken_image_24);
+        } else {
+
+            // chiamate Api per ottenere ingredienti e step
+            Glide.with(this).load(imageUrl).
+                    into(recipeImage);
+        }
+
+    }
+
     private void createChips() {
         // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne
         rcvChips = findViewById(R.id.rcv_chips);
@@ -240,43 +226,31 @@ public class SingleRecipeActivity extends AppCompatActivity {
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-        ingredientChipAdapter.setData(ingredienteRecived);
+
+        if(missingIngredients == null)
+            ingredientChipAdapter.setData(ingredienteRecived);
+        else
+            ingredientChipAdapter.setData(ingredienteRecived, missingIngredients);
+
         rcvChips.setAdapter(ingredientChipAdapter);
 
     }
 
+    private void setStepAdapter() {
 
-    //da cancellare solo per lo sviluppo
-    public void setRicettaAppoggio() {
-        //inizializare gli oggetto ricetta, riceverà id e poi verra fatta una chiamata api con ID
-        recipe = new Recipe("Pasta al Pomodoro", "First course", 2);
-        // inizializzazione oggetti ingredienti
-        pasta = new Ingredient(1, "pasta", 180);
-        pomodoro = new Ingredient(2, "pomodoro", 80);
-        carciofi = new Ingredient(3, "carciofi", 120);
-        sale = new Ingredient(4, "sale", 4);
-        pepeA = new Ingredient(5, "pepe", 8);
-        pepeB = new Ingredient(5, "pepe", 8);
-        besciamella = new Ingredient(6, "besciamella", 158);
-
-        step1 = new RecipeStep(1, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
-        step2 = new RecipeStep(2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
-        step3 = new RecipeStep(3, "Lorem Ipsum is simply dummy text oLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.f the printing and typesetting industry.");
-        step4 = new RecipeStep(4, "Lorem Ipsum is simply dummy text of the printing and typesettiLorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.ng industry.");
-        step5 = new RecipeStep(5, "Lorem Ipsum is simply dummy text of the printing and typesetting industry.");
-        //aggiunta degli ingredienti alla ricetta
-        recipe.setStepsList(step1);
-        recipe.setStepsList(step2);
-        recipe.setStepsList(step3);
-        recipe.setStepsList(step4);
-        recipe.setStepsList(step5);
-        recipe.setIngredientList(pasta);
-        recipe.setIngredientList(pomodoro);
-        recipe.setIngredientList(carciofi);
-        recipe.setIngredientList(sale);
-        recipe.setIngredientList(pepeA);
-        recipe.setIngredientList(pepeB);
-        recipe.setIngredientList(besciamella);
+       if(stepRecived.size()==0)
+           noSteps.setVisibility(View.VISIBLE);
+       else {
+           //Inflate degli steps procedimento della ricetta
+           rcvSteps = findViewById(R.id.rcv_steps);
+           recipeProcedureAdapter = new RecipeProcedureAdapter();
+           LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+           rcvSteps.setLayoutManager(linearLayoutManager);
+           rcvSteps.setFocusable(false);
+           rcvSteps.setNestedScrollingEnabled(false);
+           recipeProcedureAdapter.setData(stepRecived);
+           rcvSteps.setAdapter(recipeProcedureAdapter);
+       }
     }
 
 
@@ -301,4 +275,46 @@ public class SingleRecipeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onResponseRecipeSteps(List<StepApi> steps) {
+
+        ArrayList<String> stringSteps = new ArrayList<>();
+
+
+        if(steps != null) {
+
+            for (int i = 0; i < steps.size(); i++)
+                stringSteps.add(steps.get(i).getStep());
+        }
+
+      /*  for (StepApi st : steps)
+            stringSteps.add(st.getStep());*/
+
+
+        stepRecived = stringSteps;
+        setStepAdapter();
+
+
+    }
+
+    @Override
+    public void onResponseRecipeIngredients(List<IngredientApi> ingredients, int servings) {
+
+        this.servings = servings;
+        ingredienteRecived = (ArrayList<IngredientApi>) ingredients;
+        createChips();
+        setnPerson(servings);
+        if (servings > 1)
+            tvAmountPeople.setText(servings + costants.PEOPLE);
+        else {
+            tvAmountPeople.setText(servings + costants.PERSON);
+            btnRemove.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void onFailureIngredientAndStep(int errorMessage) {
+
+        Snackbar.make(findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_SHORT).show();
+    }
 }
