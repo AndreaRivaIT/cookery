@@ -5,19 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.models.PantryWithIngredientPantry;
 import it.unimib.cookery.models.Recipe;
+import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.repository.RecipeRepository;
+import it.unimib.cookery.utils.CsvReader;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +33,10 @@ import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ResponseCallbackDb{
@@ -40,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
     private NavigationView mNavMenu;
     private List<PantryWithIngredientPantry> list;
     private boolean logged = false;
+    private boolean firstAccess;
+    private ArrayList<IngredientApi> ing;
+    private DatabasePantryRepository dbIngredient;
+    private Costants costants = new Costants();
 
 
     private RecipeRepository db;
@@ -47,6 +59,13 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // riferimento al file
+        SharedPreferences sharedPreferences = getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+
+        firstAccess = sharedPreferences.getBoolean(costants.FIRST_ACCESS, true);
+
+        Log.d("sharedPreferences", ""+firstAccess);
 
 
         //NavHostController configuration and homeFragment set as startupFragment
@@ -104,60 +123,34 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         db.createRecipe(recipeTestM);*/
 
 
-        IngredientApi ingredientApi = new IngredientApi(11547,"tomato puree");
-        IngredientApi ingredientApiA = new IngredientApi(1012047,"sea salt");
-        IngredientApi ingredientApiB = new IngredientApi(1116,"yogurt");
-        IngredientApi ingredientApiC = new IngredientApi(98846,"cocoa nibs");
-        IngredientApi ingredientApiD = new IngredientApi(19165,"cocoa powder");
-        IngredientApi ingredientApiE = new IngredientApi(12104,"coconut");
-        IngredientApi ingredientApiF = new IngredientApi(98929,"coconut aminos");
-        IngredientApi ingredientApiG = new IngredientApi(93746,"coconut butter");
-        IngredientApi ingredientApiH = new IngredientApi(12115,"coconut cream");
-        IngredientApi ingredientApiI = new IngredientApi(1032050,"coconut extract");
-        IngredientApi ingredientApiL = new IngredientApi(10114037,"brandy");
-        IngredientApi ingredientApiM = new IngredientApi(18064,"bread");
-        IngredientApi ingredientApiN = new IngredientApi(10120129,"bread flour");
-        IngredientApi ingredientApiO = new IngredientApi(10011693,"canned tomatoes");
-        IngredientApi ingredientApiP = new IngredientApi(10115121,"canned tuna");
-        IngredientApi ingredientApiQ = new IngredientApi(10716050,"cannellini beans");
-        IngredientApi ingredientApiR = new IngredientApi(10093727,"cheese tortellini");
-        IngredientApi ingredientApiS = new IngredientApi(9070,"cherry");
-        IngredientApi ingredientApiT = new IngredientApi(12098,"chestnuts");
-        IngredientApi ingredientApiU = new IngredientApi(11168,"corn");
-        IngredientApi ingredientApiV = new IngredientApi(2012,"coriander");
-        IngredientApi ingredientApiW = new IngredientApi(10118192,"cookies");
-        IngredientApi ingredientApiZ = new IngredientApi(20137,"cooked quinoa");
-        IngredientApi ingredientApiY = new IngredientApi(98853,"gnocchi");
-
-        DatabasePantryRepository dbIngredient;
-        dbIngredient = new DatabasePantryRepository(getApplication(),this);
-
-        /*dbIngredient.create(ingredientApi);
-        dbIngredient.create(ingredientApiA);
-        dbIngredient.create(ingredientApiB);
-        dbIngredient.create(ingredientApiC);
-        dbIngredient.create(ingredientApiD);
-        dbIngredient.create(ingredientApiE);
-        dbIngredient.create(ingredientApiF);
-        dbIngredient.create(ingredientApiG);
-        dbIngredient.create(ingredientApiH);
-        dbIngredient.create(ingredientApiI);
-        dbIngredient.create(ingredientApiL);
-        dbIngredient.create(ingredientApiM);
-        dbIngredient.create(ingredientApiN);
-        dbIngredient.create(ingredientApiO);
-        dbIngredient.create(ingredientApiP);
-        dbIngredient.create(ingredientApiQ);
-        dbIngredient.create(ingredientApiR);
-        dbIngredient.create(ingredientApiS);
-        dbIngredient.create(ingredientApiT);
-        dbIngredient.create(ingredientApiU);
-        dbIngredient.create(ingredientApiV);
-        dbIngredient.create(ingredientApiZ);
-        dbIngredient.create(ingredientApiW);
-        dbIngredient.create(ingredientApiY);*/
 
 
+        dbIngredient = new DatabasePantryRepository(getApplication(), this);
+
+
+
+
+        if(firstAccess) {
+
+            CsvReader csv = new CsvReader();
+
+            try {
+                ing = csv.readCsv(getAssets().open(costants.CSV_FILE_NAME));
+                for (int i = 0; i < ing.size(); i++) {
+                    dbIngredient.create(ing.get(i));
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Snackbar.make(findViewById(android.R.id.content), R.string.csv_error, Snackbar.LENGTH_SHORT).show();
+            }
+
+            firstAccess = false;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(costants.FIRST_ACCESS, firstAccess);
+            editor.apply();
+
+        }
 
     }
 
@@ -200,8 +193,6 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
             });
         }
     }
-
-
 
 
     @Override

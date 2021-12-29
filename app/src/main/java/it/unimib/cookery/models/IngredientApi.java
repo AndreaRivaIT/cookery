@@ -29,6 +29,14 @@ public class IngredientApi implements Parcelable {
     }
 
     @Ignore
+    public IngredientApi(int id, String name, double amount, String unit) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+    }
+
+    @Ignore
     public IngredientApi() {
     }
 

@@ -57,7 +57,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         IngredientApi ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
-        holder.chipIngredient.setText(ingredient.getName()+":");
+        holder.chipIngredient.setText(ingredient.getName());
         holder.chipIngredient.setId(position);
         holder.chipIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
