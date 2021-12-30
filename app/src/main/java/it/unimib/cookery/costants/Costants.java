@@ -70,7 +70,16 @@ public class Costants {
     public static final String PEOPLE = " People";
     public static final String PERSON = " Person";
 
+    /* stringhe per singleRecipeActivity */
 
+
+    /* stringhe main activity */
+
+    public static final String SHARED_PREFERENCES_FILE_NAME ="sharedPreferences";
+    public static final String FIRST_ACCESS="firstAccess";
+    public static final String CSV_FILE_NAME="ingredient.csv";
+
+    /* fine stringhe main activity */
 
     public Costants() {
 

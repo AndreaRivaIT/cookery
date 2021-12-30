@@ -75,7 +75,19 @@ public class DatabasePantryRepository {
         Runnable runnable = new Runnable() {
             @Override
             public void  run() {
+                Log.d("nomeIng", ""+ name);
                 mResponseCallbackDb.onResponseSearchIngredient(mIngredientApi.findIngredientsWithName(name));
+            }
+        };
+        new Thread(runnable).start();
+    }
+
+
+    public void readAllIngredientApi(){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                mResponseCallbackDb.onResponse(mIngredientApi.ingredientApiALL());
             }
         };
         new Thread(runnable).start();

@@ -83,4 +83,13 @@
 
 
     <!-- fine string singleRecipeActivity -->
+
+
+    <!-- string mainActivity -->
+
+    <string name="csv_error"> ERROR IN CREATING INGREDIENT DATABASE</string>
+
+    <!-- fine string mainActivity -->
+
+
 </resources>

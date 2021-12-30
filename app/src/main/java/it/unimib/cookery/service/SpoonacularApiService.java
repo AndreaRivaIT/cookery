@@ -3,6 +3,7 @@ package it.unimib.cookery.service;
 
 import java.util.List;
 
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.ResponseRecipe;
 import it.unimib.cookery.models.StepList;
@@ -35,4 +36,7 @@ public interface SpoonacularApiService {
 
     @GET("recipes/{id}/information")
     Call<RecipeApi> getRecipeIngredients (@Path("id") int id, @Query("apiKey") String apiKey, @Query("includeNutrition") boolean includeNutrition );
+
+    @GET("food/ingredients/{id}/information")
+    Call<IngredientApi> getIngredientMeasureUnit (@Path("id") int id, @Query("apiKey") String apiKey, @Query("amount") int amount );
 }
