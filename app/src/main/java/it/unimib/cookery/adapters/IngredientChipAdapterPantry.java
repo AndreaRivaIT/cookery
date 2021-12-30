@@ -50,7 +50,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         if(ingredient == null){ return;}
         holder.tvIngredient.setText(ingredient.getIngredientName());
 
-        holder.tvQuantity.setText(" "+ingredient.getQuantity() + "g");
+        holder.tvQuantity.setText(" "+ingredient.getQuantity() + " "+ingredient.getMeasureUnit());
         holder.tvIngredient.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {

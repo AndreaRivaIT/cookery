@@ -31,7 +31,7 @@ public class IngredientMeasureUnitRepository {
     }
 
 
-    public void getMeasure(int id){
+    public void getMeasure(int id, int idChip){
 
         Call<IngredientApi> IngredintUnitMeasure =
                 spoonacularApiService.getIngredientMeasureUnit(id, APIKEY, 1);
@@ -47,7 +47,7 @@ public class IngredientMeasureUnitRepository {
 
                     possibleUnits = response.body().getPossibleUnits();
 
-                    ingredientUnitMeasureResponseCallback.getUnitMeasureResponse(possibleUnits);
+                    ingredientUnitMeasureResponseCallback.getUnitMeasureResponse(possibleUnits, idChip);
                 }else
                     ingredientUnitMeasureResponseCallback.onFailure("Error in retrieving data");
 

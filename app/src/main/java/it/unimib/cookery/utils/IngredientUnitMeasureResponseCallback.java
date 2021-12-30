@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface IngredientUnitMeasureResponseCallback {
 
     void onFailure(String errorMessage);
-    void getUnitMeasureResponse(ArrayList<String> measureUnit);
+    void getUnitMeasureResponse(ArrayList<String> measureUnit, int id);
 
 
 }

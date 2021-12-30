@@ -41,6 +41,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     private List<IngredientApi> mListIngredients;
     private  int k = 0;
     private IngredientViewHolder holder;
+    private Spinner measureUnitSpinner;
     private IngredientMeasureUnitRepository ingredientMeasureUnitRepository = new IngredientMeasureUnitRepository(this);
     public  void setData( List<IngredientApi> list){
         this.mListIngredients = list;
@@ -70,9 +71,8 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
         holder.chipIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("id", " premuto");
-                Log.d("id", " ll "+holder.chipIngredient.getId());
-                ingredientMeasureUnitRepository.getMeasure(9266);
+
+                ingredientMeasureUnitRepository.getMeasure(ingredient.getId(), holder.chipIngredient.getId());
 
             }
         });
@@ -94,11 +94,11 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     }
 
     @Override
-    public void getUnitMeasureResponse(ArrayList<String> measureUnit) {
+    public void getUnitMeasureResponse(ArrayList<String> measureUnit, int position) {
 
-       Log.d("measureUnit", ""+measureUnit.size());
+       Log.d("measureUnit", ""+ holder.chipIngredient.getId());
 
-        openDialogAddProduct(holder.itemView, holder.chipIngredient.getId() , mListIngredients, measureUnit);
+        openDialogAddProduct(holder.itemView, position , mListIngredients, measureUnit);
         notifyDataSetChanged();
 
 
@@ -134,7 +134,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
         //Spinner fors select tipe of pantry
         Spinner spinner = (Spinner)ingredientDialog.findViewById(R.id.tipe_pantry_spinner);
 
-        Spinner measureUnitSpinner = (Spinner) ingredientDialog.findViewById(R.id.measureUnitSpinner);
+        measureUnitSpinner = (Spinner) ingredientDialog.findViewById(R.id.measureUnitSpinner);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, measureUnit);
         measureUnitSpinner.setAdapter(spinnerAdapter);
 
@@ -166,7 +166,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                         //Log.d("test", "test:- " + text);
                         pantryPosition = 3;
                     }
-                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),12, pantryPosition);
+                    String measureUnit = measureUnitSpinner.getSelectedItem().toString();
+                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),
+                            12, pantryPosition, measureUnit);
                     PantryFragment.savedb(ingredientPantry);
                     ingredientDialog.dismiss();
                 } else {

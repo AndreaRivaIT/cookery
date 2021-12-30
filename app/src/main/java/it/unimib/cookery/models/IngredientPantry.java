@@ -10,6 +10,7 @@ public class IngredientPantry extends Ingredient{
     @PrimaryKey(autoGenerate = true)
     private int idIngredientPantry;
     private int data;
+    private String measureUnit;
     public long pantryId;
 
     @Ignore
@@ -17,10 +18,20 @@ public class IngredientPantry extends Ingredient{
         super(idIngredient, ingredientName, quantity);
     }
 
-    public IngredientPantry(int idIngredient, String ingredientName, int quantity, int data, long pantryId) {
+    public IngredientPantry(int idIngredient, String ingredientName, int quantity, int data, long pantryId, String measureUnit) {
         super(idIngredient, ingredientName, quantity);
         this.data = data;
         this.pantryId = pantryId;
+        this.measureUnit = measureUnit;
+    }
+
+
+    public String getMeasureUnit() {
+        return measureUnit;
+    }
+
+    public void setMeasureUnit(String measureUneit) {
+        this.measureUnit = measureUneit;
     }
 
     public int getIdIngredientPantry() {
