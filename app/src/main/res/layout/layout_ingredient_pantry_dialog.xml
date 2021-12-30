@@ -42,7 +42,7 @@
 
             <EditText
                 android:id="@+id/IngredientEditText"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="48dp"
                 android:layout_below="@id/tipe_pantry_spinner"
                 android:layout_marginTop="20dp"
@@ -54,12 +54,13 @@
 
             <Spinner
                 android:id="@+id/measureUnitSpinner"
-                android:layout_width="48dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_below="@id/tipe_pantry_spinner"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/IngredientEditText" />
+                android:layout_toRightOf="@id/IngredientEditText"
+                tools:ignore="SpeakableTextPresentCheck"/>
 
 
             <Button

@@ -9,6 +9,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -22,6 +23,8 @@ public class IngredientApi implements Parcelable {
     private double amount;
     @Ignore
     private String unit;
+    @Ignore
+    private ArrayList<String> possibleUnits;
 
     public IngredientApi(int id, String name) {
         this.id = id;
@@ -29,11 +32,12 @@ public class IngredientApi implements Parcelable {
     }
 
     @Ignore
-    public IngredientApi(int id, String name, double amount, String unit) {
+    public IngredientApi(int id, String name, double amount, String unit, ArrayList<String> possibleUnits) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
+        this.possibleUnits = possibleUnits;
     }
 
     @Ignore
@@ -60,6 +64,15 @@ public class IngredientApi implements Parcelable {
             return new IngredientApi[size];
         }
     };
+
+
+    public ArrayList<String> getPossibleUnits() {
+        return possibleUnits;
+    }
+
+    public void setPossibleUnits(ArrayList<String> possibleUnits) {
+        this.possibleUnits = possibleUnits;
+    }
 
     public String getName() {
         return name;
