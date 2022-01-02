@@ -28,15 +28,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
 
     private Context context;
     private ArrayList<RecipeApi> recipeArrayList;
+    private boolean pantryEmpty;
 
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
 
 
-    public RecipeAdapter(Context context, ArrayList<RecipeApi> recipeArrayList) {
+    public RecipeAdapter(Context context, ArrayList<RecipeApi> recipeArrayList, boolean pantryEmpty) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
+        this.pantryEmpty = pantryEmpty;
 
        /* for(RecipeApi r: recipeArrayList)
             Log.d("recipeAdapter", ""+ r.toString());*/
@@ -65,9 +67,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                     intent.putExtra(costants.RECIPE_IMAGE, recipeArrayList.get(getAdapterPosition()).getImage());
                     intent.putExtra(costants.RECIPE_NAME, recipeArrayList.get(getAdapterPosition()).getTitle());
                     intent.putExtra(costants.RECIPE_SERVINGS, recipeArrayList.get(getAdapterPosition()).getServings());
+
+                    if(!pantryEmpty){
                     intent.putExtra(costants.TYPE, costants.READY_TO_COOCK);
                     intent.putParcelableArrayListExtra(costants.MISSING_INGREDIENTS, (ArrayList<? extends Parcelable>) recipeArrayList.
-                            get(getAdapterPosition()).getMissedIngredients());
+                            get(getAdapterPosition()).getMissedIngredients());}
+
+                    else{
+                        intent.putExtra(costants.TYPE, costants.OTHER);
+                        ArrayList<String> step = new ArrayList<>();
+                        step.addAll(recipeArrayList.get(getAdapterPosition()).extractSteps());
+                        intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
+                        intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
+                                get(getAdapterPosition()).getExtendedIngredients());
+                    }
 
                     // codice di test funzionante
 

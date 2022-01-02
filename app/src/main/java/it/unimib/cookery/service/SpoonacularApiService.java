@@ -35,7 +35,7 @@ public interface SpoonacularApiService {
     //https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
 
     @GET("recipes/{id}/information")
-    Call<RecipeApi> getRecipeIngredients (@Path("id") int id, @Query("apiKey") String apiKey, @Query("includeNutrition") boolean includeNutrition );
+    Call<RecipeApi> getRecipeIngredients (@Path("id") int id, @Query("apiKey") String apiKey, @Query("includeNutrition") boolean includeNutrition);
 
     @GET("food/ingredients/{id}/information")
     Call<IngredientApi> getIngredientMeasureUnit (@Path("id") int id, @Query("apiKey") String apiKey, @Query("amount") int amount );

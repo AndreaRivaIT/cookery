@@ -11,5 +11,7 @@ public interface ResponseCallbackApi {
     void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes);
     void onResponseRandomRecipeFirstCourse(List<RecipeApi> recipes);
     void onResponseRecipeByIngredient(List<RecipeApi> recipes);
+    void onResponseRandomRecipe(List<RecipeApi> recipes);
+
     void onFailure(int errorMessage);
 }

@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.Ingredient;
-import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.ui.PantryFragment;
 
 public class IngredientChipAdapterPantry extends RecyclerView.Adapter<IngredientChipAdapterPantry.IngredientViewHolder>{
@@ -48,7 +43,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position){
         IngredientPantry ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
-        holder.tvIngredient.setText(ingredient.getIngredientName());
+        holder.tvIngredient.setText(ingredient.getName());
 
         holder.tvQuantity.setText(" "+ingredient.getQuantity() + " "+ingredient.getMeasureUnit());
         holder.tvIngredient.setOnLongClickListener(new View.OnLongClickListener(){
@@ -84,7 +79,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         ingredientDialog.setContentView(R.layout.layout_ingredient_quantity_dialog);
         // creo e trovo l'oggetto textView nella dialog
         TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
-        ingredientName.setText(ingredientSelected.getIngredientName());
+        ingredientName.setText(ingredientSelected.getName());
 
         EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
 
