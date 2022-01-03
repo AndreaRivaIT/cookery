@@ -25,6 +25,7 @@ import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.IngredientAndStepReopistory;
 import it.unimib.cookery.utils.ResponseCallbackStepAndIngredients;
@@ -72,6 +73,10 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     private IngredientAndStepReopistory ingredientAndStepReopistory =
             new IngredientAndStepReopistory(this);
     private ArrayList<IngredientApi> missingIngredients;
+    private ArrayList<String> pantryIngredients;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,10 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
+
+
+
+
 
         // ottengo i riferimenti ai vari elementi della ui
         textView_title_recipe = findViewById(R.id.textView_title_recipe);
@@ -104,6 +113,9 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         type = intent.getStringExtra(costants.TYPE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
+        pantryIngredients = intent.getStringArrayListExtra("prova");
+
+
 
 
 
@@ -214,6 +226,29 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
     }
 
+
+/*
+    private void createChipsSubcard() {
+        // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne
+        rcvChips = findViewById(R.id.rcv_chips);
+        ingredientChipAdapter = new IngredientChipAdapter();
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
+        rcvChips.setLayoutManager(flexboxLayoutManager);
+        rcvChips.setFocusable(false);
+        rcvChips.setNestedScrollingEnabled(false);
+
+        if(pantryIngredients == null)
+            ingredientChipAdapter.setData(ingredienteRecived);
+        else
+            ingredientChipAdapter.setDataPantry(ingredienteRecived, pantryIngredients);
+
+        rcvChips.setAdapter(ingredientChipAdapter);
+
+    }*/
+
+
+
+
     private void createChips() {
         // inflate chips utilizzado il FlexboxLayoutManager per non avere l'impedimento delle colonne
         rcvChips = findViewById(R.id.rcv_chips);
@@ -223,10 +258,14 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
 
-        if(missingIngredients == null)
+        if(missingIngredients == null && type.equals(costants.READY_TO_COOCK) )
+
             ingredientChipAdapter.setData(ingredienteRecived);
-        else
+
+        else if(missingIngredients != null)
             ingredientChipAdapter.setData(ingredienteRecived, missingIngredients);
+        else
+            ingredientChipAdapter.setDataPantry(ingredienteRecived, pantryIngredients);
 
         rcvChips.setAdapter(ingredientChipAdapter);
 

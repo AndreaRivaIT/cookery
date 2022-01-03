@@ -1,6 +1,7 @@
 package it.unimib.cookery.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import it.unimib.cookery.models.IngredientApi;
 public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAdapter.IngredientViewHolder> {
     private List<IngredientApi> mListIngredients;
     private ArrayList<IngredientApi> missingIngredients;
+    private ArrayList<String> ingredientPantry;
     private int k = 0;
 
 
@@ -33,6 +35,15 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
         notifyDataSetChanged();
 
     }
+
+
+    public void setDataPantry(List<IngredientApi> list, ArrayList<String> ingredientPantry ) {
+        this.mListIngredients = list;
+        this.ingredientPantry = ingredientPantry;
+        notifyDataSetChanged();
+
+    }
+
 
 
     @NonNull
@@ -60,11 +71,32 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
 
         if(missingIngredients != null && missingIngredients.contains(ingredient)) {
 
+            Log.d("stampa", ""+missingIngredients.toString());
+
            missing = true;
-
-
         }
 
+        else if(ingredientPantry != null && missingIngredients == null ){
+
+            Log.d("stampa", "second if");
+
+            boolean trovato = false;
+            for(int i=0; i<ingredientPantry.size() && !trovato; i++)
+                if(ingredientPantry.get(i).equalsIgnoreCase(ingredient.getName())){
+                    trovato = true;
+                }
+
+            if(!trovato)
+                missing = true;
+
+        }else if(missingIngredients == null) {
+            missing = true;
+            Log.d("stampa", "terzo if");
+        }
+        else if(ingredientPantry == null && missingIngredients == null) {
+            missing = true;
+            Log.d("stampa", "quarto if");
+        }
 
 
         holder.tvIngredient.setText(ingredient.getName() + ":");

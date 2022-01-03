@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import it.unimib.cookery.R;
@@ -44,6 +45,11 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
     private ArrayList<RecipeApi> recipeArrayListDessert;
     private ArrayList<RecipeApi> recipeArrayListMainCourse;
     private ArrayList<RecipeApi> recipeArrayListFirstCourse;
+    private ArrayList<IngredientPantry> ingredientPantries;
+
+    private String ingredient = "";
+    private  ArrayList<String> pantriesArrayList;
+
 
 
     private Costants costants = new Costants();
@@ -82,12 +88,12 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         recipeArrayListDessert = new ArrayList<>();
         recipeArrayListMainCourse = new ArrayList<>();
         recipeArrayListFirstCourse = new ArrayList<>();
+        ingredientPantries = new ArrayList<>();
+
 
 
         repositoryDatabase.readAllIngredientPantry();
-        recipeRepository.getRandomRecipeFirstCourse("");
-        recipeRepository.getRandomRecipeMainCourse("");
-        recipeRepository.getRandomRecipeDessert("");
+
         // provare con shared preferences ogni volta che si modifica il pantry fare le chiamte
 
 
@@ -111,9 +117,9 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
         if (modified) {
             repositoryDatabase.readAllIngredientPantry();
-            recipeRepository.getRandomRecipeFirstCourse("");
-            recipeRepository.getRandomRecipeMainCourse("");
-            recipeRepository.getRandomRecipeDessert("");
+           // recipeRepository.getRandomRecipeFirstCourse("");
+           // recipeRepository.getRandomRecipeMainCourse("");
+           // recipeRepository.getRandomRecipeDessert("");
 
             modified = false;
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -156,10 +162,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         ) {
 
             // da creare un variabile che mi dice se ci sono o meno ingredienti
-            recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, false);
-            recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
-            recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse);
-            recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
+            recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, false, pantriesArrayList);
+            recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert, pantriesArrayList);
+            recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse, pantriesArrayList);
+            recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse, pantriesArrayList);
             recyclerViewRTC.setAdapter(recipeAdapter);
             recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
             recyclerViewHome3.setAdapter(recipeAdapterSubcard2);
@@ -174,7 +180,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
     public void onResponseRandomRecipeDessert(List<RecipeApi> recipes) {
         recipeArrayListDessert.clear();
         recipeArrayListDessert.addAll(recipes);
-        recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert);
+        recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert, pantriesArrayList);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
 
 
@@ -184,7 +190,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
     public void onResponseRandomRecipeMainCourse(List<RecipeApi> recipes) {
         recipeArrayListMainCourse.clear();
         recipeArrayListMainCourse.addAll(recipes);
-        recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse);
+        recipeAdapterSubcard2 = new RecipeAdapterSubcard(getContext(), recipeArrayListMainCourse, pantriesArrayList);
         recyclerViewHome3.setAdapter(recipeAdapterSubcard2);
 
     }
@@ -195,7 +201,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         recipeArrayListFirstCourse.addAll(recipes);
         for (RecipeApi r : recipeArrayListFirstCourse)
             Log.d("Gson", "FirstCourse " + r.toString());
-        recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse);
+        recipeAdapterSubcard3 = new RecipeAdapterSubcard(getContext(), recipeArrayListFirstCourse, pantriesArrayList);
         recyclerViewHome2.setAdapter(recipeAdapterSubcard3);
 
     }
@@ -206,7 +212,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
         recipeArrayListReadyToCoock.clear();
         recipeArrayListReadyToCoock.addAll(recipes);
-        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, false);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, false, pantriesArrayList);
         recyclerViewRTC.setAdapter(recipeAdapter);
 
         // da fare sorting
@@ -217,7 +223,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
         recipeArrayListReadyToCoock.clear();
         recipeArrayListReadyToCoock.addAll(recipes);
-        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, true);
+        recipeAdapter = new RecipeAdapter(getContext(), recipeArrayListReadyToCoock, true, pantriesArrayList);
         recyclerViewRTC.setAdapter(recipeAdapter);
 
     }
@@ -232,20 +238,29 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
     public void onResponse(Object obj) {
 
 
-        List<IngredientPantry> ingredientApis = (List<IngredientPantry>) obj;
+
+
+         ingredientPantries = (ArrayList<IngredientPantry>) obj;
         String ingredient = "";
 
-        if (ingredientApis.size() > 0) {
+        if (ingredientPantries.size() > 0) {
 
 
-            for (int i = 0; i < ingredientApis.size() - 1; i++)
-                ingredient += ingredientApis.get(i).getName() + ",";
+            for (int i = 0; i < ingredientPantries.size() - 1; i++)
+                ingredient += ingredientPantries.get(i).getName() + ",";
 
-            ingredient += ingredientApis.get(ingredientApis.size() - 1).getName();
+            ingredient += ingredientPantries.get(ingredientPantries.size() - 1).getName();
 
             Log.d("ingredient7", "" + ingredient);
 
+
+           // da passare all'adapter e poi da passare alla single recipe activity
+            pantriesArrayList = new ArrayList<String>(Arrays.asList(ingredient.split(",")));
+
+
+
             recipeRepository.getRecipeByIngredient(ingredient);
+
 
         } else {
 
@@ -253,6 +268,11 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
             Log.d("ingredient7", "else");
             recipeRepository.getRandomRecipe("");
         }
+
+
+        recipeRepository.getRandomRecipeFirstCourse("");
+        recipeRepository.getRandomRecipeMainCourse("");
+        recipeRepository.getRandomRecipeDessert("");
 
     }
 
