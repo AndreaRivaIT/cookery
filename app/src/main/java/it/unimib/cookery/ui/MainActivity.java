@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private NavHostFragment mNavHostFragment;
     private NavController mNavController;
     private NavigationView mNavMenu;
-    private boolean logged = false;
+    private static boolean logged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static void setLogged(boolean bool) {
+        logged = bool;
+    }
+
     //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
 
@@ -71,7 +76,22 @@ public class MainActivity extends AppCompatActivity {
             }
 
             mNavMenu.getMenu().clear();
-            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.logout_drawer:
+                            FirebaseAuth.getInstance().signOut();
+                            setLogged(false);
+                            startActivity(getIntent());
+                            finish();
+                        case R.id.my_profile:
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                            finish();
+                    }
+                    return false;
+                }
+            });
 
 
         } else {

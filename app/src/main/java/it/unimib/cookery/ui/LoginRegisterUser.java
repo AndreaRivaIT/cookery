@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.cookery.R;
 
@@ -43,6 +44,8 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
         loginButton.setOnClickListener(this);
 
         progressBar = findViewById(R.id.login_progress);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -93,7 +96,19 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()) {
-                    //redirect tu user activity
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if(user.isEmailVerified()) {
+                        //redirect to user activity
+                        startActivity(new Intent(LoginRegisterUser.this, MainActivity.class));
+                        MainActivity.setLogged(true);
+                        finish();
+                    } else {
+                        user.sendEmailVerification();
+                        Toast.makeText(LoginRegisterUser.this, "check your email to verify your account", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
+
                 } else {
                     Toast.makeText(LoginRegisterUser.this, "failed to login, check your credentials", Toast.LENGTH_LONG).show();
                 }

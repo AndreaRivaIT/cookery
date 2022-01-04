@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.unimib.cookery">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".ui.UserProfile"
-            android:exported="false" />
+            android:name=".ui.UserProfile" />
         <activity
             android:name=".ui.LoginRegisterUser"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="false"/>
         <activity
             android:name=".ui.RegisterUser"
             android:exported="false" />
