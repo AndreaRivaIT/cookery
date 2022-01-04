@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.login_drawer:
-                            startActivity(new Intent(getApplicationContext(), login_register_user.class));
+                            startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
                     }
                     return false;
                 }
