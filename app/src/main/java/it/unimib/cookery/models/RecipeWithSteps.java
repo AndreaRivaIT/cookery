@@ -11,7 +11,7 @@ import java.util.List;
 public class RecipeWithSteps {
     @Embedded public Recipe Recipe;
     @Relation(
-            parentColumn = "idRecipe",
+            parentColumn = "id",
             entityColumn = "recipeId"
             //associateBy = @Junction(RecipeStepsCrossRef.class)
     )

@@ -11,15 +11,19 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
-import java.util.ArrayList;
-import it.unimib.cookery.R;
-import it.unimib.cookery.models.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import it.unimib.cookery.R;
+import it.unimib.cookery.models.IngredientPantry;
+import it.unimib.cookery.models.Recipe;
 
 
 public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
@@ -32,11 +36,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Context context;
 
 
-    /* url costante per prova glide */
-
-    private static final String imgUrl= "https://spoonacular.com/recipeImages/716429-312x231.jpg";
-
-
 
     // array list per le ricette che non hanno categoria desiderata dall'utente
     private ArrayList<Recipe> Removed = new ArrayList<>();
@@ -44,22 +43,24 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
     public AdapterClass(@NonNull Context context, ArrayList<Recipe> recipesArrayList) {
         super(context, 0, recipesArrayList);
-
         this.context = context;
-
         for (Recipe r : recipesArrayList)
             Log.d("stampa", "" + r.getName());
-
-
         Log.d("qui", "adapter class");
         listdata = recipesArrayList;
         filterData = new ArrayList<>(listdata);
 
     }
-
-
-
-
+    public  void setData( ArrayList<Recipe> list){
+        this.listdata = list;
+        for(int i=0; i < listdata.size();i++){
+            Log.i("test", "Adapter" + listdata.get(i).getName());
+        }
+        filterData = new ArrayList<>(listdata);
+        Log.i("test", "Adapter" + listdata.size());
+        Log.i("test", "----------------------------------------------");
+        notifyDataSetChanged();
+    }
 
 
     @NonNull
@@ -68,36 +69,25 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         if (convertView == null) {
             // Layout Inflater inflates each item to be displayed in GridView.
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        }
 
+        }
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
         ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
                 .setText(listdata.get(position).getName());
-
 
         /* ottengo l'url dell'immagine */
         // String imgUrl = listdata.get(position).getImageUrl();
 
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-      ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-       .setImageResource(listdata.get(position).getImageId());
 
-
-
-
-
-
-
-
-
-
+        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+                .setImageResource(listdata.get(position).getImageId());
         return convertView;
     }
 
 
     public void applyFilter(ArrayList<String> arr) {
-
         // serve per resettare i filtri
         if (Removed.size() > 0) {
             for (Recipe r : Removed) {
@@ -108,7 +98,6 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
             }
             Removed.clear();
         }
-
         // se c'è almeno un filtro selezionato trovo tutte le ricette che non rispettano i filtri
         // e le sottraggo dalle due array list e le aggiungo all'array list Removed che serve
         // per il ripristino
@@ -120,16 +109,13 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
                     Removed.add(r);
                 }
             }
-
             // rimuovo da entrambe le liste gli elementi che non rispecchiano i filtri
             listdata.removeAll(Removed);
             filterData.removeAll(Removed);
         }
         // notifico del cambiamento del dato per aggiornare la grid view
         notifyDataSetChanged();
-
     }
-
 
     public Filter getFilter() {
         return filterNotification;
@@ -139,45 +125,35 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
     private Filter filterNotification = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-
             ArrayList<Recipe> filterList = new ArrayList<>();
-
             if (constraint == null || constraint.length() == 0) {
-
                 filterList.addAll(filterData);
-
-
             } else {
-
                 String searchStr = constraint.toString().toLowerCase().trim();
-
                 for (Recipe recipe : filterData) {
                     String nameLowerCase = recipe.getName().toLowerCase();
                     if (nameLowerCase.contains(searchStr)) {
                         filterList.add(recipe);
-
                     }
-
                 }
-
             }
-
             FilterResults results = new FilterResults();
             results.values = filterList;
-
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults filterResults) {
-
             listdata.clear();
             listdata.addAll((ArrayList<Recipe>) filterResults.values);
 
             // se la lista risultato è vuota ritorna un messaggio di nessun risultato trovato
             if (listdata.size() == 0) {
-               // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
+                // non riesce a rislvere il metodo make quindi aspetto a implementare le snackbar
                 //Snackbar.make(getContext(), "prova", Snackbar.LENGTH_SHORT).show();
+
+
+                // Snackbar.make(, "fffffff", Snackbar.LENGTH_SHORT).show();
 
                 Toast.makeText(getContext(), R.string.result_not_found, Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();

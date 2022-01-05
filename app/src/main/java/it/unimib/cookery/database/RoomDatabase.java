@@ -9,23 +9,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.unimib.cookery.costants.Costants;
-import it.unimib.cookery.models.Ingredient;
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Pantry;
+import it.unimib.cookery.models.PantryWithIngredientPantry;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.models.RecipeIngredientCrossRef;
 import it.unimib.cookery.models.RecipeStep;
 
-//@Database(entities = {Recipe.class, RecipeStep.class, RecipeIngredientCrossRef.class,
-  //
-//      Ingredient.class, IngredientPantry.class, Pantry.class}, version = Costants.DATABASE_VERSION)
+
+@Database(entities = {Pantry.class, IngredientPantry.class, Recipe.class, RecipeStep.class, IngredientApi.class}, version = Costants.DATABASE_VERSION)
+
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
 
+    public abstract PantryDao pantryDao();
+    public abstract IngredientPantryDao ingredientPantryDao();
     public abstract RecipeDao recipeDao();
-    public abstract StepDao stepDao();
-    private static volatile RoomDatabase INSTANCE;
+    public abstract StepDao recipeStepDao();
+    public abstract IngredientApiDao ingredientApiDao();
 
+    private static volatile RoomDatabase INSTANCE;
     private static int NUMBER_OF_THREADS = 4;
+
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public static RoomDatabase getDatabase(final Context context){

@@ -1,15 +1,49 @@
 package it.unimib.cookery.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class RecipeStep {
+
+    @PrimaryKey
+    private int idStep;
+    private int recipeId;
+
+    @ColumnInfo(name = "n_steps")
     private int nStep;
+
     private String description;
 
     public RecipeStep(int nStep, String description) {
         this.nStep = nStep;
         this.description = description;
     }
+    public RecipeStep() {
 
-    public int getnStep() {
+    }
+
+
+    public int getIdStep() {
+        return idStep;
+    }
+
+    public void setIdStep(int idStep) {
+        this.idStep = idStep;
+    }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        recipeId = recipeId;
+    }
+
+
+
+    public int getNStep() {
         return nStep;
     }
 
@@ -17,7 +51,7 @@ public class RecipeStep {
         return description;
     }
 
-    public void setnStep(int nStep) {
+    public void setNStep(int nStep) {
         this.nStep = nStep;
     }
 

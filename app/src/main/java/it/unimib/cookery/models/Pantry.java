@@ -1,28 +1,39 @@
 package it.unimib.cookery.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity(tableName = "pantry")
 public class Pantry {
+     @PrimaryKey(autoGenerate = true)
+     private int idPantry;
 
-     ArrayList<Ingredient> ingredientList = new ArrayList<>();
+     @ColumnInfo(name = "name_pantry")
+     private String namePantry;
 
-     public Pantry(ArrayList<Ingredient> ingredientList) {
-          this.ingredientList = ingredientList;
+     public Pantry(String namePantry) {
+          this.namePantry = namePantry;
      }
 
-     public Pantry(Ingredient ingredient) {
-          this.ingredientList.add(ingredient);
+     public int getIdPantry() {
+          return idPantry;
      }
 
-     public ArrayList<Ingredient> getIngredientList() {
-          return ingredientList;
+     public void setIdPantry(int idPantry) {
+          idPantry = idPantry;
      }
 
-     public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-          this.ingredientList = ingredientList;
+     public String getNamePantry() {
+          return namePantry;
      }
-     public void setIngredient(Ingredient ingredient) {
-          this.ingredientList.add(ingredient);
+
+     public void setNamePantry(String namePantry) {
+          this.namePantry = namePantry;
      }
+
+
 
 }

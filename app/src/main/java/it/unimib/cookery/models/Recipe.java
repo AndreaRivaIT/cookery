@@ -2,36 +2,69 @@ package it.unimib.cookery.models;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
-
+@Entity
 /*creata la classe della ricetta sia per il frgamnt delle ricette dell'utente, e ci servirà in seguito */
 public class Recipe {
 
-    private String name;
-    // imageId andrà sostituito con una stringa per l'url dell'immagine
-    private int imageId;
-    private String category;
-    private int nPerson;
-    ArrayList<RecipeStep> stepsList = new ArrayList<>();
-    ArrayList<Ingredient> ingredientList= new ArrayList<>();
+    @PrimaryKey(autoGenerate = true)
+    private int idDb;
 
-    // serve per prova
-    public Recipe() {
+
+
+    private int id;
+    private String name;
+
+    @ColumnInfo(name = "image_url")
+    private String imageUrl;
+
+    @ColumnInfo(name = "image_id")
+    private int imageId;
+
+    private String category;
+
+    @ColumnInfo(name = "n_person")
+    private int nPerson;
+
+
+    @Ignore
+    ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    @Ignore
+    ArrayList<IngredientApi> ingredientList= new ArrayList<>();
+
+
+    public Recipe(int id, String imageUrl, String name){
+        this.id =id;
+        this.imageUrl = imageUrl;
+        this.name = name;
     }
 
+
+    @Ignore
     public Recipe(String name, String category, int imageId) {
         this.name = name;
         this.category = category;
         this.imageId = imageId;
         this.nPerson = 2;
     }
+    public int getIdDb() {
+        return idDb;
+    }
 
-    public  void setnPerson(int n){
+    public void setIdDb(int idDb) {
+        this.idDb = idDb;
+    }
+    public  void setNPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
-            int qBase = ingredientList.get(i).getQuantity() / nPerson;
-            ingredientList.get(i).setQuantity(qBase * n);
-            Log.d("test","nome:" + ingredientList.get(i).getIngredientName()+"- quantita:"+ingredientList.get(i).getQuantity());
+            double qBase = ingredientList.get(i).getAmount() / nPerson;
+            ingredientList.get(i).setAmount(qBase * n);
+            Log.d("test","nome:" + ingredientList.get(i).getName()+"- quantita:"+ingredientList.get(i).getAmount());
         }
         nPerson = n;
     }
@@ -40,7 +73,9 @@ public class Recipe {
         return stepsList;
     }
 
-    public ArrayList<Ingredient> getIngredientList() {
+
+
+    public ArrayList<IngredientApi> getIngredientList() {
 
         return ingredientList;
     }
@@ -49,15 +84,28 @@ public class Recipe {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public String getImageUrl(){
+        return imageUrl;
+    }
+
     public String getCategory() {
         return category;
     }
 
+
     public int getImageId() {
         return imageId;
     }
-
-    public  int getnPerson(){
+    public  int getNPerson(){
         return nPerson;
     }
 
@@ -73,7 +121,7 @@ public class Recipe {
         this.imageId = imageId;
     }
 
-    public void setIngredientList(Ingredient ingredientList) {
+    public void setIngredientList(IngredientApi ingredientList) {
         this.ingredientList.add(ingredientList);
     }
 
@@ -82,5 +130,23 @@ public class Recipe {
         this.stepsList.add(stepsList);
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getnPerson() {
+        return nPerson;
+    }
+
+    public void setnPerson(int nPerson) {
+        this.nPerson = nPerson;
+    }
 }
