@@ -33,11 +33,15 @@ import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements ResponseCallbackDb{
 
@@ -46,12 +50,14 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
     private NavHostFragment mNavHostFragment;
     private NavController mNavController;
     private NavigationView mNavMenu;
+
+    private static boolean logged = false;
     private List<PantryWithIngredientPantry> list;
-    private boolean logged = false;
     private boolean firstAccess;
     private ArrayList<IngredientApi> ing;
     private DatabasePantryRepository dbIngredient;
     private Costants costants = new Costants();
+
 
 
     private RecipeRepository db;
@@ -154,6 +160,10 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
     }
 
+    public static void setLogged(boolean bool) {
+        logged = bool;
+    }
+
     //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
 
@@ -168,7 +178,22 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
             }
 
             mNavMenu.getMenu().clear();
-            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.logout_drawer:
+                            FirebaseAuth.getInstance().signOut();
+                            setLogged(false);
+                            startActivity(getIntent());
+                            finish();
+                        case R.id.my_profile:
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                            finish();
+                    }
+                    return false;
+                }
+            });
 
 
         } else {
@@ -186,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.login_drawer:
-                            startActivity(new Intent(getApplicationContext(), login_register_user.class));
+                            startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
                     }
                     return false;
                 }

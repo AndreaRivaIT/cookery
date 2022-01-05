@@ -14,23 +14,23 @@
 
         <TextView
             android:id="@+id/textViewMail"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/mail" />
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Email" />
 
         <EditText
-            android:id="@+id/editTextMail"
+            android:id="@+id/profileEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewMail"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:hint="@string/mail"
+            android:gravity="center"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />
@@ -40,7 +40,7 @@
             android:id="@+id/textViewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextMail"
+            android:layout_below="@id/profileEmail"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
@@ -48,14 +48,14 @@
             android:text="@string/password" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/profilePassword"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewPassword"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
@@ -63,16 +63,19 @@
 
         <Button
             android:id="@+id/saveButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextPassword"
+            android:layout_below="@id/profilePassword"
             android:layout_marginStart="250dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/cookery_blue"
+            android:elevation="8dp"
             android:enabled="false"
-            android:text="@string/save" />
+            android:fontFamily="@font/poppins_bold"
+            android:text="SAVE"
+            android:textColor="@color/white" />
 
 
     </RelativeLayout>
