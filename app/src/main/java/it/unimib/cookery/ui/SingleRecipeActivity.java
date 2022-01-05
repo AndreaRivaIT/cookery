@@ -113,7 +113,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         type = intent.getStringExtra(costants.TYPE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
-        pantryIngredients = intent.getStringArrayListExtra("prova");
+        pantryIngredients = intent.getStringArrayListExtra(costants.PANTRY);
 
 
 

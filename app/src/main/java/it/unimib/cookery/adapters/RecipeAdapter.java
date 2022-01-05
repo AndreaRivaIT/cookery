@@ -80,7 +80,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.Viewholder
                     intent.putExtra(costants.TYPE, costants.READY_TO_COOCK);
                     intent.putParcelableArrayListExtra(costants.MISSING_INGREDIENTS, (ArrayList<? extends Parcelable>) recipeArrayList.
                             get(getAdapterPosition()).getMissedIngredients());
-                        intent.putStringArrayListExtra("prova", pantryIngredients);
+                        intent.putStringArrayListExtra(costants.PANTRY, pantryIngredients);
                     }
 
                     else{

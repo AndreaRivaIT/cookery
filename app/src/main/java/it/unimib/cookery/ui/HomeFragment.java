@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
-        modified = sharedPreferences.getBoolean("modified", true);
+        modified = sharedPreferences.getBoolean(costants.MODIFIED, true);
 
 
         Log.d("boolean", "" + modified);
@@ -255,6 +255,7 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
 
            // da passare all'adapter e poi da passare alla single recipe activity
+            // da riprovare col parcelable per gli ingredientiPantry
             pantriesArrayList = new ArrayList<String>(Arrays.asList(ingredient.split(",")));
 
 

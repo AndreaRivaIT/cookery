@@ -65,7 +65,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                     intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
                     intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
                             get(getAdapterPosition()).getExtendedIngredients());
-                    intent.putStringArrayListExtra("prova", ingredientPantry);
+                    intent.putStringArrayListExtra(costants.PANTRY, ingredientPantry);
                     context.startActivity(intent);
 
                 }

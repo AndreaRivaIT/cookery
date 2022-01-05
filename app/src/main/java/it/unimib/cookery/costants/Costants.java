@@ -45,6 +45,7 @@ public class Costants {
     public static final String MISSING_INGREDIENTS="missingIngredients";
     public static final String READY_TO_COOCK="readyToCoock";
     public static final String OTHER="other";
+    public static final String PANTRY="pantry";
 
 
     /* stringhe costanti per intent */
