@@ -2,6 +2,7 @@ package it.unimib.cookery.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -20,6 +21,7 @@ public class RecipeStep {
         this.nStep = nStep;
         this.description = description;
     }
+    @Ignore
     public RecipeStep() {
 
     }
