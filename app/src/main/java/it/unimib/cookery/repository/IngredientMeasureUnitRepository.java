@@ -4,6 +4,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.service.SpoonacularApiService;
 import it.unimib.cookery.utils.IngredientUnitMeasureResponseCallback;
@@ -15,14 +17,15 @@ import retrofit2.Response;
 public class IngredientMeasureUnitRepository {
 
 
-    private static final String ERROR_STRING = "Something went wrong, pleas check your connection";
+
 
     SpoonacularApiService spoonacularApiService;
     IngredientUnitMeasureResponseCallback ingredientUnitMeasureResponseCallback;
     private ArrayList<String> possibleUnits;
+    Costants costants = new Costants();
 
 
-    public static final String APIKEY = "dabd7cf0ddb04d2dbfe85a7597c4067b";
+
 
 
     public IngredientMeasureUnitRepository(IngredientUnitMeasureResponseCallback ingredientUnitMeasureResponseCallback) {
@@ -34,7 +37,7 @@ public class IngredientMeasureUnitRepository {
     public void getMeasure(int id, int idChip){
 
         Call<IngredientApi> IngredintUnitMeasure =
-                spoonacularApiService.getIngredientMeasureUnit(id, APIKEY, 1);
+                spoonacularApiService.getIngredientMeasureUnit(id, costants.API_KEY, 1);
 
 
         IngredintUnitMeasure.enqueue(new Callback<IngredientApi>() {
@@ -49,7 +52,7 @@ public class IngredientMeasureUnitRepository {
 
                     ingredientUnitMeasureResponseCallback.getUnitMeasureResponse(possibleUnits, idChip);
                 }else
-                    ingredientUnitMeasureResponseCallback.onFailure("Error in retrieving data");
+                    ingredientUnitMeasureResponseCallback.onFailure(R.string.errorRetriveData);
 
             }
 
@@ -58,7 +61,7 @@ public class IngredientMeasureUnitRepository {
 
                 Log.d("retrofit", "on Failure "+ t);
 
-                ingredientUnitMeasureResponseCallback.onFailure(ERROR_STRING);
+                ingredientUnitMeasureResponseCallback.onFailure(R.string.connectionError);
             }
         });
 

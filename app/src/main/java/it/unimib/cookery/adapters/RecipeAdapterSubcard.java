@@ -26,13 +26,15 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
 
     private Context context;
     private ArrayList<RecipeApi> recipeArrayList;
+    private ArrayList<String> ingredientPantry;
 
     /* oggetto per le costanti */
     private Costants costants = new Costants();
 
-    public RecipeAdapterSubcard(Context context, ArrayList<RecipeApi> recipeArrayList) {
+    public RecipeAdapterSubcard(Context context, ArrayList<RecipeApi> recipeArrayList, ArrayList<String> ingredientPantry) {
         this.context = context;
         this.recipeArrayList = recipeArrayList;
+        this.ingredientPantry = ingredientPantry;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
@@ -63,7 +65,9 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
                     intent.putStringArrayListExtra(costants.STEP_ARRAYLIST, step);
                     intent.putParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST, (ArrayList<? extends Parcelable>) recipeArrayList.
                             get(getAdapterPosition()).getExtendedIngredients());
+                    intent.putStringArrayListExtra(costants.PANTRY, ingredientPantry);
                     context.startActivity(intent);
+
                 }
             });
         }

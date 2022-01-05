@@ -45,6 +45,7 @@ public class Costants {
     public static final String MISSING_INGREDIENTS="missingIngredients";
     public static final String READY_TO_COOCK="readyToCoock";
     public static final String OTHER="other";
+    public static final String PANTRY="pantry";
 
 
     /* stringhe costanti per intent */
@@ -59,7 +60,7 @@ public class Costants {
     private static final String genericApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
 
-    public static final String API_KEY = myApiKey;
+    public static final String API_KEY = genericApiKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */
@@ -80,6 +81,11 @@ public class Costants {
     public static final String CSV_FILE_NAME="ingredient.csv";
 
     /* fine stringhe main activity */
+
+    /* stringhe per modifica */
+    public static final String MODIFIED = "modified";
+    /* fine stringhe per modifica */
+
 
     public Costants() {
 

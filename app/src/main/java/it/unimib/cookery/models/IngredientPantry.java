@@ -1,26 +1,31 @@
 package it.unimib.cookery.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ingredient_pantry")
-public class IngredientPantry extends Ingredient{
+public class IngredientPantry extends IngredientApi {
 
-    @PrimaryKey(autoGenerate = true)
-    private int idIngredientPantry;
+
     private int data;
     private String measureUnit;
     public long pantryId;
+    private int quantity;
 
     @Ignore
-    public IngredientPantry(int idIngredient, String ingredientName, int quantity) {
-        super(idIngredient, ingredientName, quantity);
+    public IngredientPantry(int id, String name) {
+        super(id, name);
     }
 
-    public IngredientPantry(int idIngredient, String ingredientName, int quantity, int data, long pantryId, String measureUnit) {
-        super(idIngredient, ingredientName, quantity);
+
+    public IngredientPantry(int id, String name, int quantity, int data, long pantryId, String measureUnit) {
+        super(id, name);
         this.data = data;
+        this.quantity = quantity;
         this.pantryId = pantryId;
         this.measureUnit = measureUnit;
     }
@@ -34,18 +39,32 @@ public class IngredientPantry extends Ingredient{
         this.measureUnit = measureUneit;
     }
 
-    public int getIdIngredientPantry() {
-        return idIngredientPantry;
-    }
-
-    public void setIdIngredientPantry(int idIngredientPantry) {
-        this.idIngredientPantry = idIngredientPantry;
-    }
 
     public int getData() {
         return data;
     }
+
     public void setData(int data) {
         this.data = data;
     }
+
+    public long getPantryId() {
+        return pantryId;
+    }
+
+    public void setPantryId(long pantryId) {
+        this.pantryId = pantryId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
+
+
 }

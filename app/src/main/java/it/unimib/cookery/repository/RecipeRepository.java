@@ -12,13 +12,8 @@ import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.database.RecipeDao;
 import it.unimib.cookery.database.RoomDatabase;
 import it.unimib.cookery.database.StepDao;
-import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
-import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.models.Recipe;
-
-import it.unimib.cookery.models.IngredientApi;
 
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.RecipeStep;
@@ -69,6 +64,41 @@ public class RecipeRepository {
         this.mStepDao = roomDatabase.recipeStepDao();
         this.mResponseCallbackDb = responseCallback;
     }
+
+
+    // get random recipe sia con tags che senza
+
+    public void getRandomRecipe(String tags) {
+
+
+        Call<ResponseRecipe> RandomRecipe;
+        if (tags.equals("")) {
+            RandomRecipe=
+                    spoonacularApiService.getRandomRecipeNoTags(costants.API_KEY, 10);
+        } else {
+            RandomRecipe =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, tags);
+        }
+        RandomRecipe.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
+            @Override
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
+                //  Log.d("retrofit", "" + response.raw().request().url());
+                if (response.body() != null && response.isSuccessful()) {
+                    RecipeApiListDessert = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipe(RecipeApiListDessert);
+                } else
+                    responseCallback.onFailure(R.string.errorRetriveData);
+            }
+            @Override
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
+                Log.d("retrofit", "on Failure " + t);
+                responseCallback.onFailure(R.string.connectionError);
+            }
+        });
+    }
+
+
+
 
 
     public void getRandomRecipeDessert(String tags) {

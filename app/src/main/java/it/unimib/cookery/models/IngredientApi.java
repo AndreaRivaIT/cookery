@@ -16,7 +16,11 @@ import java.util.Objects;
 
 @Entity(tableName = "ingredient_api")
 public class IngredientApi implements Parcelable {
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
+    private int idIngredientPantry;
+
+
     private int id;
     private String name;
     @Ignore
@@ -97,6 +101,14 @@ public class IngredientApi implements Parcelable {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public int getIdIngredientPantry() {
+        return idIngredientPantry;
+    }
+
+    public void setIdIngredientPantry(int idIngredientPantry) {
+        this.idIngredientPantry = idIngredientPantry;
     }
 
     @Override

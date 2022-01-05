@@ -1,16 +1,14 @@
 package it.unimib.cookery.adapters;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,16 +21,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.Ingredient;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.repository.IngredientMeasureUnitRepository;
 import it.unimib.cookery.ui.PantryFragment;
 import it.unimib.cookery.utils.IngredientUnitMeasureResponseCallback;
@@ -40,6 +36,8 @@ import it.unimib.cookery.utils.IngredientUnitMeasureResponseCallback;
 public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.IngredientViewHolder> implements IngredientUnitMeasureResponseCallback {
     private List<IngredientApi> mListIngredients;
     private  int k = 0;
+    private Costants costants = new Costants();
+    private boolean modified;
     private IngredientViewHolder holder;
     private Spinner measureUnitSpinner;
     private IngredientMeasureUnitRepository ingredientMeasureUnitRepository = new IngredientMeasureUnitRepository(this);
@@ -88,9 +86,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     }
 
     @Override
-    public void onFailure(String errorMessage) {
+    public void onFailure(int errorMessage) {
 
-        Toast.makeText(holder.itemView.getContext(), "errore", Toast.LENGTH_SHORT).show();
+        Toast.makeText(holder.itemView.getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -152,6 +150,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                 // prendo la quantità scritta nel text edit se non è vuota la converto in stringa e poi in intero
                 // se è > 0 la salvo mentre se è = 0 mostro il toast
                 // l'edit text è già settata solo per accettare numeri interi positivi
+
+                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+
                 int pantryPosition = 0;
                 String text = spinner.getSelectedItem().toString();
                 if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
@@ -170,6 +171,10 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                     IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),
                             12, pantryPosition, measureUnit);
                     PantryFragment.savedb(ingredientPantry);
+                    modified = true;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(costants.MODIFIED, modified);
+                    editor.apply();
                     ingredientDialog.dismiss();
                 } else {
                     // stampa un toast di errore

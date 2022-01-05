@@ -110,6 +110,7 @@ public class DatabasePantryRepository {
             public void  run() {
                 if(obj instanceof IngredientPantry) {
                     ingredientPantryDao.update((IngredientPantry) obj);
+                    readAllIngredientPantry();
                 }
             }
         };
@@ -119,4 +120,18 @@ public class DatabasePantryRepository {
 
     }
     //Delete
+    public void delete(Object obj){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                if(obj instanceof IngredientPantry) {
+                    int id = ((IngredientPantry) obj).getIdIngredientPantry();
+                    Log.d("test","delete" + id);
+                    ingredientPantryDao.deleteByIngredientPantry(id);
+                    readAllIngredientPantry();
+                }
+            }
+        };
+        new Thread(runnable).start();
+    }
 }
