@@ -175,6 +175,9 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
         return root;
     }
 
+
+
+
     private void closeKeyboard() {
         // this will give us the view which is currently focus in this layout
         View view = this.getActivity().getCurrentFocus();
@@ -203,7 +206,7 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
     public static void updateQuantity(IngredientPantry ingredientPantry){
         db.update(ingredientPantry);
-        db.readAllIngredientPantry();
+
     }
 
     @Override
@@ -249,6 +252,13 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
                 });
             }
         }
+    }
+
+
+    public static void deleteIngredient(IngredientPantry ingredientPantry){
+        //Log.d("test","delete");
+        db.delete(ingredientPantry);
+        //db.readAllIngredientPantry();
     }
 
     private void createPantry(List<IngredientPantry> listData) {

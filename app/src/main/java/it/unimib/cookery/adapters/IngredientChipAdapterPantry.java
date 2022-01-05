@@ -57,6 +57,15 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         });
 
 
+       // sistemare variabile modified share preferences
+        holder.imgButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PantryFragment.deleteIngredient(ingredient);
+            }
+        });
+
+
         holder.tvIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
