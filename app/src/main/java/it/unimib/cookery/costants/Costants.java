@@ -5,12 +5,31 @@ public class Costants {
 
     /* inizio stringhe costanti Alimentar Prefences Fragment */
 
+
     public static final String GLUTEN = "Gluten";
-    public static final String LACTOSE = "Lactose";
-    public static final String NUTS = "Nuts";
+    public static final String EGG = "Egg";
+    public static final String GRAIN = "Grain";
+    public static final String PENAUT = "Penaut";
+    public static final String SEAFOOD = "Seafood";
+    public static final String SESAME = "Sesame";
+    public static final String SHELLFISH = "Shellfish";
+    public static final String SOY = "Soy";
+    public static final String SULFITE = "Sulfite";
+    public static final String WHEAT = "Wheat";
+    public static final String DAIRY = "Dairy";
+    public static final String TREE_NUT = "Tree Nut";
     public static final String VEGAN = "Vegan";
     public static final String VEGETARIAN = "Vegetarian";
     public static final String PESCETARIAN = "Pescetarian";
+    public static final String GLUTEN_FREE = "Gluten Free";
+    public static final String PALEO = "Paleo";
+    public static final String KETOGENIC = "Ketogenic";
+
+    public static final String DIET = "diet";
+    public static final String INTOLLERANCES = "intollerances";
+    public static final String PREFERENCES_MODIFIED = "preferencesModified";
+
+
 
 
     /* fine  stringhe costanti Alimentar Prefences Fragment */
@@ -42,10 +61,10 @@ public class Costants {
     public static final String STEP_ARRAYLIST = "StepArraylist";
     public static final String INGREDIENT_ARRAYLIST = "IngredientArraylist";
     public static final String RECIPE_SERVINGS = "Servings";
-    public static final String MISSING_INGREDIENTS="missingIngredients";
-    public static final String READY_TO_COOCK="readyToCoock";
-    public static final String OTHER="other";
-    public static final String PANTRY="pantry";
+    public static final String MISSING_INGREDIENTS = "missingIngredients";
+    public static final String READY_TO_COOCK = "readyToCoock";
+    public static final String OTHER = "other";
+    public static final String PANTRY = "pantry";
 
 
     /* stringhe costanti per intent */
@@ -77,9 +96,9 @@ public class Costants {
 
     /* stringhe main activity */
 
-    public static final String SHARED_PREFERENCES_FILE_NAME ="sharedPreferences";
-    public static final String FIRST_ACCESS="firstAccess";
-    public static final String CSV_FILE_NAME="ingredient.csv";
+    public static final String SHARED_PREFERENCES_FILE_NAME = "sharedPreferences";
+    public static final String FIRST_ACCESS = "firstAccess";
+    public static final String CSV_FILE_NAME = "ingredient.csv";
 
     /* fine stringhe main activity */
 
