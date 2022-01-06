@@ -1,15 +1,22 @@
 package it.unimib.cookery.ui;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +35,9 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
     private ArrayList<String> preferencesChoosen = new ArrayList<>();
     private String intollerances = "";
     private String diet = "";
+    private boolean logged = false;
     private boolean preferenciesModified;
+
 
 
     // oggetto classe Costants per accedere alle costanti
@@ -49,6 +58,8 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         intollerances = sharedPreferences.getString(alimentarPreferenceCostants.INTOLLERANCES, "");
         diet = sharedPreferences.getString(alimentarPreferenceCostants.DIET, "");
         preferenciesModified = sharedPreferences.getBoolean(alimentarPreferenceCostants.PREFERENCES_MODIFIED, false);
+        //logged =
+
 
         intolleranceChoosen = new ArrayList<String>(Arrays.asList(intollerances.split(",")));
         preferencesChoosen = new ArrayList<String>(Arrays.asList(diet.split(",")));
@@ -77,7 +88,69 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.saveButton);
 
 
-        /* fare switch per intolleranze */
+
+
+
+        ImageView hamburgherMenu = findViewById(R.id.imageMenu);
+
+
+
+
+       for(int i=0; i< intolleranceChoosen.size(); i++){
+           switch (intolleranceChoosen.get(i)){
+
+               case Costants.GLUTEN:
+                   gluten.setChecked(true);
+                   break;
+
+               case Costants.EGG:
+                   egg.setChecked(true);
+                   break;
+
+               case Costants.DAIRY:
+                   dairy.setChecked(true);
+                   break;
+
+               case Costants.TREE_NUT:
+                   treeNut.setChecked(true);
+                   break;
+
+               case Costants.PENAUT:
+                   penaut.setChecked(true);
+                   break;
+
+               case Costants.SHELLFISH:
+                   shellfish.setChecked(true);
+                   break;
+
+               case Costants.WHEAT:
+                   wheat.setChecked(true);
+                   break;
+
+               case Costants.GRAIN:
+                   grain.setChecked(true);
+                   break;
+
+               case Costants.SEAFOOD:
+                   seafood.setChecked(true);
+                   break;
+
+               case Costants.SOY:
+                   soy.setChecked(true);
+                   break;
+
+               case Costants.SESAME:
+                   sesame.setChecked(true);
+                   break;
+
+
+               case Costants.SULFITE:
+                   sulfite.setChecked(true);
+                   break;
+           }
+       }
+
+
 
 
         for (int i = 0; i < preferencesChoosen.size(); i++) {
@@ -109,6 +182,16 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
                     break;
             }
         }
+
+
+        hamburgherMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // onBackPressed();
+
+            }
+        });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,4 +293,5 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
 
         });
     }
+
 }

@@ -111,6 +111,8 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
 
                 } else {
                     Toast.makeText(LoginRegisterUser.this, "failed to login, check your credentials", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+
                 }
             }
         });
