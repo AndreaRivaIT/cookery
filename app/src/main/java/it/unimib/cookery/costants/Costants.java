@@ -5,12 +5,31 @@ public class Costants {
 
     /* inizio stringhe costanti Alimentar Prefences Fragment */
 
-    public static final String GLUTEN = "Gluten";
-    public static final String LACTOSE = "Lactose";
-    public static final String NUTS = "Nuts";
-    public static final String VEGAN = "Vegan";
-    public static final String VEGETARIAN = "Vegetarian";
-    public static final String PESCETARIAN = "Pescetarian";
+
+    public static final String GLUTEN = "gluten";
+    public static final String EGG = "egg";
+    public static final String GRAIN = "grain";
+    public static final String PENAUT = "penaut";
+    public static final String SEAFOOD = "seafood";
+    public static final String SESAME = "sesame";
+    public static final String SHELLFISH = "shellfish";
+    public static final String SOY = "soy";
+    public static final String SULFITE = "sulfite";
+    public static final String WHEAT = "wheat";
+    public static final String DAIRY = "dairy";
+    public static final String TREE_NUT = "tree nut";
+    public static final String VEGAN = "vegan";
+    public static final String VEGETARIAN = "vegetarian";
+    public static final String PESCETARIAN = "pescetarian";
+    public static final String GLUTEN_FREE = "gluten free";
+    public static final String PALEO = "paleo";
+    public static final String KETOGENIC = "ketogenic";
+
+    public static final String DIET = "diet";
+    public static final String INTOLLERANCES = "intollerances";
+    public static final String PREFERENCES_MODIFIED = "preferencesModified";
+
+
 
 
     /* fine  stringhe costanti Alimentar Prefences Fragment */
@@ -42,10 +61,10 @@ public class Costants {
     public static final String STEP_ARRAYLIST = "StepArraylist";
     public static final String INGREDIENT_ARRAYLIST = "IngredientArraylist";
     public static final String RECIPE_SERVINGS = "Servings";
-    public static final String MISSING_INGREDIENTS="missingIngredients";
-    public static final String READY_TO_COOCK="readyToCoock";
-    public static final String OTHER="other";
-    public static final String PANTRY="pantry";
+    public static final String MISSING_INGREDIENTS = "missingIngredients";
+    public static final String READY_TO_COOCK = "readyToCoock";
+    public static final String OTHER = "other";
+    public static final String PANTRY = "pantry";
 
 
     /* stringhe costanti per intent */
@@ -59,8 +78,9 @@ public class Costants {
     //  8b2514bd6d21482e8b4330863ee719b8
     private static final String genericApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
+    private static final String anotherKey = "fcb6270717784ef3be8488d7befb7477";
 
-    public static final String API_KEY = genericApiKey;
+    public static final String API_KEY = anotherKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */
@@ -76,9 +96,9 @@ public class Costants {
 
     /* stringhe main activity */
 
-    public static final String SHARED_PREFERENCES_FILE_NAME ="sharedPreferences";
-    public static final String FIRST_ACCESS="firstAccess";
-    public static final String CSV_FILE_NAME="ingredient.csv";
+    public static final String SHARED_PREFERENCES_FILE_NAME = "sharedPreferences";
+    public static final String FIRST_ACCESS = "firstAccess";
+    public static final String CSV_FILE_NAME = "ingredient.csv";
 
     /* fine stringhe main activity */
 
