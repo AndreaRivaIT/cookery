@@ -36,7 +36,7 @@ public class Recipe {
     @Ignore
     ArrayList<RecipeStep> stepsList = new ArrayList<>();
     @Ignore
-    ArrayList<Ingredient> ingredientList= new ArrayList<>();
+    ArrayList<IngredientApi> ingredientList= new ArrayList<>();
 
 
     public Recipe(int id, String imageUrl, String name){
@@ -62,9 +62,9 @@ public class Recipe {
     }
     public  void setNPerson(int n){
         for(int i = 0; i < ingredientList.size(); i++){
-            int qBase = ingredientList.get(i).getQuantity() / nPerson;
-            ingredientList.get(i).setQuantity(qBase * n);
-            Log.d("test","nome:" + ingredientList.get(i).getIngredientName()+"- quantita:"+ingredientList.get(i).getQuantity());
+            double qBase = ingredientList.get(i).getAmount() / nPerson;
+            ingredientList.get(i).setAmount(qBase * n);
+            Log.d("test","nome:" + ingredientList.get(i).getName()+"- quantita:"+ingredientList.get(i).getAmount());
         }
         nPerson = n;
     }
@@ -75,8 +75,7 @@ public class Recipe {
 
 
 
-    public ArrayList<Ingredient> getIngredientList() {
-
+    public ArrayList<IngredientApi> getIngredientList() {
         return ingredientList;
     }
 
@@ -121,7 +120,7 @@ public class Recipe {
         this.imageId = imageId;
     }
 
-    public void setIngredientList(Ingredient ingredientList) {
+    public void setIngredientList(IngredientApi ingredientList) {
         this.ingredientList.add(ingredientList);
     }
 

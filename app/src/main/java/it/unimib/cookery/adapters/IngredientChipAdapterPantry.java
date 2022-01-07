@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.Ingredient;
-import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.ui.PantryFragment;
 
 public class IngredientChipAdapterPantry extends RecyclerView.Adapter<IngredientChipAdapterPantry.IngredientViewHolder>{
@@ -48,9 +43,8 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position){
         IngredientPantry ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
-        holder.tvIngredient.setText(ingredient.getIngredientName());
-
-        holder.tvQuantity.setText(" "+ingredient.getQuantity() + " "+ingredient.getMeasureUnit());
+        holder.tvIngredient.setText(ingredient.getName());
+        holder.tvQuantity.setText(" "+ ingredient.getQuantity() + " "+ingredient.getMeasureUnit());
         holder.tvIngredient.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
@@ -60,8 +54,6 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
                 return false;
             }
         });
-
-
         holder.tvIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +61,13 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
                     Log.d("test", "nome click veloce:" + holder.tvIngredient.getText());
                     openDialogModifyProduct(holder.itemView,ingredient);
                 }
-
                 singleClic = true;
+            }
+        });
+        holder.imgButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PantryFragment.deleteIngredient(ingredient);
             }
         });
     }
@@ -84,7 +81,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         ingredientDialog.setContentView(R.layout.layout_ingredient_quantity_dialog);
         // creo e trovo l'oggetto textView nella dialog
         TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
-        ingredientName.setText(ingredientSelected.getIngredientName());
+        ingredientName.setText(ingredientSelected.getName());
 
         EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
 
@@ -95,7 +92,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
             public void onClick(View v) {
                 if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
 
-                    ingredientSelected.setQuantity(Integer.parseInt(editText.getText().toString()));
+                    ingredientSelected.setAmount(Integer.parseInt(editText.getText().toString()));
                     PantryFragment.updateQuantity(ingredientSelected);
                     ingredientDialog.dismiss();
                 } else {

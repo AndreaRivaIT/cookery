@@ -1,24 +1,19 @@
 package it.unimib.cookery.ui;
 
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +26,6 @@ import it.unimib.cookery.R;
 
 import it.unimib.cookery.adapters.IngredientChipAdapterPantry;
 import it.unimib.cookery.adapters.SearchChipAdapter;
-import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 
@@ -39,9 +33,6 @@ import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
 import android.content.Context;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +59,7 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     private RecyclerView rvFridge;
     private RecyclerView rvFreezer;
     private RecyclerView rcvIngredientSearch;
-    private List<Ingredient> ingredientApiSearch = new ArrayList();
+    private List<IngredientApi> ingredientApiSearch = new ArrayList();
 
     private static IngredientChipAdapterPantry ingredientPantryAdapter = new IngredientChipAdapterPantry();
     private static IngredientChipAdapterPantry ingredientFridgeAdapter = new IngredientChipAdapterPantry();
@@ -76,9 +67,9 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
     private LinearLayout designBottomSheet;
     //test ricerca e aggiunta di ricetta
-    private Ingredient primo;
-    private Ingredient secondo;
-    private Ingredient terzo;
+    private IngredientApi primo;
+    private IngredientApi secondo;
+    private IngredientApi terzo;
 
     public PantryFragment() {
         // Required empty public constructor
@@ -212,9 +203,13 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
     public static void updateQuantity(IngredientPantry ingredientPantry){
         db.update(ingredientPantry);
-        db.readAllIngredientPantry();
+        //db.readAllIngredientPantry();
     }
-
+    public static void deleteIngredient(IngredientPantry ingredientPantry){
+        //Log.d("test","delete");
+        db.delete(ingredientPantry);
+        //db.readAllIngredientPantry();
+    }
     @Override
     public void onResponse(Object obj) {
         if (obj != null) {

@@ -30,6 +30,7 @@ public class AlimentarPreferenceFragment extends Fragment {
 
 
 
+
     // oggetto classe Costants per accedere alle costanti
      private Costants alimentarPreferenceCostants = new Costants();
 

@@ -1,8 +1,6 @@
 package it.unimib.cookery.adapters;
 
 import android.graphics.Color;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
 
 public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAdapter.IngredientViewHolder> {

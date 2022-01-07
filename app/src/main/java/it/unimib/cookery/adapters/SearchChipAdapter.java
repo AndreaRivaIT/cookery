@@ -1,16 +1,12 @@
 package it.unimib.cookery.adapters;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.Dialog;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,16 +19,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
-import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.repository.IngredientMeasureUnitRepository;
 import it.unimib.cookery.ui.PantryFragment;
 import it.unimib.cookery.utils.IngredientUnitMeasureResponseCallback;

@@ -24,13 +24,9 @@ import it.unimib.cookery.R;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
-import it.unimib.cookery.models.Ingredient;
 import it.unimib.cookery.models.IngredientApi;
-import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.models.RecipeStep;
 import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.IngredientAndStepReopistory;
-import it.unimib.cookery.repository.RecipeRepository;
 import it.unimib.cookery.utils.ResponseCallbackStepAndIngredients;
 
 public class SingleRecipeActivity extends AppCompatActivity implements ResponseCallbackStepAndIngredients {
