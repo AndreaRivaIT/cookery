@@ -6,24 +6,24 @@ public class Costants {
     /* inizio stringhe costanti Alimentar Prefences Fragment */
 
 
-    public static final String GLUTEN = "Gluten";
-    public static final String EGG = "Egg";
-    public static final String GRAIN = "Grain";
-    public static final String PENAUT = "Penaut";
-    public static final String SEAFOOD = "Seafood";
-    public static final String SESAME = "Sesame";
-    public static final String SHELLFISH = "Shellfish";
-    public static final String SOY = "Soy";
-    public static final String SULFITE = "Sulfite";
-    public static final String WHEAT = "Wheat";
-    public static final String DAIRY = "Dairy";
-    public static final String TREE_NUT = "Tree Nut";
-    public static final String VEGAN = "Vegan";
-    public static final String VEGETARIAN = "Vegetarian";
-    public static final String PESCETARIAN = "Pescetarian";
-    public static final String GLUTEN_FREE = "Gluten Free";
-    public static final String PALEO = "Paleo";
-    public static final String KETOGENIC = "Ketogenic";
+    public static final String GLUTEN = "gluten";
+    public static final String EGG = "egg";
+    public static final String GRAIN = "grain";
+    public static final String PENAUT = "penaut";
+    public static final String SEAFOOD = "seafood";
+    public static final String SESAME = "sesame";
+    public static final String SHELLFISH = "shellfish";
+    public static final String SOY = "soy";
+    public static final String SULFITE = "sulfite";
+    public static final String WHEAT = "wheat";
+    public static final String DAIRY = "dairy";
+    public static final String TREE_NUT = "tree nut";
+    public static final String VEGAN = "vegan";
+    public static final String VEGETARIAN = "vegetarian";
+    public static final String PESCETARIAN = "pescetarian";
+    public static final String GLUTEN_FREE = "gluten free";
+    public static final String PALEO = "paleo";
+    public static final String KETOGENIC = "ketogenic";
 
     public static final String DIET = "diet";
     public static final String INTOLLERANCES = "intollerances";
@@ -80,7 +80,7 @@ public class Costants {
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
     private static final String anotherKey = "fcb6270717784ef3be8488d7befb7477";
 
-    public static final String API_KEY = myApiKey;
+    public static final String API_KEY = anotherKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */

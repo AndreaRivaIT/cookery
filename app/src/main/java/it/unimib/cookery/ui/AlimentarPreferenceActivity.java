@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.models.IngredientPantry;
 
 public class AlimentarPreferenceActivity extends AppCompatActivity {
 
@@ -184,6 +185,7 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         }
 
 
+        // todo sistemare menu hamburgher con andrea o mettere tasto back
         hamburgherMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,8 +288,10 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
                 editor.apply();
 
 
-                Log.d("alimentar", "intollerances " + intollerances);
-                Log.d("alimentar", "diet " + diet);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+
+
             }
 
 

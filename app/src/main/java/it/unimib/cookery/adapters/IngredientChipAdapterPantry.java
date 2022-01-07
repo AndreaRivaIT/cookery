@@ -70,7 +70,6 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
             @Override
             public void onClick(View v) {
 
-
                 PantryFragment.deleteIngredient(ingredient);
                 SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
                 modified = true;
