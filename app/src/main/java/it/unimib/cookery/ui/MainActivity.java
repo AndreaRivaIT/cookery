@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
@@ -33,21 +34,26 @@ import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ResponseCallbackDb{
+
+public class MainActivity extends AppCompatActivity implements ResponseCallbackDb {
 
     private Menu drawerMenu;
     private DrawerLayout mDrawerLayout;
     private NavHostFragment mNavHostFragment;
     private NavController mNavController;
     private NavigationView mNavMenu;
+
+    private static boolean logged = false;
     private List<PantryWithIngredientPantry> list;
-    private boolean logged = false;
     private boolean firstAccess;
     private ArrayList<IngredientApi> ing;
     private DatabasePantryRepository dbIngredient;
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
 
     private RecipeRepository db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
         firstAccess = sharedPreferences.getBoolean(costants.FIRST_ACCESS, true);
 
-        Log.d("sharedPreferences", ""+firstAccess);
+        Log.d("sharedPreferences", "" + firstAccess);
 
 
         //NavHostController configuration and homeFragment set as startupFragment
@@ -94,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
 
         /*creazione ricetta*/
-        String urlImg ="https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-lasagne-bolognese/_jcr_content/header-par/image_single.img.jpg/1462958827968.jpg";
+        String urlImg = "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-lasagne-bolognese/_jcr_content/header-par/image_single.img.jpg/1462958827968.jpg";
 
-        Recipe recipeTest = new Recipe(1,urlImg,"Lasagna");
+        Recipe recipeTest = new Recipe(1, urlImg, "Lasagna");
         Recipe recipeTestA = new Recipe("pasta al forno", "First course", R.drawable.spoonacular);
         Recipe recipeTestB = new Recipe("risotto", "First course", R.drawable.spoonacular);
-        Recipe recipeTestC= new Recipe("arrosto", "Main meal", R.drawable.spoonacular);
+        Recipe recipeTestC = new Recipe("arrosto", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestD = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestE = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestF = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
@@ -108,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         Recipe recipeTestI = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestL = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestM = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        db = new RecipeRepository(getApplication(),this);
+        db = new RecipeRepository(getApplication(), this);
        /* db.createRecipe(recipeTest);
         db.createRecipe(recipeTestA);
         db.createRecipe(recipeTestB);
@@ -123,14 +130,10 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         db.createRecipe(recipeTestM);*/
 
 
-
-
         dbIngredient = new DatabasePantryRepository(getApplication(), this);
 
 
-
-
-        if(firstAccess) {
+        if (firstAccess) {
 
             CsvReader csv = new CsvReader();
 
@@ -154,13 +157,17 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
     }
 
+    public static void setLogged(boolean bool) {
+        logged = bool;
+    }
+
     //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
 
         View view = mNavMenu.getHeaderView(0);
 
-        if(logged) {
-            if(view.equals(null)) {
+        if (logged) {
+            if (view.equals(null)) {
                 mNavMenu.inflateHeaderView(R.layout.drawer_menu_header);
             } else {
                 mNavMenu.removeHeaderView(view);
@@ -169,10 +176,34 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
             mNavMenu.getMenu().clear();
             mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+            mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.logout_drawer:
+                            FirebaseAuth.getInstance().signOut();
+                            setLogged(false);
+                            startActivity(getIntent());
+                            finish();
+                            break;
+                        case R.id.my_profile:
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                            finish();
+                            break;
+
+                        case R.id.food_preferences:
+                            startActivity(new Intent(getApplicationContext(), AlimentarPreferenceActivity.class));
+                            break;
+
+
+                    }
+                    return false;
+                }
+            });
 
 
         } else {
-            if(view.equals(null)) {
+            if (view.equals(null)) {
                 mNavMenu.inflateHeaderView(R.layout.drawer_menu_header_not_logged);
             } else {
                 mNavMenu.removeHeaderView(view);
@@ -186,7 +217,13 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.login_drawer:
-                            startActivity(new Intent(getApplicationContext(), login_register_user.class));
+                            startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
+                            break;
+
+                        case R.id.foodPreferences:
+                            startActivity(new Intent(getApplicationContext(), AlimentarPreferenceActivity.class));
+                            break;
+
                     }
                     return false;
                 }

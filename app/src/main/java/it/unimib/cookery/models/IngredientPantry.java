@@ -1,19 +1,19 @@
 package it.unimib.cookery.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ingredient_pantry")
-public class IngredientPantry extends IngredientApi{
+public class IngredientPantry extends IngredientApi {
 
 
     private int data;
     private String measureUnit;
     public long pantryId;
-
-
-
     private int quantity;
 
     @Ignore
@@ -21,7 +21,8 @@ public class IngredientPantry extends IngredientApi{
         super(id, name);
     }
 
-    public IngredientPantry(int id, String name,int quantity, int data, long pantryId, String measureUnit) {
+
+    public IngredientPantry(int id, String name, int quantity, int data, long pantryId, String measureUnit) {
         super(id, name);
         this.data = data;
         this.quantity = quantity;
@@ -42,9 +43,19 @@ public class IngredientPantry extends IngredientApi{
     public int getData() {
         return data;
     }
+
     public void setData(int data) {
         this.data = data;
     }
+
+    public long getPantryId() {
+        return pantryId;
+    }
+
+    public void setPantryId(long pantryId) {
+        this.pantryId = pantryId;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -52,4 +63,8 @@ public class IngredientPantry extends IngredientApi{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
+
+
 }

@@ -66,6 +66,42 @@ public class RecipeRepository {
     }
 
 
+    // get random recipe sia con tags che senza
+
+    public void getRandomRecipe(String tags) {
+
+
+        Call<ResponseRecipe> RandomRecipe;
+        if (tags.equals("")) {
+            RandomRecipe=
+                    spoonacularApiService.getRandomRecipeNoTags(costants.API_KEY, 10);
+        } else {
+            RandomRecipe =
+                    spoonacularApiService.getRandomRecipe(costants.API_KEY, 10, tags);
+        }
+        RandomRecipe.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
+            @Override
+            public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
+
+                Log.d("retrofit random", "" + response.raw().request().url());
+                if (response.body() != null && response.isSuccessful()) {
+                    RecipeApiList = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipe(RecipeApiList);
+                } else
+                    responseCallback.onFailure(R.string.errorRetriveData);
+            }
+            @Override
+            public void onFailure(Call<ResponseRecipe> call, Throwable t) {
+                Log.d("retrofit", "on Failure " + t);
+                responseCallback.onFailure(R.string.connectionError);
+            }
+        });
+    }
+
+
+
+
+
     public void getRandomRecipeDessert(String tags) {
 
         String allTags = tags + ",dessert";
@@ -80,7 +116,7 @@ public class RecipeRepository {
         RandomRecipeDessert.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
             @Override
             public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
-                //  Log.d("retrofit", "" + response.raw().request().url());
+                  Log.d("retrofit", "" + response.raw().request().url());
                 if (response.body() != null && response.isSuccessful()) {
                     RecipeApiListDessert = response.body().getRecipes();
                     responseCallback.onResponseRandomRecipeDessert(RecipeApiListDessert);
