@@ -1,5 +1,6 @@
 package it.unimib.cookery.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -113,6 +114,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
                                     if(task.isSuccessful()) {
                                         Toast.makeText(RegisterUser.this, "User has been registered", Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class ));
                                         finish();
                                     } else {
                                         Toast.makeText(RegisterUser.this, "Registration has failed, try again", Toast.LENGTH_LONG).show();

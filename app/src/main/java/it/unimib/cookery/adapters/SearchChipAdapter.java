@@ -40,7 +40,9 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     private boolean modified;
     private IngredientViewHolder holder;
     private Spinner measureUnitSpinner;
-    private IngredientMeasureUnitRepository ingredientMeasureUnitRepository = new IngredientMeasureUnitRepository(this);
+    private IngredientMeasureUnitRepository ingredientMeasureUnitRepository =
+            new IngredientMeasureUnitRepository(this);
+
     public  void setData( List<IngredientApi> list){
         this.mListIngredients = list;
         notifydata();
