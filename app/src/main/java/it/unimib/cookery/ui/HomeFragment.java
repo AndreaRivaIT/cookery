@@ -117,9 +117,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
         if (modified) {
             repositoryDatabase.readAllIngredientPantry();
-           // recipeRepository.getRandomRecipeFirstCourse("");
-           // recipeRepository.getRandomRecipeMainCourse("");
-           // recipeRepository.getRandomRecipeDessert("");
 
             modified = false;
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -132,20 +129,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         recyclerViewHome2 = view.findViewById(R.id.recyclerViewHome2);
         recyclerViewHome3 = view.findViewById(R.id.recyclerViewHome3);
         recyclerViewHome4 = view.findViewById(R.id.recyclerViewHome4);
-
-
-        // TEST_ARRAY recipe adapter
-/*
-        ArrayList<Recipe> recipeArrayList = new ArrayList<>();
-
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));
-        recipeArrayList.add(new Recipe("Orange", "TEST_FOOD_CATEGORY", R.drawable.test_food_img));*/
-
-        // END OF TEST_ARRAY
 
         LinearLayoutManager linearLayoutManagerRTC = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManagerHome2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
