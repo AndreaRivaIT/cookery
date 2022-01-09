@@ -61,7 +61,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         //add ingredient
         searchIngredientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 openDialogAddIngredient(v);
             }
         });
@@ -109,12 +110,9 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
         // saving the ingredients(data) on the adapter
         saveBtn = ingredientDialog.findViewById(R.id.ingredient_dialog_btn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ingredientChipAdapter.setData(ingredientsList);
-                ingredientDialog.dismiss();
-            }
+        saveBtn.setOnClickListener(v -> {
+            ingredientChipAdapter.setData(ingredientsList);
+            ingredientDialog.dismiss();
         });
 
         ingredientDialog.show();
