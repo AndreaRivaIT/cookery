@@ -58,9 +58,9 @@ public class Costants {
     /* stringhe costanti  retrofit */
     //  8b2514bd6d21482e8b4330863ee719b8
     private static final String genericApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
-    private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
+    private static final String myApiKey = "8b2514bd6d21482e8b4330863ee719b8";
 
-    public static final String API_KEY = genericApiKey;
+    public static final String API_KEY = myApiKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */

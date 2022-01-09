@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/add_ingredient_dialog"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +10,7 @@
     android:background="@drawable/rounded_shape_v3">
 
     <SearchView
+        android:id="@+id/ingredient_dialog_sv"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="30dp"
@@ -20,6 +22,7 @@
         android:background="@drawable/rounded_shape"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredient_dialog_rv"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
@@ -27,6 +30,7 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/ingredient_dialog_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="240dp"
