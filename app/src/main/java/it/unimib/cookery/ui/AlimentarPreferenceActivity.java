@@ -3,6 +3,8 @@ package it.unimib.cookery.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +38,13 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
     private ArrayList<String> preferencesChoosen = new ArrayList<>();
     private String intollerances = "";
     private String diet = "";
-    private boolean logged = false;
+    public static boolean logged;
     private boolean preferenciesModified;
+
+
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavMenu;
+
 
 
 
@@ -66,6 +73,20 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         preferencesChoosen = new ArrayList<String>(Arrays.asList(diet.split(",")));
 
 
+
+
+        mDrawerLayout = findViewById(R.id.drawerLayout);
+
+        //NavigationMenu config
+        mNavMenu = findViewById(R.id.navigationView);
+
+        setDrawerMenu();
+
+
+
+
+
+
         gluten = findViewById(R.id.checkBoxIntolleranceGluten);
         dairy = findViewById(R.id.checkBoxIntolleranceDairy);
         treeNut = findViewById(R.id.checkBoxIntolleranceTreeNuts);
@@ -87,7 +108,6 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         ketogenic = findViewById(R.id.checkBoxPreferencesKetogenic);
 
         Button saveButton = findViewById(R.id.saveButton);
-
 
 
 
@@ -185,12 +205,15 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
         }
 
 
-        // todo sistemare menu hamburgher con andrea o mettere tasto back
+        // todo sistemare bug se mi loggo e torno sul alimentar preferences mi carica il
+        // todo drawer da non loggato
         hamburgherMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // onBackPressed();
+                mDrawerLayout.openDrawer(GravityCompat.START);
+
+
 
             }
         });
@@ -297,5 +320,80 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
 
         });
     }
+
+
+
+
+
+    public static void setLogged(boolean bool) {
+        logged = bool;
+    }
+
+    //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
+    public void setDrawerMenu() {
+
+
+        View view = mNavMenu.getHeaderView(0);
+
+        if (logged) {
+            if (view.equals(null)) {
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header);
+            } else {
+                mNavMenu.removeHeaderView(view);
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header);
+            }
+
+            mNavMenu.getMenu().clear();
+            mNavMenu.inflateMenu(R.menu.drawer_nav_menu);
+            mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.logout_drawer:
+                            FirebaseAuth.getInstance().signOut();
+                            setLogged(false);
+                            startActivity(getIntent());
+                            finish();
+                            break;
+                        case R.id.my_profile:
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                            finish();
+                            break;
+
+
+                    }
+                    return false;
+                }
+            });
+
+        } else {
+            if (view.equals(null)) {
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header_not_logged);
+            } else {
+                mNavMenu.removeHeaderView(view);
+                mNavMenu.inflateHeaderView(R.layout.drawer_menu_header_not_logged);
+            }
+
+            mNavMenu.getMenu().clear();
+            mNavMenu.inflateMenu(R.menu.drawer_menu_not_logged);
+            mNavMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.login_drawer:
+                            startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
+                            break;
+
+                    }
+                    return false;
+                }
+            });
+        }
+    }
+
+
+
+
+
 
 }
