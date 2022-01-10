@@ -24,7 +24,6 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
     public void setData(ArrayList<String> list) {
         this.mListStep = list;
 
-
         notifyDataSetChanged();
     }
 
@@ -35,15 +34,11 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
         return new StepViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
 
-
             holder.tvNStep.setText("Step " + (position + 1) + ": ");
             holder.tvDescription.setText(mListStep.get(position));
-
-
 
     }
 
@@ -54,8 +49,6 @@ public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedure
         }
         return 0;
     }
-
-
 
     public class StepViewHolder extends RecyclerView.ViewHolder {
         private TextView tvNStep;

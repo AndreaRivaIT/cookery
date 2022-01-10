@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,21 +23,33 @@ import java.util.List;
 import it.unimib.cookery.R;
 import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.MakeRecipeSearchAdapter;
+import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.adapters.SearchChipAdapter;
 import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.RecipeStep;
+import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
 public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
 
-    private Button searchIngredientBtn, saveBtn;
+    private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep;
     private RecyclerView ingredientListRV,addIngredientListRV;
+
     private MakeRecipeSearchAdapter searchChipAdapter;
     private IngredientChipAdapter ingredientChipAdapter;
+    private RecipeProcedureAdapter stepAdapter;
+
     private Dialog ingredientDialog;
+    private Dialog stepDialog;
+
     private SearchView searchView;
     private DatabasePantryRepository db;
+
+    private EditText addStepEt;
+
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
+    private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
 
     public static void updateArrayList(IngredientApi ingredient) {
         ingredientsList.add(ingredient);
@@ -48,6 +61,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         setContentView(R.layout.activity_make_recipe);
 
         // initializing RV and views
+        addStepBtn = findViewById(R.id.add_step_button);
         searchIngredientBtn = findViewById(R.id.ingredient_button);
         ingredientListRV = findViewById(R.id.ingredient_list);
 
@@ -59,12 +73,30 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         ingredientChipAdapter = new IngredientChipAdapter();
 
         //add ingredient
-        searchIngredientBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                openDialogAddIngredient(v);
-            }
+        searchIngredientBtn.setOnClickListener(v -> {
+            openDialogAddIngredient(v);
+        });
+        
+        //add step
+        addStepBtn.setOnClickListener(v -> {
+            openDialogAddStep(v);
+        });
+    }
+
+    private void openDialogAddStep(View view) {
+        int counter = 1;
+        stepDialog = new Dialog(view.getContext());
+        stepDialog.setContentView(R.layout.add_step_dialog);
+        stepDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        addStepEt = stepDialog.findViewById(R.id.add_step_et);
+        String description = addStepEt.getText().toString();
+
+        step = new RecipeStep(nStep, description);
+
+        saveBtnStep = stepDialog.findViewById(R.id.ingredient_dialog_btn);
+        saveBtnStep.setOnClickListener(v -> {
+            stepsList.add(counter, step);
         });
 
     }

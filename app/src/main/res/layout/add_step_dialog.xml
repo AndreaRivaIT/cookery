@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/step_dialog"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,5 +8,26 @@
     android:layout_width="350dp"
     android:orientation="vertical"
     android:background="@drawable/rounded_shape_v3">
+
+    <EditText
+        android:id="@+id/add_step_et"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:lines="10"
+        android:minLines="6"
+        android:maxLines="15"/>
+
+    <Button
+        android:id="@+id/ingredient_dialog_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:textAllCaps="false"
+        android:text="Save"
+        android:backgroundTint="@color/cookery_blue"
+        android:layout_marginBottom="15dp"/>
 
 </LinearLayout>
