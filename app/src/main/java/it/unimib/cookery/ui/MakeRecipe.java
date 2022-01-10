@@ -36,7 +36,7 @@ import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
-public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb, AdapterView.OnItemSelectedListener {
+public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
 
     private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep;
     private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
@@ -52,8 +52,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
 
     private RecipeStep step;
 
-    private Spinner nStepSpinner;
-
     private SearchView searchView;
     private DatabasePantryRepository db;
 
@@ -61,6 +59,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
 
     private int nStep;
 
+    private static int counter = 0;
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
     private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
     private static ArrayList<String> stepsListString = new ArrayList<>();
@@ -78,7 +77,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
         addStepBtn = findViewById(R.id.add_step_button);
         searchIngredientBtn = findViewById(R.id.ingredient_button);
         ingredientListRV = findViewById(R.id.ingredient_list);
-        nStepSpinner = findViewById(R.id.stepSpinner);
         stepRV = findViewById(R.id.step_list);
 
         //setting db
@@ -93,13 +91,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
         searchIngredientBtn.setOnClickListener(v -> {
             openDialogAddIngredient(v);
         });
-
-        //retrieve spinner value
-        ArrayAdapter<CharSequence> spinAdapter = ArrayAdapter.createFromResource(this, R.array.steps, android.R.layout.simple_spinner_item);
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        nStepSpinner.setAdapter(spinAdapter);
-
-        nStepSpinner.setOnItemSelectedListener(this);
 
         //add step
         addStepBtn.setOnClickListener(v -> {
@@ -124,23 +115,22 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
 
         saveBtnStep = stepDialog.findViewById(R.id.ingredient_dialog_btn);
         saveBtnStep.setOnClickListener(v -> {
+            stepsListString.clear();
             description = addStepEt.getText().toString();
-
-            step = new RecipeStep(nStep, description);
+            step = new RecipeStep(description);
 
             stepsList.add(step);
-            stepAdapter.setData(recipeStepParse(stepsList));
+            recipeStepParse(stepsList);
+            stepAdapter.setData(stepsListString);
             stepDialog.dismiss();
         });
-
         stepDialog.show();
     }
 
-    private ArrayList<String> recipeStepParse(ArrayList<RecipeStep> stepsList) {
-        for(int j = 0; j < nStep; j++) {
+    private void recipeStepParse(ArrayList<RecipeStep> stepsList) {
+        for(int j = 0; j < stepsList.size(); j++) {
             stepsListString.add(stepsList.get(j).getDescription());
         }
-        return stepsListString;
     }
 
     public void openDialogAddIngredient(View view) {
@@ -227,13 +217,4 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb,
         super.onDestroy();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        nStep = Integer.parseInt(nStepSpinner.getSelectedItem().toString());
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

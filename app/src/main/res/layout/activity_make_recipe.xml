@@ -67,19 +67,6 @@
                 android:text="Add steps"
                 android:textAllCaps="false" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select number of steps:"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:layout_marginTop="10dp"/>
-
-            <Spinner
-                android:id="@+id/stepSpinner"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/step_list"
                 android:layout_width="match_parent"
