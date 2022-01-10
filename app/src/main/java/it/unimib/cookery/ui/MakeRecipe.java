@@ -6,14 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SearchView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.android.flexbox.FlexboxLayoutManager;
 
@@ -31,10 +36,10 @@ import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
-public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
+public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb, AdapterView.OnItemSelectedListener {
 
     private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep;
-    private RecyclerView ingredientListRV,addIngredientListRV;
+    private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
 
     private MakeRecipeSearchAdapter searchChipAdapter;
     private IngredientChipAdapter ingredientChipAdapter;
@@ -43,13 +48,22 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     private Dialog ingredientDialog;
     private Dialog stepDialog;
 
+    private String description;
+
+    private RecipeStep step;
+
+    private Spinner nStepSpinner;
+
     private SearchView searchView;
     private DatabasePantryRepository db;
 
     private EditText addStepEt;
 
+    private int nStep;
+
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
     private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    private static ArrayList<String> stepsListString = new ArrayList<>();
 
     public static void updateArrayList(IngredientApi ingredient) {
         ingredientsList.add(ingredient);
@@ -64,6 +78,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         addStepBtn = findViewById(R.id.add_step_button);
         searchIngredientBtn = findViewById(R.id.ingredient_button);
         ingredientListRV = findViewById(R.id.ingredient_list);
+        nStepSpinner = findViewById(R.id.stepSpinner);
+        stepRV = findViewById(R.id.step_list);
 
         //setting db
         db = new DatabasePantryRepository(this.getApplication(), this);
@@ -71,34 +87,60 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         //setting adapters
         searchChipAdapter = new MakeRecipeSearchAdapter();
         ingredientChipAdapter = new IngredientChipAdapter();
+        stepAdapter = new RecipeProcedureAdapter();
 
         //add ingredient
         searchIngredientBtn.setOnClickListener(v -> {
             openDialogAddIngredient(v);
         });
-        
+
+        //retrieve spinner value
+        ArrayAdapter<CharSequence> spinAdapter = ArrayAdapter.createFromResource(this, R.array.steps, android.R.layout.simple_spinner_item);
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        nStepSpinner.setAdapter(spinAdapter);
+
+        nStepSpinner.setOnItemSelectedListener(this);
+
         //add step
         addStepBtn.setOnClickListener(v -> {
             openDialogAddStep(v);
         });
+
     }
 
     private void openDialogAddStep(View view) {
-        int counter = 1;
         stepDialog = new Dialog(view.getContext());
         stepDialog.setContentView(R.layout.add_step_dialog);
         stepDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        addStepEt = stepDialog.findViewById(R.id.add_step_et);
-        String description = addStepEt.getText().toString();
+        //setting steps RV
+        LinearLayoutManager flexboxLayoutManagerStepListRv = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        stepRV.setLayoutManager(flexboxLayoutManagerStepListRv);
+        stepRV.setFocusable(false);
+        stepRV.setNestedScrollingEnabled(true);
+        stepRV.setAdapter(stepAdapter);
 
-        step = new RecipeStep(nStep, description);
+        addStepEt = stepDialog.findViewById(R.id.add_step_et);
 
         saveBtnStep = stepDialog.findViewById(R.id.ingredient_dialog_btn);
         saveBtnStep.setOnClickListener(v -> {
-            stepsList.add(counter, step);
+            description = addStepEt.getText().toString();
+
+            step = new RecipeStep(nStep, description);
+
+            stepsList.add(step);
+            stepAdapter.setData(recipeStepParse(stepsList));
+            stepDialog.dismiss();
         });
 
+        stepDialog.show();
+    }
+
+    private ArrayList<String> recipeStepParse(ArrayList<RecipeStep> stepsList) {
+        for(int j = 0; j < nStep; j++) {
+            stepsListString.add(stepsList.get(j).getDescription());
+        }
+        return stepsListString;
     }
 
     public void openDialogAddIngredient(View view) {
@@ -183,5 +225,15 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     public void onDestroy() {
         ingredientsList.removeAll(ingredientsList);
         super.onDestroy();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        nStep = Integer.parseInt(nStepSpinner.getSelectedItem().toString());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
