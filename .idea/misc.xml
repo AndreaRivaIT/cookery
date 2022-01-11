@@ -40,7 +40,6 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_pantry_container.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_add_pantry.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_dialog.xml" value="0.2546875" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_make_recipe_dialog.xml" value="0.275" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_pantry_dialog.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_quantity_dialog.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_step_dialog.xml" value="0.275" />
@@ -73,6 +72,7 @@
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/circle.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/rounded_shape.xml" value="0.1578125" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_main.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_make_recipe.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.18111964873765093" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/alimentar_preference_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/bottom_navigation_selector.xml" value="0.12360688956433637" />

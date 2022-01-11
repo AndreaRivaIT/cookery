@@ -132,4 +132,15 @@
     <!-- fine string mainActivity -->
 
 
+    <!-- string makeRecipe -->
+    <string name="name_your_recipe">Name your recipe!</string>
+    <string name="make_your_recipe">Make your own recipe!</string>
+    <string name="number_of_servings">Number of servings:</string>
+    <string name="add_ingredients">Add ingredients</string>
+    <string name="add_steps">Add steps</string>
+    <string name="add_image">Add image</string>
+    <string name="save_recipe">Save recipe</string>
+
+
+
 </resources>

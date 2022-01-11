@@ -80,9 +80,10 @@ public class Costants {
 
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
     private static final String anotherKey = "fcb6270717784ef3be8488d7befb7477";
+    private static final String anotherAnotherKey="8b2514bd6d21482e8b4330863ee719b8";
 
 
-    public static final String API_KEY = genericApiKey;
+    public static final String API_KEY = anotherAnotherKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */
