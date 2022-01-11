@@ -8,12 +8,19 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.16640625" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape.xml" value="0.16640625" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v2.xml" value="0.16640625" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v3.xml" value="0.2708333333333333" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v4.xml" value="0.287109375" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/xml_custom_shapes.xml" value="0.2708333333333333" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.36802721088435375" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout-w936dp/activity_login.xml" value="0.211328125" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_login.xml" value="0.211328125" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_login_register_user.xml" value="0.21015625" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_make_recipe.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/activity_user_profile.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/add_ingredient_dialog.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/add_step_dialog.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/bottom_sheet.xml" value="0.2125" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/drawer_menu_header.xml" value="0.275" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/drawer_menu_header_not_logged.xml" value="0.15390625" />
@@ -26,8 +33,15 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_pantry.xml" value="0.213671875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_recipe.xml" value="0.275" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_scrolling.xml" value="0.33" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_card.xml" value="0.22" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_card.xml" value="0.5" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.33" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_chip_ingredient.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_chip_ingredient_search.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_pantry_container.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_add_pantry.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_dialog.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_pantry_dialog.xml" value="0.2546875" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_ingredient_quantity_dialog.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/layout_step_dialog.xml" value="0.275" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/login_register_activity.xml" value="0.16" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/register_activity.xml" value="0.211328125" />

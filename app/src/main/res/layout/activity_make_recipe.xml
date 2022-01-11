@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MakeRecipe">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/xml_custom_shapes"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:text="Make your own Recipe!"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.502">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/ingredient_button"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:textAllCaps="false"
+                android:text="Add ingredients"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:backgroundTint="@color/cookery_blue"
+                android:queryHint="Search ingredient" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredient_list"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/add_step_button"
+                android:layout_marginTop="25dp"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/cookery_blue"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Add steps"
+                android:textAllCaps="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/step_list"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <Button
+                android:layout_marginTop="25dp"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/cookery_blue"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Add image"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

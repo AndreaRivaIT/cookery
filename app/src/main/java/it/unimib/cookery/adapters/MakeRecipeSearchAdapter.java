@@ -30,24 +30,31 @@ import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.repository.IngredientMeasureUnitRepository;
+import it.unimib.cookery.ui.MakeRecipe;
 import it.unimib.cookery.ui.PantryFragment;
 import it.unimib.cookery.utils.IngredientUnitMeasureResponseCallback;
 
-public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.IngredientViewHolder> implements IngredientUnitMeasureResponseCallback {
+public class MakeRecipeSearchAdapter extends RecyclerView.Adapter<MakeRecipeSearchAdapter.IngredientViewHolder> implements IngredientUnitMeasureResponseCallback {
     private List<IngredientApi> mListIngredients;
     private  int k = 0;
     private Costants costants = new Costants();
     private boolean modified;
+    private Dialog ingredientDialog;
+    private Button addButton, deleteButton;
+    private TextView ingredientName;
+    private EditText editText;
+    private SharedPreferences sharedPreferences;
     private IngredientViewHolder holder;
     private Spinner measureUnitSpinner;
     private IngredientMeasureUnitRepository ingredientMeasureUnitRepository =
             new IngredientMeasureUnitRepository(this);
 
-    public  void setData( List<IngredientApi> list){
+    public  void setData(List<IngredientApi> list) {
         this.mListIngredients = list;
         notifydata();
 
     }
+
     public void notifydata(){
         notifyDataSetChanged();
     }
@@ -64,7 +71,8 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
 
         this.holder = holder;
-        IngredientApi ingredient = mListIngredients.get(position);
+        IngredientApi ingredient;
+        ingredient = mListIngredients.get(position);
         if(ingredient == null){ return;}
         holder.chipIngredient.setText(ingredient.getName());
         holder.chipIngredient.setId(position);
@@ -77,7 +85,6 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -102,7 +109,6 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
         notifyDataSetChanged();
 
 
-
     }
 
     public class IngredientViewHolder extends RecyclerView.ViewHolder{
@@ -117,62 +123,44 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
 
         Log.d("chip", "creazione dialog ");
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+
         // crea una dialog
-        Dialog ingredientDialog = new Dialog(itemView.getContext());
+        ingredientDialog = new Dialog(itemView.getContext());
+
         // elimina il titolo dalla dialog che non serve
         ingredientDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         // permette l'uscita dalla dialog solo se si preme cancella
         //ingredientDialog.setCancelable(false);
         // setta il layout che poi verrà mostrato nella dialog
-        ingredientDialog.setContentView(R.layout.layout_ingredient_pantry_dialog);
+        ingredientDialog.setContentView(R.layout.layout_ingredient_make_recipe_dialog);
+
         // creo e trovo l'oggetto textView nella dialog
-        TextView ingredientName = ingredientDialog.findViewById(R.id.IngredientName);
+        ingredientName = ingredientDialog.findViewById(R.id.IngredientNameV2);
+
         // setto il teso della dialog la stringa andrà poi sostituita col nome dell'ingrediente da aggiungere
         ingredientName.setText(list.get(id).getName());
-        // creo e trovo l'oggetto editText dove l'utente inserisce la quantità
-        EditText editText = ingredientDialog.findViewById(R.id.IngredientEditText);
-        //Spinner fors select tipe of pantry
-        Spinner spinner = (Spinner)ingredientDialog.findViewById(R.id.tipe_pantry_spinner);
 
-        measureUnitSpinner = (Spinner) ingredientDialog.findViewById(R.id.measureUnitSpinner);
+        // creo e trovo l'oggetto editText dove l'utente inserisce la quantità
+        editText = ingredientDialog.findViewById(R.id.IngredientEditTextV2);
+
+        measureUnitSpinner = (Spinner) ingredientDialog.findViewById(R.id.measureUnitSpinnerV2);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(itemView.getContext(), android.R.layout.simple_spinner_dropdown_item, measureUnit);
         measureUnitSpinner.setAdapter(spinnerAdapter);
 
+        addButton = ingredientDialog.findViewById(R.id.addIngredientButtonV2);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(itemView.getContext(),R.array.pantry_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        Button addButton = ingredientDialog.findViewById(R.id.addIngredientButton);
         //listener per il bottone per aggiungere l'ingrediente
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // prendo la quantità scritta nel text edit se non è vuota la converto in stringa e poi in intero
-                // se è > 0 la salvo mentre se è = 0 mostro il toast
-                // l'edit text è già settata solo per accettare numeri interi positivi
+                sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
 
-                SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
-
-                int pantryPosition = 0;
-                String text = spinner.getSelectedItem().toString();
                 if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
 
-                    if (text.equalsIgnoreCase("pantry")){
-                        //Log.d("test", "test:- " + text);
-                        pantryPosition = 1;
-                    }else if(text.equalsIgnoreCase("fridge")){
-                        //Log.d("test", "test:- " + text);
-                        pantryPosition = 2;
-                    }else if(text.equalsIgnoreCase("freezer")){
-                        //Log.d("test", "test:- " + text);
-                        pantryPosition = 3;
-                    }
                     String measureUnit = measureUnitSpinner.getSelectedItem().toString();
-                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),
-                            12, pantryPosition, measureUnit);
-                    PantryFragment.savedb(ingredientPantry);
+                    list.get(id).setUnit(measureUnit);
+                    MakeRecipe.updateArrayList(list.get(id));
                     modified = true;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean(costants.MODIFIED, modified);
@@ -188,7 +176,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
 
         });
         // creo e ottengo l'oggetto per il bottone di delete
-        Button deleteButton = ingredientDialog.findViewById(R.id.deleteIngredientButton);
+        deleteButton = ingredientDialog.findViewById(R.id.deleteIngredientButtonV2);
         // listener del bottone di delete
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
