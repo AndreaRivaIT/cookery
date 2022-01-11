@@ -9,6 +9,7 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape.xml" value="0.16640625" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v2.xml" value="0.16640625" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v3.xml" value="0.2708333333333333" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/rounded_shape_v4.xml" value="0.287109375" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/drawable/xml_custom_shapes.xml" value="0.2708333333333333" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.36802721088435375" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout-w936dp/activity_login.xml" value="0.211328125" />
@@ -33,7 +34,7 @@
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_recipe.xml" value="0.275" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/fragment_scrolling.xml" value="0.33" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_card.xml" value="0.5" />
-        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.275" />
+        <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/home_subcard.xml" value="0.33" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_chip_ingredient.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_chip_ingredient_search.xml" value="0.2546875" />
         <entry key="..\:/Documents/AndroidStudio/Cookery/app/src/main/res/layout/item_pantry_container.xml" value="0.2546875" />

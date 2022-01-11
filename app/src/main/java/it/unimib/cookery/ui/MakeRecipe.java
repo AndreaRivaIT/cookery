@@ -31,6 +31,7 @@ import it.unimib.cookery.adapters.MakeRecipeSearchAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.adapters.SearchChipAdapter;
 import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.models.RecipeStep;
 import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
@@ -39,6 +40,7 @@ import it.unimib.cookery.utils.ResponseCallbackDb;
 public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
 
     private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep;
+
     private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
 
     private MakeRecipeSearchAdapter searchChipAdapter;
@@ -53,16 +55,15 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     private RecipeStep step;
 
     private SearchView searchView;
+
     private DatabasePantryRepository db;
 
     private EditText addStepEt;
 
-    private int nStep;
-
-    private static int counter = 0;
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
     private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
     private static ArrayList<String> stepsListString = new ArrayList<>();
+    private static ArrayList<Recipe> recipesList = new ArrayList<>();
 
     public static void updateArrayList(IngredientApi ingredient) {
         ingredientsList.add(ingredient);
@@ -96,6 +97,10 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         addStepBtn.setOnClickListener(v -> {
             openDialogAddStep(v);
         });
+
+    }
+
+    private void makeDb() {
 
     }
 
