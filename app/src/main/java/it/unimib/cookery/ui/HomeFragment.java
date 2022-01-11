@@ -49,6 +49,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
     private String ingredient = "";
     private  ArrayList<String> pantriesArrayList;
+    private String tags="";
+    private String intollerances;
+    private String diet;
+    private boolean preferencesModified;
 
 
 
@@ -90,6 +94,9 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         recipeArrayListFirstCourse = new ArrayList<>();
         ingredientPantries = new ArrayList<>();
 
+         setPreferences();
+
+
 
 
         repositoryDatabase.readAllIngredientPantry();
@@ -99,6 +106,32 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
         //Snackbar.make(requireActivity().findViewById(android.R.id.content), "fffffff", Snackbar.LENGTH_SHORT).show();
 
+
+    }
+
+
+    public void setPreferences(){
+
+        Log.d("retrofit", "set preferences");
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+
+       intollerances="";
+       diet="";
+       tags="";
+
+        intollerances = sharedPreferences.getString(costants.INTOLLERANCES, "");
+        diet = sharedPreferences.getString(costants.DIET, "");
+
+        if(!intollerances.equals("") && !diet.equals(""))
+            tags = intollerances+","+diet;
+        else if(!intollerances.equals("") && diet.equals(""))
+            tags = intollerances;
+        else if(intollerances.equals("") && !diet.equals(""))
+            tags = diet;
+
+
+        Log.d("retrofit", "tags "+tags);
 
     }
 
@@ -112,18 +145,31 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
         modified = sharedPreferences.getBoolean(costants.MODIFIED, true);
 
+        preferencesModified = sharedPreferences.getBoolean(costants.PREFERENCES_MODIFIED, false);
 
         Log.d("boolean", "" + modified);
 
         if (modified) {
             repositoryDatabase.readAllIngredientPantry();
-
             modified = false;
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(costants.MODIFIED, modified);
             editor.apply();
         }
 
+        if(preferencesModified){
+
+            setPreferences();
+
+            recipeRepository.getRandomRecipeFirstCourse(tags);
+            recipeRepository.getRandomRecipeMainCourse(tags);
+            recipeRepository.getRandomRecipeDessert(tags);
+
+            preferencesModified = false;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(costants.PREFERENCES_MODIFIED, preferencesModified);
+            editor.apply();
+        }
 
         recyclerViewRTC = view.findViewById(R.id.recyclerViewRTC);
         recyclerViewHome2 = view.findViewById(R.id.recyclerViewHome2);
@@ -250,13 +296,13 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
 
             Log.d("ingredient7", "else");
-            recipeRepository.getRandomRecipe("");
+            recipeRepository.getRandomRecipe(tags);
         }
 
 
-        recipeRepository.getRandomRecipeFirstCourse("");
-        recipeRepository.getRandomRecipeMainCourse("");
-        recipeRepository.getRandomRecipeDessert("");
+        recipeRepository.getRandomRecipeFirstCourse(tags);
+        recipeRepository.getRandomRecipeMainCourse(tags);
+        recipeRepository.getRandomRecipeDessert(tags);
 
     }
 

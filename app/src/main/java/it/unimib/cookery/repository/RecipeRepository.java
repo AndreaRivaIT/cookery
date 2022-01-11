@@ -82,10 +82,11 @@ public class RecipeRepository {
         RandomRecipe.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
             @Override
             public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
-                //  Log.d("retrofit", "" + response.raw().request().url());
+
+                Log.d("retrofit random", "" + response.raw().request().url());
                 if (response.body() != null && response.isSuccessful()) {
-                    RecipeApiListDessert = response.body().getRecipes();
-                    responseCallback.onResponseRandomRecipe(RecipeApiListDessert);
+                    RecipeApiList = response.body().getRecipes();
+                    responseCallback.onResponseRandomRecipe(RecipeApiList);
                 } else
                     responseCallback.onFailure(R.string.errorRetriveData);
             }
@@ -115,7 +116,7 @@ public class RecipeRepository {
         RandomRecipeDessert.enqueue(new Callback<ResponseRecipe>() {  // con enqueue è asincrona con execute è sincrona
             @Override
             public void onResponse(Call<ResponseRecipe> call, Response<ResponseRecipe> response) {
-                //  Log.d("retrofit", "" + response.raw().request().url());
+                  Log.d("retrofit", "" + response.raw().request().url());
                 if (response.body() != null && response.isSuccessful()) {
                     RecipeApiListDessert = response.body().getRecipes();
                     responseCallback.onResponseRandomRecipeDessert(RecipeApiListDessert);
