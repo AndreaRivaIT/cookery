@@ -17,6 +17,14 @@
         <item>9</item>
     </string-array>
 
+    <string-array name="type">
+        <item>Appetizers</item>
+        <item>First course</item>
+        <item>Main meal</item>
+        <item>Side dish</item>
+        <item>Desserts</item>
+    </string-array>
+
 
 
     <!-- strings per fragment my recipe -->

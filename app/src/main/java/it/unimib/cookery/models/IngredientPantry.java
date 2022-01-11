@@ -14,7 +14,7 @@ public class IngredientPantry extends IngredientApi {
     private int data;
     private String measureUnit;
     public long pantryId;
-    private int quantity;
+    private double quantity;
 
     @Ignore
     public IngredientPantry(int id, String name) {
@@ -22,7 +22,7 @@ public class IngredientPantry extends IngredientApi {
     }
 
 
-    public IngredientPantry(int id, String name, int quantity, int data, long pantryId, String measureUnit) {
+    public IngredientPantry(int id, String name, double quantity, int data, long pantryId, String measureUnit) {
         super(id, name);
         this.data = data;
         this.quantity = quantity;
@@ -56,7 +56,7 @@ public class IngredientPantry extends IngredientApi {
         this.pantryId = pantryId;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 

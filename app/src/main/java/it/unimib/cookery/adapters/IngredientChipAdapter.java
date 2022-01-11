@@ -20,6 +20,7 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     private List<IngredientApi> mListIngredients;
     private ArrayList<IngredientApi> missingIngredients;
     private ArrayList<String> ingredientPantry;
+    private boolean notReadChip = false;
     private int k = 0;
 
 
@@ -32,6 +33,14 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     public void setData(List<IngredientApi> list, ArrayList<IngredientApi> missingIngredients ) {
         this.mListIngredients = list;
         this.missingIngredients = missingIngredients;
+        notifyDataSetChanged();
+
+    }
+
+    public void setData(List<IngredientApi> list, ArrayList<IngredientApi> missingIngredients, boolean notReadChip ) {
+        this.mListIngredients = list;
+        this.missingIngredients = missingIngredients;
+        this.notReadChip = notReadChip;
         notifyDataSetChanged();
 
     }
@@ -68,34 +77,33 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
             return;
         }
 
+        if(!notReadChip) {
 
-        if(missingIngredients != null && missingIngredients.contains(ingredient)) {
+            if (missingIngredients != null && missingIngredients.contains(ingredient)) {
 
-            Log.d("stampa", ""+missingIngredients.toString());
+                Log.d("stampa", "" + missingIngredients.toString());
 
-           missing = true;
-        }
-
-        else if(ingredientPantry != null && missingIngredients == null ){
-
-            Log.d("stampa", "second if");
-
-            boolean trovato = false;
-            for(int i=0; i<ingredientPantry.size() && !trovato; i++)
-                if(ingredientPantry.get(i).equalsIgnoreCase(ingredient.getName())){
-                    trovato = true;
-                }
-
-            if(!trovato)
                 missing = true;
+            } else if (ingredientPantry != null && missingIngredients == null) {
 
-        }else if(missingIngredients == null) {
-            missing = true;
-            Log.d("stampa", "terzo if");
-        }
-        else if(ingredientPantry == null && missingIngredients == null) {
-            missing = true;
-            Log.d("stampa", "quarto if");
+                Log.d("stampa", "second if");
+
+                boolean trovato = false;
+                for (int i = 0; i < ingredientPantry.size() && !trovato; i++)
+                    if (ingredientPantry.get(i).equalsIgnoreCase(ingredient.getName())) {
+                        trovato = true;
+                    }
+
+                if (!trovato)
+                    missing = true;
+
+            } else if (missingIngredients == null) {
+                missing = true;
+                Log.d("stampa", "terzo if");
+            } else if (ingredientPantry == null && missingIngredients == null) {
+                missing = true;
+                Log.d("stampa", "quarto if");
+            }
         }
 
 

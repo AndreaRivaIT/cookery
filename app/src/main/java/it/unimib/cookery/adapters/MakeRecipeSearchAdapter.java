@@ -156,10 +156,11 @@ public class MakeRecipeSearchAdapter extends RecyclerView.Adapter<MakeRecipeSear
             public void onClick(View v) {
                 sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
 
-                if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
+                if (!editText.getText().toString().equals("") && (Double.parseDouble(editText.getText().toString())) > 0) {
 
                     String measureUnit = measureUnitSpinner.getSelectedItem().toString();
                     list.get(id).setUnit(measureUnit);
+                    list.get(id).setAmount(Double.parseDouble(editText.getText().toString()));
                     MakeRecipe.updateArrayList(list.get(id));
                     modified = true;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
