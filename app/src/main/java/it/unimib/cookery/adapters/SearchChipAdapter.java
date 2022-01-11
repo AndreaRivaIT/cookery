@@ -157,7 +157,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
 
                 int pantryPosition = 0;
                 String text = spinner.getSelectedItem().toString();
-                if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
+                if (!editText.getText().toString().equals("") && (Double.parseDouble(editText.getText().toString())) > 0) {
 
                     if (text.equalsIgnoreCase("pantry")){
                         //Log.d("test", "test:- " + text);
@@ -170,7 +170,7 @@ public class SearchChipAdapter extends RecyclerView.Adapter<SearchChipAdapter.In
                         pantryPosition = 3;
                     }
                     String measureUnit = measureUnitSpinner.getSelectedItem().toString();
-                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Integer.parseInt(editText.getText().toString()),
+                    IngredientPantry  ingredientPantry = new IngredientPantry(list.get(id).getId(),list.get(id).getName(),Double.parseDouble(editText.getText().toString()),
                             12, pantryPosition, measureUnit);
                     PantryFragment.savedb(ingredientPantry);
                     modified = true;
