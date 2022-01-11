@@ -11,6 +11,7 @@
 
     <SearchView
         android:id="@+id/ingredient_dialog_sv"
+        android:iconifiedByDefault="false"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="30dp"

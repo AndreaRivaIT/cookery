@@ -10,13 +10,11 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 
 @Entity
-/*creata la classe della ricetta sia per il frgamnt delle ricette dell'utente, e ci servirà in seguito */
+/*creata la classe della ricetta sia per il fragment delle ricette dell'utente, e ci servirà in seguito */
 public class Recipe {
 
     @PrimaryKey(autoGenerate = true)
     private int idDb;
-
-
 
     private int id;
     private String name;
@@ -31,7 +29,6 @@ public class Recipe {
 
     @ColumnInfo(name = "n_person")
     private int nPerson;
-
 
     @Ignore
     ArrayList<RecipeStep> stepsList = new ArrayList<>();

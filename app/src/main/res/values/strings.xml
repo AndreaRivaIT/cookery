@@ -17,6 +17,14 @@
         <item>9</item>
     </string-array>
 
+    <string-array name="type">
+        <item>Appetizers</item>
+        <item>First course</item>
+        <item>Main meal</item>
+        <item>Side dish</item>
+        <item>Desserts</item>
+    </string-array>
+
 
 
     <!-- strings per fragment my recipe -->
@@ -122,6 +130,17 @@
     <string name="csv_error"> ERROR IN CREATING INGREDIENT DATABASE</string>
 
     <!-- fine string mainActivity -->
+
+
+    <!-- string makeRecipe -->
+    <string name="name_your_recipe">Name your recipe!</string>
+    <string name="make_your_recipe">Make your own recipe!</string>
+    <string name="number_of_servings">Number of servings:</string>
+    <string name="add_ingredients">Add ingredients</string>
+    <string name="add_steps">Add steps</string>
+    <string name="add_image">Add image</string>
+    <string name="save_recipe">Save recipe</string>
+
 
 
 </resources>
