@@ -93,7 +93,6 @@
                 android:layout_marginTop="35dp"
                 android:backgroundTint="@color/cookery_blue"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:queryHint="Search ingredient"
                 android:text="@string/add_ingredients"
                 android:textAllCaps="false" />
 
