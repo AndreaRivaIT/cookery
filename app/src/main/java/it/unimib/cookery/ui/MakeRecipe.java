@@ -172,6 +172,9 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             public boolean onQueryTextChange(String newText) {
                 if(newText.length() > 3) {
                     db.readIngredientApi(newText);
+                }else
+                {
+                    searchChipAdapter.setData(null);
                 }
                 return false;
             }
@@ -180,7 +183,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         // saving the ingredients(data) on the adapter
         saveBtn = ingredientDialog.findViewById(R.id.ingredient_dialog_btn);
         saveBtn.setOnClickListener(v -> {
-            ingredientChipAdapter.setData(ingredientsList);
+            ingredientChipAdapter.setData(ingredientsList, true);
             ingredientDialog.dismiss();
         });
 
