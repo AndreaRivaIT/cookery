@@ -208,7 +208,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         // saving the ingredients(data) on the adapter
         saveBtn = ingredientDialog.findViewById(R.id.ingredient_dialog_btn);
         saveBtn.setOnClickListener(v -> {
-            ingredientChipAdapter.setData(ingredientsList);
+            ingredientChipAdapter.setData(ingredientsList, true);
             ingredientDialog.dismiss();
         });
 

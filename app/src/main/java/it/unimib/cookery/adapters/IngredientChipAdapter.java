@@ -22,11 +22,19 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     private ArrayList<String> ingredientPantry;
     private boolean notReadChip = false;
     private int k = 0;
+    private boolean notRedChip=false;
 
 
     public void setData(List<IngredientApi> list) {
         this.mListIngredients = list;
         notifyDataSetChanged();
+
+    }
+
+    public void setData(List<IngredientApi> list, boolean notRedChip) {
+        this.mListIngredients = list;
+        notifyDataSetChanged();
+        this.notRedChip = notRedChip;
 
     }
 
@@ -77,7 +85,7 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
             return;
         }
 
-        if(!notReadChip) {
+        if(!notRedChip) {
 
             if (missingIngredients != null && missingIngredients.contains(ingredient)) {
 
@@ -106,10 +114,10 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
             }
         }
 
-
         holder.tvIngredient.setText(ingredient.getName() + ":");
 
 
+        Log.d("quanità", ""+ingredient.getAmount());
 
         switch (ingredient.getUnit()) {
 
