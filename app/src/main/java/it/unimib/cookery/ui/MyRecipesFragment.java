@@ -195,7 +195,7 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
             @Override
             public void onClick(View v) {
                 Log.d("premuto", "premuto chip add");
-
+                startActivity(new Intent(getContext(), MakeRecipe.class));
                 /* fare update database*/
                 //creazione della ricetta
                 // aggiungo la ricetta e la mostro sulla gridview

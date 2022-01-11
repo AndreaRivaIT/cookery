@@ -23,6 +23,8 @@ public interface StepDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertStep(RecipeStep... step);
+
+    @Query("SELECT * FROM RecipeStep WHERE pantry.idPantry LIKE :id")
     /*@Query("SELECT * FROM RecipeStep")
     List<RecipeStep> getAll();
 

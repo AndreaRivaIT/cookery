@@ -222,6 +222,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     @Override
     public void onDestroy() {
         ingredientsList.removeAll(ingredientsList);
+        stepsList.removeAll(stepsList);
+        stepsListString.removeAll(stepsListString);
         super.onDestroy();
     }
 
