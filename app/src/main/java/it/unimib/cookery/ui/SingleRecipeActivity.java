@@ -56,27 +56,20 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     private int recipeId;
     private int servings;
 
-
     // oggetto per le costanti
     private Costants costants = new Costants();
-
 
     // bottoni per modifica e creazione ricetta
     private ImageButton modifyRecipe;
     private ImageButton deleteRecipe;
 
-
     // codice di test
-
     private ArrayList<String> stepRecived;
     private ArrayList<IngredientApi> ingredienteRecived;
     private IngredientAndStepReopistory ingredientAndStepReopistory =
             new IngredientAndStepReopistory(this);
     private ArrayList<IngredientApi> missingIngredients;
     private ArrayList<String> pantryIngredients;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +79,8 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         stepRecived = new ArrayList<>();
         ingredienteRecived = new ArrayList<>();
 
-
         // ottengo l'intent che ha avviato l'activity
         Intent intent = getIntent();
-
-
-
-
 
         // ottengo i riferimenti ai vari elementi della ui
         textView_title_recipe = findViewById(R.id.textView_title_recipe);
@@ -107,20 +95,13 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         // setto il nome della ricetta
         textView_title_recipe.setText(intent.getStringExtra(costants.RECIPE_NAME));
 
-
         // ottengo parametri comuni dall'intent
-
         type = intent.getStringExtra(costants.TYPE);
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
         pantryIngredients = intent.getStringArrayListExtra(costants.PANTRY);
 
-
-
-
-
-
-        if (type.equals(costants.OTHER)) {
+        if(type.equals(costants.OTHER)) {
             stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
             ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
             servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
@@ -129,7 +110,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             createChips();
             setnPerson(servings);
 
-            if (servings > 1)
+            if(servings > 1)
                 tvAmountPeople.setText(servings + costants.PEOPLE);
             else {
                 tvAmountPeople.setText(servings + costants.PERSON);
@@ -137,15 +118,12 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
             }
 
-
-        } else if(type.equals(costants.READY_TO_COOCK)){
+        }else if(type.equals(costants.READY_TO_COOCK)){
             missingIngredients = new ArrayList<>();
             missingIngredients = intent.getParcelableArrayListExtra(costants.MISSING_INGREDIENTS);
             loadImage();
             ingredientAndStepReopistory.getRecipeSteps(recipeId);
             ingredientAndStepReopistory.getRecipeIngredients(recipeId, false);
-
-
 
         }else {
             // ottengo i bottoni per modificare/eliminare la ricetta

@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cookery_blue">#54B3AB</color>
+    <color name="tranparent_black">#99000000</color>
 
 
 </resources>

@@ -23,6 +23,11 @@ public class RecipeStep {
     }
 
     @Ignore
+    public RecipeStep(String description) {
+        this.description = description;
+    }
+
+    @Ignore
     public RecipeStep() {
 
     }

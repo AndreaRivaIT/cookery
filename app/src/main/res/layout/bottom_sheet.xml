@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="65dp">
 
         <SearchView
             android:id="@+id/sv_ingredient"
@@ -64,6 +64,8 @@
         android:background="@color/cookery_blue">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/rcv_ingredient_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

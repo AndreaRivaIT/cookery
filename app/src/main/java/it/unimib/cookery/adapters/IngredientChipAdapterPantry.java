@@ -98,6 +98,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
      * dialog  modifica quantità
      */
     public void openDialogModifyProduct(View itemView, IngredientPantry ingredientSelected) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
         // crea una dialog
         Dialog ingredientDialog = new Dialog(itemView.getContext());
