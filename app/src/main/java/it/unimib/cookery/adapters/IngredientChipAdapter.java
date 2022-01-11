@@ -20,6 +20,7 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     private List<IngredientApi> mListIngredients;
     private ArrayList<IngredientApi> missingIngredients;
     private ArrayList<String> ingredientPantry;
+    private boolean notReadChip = false;
     private int k = 0;
     private boolean notRedChip=false;
 
@@ -40,6 +41,14 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     public void setData(List<IngredientApi> list, ArrayList<IngredientApi> missingIngredients ) {
         this.mListIngredients = list;
         this.missingIngredients = missingIngredients;
+        notifyDataSetChanged();
+
+    }
+
+    public void setData(List<IngredientApi> list, ArrayList<IngredientApi> missingIngredients, boolean notReadChip ) {
+        this.mListIngredients = list;
+        this.missingIngredients = missingIngredients;
+        this.notReadChip = notReadChip;
         notifyDataSetChanged();
 
     }
@@ -76,8 +85,8 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
             return;
         }
 
-
         if(!notRedChip) {
+
             if (missingIngredients != null && missingIngredients.contains(ingredient)) {
 
                 Log.d("stampa", "" + missingIngredients.toString());

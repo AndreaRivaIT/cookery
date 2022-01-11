@@ -36,11 +36,57 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/make_recipe_name"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Name your Recipe!"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"/>
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-18dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="number of servings:"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/numServ"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_marginTop="20dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/ingredient_button"
                 android:layout_width="170dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:textAllCaps="false"
                 android:text="Add ingredients"
                 android:fontFamily="@font/poppins_semi_bold"
@@ -84,6 +130,16 @@
                 android:backgroundTint="@color/cookery_blue"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:text="Add image"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/save_recipe"
+                android:layout_marginTop="25dp"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/cookery_blue"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="Save Recipe"
                 android:textAllCaps="false" />
 
         </LinearLayout>

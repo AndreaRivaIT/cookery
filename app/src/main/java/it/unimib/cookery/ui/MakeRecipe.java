@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayoutManager;
 
@@ -39,7 +40,7 @@ import it.unimib.cookery.utils.ResponseCallbackDb;
 
 public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
 
-    private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep;
+    private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep, saveRecipe;
 
     private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
 
@@ -58,7 +59,9 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     private DatabasePantryRepository db;
 
-    private EditText addStepEt;
+    private EditText addStepEt, recipeNameEt, numServ;
+
+    private Spinner typeSpinner;
 
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
     private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
@@ -79,9 +82,32 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         searchIngredientBtn = findViewById(R.id.ingredient_button);
         ingredientListRV = findViewById(R.id.ingredient_list);
         stepRV = findViewById(R.id.step_list);
+        recipeNameEt = findViewById(R.id.make_recipe_name);
+        typeSpinner = findViewById(R.id.type_spinner);
+        numServ = findViewById(R.id.numServ);
+        saveRecipe = findViewById(R.id.save_recipe);
+        numServ = findViewById(R.id.numServ);
+
+        //setting up typeSpinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(adapter);
 
         //setting db
         db = new DatabasePantryRepository(this.getApplication(), this);
+
+        //saving recipe
+        saveRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getContext().toString(), 1);
+
+                //setting up db
+                makeDb(newRecipe);
+                finish();
+            }
+        });
 
         //setting adapters
         searchChipAdapter = new MakeRecipeSearchAdapter();
@@ -100,8 +126,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     }
 
-    private void makeDb() {
-
+    private void makeDb(Recipe recipe) {
+        db.create(recipe);
     }
 
     private void openDialogAddStep(View view) {
@@ -172,8 +198,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             public boolean onQueryTextChange(String newText) {
                 if(newText.length() > 3) {
                     db.readIngredientApi(newText);
-                }else
-                {
+                } else {
                     searchChipAdapter.setData(null);
                 }
                 return false;
@@ -222,6 +247,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     @Override
     public void onDestroy() {
         ingredientsList.removeAll(ingredientsList);
+        stepsList.removeAll(stepsList);
+        stepsListString.removeAll(stepsListString);
         super.onDestroy();
     }
 
