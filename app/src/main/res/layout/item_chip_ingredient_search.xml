@@ -4,8 +4,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/cookery_blue"
-    card_view:cardBackgroundColor="@color/cookery_blue"
+    android:background="@android:color/transparent"
+    card_view:cardBackgroundColor="@android:color/transparent"
     card_view:cardElevation="0dp">
 
     <com.google.android.material.chip.Chip

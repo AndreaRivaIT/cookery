@@ -14,7 +14,7 @@
         android:background="@drawable/xml_custom_shapes"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
-        android:text="Make your own Recipe!"
+        android:text="@string/make_your_recipe"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Name your Recipe!"
+                    android:hint="@string/name_your_recipe"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="18sp"/>
 
@@ -64,34 +64,37 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="number of servings:"
+                        android:text="@string/number_of_servings"
                         android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/numServ"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="5dp"
+                        android:inputType="number"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <Spinner
                 android:id="@+id/type_spinner"
-                android:layout_marginTop="20dp"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/ingredient_button"
                 android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="35dp"
-                android:textAllCaps="false"
-                android:text="Add ingredients"
-                android:fontFamily="@font/poppins_semi_bold"
                 android:backgroundTint="@color/cookery_blue"
-                android:queryHint="Search ingredient" />
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/add_ingredients"
+                android:textAllCaps="false" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ingredient_list"
@@ -105,12 +108,12 @@
 
             <Button
                 android:id="@+id/add_step_button"
-                android:layout_marginTop="25dp"
                 android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="@color/cookery_blue"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Add steps"
+                android:text="@string/add_steps"
                 android:textAllCaps="false" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -124,12 +127,12 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <Button
-                android:layout_marginTop="25dp"
                 android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="@color/cookery_blue"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Add image"
+                android:text="@string/add_image"
                 android:textAllCaps="false" />
 
             <Button
@@ -139,7 +142,7 @@
                 android:layout_height="40dp"
                 android:backgroundTint="@color/cookery_blue"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Save Recipe"
+                android:text="@string/save_recipe"
                 android:textAllCaps="false" />
 
         </LinearLayout>
