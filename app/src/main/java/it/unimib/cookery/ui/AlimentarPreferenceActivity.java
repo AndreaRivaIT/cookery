@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
-import it.unimib.cookery.models.IngredientPantry;
+import it.unimib.cookery.firebase.LoginRegisterUser;
 
 public class AlimentarPreferenceActivity extends AppCompatActivity {
 

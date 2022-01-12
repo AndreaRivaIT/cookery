@@ -1,8 +1,7 @@
-package it.unimib.cookery.ui;
+package it.unimib.cookery.firebase;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.firebase.User;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
