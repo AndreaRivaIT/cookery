@@ -33,11 +33,6 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.MakeRecipe"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".ui.SingleRecipeActivity"
             android:exported="false"
             android:noHistory="true"
