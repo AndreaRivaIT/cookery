@@ -217,9 +217,6 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
                         case R.id.login_drawer:
                             startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
                             break;
-                        case R.id.make_recipe_drawer:
-                            startActivity(new Intent(getApplicationContext(), MakeRecipe.class));
-                            break;
                         case R.id.foodPreferences:
                             startActivity(new Intent(getApplicationContext(), AlimentarPreferenceActivity.class));
                             break;

@@ -27,7 +27,7 @@ public class IngredientAndStepReopistory {
     private List<IngredientApi> ingredientApis;
     private int servings;
     private Costants costants = new Costants();
-    private static final String ERROR_STRING = "Something went wrong, pleas check your connection";
+
 
 
     public IngredientAndStepReopistory(ResponseCallbackStepAndIngredients responseCallbackStepAndIngredients) {
