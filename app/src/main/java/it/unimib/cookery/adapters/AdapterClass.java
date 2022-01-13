@@ -72,7 +72,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         }
         /* ottiene la text view dell'elemento dell'array list e ne setta il nome*/
-        ((TextView) convertView.findViewById(R.id.TextViewCardRicetta))
+        ((TextView) convertView.findViewById(R.id.textViewRicetta))
                 .setText(listdata.get(position).getName());
 
         /* ottengo l'url dell'immagine */
@@ -81,7 +81,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
         //todo togliere il commento una volta settata l'immagine settare l'immagine
-        /*((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+        /*((ImageView) convertView.findViewById(R.id.imageViewTest))
                 .setImageResource(listdata.get(position).getImageId());*/
         return convertView;
     }
