@@ -7,11 +7,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.firebase.LoginRegisterUser;
 import it.unimib.cookery.models.IngredientApi;
-import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.models.PantryWithIngredientPantry;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.repository.RecipeRepository;
 import it.unimib.cookery.utils.CsvReader;
@@ -30,7 +29,6 @@ import android.view.MenuItem;
 import android.util.Log;
 
 import android.view.View;
-import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -218,9 +216,6 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
                     switch (item.getItemId()) {
                         case R.id.login_drawer:
                             startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class));
-                            break;
-                        case R.id.make_recipe_drawer:
-                            startActivity(new Intent(getApplicationContext(), MakeRecipe.class));
                             break;
                         case R.id.foodPreferences:
                             startActivity(new Intent(getApplicationContext(), AlimentarPreferenceActivity.class));

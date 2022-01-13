@@ -22,11 +22,14 @@
 
             <TextView
                 android:id="@+id/txtPantry"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="My Pantry"
+                android:text="Pantry"
                 android:textSize="25dp"
-                android:fontFamily="@font/poppins_bold"/>
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semi_bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_pantry"
@@ -38,11 +41,14 @@
 
             <TextView
                 android:id="@+id/txtFridge"
+                android:layout_marginTop="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Fridge"
+                android:text="Fridge"
+                android:textColor="@color/black"
+                android:paddingLeft="15dp"
                 android:textSize="25dp"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_semi_bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_fridge"
@@ -56,9 +62,12 @@
                 android:id="@+id/txtFreezer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Freezer"
+                android:layout_marginTop="25dp"
+                android:text="Freezer"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
                  android:textSize="25dp"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_semi_bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_freezer"

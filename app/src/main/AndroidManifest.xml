@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.unimib.cookery">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,18 +14,17 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginRegisterUser"
+            android:name=".firebase.LoginRegisterUser"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.RegisterUser"
+            android:name=".firebase.RegisterUser"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.UserProfile"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.SingleRecipeActivity"
             android:exported="false"
@@ -44,10 +41,8 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

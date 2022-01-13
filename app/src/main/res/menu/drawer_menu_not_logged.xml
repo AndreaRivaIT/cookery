@@ -12,10 +12,6 @@
             android:title="Login"
             android:icon="@drawable/ic_login"/>
 
-        <item
-            android:id="@+id/make_recipe_drawer"
-            android:title="Make recipe"
-            android:icon="@drawable/ic_login"/>
 
     </group>
 </menu>

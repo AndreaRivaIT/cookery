@@ -1,4 +1,4 @@
-package it.unimib.cookery.ui;
+package it.unimib.cookery.firebase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.ui.MainActivity;
 
 public class LoginRegisterUser extends AppCompatActivity implements View.OnClickListener {
 
