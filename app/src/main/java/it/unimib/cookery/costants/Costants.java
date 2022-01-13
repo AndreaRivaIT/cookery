@@ -71,6 +71,7 @@ public class Costants {
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "dbCookery";
+    public static final String ID_RECIPE_DB = "Recipe id";
 
     /* fine stringhe costanti per intent */
 
@@ -81,9 +82,12 @@ public class Costants {
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
     private static final String anotherKey = "fcb6270717784ef3be8488d7befb7477";
     private static final String anotherAnotherKey="8b2514bd6d21482e8b4330863ee719b8";
+    private static final String anotheranotherAnotherKey="dbfe8f72b273495b93c195ee2613d24d";
+    private static final String anotheranotheranotherAnotherKey="4406ed7d134f45df89cb768b7664aafd";
 
 
-    public static final String API_KEY = anotherAnotherKey;
+
+    public static final String API_KEY = myApiKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */

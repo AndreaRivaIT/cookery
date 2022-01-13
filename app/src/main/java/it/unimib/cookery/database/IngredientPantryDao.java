@@ -31,7 +31,7 @@ public interface IngredientPantryDao {
     @Update
     public void update(IngredientPantry... users);
 
-    @Query("DELETE FROM ingredient_pantry WHERE idIngredientPantry = :idPantry")
+    @Query("DELETE FROM ingredient_pantry WHERE idIngredient = :idPantry")
     public void deleteByIngredientPantry(int idPantry);
 }
 

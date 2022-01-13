@@ -11,8 +11,8 @@ public class RecipeWithIngredients {
     @Embedded
     public Recipe Recipe;
     @Relation(
-            parentColumn = "idRecipe",
-            entityColumn = "idIngredient",
+            parentColumn = "idDb",
+            entityColumn = "idRecipe",
             associateBy = @Junction(RecipeIngredientCrossRef.class)
     )
     public List<IngredientApi> ingredientList;

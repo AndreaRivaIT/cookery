@@ -53,15 +53,19 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="25dp"
                     android:id="@+id/textView_title_recipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="35dp"
+                    android:fontFamily="@font/poppins_semi_bold"
                     android:gravity="center"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:paddingRight="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe"
-                    android:fontFamily="@font/poppins_bold"/>
+                    app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe" />
 
                 <ImageButton
                     android:id="@+id/ButtonDeleteRecipe"
@@ -69,15 +73,15 @@
                     android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
-                    android:minHeight="48dp"
                     android:clickable="false"
+                    android:foreground="?android:selectableItemBackground"
+                    android:minHeight="48dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ButtonEditRecipe"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_action_delete"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:foreground="?android:selectableItemBackground"
-                    android:visibility="gone"/>
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/ButtonEditRecipe"
@@ -85,16 +89,16 @@
                     android:layout_height="48dp"
                     android:layout_marginEnd="5dp"
                     android:background="@android:drawable/screen_background_light_transparent"
-                    android:minHeight="48dp"
                     android:clickable="false"
+                    android:foreground="?android:selectableItemBackground"
+                    android:minHeight="48dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/ButtonDeleteRecipe"
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/ic_action_edit"
-                    tools:ignore="SpeakableTextPresentCheck"
-                    android:foreground="?android:selectableItemBackground"
-                    android:visibility="gone"/>
+                    tools:ignore="SpeakableTextPresentCheck" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -118,11 +122,13 @@
                     android:id="@+id/textViewIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingLeft="15dp"
                     android:text="Ingredients:"
-                    android:textSize="30sp" />
+                    android:textSize="20sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
                     android:id="@+id/rcv_chips"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
