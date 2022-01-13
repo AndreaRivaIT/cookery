@@ -32,10 +32,12 @@ import it.unimib.cookery.adapters.MakeRecipeSearchAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.adapters.SearchChipAdapter;
 import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.IngredientRecipe;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.models.RecipeStep;
+import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.repository.DatabasePantryRepository;
+import it.unimib.cookery.repository.RecipeRepository;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 
 public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
@@ -53,24 +55,37 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     private String description;
 
-    private RecipeStep step;
+    private StepApi step;
 
     private SearchView searchView;
 
-    private DatabasePantryRepository db;
+    private RecipeRepository db;
+    private DatabasePantryRepository dbSearch;
 
     private EditText addStepEt, recipeNameEt, numServ;
 
     private Spinner typeSpinner;
 
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
-    private static ArrayList<RecipeStep> stepsList = new ArrayList<>();
+    private static ArrayList<IngredientRecipe> ingredientsListDb = new ArrayList<>();
+
+    private static ArrayList<StepApi> stepsList = new ArrayList<>();
     private static ArrayList<String> stepsListString = new ArrayList<>();
     private static ArrayList<Recipe> recipesList = new ArrayList<>();
 
     public static void updateArrayList(IngredientApi ingredient) {
+        IngredientRecipe ingredientRecipe;
+        ingredientRecipe = new IngredientRecipe(
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getAmount(),
+                ingredient.getUnit()
+        );
+        ingredientsListDb.add(ingredientRecipe);
         ingredientsList.add(ingredient);
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +101,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         typeSpinner = findViewById(R.id.type_spinner);
         numServ = findViewById(R.id.numServ);
         saveRecipe = findViewById(R.id.save_recipe);
-        numServ = findViewById(R.id.numServ);
+
 
         //setting up typeSpinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -95,14 +110,26 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         typeSpinner.setAdapter(adapter);
 
         //setting db
-        db = new DatabasePantryRepository(this.getApplication(), this);
-
+        db = new RecipeRepository(getApplication(), this);
+        dbSearch = new DatabasePantryRepository(getApplication(),this);
         //saving recipe
         saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
+            //todo settare nel costrurtore L'immagine
+            //todo settare il controllo per gli step e gli ingredienti vuoti
             public void onClick(View v) {
-                Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getContext().toString(), 1);
-
+               if(recipeNameEt.getText().toString().isEmpty()) {
+                    Log.d("test", ": "+recipeNameEt.getText().toString());
+                    recipeNameEt.setError("Enter name Recipe");
+                    recipeNameEt.requestFocus();
+                    return;
+                }
+                if(numServ.getText().toString().isEmpty()) {
+                    numServ.setError("Enter number of people");
+                    numServ.requestFocus();
+                    return;
+                }
+                Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getSelectedItem().toString(), 1, Integer.parseInt(numServ.getText().toString()));
                 //setting up db
                 makeDb(newRecipe);
                 finish();
@@ -127,7 +154,11 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     }
 
     private void makeDb(Recipe recipe) {
-        db.create(recipe);
+        //salvataggio della ricetta
+       db.createRecipe(recipe, ingredientsListDb, stepsList);
+
+
+
     }
 
     private void openDialogAddStep(View view) {
@@ -148,7 +179,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         saveBtnStep.setOnClickListener(v -> {
             stepsListString.clear();
             description = addStepEt.getText().toString();
-            step = new RecipeStep(description);
+            step = new StepApi(description);
 
             stepsList.add(step);
             recipeStepParse(stepsList);
@@ -158,9 +189,9 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         stepDialog.show();
     }
 
-    private void recipeStepParse(ArrayList<RecipeStep> stepsList) {
+    private void recipeStepParse(ArrayList<StepApi> stepsList) {
         for(int j = 0; j < stepsList.size(); j++) {
-            stepsListString.add(stepsList.get(j).getDescription());
+            stepsListString.add(stepsList.get(j).getStep());
         }
     }
 
@@ -176,7 +207,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         FlexboxLayoutManager flexboxLayoutManagerIngredientListRv = new FlexboxLayoutManager(this);
         ingredientListRV.setLayoutManager(flexboxLayoutManagerIngredientListRv);
         ingredientListRV.setFocusable(false);
-        ingredientListRV.setNestedScrollingEnabled(false);
+        ingredientListRV.setNestedScrollingEnabled(true);
         ingredientListRV.setAdapter(ingredientChipAdapter);
 
         //ingredientListSearch RV layoutmanager
@@ -197,7 +228,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(newText.length() > 3) {
-                    db.readIngredientApi(newText);
+                    dbSearch.readIngredientApi(newText);
                 } else {
                     searchChipAdapter.setData(null);
                 }
@@ -217,6 +248,11 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     @Override
     public void onResponse(Object obj) {
+
+    }
+
+    @Override
+    public void onResponsePantry(Object obj) {
 
     }
 
@@ -248,8 +284,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     public void onDestroy() {
         ingredientsList.removeAll(ingredientsList);
         stepsList.removeAll(stepsList);
+        ingredientsListDb.removeAll(ingredientsListDb);
         stepsListString.removeAll(stepsListString);
         super.onDestroy();
     }
-
 }

@@ -3,12 +3,16 @@ package it.unimib.cookery.repository;
 import android.app.Application;
 import android.util.Log;
 
+import java.util.List;
+
 import it.unimib.cookery.database.IngredientApiDao;
 import it.unimib.cookery.database.IngredientPantryDao;
+import it.unimib.cookery.database.IngredientRecipeDao;
 import it.unimib.cookery.database.PantryDao;
 import it.unimib.cookery.database.RoomDatabase;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
+import it.unimib.cookery.models.IngredientRecipe;
 import it.unimib.cookery.models.Pantry;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 import it.unimib.cookery.utils.ServiceLocator;
@@ -27,7 +31,7 @@ public class DatabasePantryRepository {
     private final IngredientApiDao mIngredientApi;
     private final IngredientPantryDao ingredientPantryDao;
     private final ResponseCallbackDb mResponseCallbackDb;
-
+    private IngredientRecipeDao mIngredientDao;
 
     public DatabasePantryRepository(Application application, ResponseCallbackDb responseCallback) {
         this.mApplication = application;
@@ -103,6 +107,16 @@ public class DatabasePantryRepository {
         new Thread(runnable).start();
     }
 
+    public void readAllIngredientPantryTest() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                mResponseCallbackDb.onResponsePantry(ingredientPantryDao.ingredientPantryALL());
+            }
+        };
+        new Thread(runnable).start();
+    }
+
     //Update
     public void update(Object obj){
         Runnable runnable = new Runnable() {
@@ -115,9 +129,6 @@ public class DatabasePantryRepository {
             }
         };
         new Thread(runnable).start();
-
-
-
     }
     //Delete
     public void delete(Object obj){
@@ -125,7 +136,7 @@ public class DatabasePantryRepository {
             @Override
             public void  run() {
                 if(obj instanceof IngredientPantry) {
-                    int id = ((IngredientPantry) obj).getIdIngredientPantry();
+                    int id = ((IngredientPantry) obj).getIdIngredient();
                     Log.d("test","delete" + id);
                     ingredientPantryDao.deleteByIngredientPantry(id);
                     readAllIngredientPantry();

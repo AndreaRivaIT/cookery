@@ -118,7 +118,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
             public void onClick(View v) {
                 if (!editText.getText().toString().equals("") && (Integer.parseInt(editText.getText().toString())) > 0) {
 
-                    ingredientSelected.setQuantity(Integer.parseInt(editText.getText().toString()));
+                    ingredientSelected.setQuantity(Double.parseDouble(editText.getText().toString()));
                     PantryFragment.updateQuantity(ingredientSelected);
                     ingredientDialog.dismiss();
                 } else {

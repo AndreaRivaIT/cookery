@@ -9,16 +9,19 @@ import java.util.List;
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
 
+import it.unimib.cookery.database.IngredientRecipeDao;
 import it.unimib.cookery.database.RecipeDao;
 import it.unimib.cookery.database.RoomDatabase;
 import it.unimib.cookery.database.StepDao;
 import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.IngredientRecipe;
 import it.unimib.cookery.models.Recipe;
 
 import it.unimib.cookery.models.RecipeApi;
-import it.unimib.cookery.models.RecipeStep;
+import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.models.ResponseRecipe;
 import it.unimib.cookery.service.SpoonacularApiService;
+import it.unimib.cookery.ui.MakeRecipe;
 import it.unimib.cookery.utils.ResponseCallbackApi;
 import it.unimib.cookery.utils.ResponseCallbackDb;
 import it.unimib.cookery.utils.ServiceLocator;
@@ -34,8 +37,8 @@ public class RecipeRepository {
     private List<RecipeApi> RecipeApiListDessert;
     private List<RecipeApi> RecipeApiListMainCourse;
     private List<RecipeApi> RecipeApiListFirstCourse;
-
-
+    private ArrayList<StepApi> list;
+    private long idRecipe;
 
     private Costants costants = new Costants();
 
@@ -43,6 +46,7 @@ public class RecipeRepository {
     private Application mApplication;
     private RecipeDao mRecipeDao;
     private StepDao mStepDao;
+    private IngredientRecipeDao mIngredientDao;
     private ResponseCallbackDb mResponseCallbackDb;
 
     public RecipeRepository(Application application, ResponseCallbackApi responseCallback) {
@@ -62,6 +66,7 @@ public class RecipeRepository {
         RoomDatabase roomDatabase = ServiceLocator.getInstance().getDao(application);
         this.mRecipeDao = roomDatabase.recipeDao();
         this.mStepDao = roomDatabase.recipeStepDao();
+        this.mIngredientDao = roomDatabase.ingredientRecipeDao();
         this.mResponseCallbackDb = responseCallback;
     }
 
@@ -226,7 +231,6 @@ public class RecipeRepository {
 
                     RecipeApiList = sort((ArrayList<RecipeApi>) response.body());
 
-
                     for(RecipeApi r: RecipeApiList)
                         Log.d("retrofit", " "+r.toString());
 
@@ -254,12 +258,9 @@ public class RecipeRepository {
         ArrayList<RecipeApi> sortedList = new ArrayList<>();
 
         int length = unsortedList.size();
-
         for(int i=0; i<length; i++){
-
             int min = 100000;
             RecipeApi rec = null;
-
             for(int j=0; j < unsortedList.size(); j++){
                 if(unsortedList.get(j).getMissedIngredientCount() <= min) {
                     min = unsortedList.get(j).getMissedIngredientCount();
@@ -267,38 +268,51 @@ public class RecipeRepository {
 
                 }
             }
-
             unsortedList.remove(rec);
             sortedList.add(rec);
 
         }
-
         return sortedList;
     }
 
 
+    public void createRecipe(Object obj ,ArrayList<IngredientRecipe> ingredient, ArrayList<StepApi> steps){
+        // oggetto ricetta, array list Ingredienti, array list Steps
+        saveObj(obj, ingredient, steps);
 
-    public void createRecipe(Object obj){
-    saveObj(obj);
-}
 
-    private void saveObj(Object obj){
+    }
+
+    private void saveObj(Object obj,ArrayList<IngredientRecipe> ingredient, ArrayList<StepApi> steps){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 if(obj instanceof Recipe) {
-                    mRecipeDao.insertRecipe((Recipe) obj);
-                }
-                else if(obj instanceof RecipeStep) {
-                    mStepDao.insertStep((RecipeStep) obj);
-                }
-                else if(obj instanceof IngredientApi) {
-                   // mStepDao.insertStep((IngredientApi) obj);
+                    idRecipe = mRecipeDao.insertRecipe((Recipe) obj);
+                    for (int k=0; k < steps.size(); k++){
+                        steps.get(k).setRecipeId(idRecipe);
+                        steps.get(k).setNumber(k+1);
+                        saveStepsIngredientRecipe(steps.get(k));
+                    }
+                    for (int k=0; k< ingredient.size(); k++){
+                        ingredient.get(k).setIdRecipe(idRecipe);
+                        saveStepsIngredientRecipe(ingredient.get(k));
+                    }
                 }
                 //responseCallback.onResponse(mPantryDao.pantryWithIngredientPantry(1));
             }
         };
         new Thread(runnable).start();
+
+    }
+    private void saveStepsIngredientRecipe(Object obj){
+        if(obj instanceof StepApi) {
+            mStepDao.insertStep((StepApi) obj);
+        }
+        if(obj instanceof IngredientRecipe) {
+            Log.d("prima di salvare:",""+((IngredientRecipe) obj).getName());
+            mIngredientDao.insertIngredient((IngredientRecipe) obj);
+        }
 
     }
 

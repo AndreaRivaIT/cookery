@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         /*creazione ricetta*/
         String urlImg = "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-lasagne-bolognese/_jcr_content/header-par/image_single.img.jpg/1462958827968.jpg";
 
-        Recipe recipeTest = new Recipe(1, urlImg, "Lasagna");
+        /*Recipe recipeTest = new Recipe(1, urlImg, "Lasagna");
         Recipe recipeTestA = new Recipe("pasta al forno", "First course", R.drawable.spoonacular);
         Recipe recipeTestB = new Recipe("risotto", "First course", R.drawable.spoonacular);
         Recipe recipeTestC = new Recipe("arrosto", "Main meal", R.drawable.spoonacular);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         Recipe recipeTestH = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestI = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
         Recipe recipeTestL = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestM = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
+        Recipe recipeTestM = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);*/
         db = new RecipeRepository(getApplication(), this);
        /* db.createRecipe(recipeTest);
         db.createRecipe(recipeTestA);
@@ -231,6 +231,11 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
     @Override
     public void onResponse(Object obj) {
+
+    }
+
+    @Override
+    public void onResponsePantry(Object obj) {
 
     }
 

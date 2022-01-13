@@ -1,11 +1,18 @@
 package it.unimib.cookery.models;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "RecipeStep")
 public class StepApi {
 
+    @PrimaryKey(autoGenerate = true)
+    private int idStep;
+    private long recipeId;
 
     private int number;
     private String step;
-
 
     public StepApi() {
     }
@@ -13,6 +20,10 @@ public class StepApi {
     public StepApi(int number, String step) {
         this.number = number;
         this.step = step;
+    }
+    @Ignore
+    public StepApi(String description) {
+        this.step = description;
     }
 
 
@@ -40,5 +51,19 @@ public class StepApi {
         this.step = steps;
     }
 
+    public int getIdStep() {
+        return idStep;
+    }
 
+    public void setIdStep(int idStep) {
+        this.idStep = idStep;
+    }
+
+    public long getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(long recipeId) {
+        this.recipeId = recipeId;
+    }
 }

@@ -54,54 +54,50 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     }
 
 
-    public void setDataPantry(List<IngredientApi> list, ArrayList<String> ingredientPantry ) {
+    public void setDataPantry(List<IngredientApi> list, ArrayList<String> ingredientPantry) {
         this.mListIngredients = list;
         this.ingredientPantry = ingredientPantry;
+
+        Log.d("testQ", "mListIngredients.size() :" + mListIngredients.size());
+        for(int k = 0; k<mListIngredients.size(); k++){
+            Log.d("testQ", "" + mListIngredients.get(k).getAmount());
+            Log.d("testQ", "------" +k);
+        }
         notifyDataSetChanged();
-
     }
-
 
 
     @NonNull
     @Override
     public IngredientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chip_ingredient, parent, false);
-
-
         return new IngredientViewHolder(view);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
-
         // per ora parzialmente funzionante
         // da sistemare bene con richiesta database
         boolean missing = false;
 
         IngredientApi ingredient = mListIngredients.get(position);
+        Log.d("testQ", "ingredient:" + mListIngredients.get(position).getName());
+
+
         if (ingredient == null) {
             return;
         }
-
         if(!notRedChip) {
-
             if (missingIngredients != null && missingIngredients.contains(ingredient)) {
-
                 Log.d("stampa", "" + missingIngredients.toString());
-
                 missing = true;
             } else if (ingredientPantry != null && missingIngredients == null) {
-
                 Log.d("stampa", "second if");
-
                 boolean trovato = false;
                 for (int i = 0; i < ingredientPantry.size() && !trovato; i++)
                     if (ingredientPantry.get(i).equalsIgnoreCase(ingredient.getName())) {
                         trovato = true;
                     }
-
                 if (!trovato)
                     missing = true;
 
@@ -115,8 +111,6 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
         }
 
         holder.tvIngredient.setText(ingredient.getName() + ":");
-
-
         Log.d("quanità", ""+ingredient.getAmount());
 
         switch (ingredient.getUnit()) {

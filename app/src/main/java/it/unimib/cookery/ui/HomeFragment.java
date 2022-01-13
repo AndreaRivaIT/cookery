@@ -211,8 +211,6 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
         recipeArrayListDessert.addAll(recipes);
         recipeAdapterSubcard1 = new RecipeAdapterSubcard(getContext(), recipeArrayListDessert, pantriesArrayList);
         recyclerViewHome4.setAdapter(recipeAdapterSubcard1);
-
-
     }
 
     @Override
@@ -265,23 +263,14 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
     @Override
     public void onResponse(Object obj) {
-
-
-
-
          ingredientPantries = (ArrayList<IngredientPantry>) obj;
         String ingredient = "";
 
         if (ingredientPantries.size() > 0) {
-
-
             for (int i = 0; i < ingredientPantries.size() - 1; i++)
                 ingredient += ingredientPantries.get(i).getName() + ",";
-
             ingredient += ingredientPantries.get(ingredientPantries.size() - 1).getName();
-
             Log.d("ingredient7", "" + ingredient);
-
 
            // da passare all'adapter e poi da passare alla single recipe activity
             // da riprovare col parcelable per gli ingredientiPantry
@@ -290,16 +279,10 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
 
 
             recipeRepository.getRecipeByIngredient(ingredient);
-
-
         } else {
-
-
             Log.d("ingredient7", "else");
             recipeRepository.getRandomRecipe(tags);
         }
-
-
         recipeRepository.getRandomRecipeFirstCourse(tags);
         recipeRepository.getRandomRecipeMainCourse(tags);
         recipeRepository.getRandomRecipeDessert(tags);
@@ -307,13 +290,16 @@ public class HomeFragment extends Fragment implements ResponseCallbackApi, Respo
     }
 
     @Override
-    public void onResponseSearchIngredient(Object obj) {
+    public void onResponsePantry(Object obj) {
 
     }
 
     @Override
-    public void onFailure(String errorMessage) {
+    public void onResponseSearchIngredient(Object obj) {
+    }
 
+    @Override
+    public void onFailure(String errorMessage) {
         Snackbar.make(requireActivity().findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_SHORT).show();
     }
 }

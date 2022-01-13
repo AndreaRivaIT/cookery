@@ -158,6 +158,7 @@ public class MakeRecipeSearchAdapter extends RecyclerView.Adapter<MakeRecipeSear
                 if (!editText.getText().toString().equals("") && (Double.parseDouble(editText.getText().toString())) > 0) {
 
                     String measureUnit = measureUnitSpinner.getSelectedItem().toString();
+                    list.get(id).setAmount(Double.parseDouble(editText.getText().toString()));
                     list.get(id).setUnit(measureUnit);
                     list.get(id).setAmount(Double.parseDouble(editText.getText().toString()));
                     MakeRecipe.updateArrayList(list.get(id));
