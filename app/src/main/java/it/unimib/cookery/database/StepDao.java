@@ -6,11 +6,13 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Recipe;
-import it.unimib.cookery.models.RecipeStep;
+import it.unimib.cookery.models.StepApi;
 
 
 /**
@@ -22,9 +24,16 @@ import it.unimib.cookery.models.RecipeStep;
 public interface StepDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertStep(RecipeStep... step);
+    void insertStep(StepApi... step);
 
-    @Query("SELECT * FROM RecipeStep WHERE pantry.idPantry LIKE :id")
+    @Query("SELECT * FROM RecipeStep WHERE recipeId = :idRecipe")
+    List<StepApi> selectStepsByRecipeId(long idRecipe);
+
+    @Query("DELETE FROM RecipeStep WHERE recipeId = :idRecipe")
+    public void deleteByStepRecipe(long idRecipe);
+
+
+    //@Query("SELECT * FROM RecipeStep WHERE pantry.idPantry LIKE :id")
     /*@Query("SELECT * FROM RecipeStep")
     List<RecipeStep> getAll();
 

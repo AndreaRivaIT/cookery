@@ -30,6 +30,8 @@ import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.models.IngredientApi;
+import it.unimib.cookery.models.IngredientPantry;
 import it.unimib.cookery.models.Recipe;
 import it.unimib.cookery.adapters.AdapterClass;
 import it.unimib.cookery.repository.DatabasePantryRepository;
@@ -45,7 +47,6 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
     private static final String TAG = "premuto";
 
     /* fine robe di comodo */
-
     /* ottengo le stringhe costanti per dialog filtri */
     private Costants myRecipeCostants = new Costants();
 
@@ -64,6 +65,8 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
 
     /* dichiaro un oggetto di tipo textButton*/
     private Button buttonFilter;
+    private ArrayList<IngredientPantry> ingredientPantries;
+    private ArrayList<String> igredientPantriesString = new ArrayList<>();
 
     /* crea l'array list di elementi da mostrare nell gridView */
     ArrayList<Recipe> recipeArrayList = new ArrayList<Recipe>();
@@ -72,7 +75,7 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
     ArrayList<String> filterList = new ArrayList<>();
 
     static private RecipeRepository db;
-
+     private DatabasePantryRepository dbPantry;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +87,13 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Log.d("state", "on create view");
         //connessione al db e caricamento delle ricette
         db = new RecipeRepository(requireActivity().getApplication(), this);
-        db.readAllRecipe();
+
+
+        dbPantry = new DatabasePantryRepository(requireActivity().getApplication(), this);
+        dbPantry.readAllIngredientPantryTest();
 
         // pulizia preventiva perchè a volte le duplica non so perchè
         recipeArrayList.clear();
@@ -140,16 +145,19 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* stampa di debug */
-                Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getName());
+                Log.d(TAG, "PREMUTO " + recipeArrayList.get(position).getIdDb());
 
                 // quando schiaccio una card crea l'intent e salva le
                 // informazioni da passare all'activity SingleRecipeActivity il back stack è gestito in automatico
                 Intent intent = new Intent(getActivity(), SingleRecipeActivity.class);
                 // da aggiungere passaggio id ricetta
 
-                intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName() );
+                intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName());
                 intent.putExtra(myRecipeCostants.TYPE, "true");
+                intent.putExtra(String.valueOf(myRecipeCostants.ID_RECIPE_DB),recipeArrayList.get(position).getIdDb());
 
+                intent.putExtra(myRecipeCostants.RECIPE_SERVINGS, recipeArrayList.get(position).getnPerson());
+                intent.putStringArrayListExtra(myRecipeCostants.PANTRY, igredientPantriesString);
                 // starta l'activity
                 startActivity(intent);
 
@@ -334,19 +342,27 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
                     public void run() {
                         recipeArrayList.clear();
                         recipeArrayList = (ArrayList) obj;
-                        for(int i=0; i < recipeArrayList.size();i++){
-                            Log.i("test", "RecipeFragment" + recipeArrayList.get(i).getName());
-                        }
-                        Log.i("test", "RecipeFragment" + recipeArrayList.size());
-                        Log.i("test", "----------------------------------------------");
                         adapter = new AdapterClass(getContext(), recipeArrayList);
                         myRecipiesGridView.setAdapter(adapter);
+
                     }
                 });
             }
         }
 
 
+    }
+
+    @Override
+    public void onResponsePantry(Object obj) {
+        igredientPantriesString.clear();
+        ingredientPantries = (ArrayList<IngredientPantry>) obj;
+        if (ingredientPantries.size() > 0){
+            for(int k = 0; k < ingredientPantries.size(); k++){
+                igredientPantriesString.add(ingredientPantries.get(k).getName());
+            }
+        }
+        db.readAllRecipe();
     }
 
     @Override
@@ -358,5 +374,12 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
     @Override
     public void onFailure(String errorMessage) {
 
+    }
+
+    @Override
+    public void onResume() {
+        Log.d("bbbbb","onResume");
+        super.onResume();
+        db.readAllRecipe();
     }
 }

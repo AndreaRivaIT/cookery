@@ -18,7 +18,7 @@ import java.util.Objects;
 public class IngredientApi implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    private int idIngredientPantry;
+    private int idIngredient;
 
 
     private int id;
@@ -42,6 +42,13 @@ public class IngredientApi implements Parcelable {
         this.amount = amount;
         this.unit = unit;
         this.possibleUnits = possibleUnits;
+    }
+    @Ignore
+    public IngredientApi(int id, String name, double amount, String unit) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
     }
 
     @Ignore
@@ -103,12 +110,12 @@ public class IngredientApi implements Parcelable {
         this.unit = unit;
     }
 
-    public int getIdIngredientPantry() {
-        return idIngredientPantry;
+    public int getIdIngredient() {
+        return idIngredient;
     }
 
-    public void setIdIngredientPantry(int idIngredientPantry) {
-        this.idIngredientPantry = idIngredientPantry;
+    public void setIdIngredient(int idIngredientPantry) {
+        this.idIngredient = idIngredientPantry;
     }
 
     @Override

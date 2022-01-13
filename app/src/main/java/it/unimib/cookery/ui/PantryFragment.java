@@ -240,6 +240,11 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     }
 
     @Override
+    public void onResponsePantry(Object obj) {
+
+    }
+
+    @Override
     public void onResponseSearchIngredient(Object obj) {
         if (obj != null) {
             if (obj instanceof List) {

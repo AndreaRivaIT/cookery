@@ -1,16 +1,24 @@
 package it.unimib.cookery.repository;
 
+import android.app.Application;
 import android.util.Log;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import it.unimib.cookery.R;
 import it.unimib.cookery.costants.Costants;
+import it.unimib.cookery.database.IngredientRecipeDao;
+import it.unimib.cookery.database.RecipeDao;
+import it.unimib.cookery.database.RoomDatabase;
+import it.unimib.cookery.database.StepDao;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.RecipeApi;
 import it.unimib.cookery.models.StepApi;
 import it.unimib.cookery.models.StepList;
 import it.unimib.cookery.service.SpoonacularApiService;
+import it.unimib.cookery.utils.ResponseCallbackDb;
 import it.unimib.cookery.utils.ResponseCallbackStepAndIngredients;
 import it.unimib.cookery.utils.ServiceLocator;
 import retrofit2.Call;
@@ -29,10 +37,25 @@ public class IngredientAndStepReopistory {
     private Costants costants = new Costants();
     private static final String ERROR_STRING = "Something went wrong, pleas check your connection";
 
+    //variabili database
+    private RecipeDao mRecipeDao;
+    private StepDao mStepDao;
+    private IngredientRecipeDao mIngredientDao;
+
+
 
     public IngredientAndStepReopistory(ResponseCallbackStepAndIngredients responseCallbackStepAndIngredients) {
         this.responseCallbackStepAndIngredients = responseCallbackStepAndIngredients;
         this.spoonacularApiService = ServiceLocator.getInstance().getSpoonacularApiService();
+
+    }
+    public IngredientAndStepReopistory(Application application, ResponseCallbackStepAndIngredients responseCallbackStepAndIngredients) {
+        this.responseCallbackStepAndIngredients = responseCallbackStepAndIngredients;
+        //this.spoonacularApiService = ServiceLocator.getInstance().getSpoonacularApiService();
+        RoomDatabase roomDatabase = ServiceLocator.getInstance().getDao(application);
+        this.mRecipeDao = roomDatabase.recipeDao();
+        this.mStepDao = roomDatabase.recipeStepDao();
+        this.mIngredientDao = roomDatabase.ingredientRecipeDao();
     }
 
 
@@ -56,9 +79,6 @@ public class IngredientAndStepReopistory {
                             stepApis = response.body().get(i).getSteps();
                         else
                             stepApis.addAll(response.body().get(i).getSteps());
-
-
-
                     }
                     //  Log.d("retrofit", "sssss "+stepApis.size());
 
@@ -101,12 +121,10 @@ public class IngredientAndStepReopistory {
                 //  Log.d("retrofit", "sssss "+stepApis.size());
                 else
                     responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.errorRetriveData);
-
             }
 
             @Override
             public void onFailure(Call<RecipeApi> call, Throwable t) {
-
                 responseCallbackStepAndIngredients.onFailureIngredientAndStep(R.string.connectionError);
             }
         });
@@ -115,6 +133,34 @@ public class IngredientAndStepReopistory {
 
 
     }
-
+    //Read
+    public void readIngredientsAndStepsRecipe(long idRecipe){
+        Log.d("ciao:","idRecipe: - "+idRecipe);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                /*for(int k=0; k < mIngredientDao.selectIngrediensByRecipeId(idRecipe).size();k++){
+                    String  nome =mIngredientDao.selectIngrediensByRecipeId(idRecipe).get(k).getName();
+                    Log.d("ciao:","nome: - "+nome);
+                }*/
+                Log.d("ciao:","chiamata al db"+mIngredientDao.selectIngrediensByRecipeId(idRecipe).size());
+                responseCallbackStepAndIngredients.onResponseRecipeSteps(mStepDao.selectStepsByRecipeId(idRecipe));
+                responseCallbackStepAndIngredients.onResponseRecipeIngredientsDb(mIngredientDao.selectIngrediensByRecipeId(idRecipe));
+            }
+        };
+        new Thread(runnable).start();
+    }
+    //delete recipe
+    public void deleteRecipe(long idRecipe){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void  run() {
+                mStepDao.deleteByStepRecipe(idRecipe);
+                mIngredientDao.deleteByIngredientRecipe(idRecipe);
+                mRecipeDao.deleteByRecipe(idRecipe);
+            }
+        };
+        new Thread(runnable).start();
+    }
 
 }

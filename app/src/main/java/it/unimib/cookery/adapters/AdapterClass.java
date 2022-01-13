@@ -80,9 +80,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-
-        ((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
-                .setImageResource(listdata.get(position).getImageId());
+        //todo togliere il commento una volta settata l'immagine settare l'immagine
+        /*((ImageView) convertView.findViewById(R.id.ImageViewCardRicetta))
+                .setImageResource(listdata.get(position).getImageId());*/
         return convertView;
     }
 

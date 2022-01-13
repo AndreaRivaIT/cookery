@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unimib.cookery.R;
-import it.unimib.cookery.models.RecipeStep;
-import it.unimib.cookery.models.RecipeStep;
+
 import it.unimib.cookery.models.StepApi;
 
 public class RecipeProcedureAdapter extends RecyclerView.Adapter<RecipeProcedureAdapter.StepViewHolder> {

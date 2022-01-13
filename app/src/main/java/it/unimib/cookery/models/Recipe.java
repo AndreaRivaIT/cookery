@@ -30,8 +30,7 @@ public class Recipe {
     @ColumnInfo(name = "n_person")
     private int nPerson;
 
-    @Ignore
-    ArrayList<RecipeStep> stepsList = new ArrayList<>();
+
     @Ignore
     ArrayList<IngredientApi> ingredientList= new ArrayList<>();
 
@@ -44,11 +43,11 @@ public class Recipe {
 
 
     @Ignore
-    public Recipe(String name, String category, int imageId) {
+    public Recipe(String name, String category, int imageId, int n) {
         this.name = name;
         this.category = category;
         this.imageId = imageId;
-        this.nPerson = 2;
+        this.nPerson = n;
     }
     public int getIdDb() {
         return idDb;
@@ -66,9 +65,6 @@ public class Recipe {
         nPerson = n;
     }
 
-    public ArrayList<RecipeStep> getStepsList() {
-        return stepsList;
-    }
 
 
 
@@ -122,10 +118,6 @@ public class Recipe {
         this.ingredientList.add(ingredientList);
     }
 
-    public void setStepsList(RecipeStep stepsList) {
-
-        this.stepsList.add(stepsList);
-    }
 
     public int getId() {
         return id;

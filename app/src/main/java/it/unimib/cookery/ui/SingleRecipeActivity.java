@@ -26,8 +26,12 @@ import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientPantry;
+import it.unimib.cookery.models.IngredientRecipe;
 import it.unimib.cookery.models.StepApi;
+
+import it.unimib.cookery.repository.DatabasePantryRepository;
 import it.unimib.cookery.repository.IngredientAndStepReopistory;
+import it.unimib.cookery.repository.RecipeRepository;
 import it.unimib.cookery.utils.ResponseCallbackStepAndIngredients;
 
 public class SingleRecipeActivity extends AppCompatActivity implements ResponseCallbackStepAndIngredients {
@@ -55,7 +59,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
     private String imageUrl;
     private int recipeId;
     private int servings;
-
+    private int idRecipeDb;
     // oggetto per le costanti
     private Costants costants = new Costants();
 
@@ -70,6 +74,10 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             new IngredientAndStepReopistory(this);
     private ArrayList<IngredientApi> missingIngredients;
     private ArrayList<String> pantryIngredients;
+
+    // Database
+    private IngredientAndStepReopistory db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +108,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         imageUrl = intent.getStringExtra(costants.RECIPE_IMAGE);
         recipeId = intent.getIntExtra(costants.RECIPE_ID, 0);
         pantryIngredients = intent.getStringArrayListExtra(costants.PANTRY);
-
+        idRecipeDb= intent.getIntExtra(costants.ID_RECIPE_DB,0);
         if(type.equals(costants.OTHER)) {
             stepRecived = intent.getStringArrayListExtra(costants.STEP_ARRAYLIST);
             ingredienteRecived = intent.getParcelableArrayListExtra(costants.INGREDIENT_ARRAYLIST);
@@ -131,22 +139,31 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             deleteRecipe.setVisibility(View.VISIBLE);
             modifyRecipe.setClickable(true);
             deleteRecipe.setClickable(true);
+            servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
+            setnPerson(servings);
+            Log.d("ciao:","prima della chiamata db");
+            //Log.d("idRecipe", ""+ recipeId);
+
 
             // le informazioni ottenute dal database
+            db = new IngredientAndStepReopistory(getApplication(),this);
+            Log.d("ciao:","idRecipe"+idRecipeDb);
+            db.readIngredientsAndStepsRecipe(idRecipeDb);
 
         }
-
+//todo cancellare la modifica
         modifyRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("premuto", "modifyRecipe");
             }
         });
+
         deleteRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                db.deleteRecipe(idRecipeDb);
                 // cancellare ricetta da database
 
                 onBackPressed();
@@ -236,14 +253,17 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
 
-        if(missingIngredients == null && type.equals(costants.READY_TO_COOCK) )
-
+        if(missingIngredients == null && type.equals(costants.READY_TO_COOCK) ) {
+            Log.d("dove", "1");
             ingredientChipAdapter.setData(ingredienteRecived);
-
-        else if(missingIngredients != null)
+        }
+        else if(missingIngredients != null) {
+            Log.d("dove", "2");
             ingredientChipAdapter.setData(ingredienteRecived, missingIngredients);
-        else
+        }
+        else{
             ingredientChipAdapter.setDataPantry(ingredienteRecived, pantryIngredients);
+            Log.d("dove","3");}
 
         rcvChips.setAdapter(ingredientChipAdapter);
 
@@ -280,8 +300,6 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
                 ingredienteRecived.get(i).setAmount(Math.round(qBase * n));
             else
                 ingredienteRecived.get(i).setAmount(Math.round((qBase * n) * 100.0) / 100.0);
-
-
             Log.d("test", "nome:" + ingredienteRecived.get(i).getName() + "- quantita:" + ingredienteRecived.get(i).getAmount());
         }
         servings = n;
@@ -290,23 +308,15 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
     @Override
     public void onResponseRecipeSteps(List<StepApi> steps) {
-
         ArrayList<String> stringSteps = new ArrayList<>();
-
-
         if(steps != null) {
-
             for (int i = 0; i < steps.size(); i++)
                 stringSteps.add(steps.get(i).getStep());
         }
-
       /*  for (StepApi st : steps)
             stringSteps.add(st.getStep());*/
-
-
         stepRecived = stringSteps;
         setStepAdapter();
-
 
     }
 
@@ -315,6 +325,30 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
         this.servings = servings;
         ingredienteRecived = (ArrayList<IngredientApi>) ingredients;
+        createChips();
+        setnPerson(servings);
+        if (servings > 1)
+            tvAmountPeople.setText(servings + costants.PEOPLE);
+        else {
+            tvAmountPeople.setText(servings + costants.PERSON);
+            btnRemove.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void onResponseRecipeIngredientsDb(List<IngredientRecipe> ingredients) {
+        IngredientApi ingredientApi;
+
+        for(int k=0; k< ingredients.size();k++){
+            Log.d("ciao:","ciao");
+            ingredientApi  = new IngredientApi(
+                    ingredients.get(k).getIdIngredient(),
+                    ingredients.get(k).getName(),
+                    ingredients.get(k).getAmount(),
+                    ingredients.get(k).getUnit());
+            Log.d("quant:","- " + ingredientApi.getAmount());
+            ingredienteRecived.add(ingredientApi);
+        }
         createChips();
         setnPerson(servings);
         if (servings > 1)

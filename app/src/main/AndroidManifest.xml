@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".ui.MakeRecipe"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.AlimentarPreferenceActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -29,11 +25,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.UserProfile"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".ui.MakeRecipe"
             android:exported="false"
             android:screenOrientation="portrait" />
 
