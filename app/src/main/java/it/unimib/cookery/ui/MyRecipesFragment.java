@@ -208,9 +208,6 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
                 //creazione della ricetta
                 // aggiungo la ricetta e la mostro sulla gridview
                 //recipeArrayList.add(new Recipe("aggiunta", "Desserts", R.drawable.ic_baseline_add_24));
-
-                Intent intent = new Intent(getActivity(), MakeRecipe.class);
-                startActivity(intent);
                 // adapter=new AdapterClass(getContext(), recipeArrayList);
                 myRecipiesGridView.setAdapter(adapter);
 
