@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity
-            android:name=".ui.MakeRecipe"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.AlimentarPreferenceActivity"
             android:exported="false"
@@ -36,6 +33,10 @@
             android:name=".ui.SingleRecipeActivity"
             android:exported="false"
             android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MakeRecipe"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity"
