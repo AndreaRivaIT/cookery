@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
     private EditText loginEmail, loginPassword;
     private Button loginButton;
     private ProgressBar progressBar;
+    private ImageView back;
     private FirebaseAuth mAuth;
 
     @Override
@@ -47,6 +49,15 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
         progressBar = findViewById(R.id.login_progress);
 
         mAuth = FirebaseAuth.getInstance();
+
+        back = findViewById(R.id.back_button_login);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
