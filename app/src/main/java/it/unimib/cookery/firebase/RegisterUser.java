@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText editTextEmail, editTextPassword, editTextReenterPass;
     private Button registerButton;
     private ProgressBar progressBar;
+    private ImageView back;
 
     private FirebaseAuth mAuth;
 
@@ -42,9 +44,24 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextEmail = findViewById(R.id.register_email);
         editTextPassword = findViewById(R.id.register_password);
         editTextReenterPass = findViewById(R.id.register_password_again);
+        back=findViewById(R.id.back_button_login);
 
         progressBar = findViewById(R.id.progress_bar_reg);
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+
     }
+
+
+
 
     @Override
     public void onClick(View v) {

@@ -140,6 +140,14 @@
     <string name="add_steps">Add steps</string>
     <string name="add_image">Add image</string>
     <string name="save_recipe">Save recipe</string>
+    <!-- fine string makeRecipe -->
+
+    <!-- string registrazione-->
+    <string name="sign_up">Sign Up!</string>
+    <string name="email">Email address</string>
+    <string name="reenter_password">Reenter password</string>
+    <string name="register">REGISTER</string>
+    <!-- fine string registrazione-->
 
 
 
