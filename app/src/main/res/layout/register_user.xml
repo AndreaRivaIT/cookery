@@ -20,7 +20,8 @@
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
-            app:srcCompat="@drawable/ic_back_button" />
+            app:srcCompat="@drawable/ic_back_button"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
     </LinearLayout>
 
@@ -37,28 +38,26 @@
     </ProgressBar>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:background="@drawable/rounded_shape_v2"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/xml_custom_shapes"
         android:fontFamily="@font/poppins_bold"
-        android:text="Sign Up"
-        android:textColor="@color/browser_actions_bg_grey"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textColor="@color/black"
         android:textSize="45sp"
-        android:textStyle="bold"
+        android:paddingBottom="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout">
-
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
         android:id="@+id/register_password"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:hint="password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -74,7 +73,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:hint="email address"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -91,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="reenter password"
+        android:hint="@string/reenter_password"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -109,7 +108,7 @@
         android:backgroundTint="@color/cookery_blue"
         android:elevation="8dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
