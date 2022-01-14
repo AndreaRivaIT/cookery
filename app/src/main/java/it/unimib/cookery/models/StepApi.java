@@ -13,7 +13,7 @@ public class StepApi {
 
     private int number;
     private String step;
-
+@Ignore
     public StepApi() {
     }
 
