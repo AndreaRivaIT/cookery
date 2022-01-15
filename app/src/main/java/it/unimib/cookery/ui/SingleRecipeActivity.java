@@ -141,6 +141,7 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             deleteRecipe.setClickable(true);
             servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
             setnPerson(servings);
+            loadImage();
             Log.d("ciao:","prima della chiamata db");
             //Log.d("idRecipe", ""+ recipeId);
 

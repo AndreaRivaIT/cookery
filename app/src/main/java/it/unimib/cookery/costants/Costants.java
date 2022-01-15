@@ -114,6 +114,11 @@ public class Costants {
     /* fine stringhe per modifica */
 
 
+    /* stringhe per accesso galleria*/
+    public static final int PICK_IMAGE = 100;
+    public static int STORAGE_PERMISSION_CODE=113;
+
+
     public Costants() {
 
     }

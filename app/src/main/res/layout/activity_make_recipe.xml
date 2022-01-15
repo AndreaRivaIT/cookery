@@ -160,7 +160,7 @@
             <Button
                 android:id="@+id/save_recipe"
                 android:layout_width="170dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/cookery_blue"

@@ -1,6 +1,7 @@
 package it.unimib.cookery.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,10 +80,19 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         // String imgUrl = listdata.get(position).getImageUrl();
 
 
+
+
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
-        //todo togliere il commento una volta settata l'immagine settare l'immagine
-        /*((ImageView) convertView.findViewById(R.id.imageViewTest))
-                .setImageResource(listdata.get(position).getImageId());*/
+
+    // todo settare un immagine di default se non viene selezionata la foto
+
+        ImageView img =(ImageView) convertView.findViewById(R.id.imageViewRicetta);
+        if(!listdata.get(position).getImageUrl().equals("")) {
+        Uri myUri = Uri.parse(listdata.get(position).getImageUrl());
+        img.setImageURI(myUri);
+
+        }
+
         return convertView;
     }
 
