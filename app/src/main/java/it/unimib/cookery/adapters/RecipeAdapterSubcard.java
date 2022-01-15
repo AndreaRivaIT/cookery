@@ -89,7 +89,7 @@ public class RecipeAdapterSubcard extends RecyclerView.Adapter<RecipeAdapterSubc
         String url = model.getImage();
 
         if (url == null) {
-            holder.imageView.setImageResource(R.drawable.ic_baseline_broken_image_24);
+            holder.imageView.setImageResource(R.drawable.generic_recipe);
         } else {
             Glide.with(context)
                     .load(url)
