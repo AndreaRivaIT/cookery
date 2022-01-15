@@ -142,6 +142,10 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
             servings = intent.getIntExtra(costants.RECIPE_SERVINGS, 0);
             setnPerson(servings);
             loadImage();
+
+
+
+
             Log.d("ciao:","prima della chiamata db");
             //Log.d("idRecipe", ""+ recipeId);
 
@@ -211,8 +215,8 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
     private void loadImage(){
 
-        if (imageUrl == null) {
-            recipeImage.setImageResource(R.drawable.ic_baseline_broken_image_24);
+        if (imageUrl == null || imageUrl.equals("")) {
+            recipeImage.setImageResource(R.drawable.generic_recipe);
         } else {
 
             // chiamate Api per ottenere ingredienti e step
