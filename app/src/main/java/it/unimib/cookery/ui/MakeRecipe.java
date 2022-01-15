@@ -1,16 +1,25 @@
 package it.unimib.cookery.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +30,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +42,7 @@ import it.unimib.cookery.adapters.IngredientChipAdapter;
 import it.unimib.cookery.adapters.MakeRecipeSearchAdapter;
 import it.unimib.cookery.adapters.RecipeProcedureAdapter;
 import it.unimib.cookery.adapters.SearchChipAdapter;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.models.IngredientApi;
 import it.unimib.cookery.models.IngredientRecipe;
 import it.unimib.cookery.models.Recipe;
@@ -64,10 +76,16 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     private EditText addStepEt, recipeNameEt, numServ;
 
+    private ImageView recipeImage;
+    private TextView recipeImageTextView;
+    private Uri imageUri;
+    private String uriImageString="";
+
     private Spinner typeSpinner;
 
     private static ArrayList<IngredientApi> ingredientsList = new ArrayList<>();
     private static ArrayList<IngredientRecipe> ingredientsListDb = new ArrayList<>();
+    private Costants costants = new Costants();
 
     private static ArrayList<StepApi> stepsList = new ArrayList<>();
     private static ArrayList<String> stepsListString = new ArrayList<>();
@@ -101,6 +119,8 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         typeSpinner = findViewById(R.id.type_spinner);
         numServ = findViewById(R.id.numServ);
         saveRecipe = findViewById(R.id.save_recipe);
+        recipeImage = findViewById(R.id.recipeImage);
+        recipeImageTextView= findViewById(R.id.chooseImageText);
 
 
         //setting up typeSpinner
@@ -129,7 +149,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
                     numServ.requestFocus();
                     return;
                 }
-                Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getSelectedItem().toString(), 1, Integer.parseInt(numServ.getText().toString()));
+                Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getSelectedItem().toString(), uriImageString, Integer.parseInt(numServ.getText().toString()));
                 //setting up db
                 makeDb(newRecipe);
                 finish();
@@ -141,6 +161,9 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         ingredientChipAdapter = new IngredientChipAdapter();
         stepAdapter = new RecipeProcedureAdapter();
 
+        // todo fare in modo che le dialog si possoano chiudere solo con i pulsanti salva
+        // todo e cancella (da implementare) e non con il tap fuori dialog
+
         //add ingredient
         searchIngredientBtn.setOnClickListener(v -> {
             openDialogAddIngredient(v);
@@ -151,7 +174,76 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             openDialogAddStep(v);
         });
 
+
+// nuovo codice
+
+        // todo controllare vari file e settare le stringhe a costanti eccetera
+        // todo aspettare risposta ginelli su cosa deprecata
+        recipeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, costants.STORAGE_PERMISSION_CODE);
+            }
+        });
+
+        recipeImageTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, costants.STORAGE_PERMISSION_CODE);
+            }
+        });
+
     }
+
+
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, costants.PICK_IMAGE);
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == costants.PICK_IMAGE){
+            imageUri = data.getData();
+            uriImageString=imageUri.toString();
+            Glide.with(this)
+                    .load(imageUri.toString())
+                    .into(recipeImage);
+
+            recipeImageTextView.setVisibility(View.GONE);
+
+
+        }
+    }
+
+    private void checkPermission(String permission, int requestCode){
+
+        if(ContextCompat.checkSelfPermission(MakeRecipe.this, permission) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(MakeRecipe.this, new String[]{permission}, requestCode);
+        }else{
+            openGallery();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == costants.STORAGE_PERMISSION_CODE){
+
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                openGallery();
+            }
+        }
+    }
+
+
+    // fine nuovo codice
+
 
     private void makeDb(Recipe recipe) {
         //salvataggio della ricetta

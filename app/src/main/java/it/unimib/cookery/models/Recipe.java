@@ -43,10 +43,10 @@ public class Recipe {
 
 
     @Ignore
-    public Recipe(String name, String category, int imageId, int n) {
+    public Recipe(String name, String category, String imageUrl, int n) {
         this.name = name;
         this.category = category;
-        this.imageId = imageId;
+        this.imageUrl = imageUrl;
         this.nPerson = n;
     }
     public int getIdDb() {

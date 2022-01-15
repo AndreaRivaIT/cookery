@@ -155,7 +155,7 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
                 intent.putExtra(myRecipeCostants.RECIPE_NAME,recipeArrayList.get(position).getName());
                 intent.putExtra(myRecipeCostants.TYPE, "true");
                 intent.putExtra(String.valueOf(myRecipeCostants.ID_RECIPE_DB),recipeArrayList.get(position).getIdDb());
-
+                intent.putExtra(myRecipeCostants.RECIPE_IMAGE,recipeArrayList.get(position).getImageUrl());
                 intent.putExtra(myRecipeCostants.RECIPE_SERVINGS, recipeArrayList.get(position).getnPerson());
                 intent.putStringArrayListExtra(myRecipeCostants.PANTRY, igredientPantriesString);
                 // starta l'activity
