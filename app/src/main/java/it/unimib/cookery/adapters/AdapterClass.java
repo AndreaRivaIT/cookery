@@ -91,6 +91,9 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
         Uri myUri = Uri.parse(listdata.get(position).getImageUrl());
         img.setImageURI(myUri);
 
+        }else {
+
+            img.setImageResource(R.drawable.generic_recipe);
         }
 
         return convertView;
