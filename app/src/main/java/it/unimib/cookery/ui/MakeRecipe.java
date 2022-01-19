@@ -54,7 +54,7 @@ import it.unimib.cookery.utils.ResponseCallbackDb;
 
 public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb {
 
-    private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep, saveRecipe;
+    private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep, saveRecipe, deleteBtn;
 
     private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
 
@@ -256,6 +256,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     private void openDialogAddStep(View view) {
         stepDialog = new Dialog(view.getContext());
         stepDialog.setContentView(R.layout.add_step_dialog);
+        stepDialog.setCancelable(false);
         stepDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //setting steps RV
@@ -279,6 +280,17 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             stepDialog.dismiss();
         });
         stepDialog.show();
+
+    deleteBtn= stepDialog.findViewById(R.id.ingredient_dialog_btn_delete);
+
+    deleteBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            stepDialog.dismiss();
+        }
+    });
+
+
     }
 
     private void recipeStepParse(ArrayList<StepApi> stepsList) {
@@ -290,6 +302,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     public void openDialogAddIngredient(View view) {
         ingredientDialog = new Dialog(view.getContext());
         ingredientDialog.setContentView(R.layout.add_ingredient_dialog);
+        ingredientDialog.setCancelable(false);
         ingredientDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //setting RV
@@ -319,7 +332,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText.length() > 3) {
+                if(newText.length() > 2) {
                     dbSearch.readIngredientApi(newText);
                 } else {
                     searchChipAdapter.setData(null);
@@ -333,6 +346,15 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         saveBtn.setOnClickListener(v -> {
             ingredientChipAdapter.setData(ingredientsList, true);
             ingredientDialog.dismiss();
+        });
+
+        deleteBtn = ingredientDialog.findViewById(R.id.ingredient_dialog_btn_delete);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ingredientsList.clear();
+                ingredientDialog.dismiss();
+            }
         });
 
         ingredientDialog.show();
