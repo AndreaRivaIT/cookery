@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="New Pantry Box"
+                android:text="@string/new_pantry_box"
                 android:textSize="18dp"
                 android:fontFamily="@font/poppins_bold"/>
 
@@ -35,7 +35,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_shape"
-                android:hint="Insert name"
+                android:hint="@string/insert_name"
                 android:minHeight="48dp"
                 android:paddingLeft="4dp" />
             <Button
