@@ -249,7 +249,7 @@
                 android:backgroundTint="@color/cookery_blue"
                 android:enabled="true"
                 android:text="@string/save_string"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

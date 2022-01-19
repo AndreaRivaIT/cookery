@@ -3,6 +3,8 @@ package it.unimib.cookery.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,6 +128,7 @@ public class MakeRecipeSearchAdapter extends RecyclerView.Adapter<MakeRecipeSear
 
         // crea una dialog
         ingredientDialog = new Dialog(itemView.getContext());
+        ingredientDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // elimina il titolo dalla dialog che non serve
         ingredientDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
