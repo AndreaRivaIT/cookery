@@ -46,7 +46,7 @@
                 android:layout_height="44dp"
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="COOKERY"
+                android:text="@string/app_name_uppercase"
                 android:textColor="@color/black"
                 android:textSize="30sp" />
 
