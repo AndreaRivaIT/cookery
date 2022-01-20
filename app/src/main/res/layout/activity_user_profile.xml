@@ -20,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:fontFamily="@font/poppins_semi_bold"
-            android:text="Email" />
+            android:text="@string/email" />
 
         <EditText
             android:id="@+id/profileEmail"
@@ -74,7 +74,7 @@
             android:elevation="8dp"
             android:enabled="false"
             android:fontFamily="@font/poppins_bold"
-            android:text="SAVE"
+            android:text="@string/save"
             android:textColor="@color/white" />
 
 

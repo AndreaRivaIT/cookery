@@ -45,7 +45,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="First courses"
+                android:text="@string/first_courses"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Main courses"
+                android:text="@string/main_courses"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -83,7 +83,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Desserts"
+                android:text="@string/desserts"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 

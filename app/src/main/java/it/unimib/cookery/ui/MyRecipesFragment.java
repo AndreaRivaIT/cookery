@@ -1,6 +1,7 @@
 package it.unimib.cookery.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.content.DialogInterface;
 
@@ -302,6 +303,7 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
 
                 });
 
+
                 // crea bottone close
                 builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     @Override
@@ -312,8 +314,15 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
                 });
 
 
+                AlertDialog dialog = builder.create();
                 // mostra l'alert dialog
-                builder.show();
+                dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#54B3AB"));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#54B3AB"));
+
+
+
 
 
             }
@@ -379,7 +388,6 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
 
     @Override
     public void onResume() {
-        Log.d("bbbbb","onResume");
         super.onResume();
         db.readAllRecipe();
     }

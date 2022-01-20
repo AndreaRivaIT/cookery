@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Cookery</string>
+    <string name="app_name_uppercase"> COOKERY</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -80,15 +81,30 @@
     <string name="invalid_step">Impossible to add an empty step</string>
     <!-- fine strings per dialog aggiunta ingredienti e step -->
 
+   <!-- stringhe per home -->
     <string name="home">Home</string>
     <string name="fridge">Fridge</string>
     <string name="recipe">Recipe</string>
     <string name="Ready_to_cook">Ready to cook</string>
     <string name="img_recipe">img_recipe</string>
-    <string name="like">like</string>
+    <string name="first_courses">First courses</string>
+    <string name="main_courses">Main courses</string>
+    <string name="desserts">Desserts</string>
+    <!-- stringhe per home -->
+
+    <!-- strings for pantry -->
     <string name="crea_una_lista_della_spesa">Create a shopping list</string>
     <string name="my_pantry">My pantry</string>
     <string name="my_fridge">My fridge</string>
+    <string name="search_an_ingredient">Search an ingredient</string>
+    <string name="pantry">Pantry</string>
+    <string name="freezer">Freezer</string>
+
+    <!-- fine strings for pantry -->
+
+    <!-- stringhe add pantry -->
+    <string name="insert_name">Insert name</string>
+    <string name="new_pantry_box">New Pantry Box</string>
 
 
     <!-- strings MyProfileFragment -->
@@ -120,6 +136,7 @@
     <!-- string singleRecipeActivity -->
 
     <string name="noStepFoundString">NO STEP FOUND FOR THIS RECIPE</string>
+    <string name="ingredients_double_dot">Ingredients:</string>
 
 
     <!-- fine string singleRecipeActivity -->
@@ -142,12 +159,15 @@
     <string name="save_recipe">Save recipe</string>
     <!-- fine string makeRecipe -->
 
-    <!-- string registrazione-->
+    <!-- string registrazione e log-in -->
     <string name="sign_up">Sign Up!</string>
     <string name="email">Email address</string>
     <string name="reenter_password">Reenter password</string>
     <string name="register">REGISTER</string>
-    <!-- fine string registrazione-->
+    <string name="register_lowercase">Register</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">LOGIN</string>
+    <!-- fine string registrazione e log-in-->
 
 
 
