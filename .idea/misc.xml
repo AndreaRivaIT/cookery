@@ -50,17 +50,24 @@
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/layout/round_shape_border.xml" value="0.33559782608695654" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2101851851851852" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-anydpi/ic_action_add.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-anydpi/ic_launcher.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-hdpi/border_radius_style.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-hdpi/border_radius_style_btn.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-hdpi/bottom_sheet_style.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-hdpi/btnclick_add_style.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-hdpi/btnclick_remove_style.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/circle.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/ic_back_button.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/ic_cookery_logo.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/ic_login.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/image_border.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/rounded_shape.xml" value="0.1578125" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/rounded_shape_v3.xml" value="0.21296296296296297" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/drawable/rounded_shape_v4.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_main.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_make_recipe.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/layout/activity_single_recipe.xml" value="0.18111964873765093" />
@@ -100,6 +107,10 @@
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/menu/drawer_menu_not_logged.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/menu/drawer_nav_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/mipmap-hdpi/ic_launcher.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/ASUS/Desktop/progettoAndroid2/Cookery/app/src/main/res/mipmap-mdpi/ic_launcher_round.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-hdpi/border_radius_style.xml" value="0.1" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-hdpi/btnclick_add_style.xml" value="0.14375" />
         <entry key="..\:/Users/adami/Desktop/DispositiviMobili/Cookery/app/src/main/res/drawable-xxxhdpi/pressed.xml" value="0.15572916666666667" />
