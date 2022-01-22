@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -154,6 +155,11 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
                 if (numServ.getText().toString().isEmpty()) {
                     numServ.setError(costants.NUMBER_PEOPLE_ERROR);
                     numServ.requestFocus();
+                    return;
+
+                }
+                if (stepsList.isEmpty() || ingredientsList.isEmpty()){
+                    Toast.makeText(MakeRecipe.this, "Step or ingredient are empty", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getSelectedItem().toString(), uriImageString, Integer.parseInt(numServ.getText().toString()));

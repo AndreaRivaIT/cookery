@@ -59,6 +59,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         holder.tvIngredient.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+
                 Log.d("test", "nome click lungo:" + ingredient);
                 holder.imgButtonDelete.setVisibility(View.VISIBLE);
                 singleClic = false;
@@ -71,7 +72,6 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         holder.imgButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 PantryFragment.deleteIngredient(ingredient);
                 SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
                 modified = true;
@@ -81,8 +81,6 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
 
             }
         });
-
-
         holder.tvIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +88,6 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
                     Log.d("test", "nome click veloce:" + holder.tvIngredient.getText());
                     openDialogModifyProduct(holder.itemView, ingredient);
                 }
-
                 singleClic = true;
             }
         });
@@ -133,6 +130,7 @@ public class IngredientChipAdapterPantry extends RecyclerView.Adapter<Ingredient
         });
         // creo e ottengo l'oggetto per il bottone di delete
         Button deleteButton = ingredientDialog.findViewById(R.id.deleteIngredientButton);
+
         // listener del bottone di delete
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
