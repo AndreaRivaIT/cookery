@@ -104,6 +104,7 @@ public class Costants {
 
     public static final String SHARED_PREFERENCES_FILE_NAME = "sharedPreferences";
     public static final String FIRST_ACCESS = "firstAccess";
+    public static final String LOGGED = "logged";
     public static final String CSV_FILE_NAME = "ingredient.csv";
 
     /* fine stringhe main activity */

@@ -57,6 +57,7 @@
     <string name="Soy_intollerance">Soy</string>
     <string name="Sulfite_intollerance">Sulfite</string>
     <string name="Wheat_intollerance">Wheat</string>
+    <string name="choose_category">Select a category:</string>
 
     <string name="vegan_string">Vegan</string>
     <string name="Ketogenic_string">Ketogenic</string>

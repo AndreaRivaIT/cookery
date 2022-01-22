@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
@@ -44,13 +45,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ResponseCallbackDb {
 
+    public static SharedPreferences sharedPreferences;
     private Menu drawerMenu;
     private DrawerLayout mDrawerLayout;
     private NavHostFragment mNavHostFragment;
     private NavController mNavController;
     private NavigationView mNavMenu;
 
-    private static boolean logged = false;
+    private boolean logged;
     private List<PantryWithIngredientPantry> list;
     private boolean firstAccess;
     private ArrayList<IngredientApi> ing;
@@ -66,10 +68,13 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         setContentView(R.layout.activity_main);
 
         // riferimento al file
-        SharedPreferences sharedPreferences = getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
 
         firstAccess = sharedPreferences.getBoolean(costants.FIRST_ACCESS, true);
+        logged = sharedPreferences.getBoolean(costants.LOGGED, false);
 
+        Log.d("logged", "" + logged);
         Log.d("sharedPreferences", "" + firstAccess);
 
 
@@ -101,32 +106,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         /*creazione ricetta*/
         String urlImg = "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-lasagne-bolognese/_jcr_content/header-par/image_single.img.jpg/1462958827968.jpg";
 
-        /*Recipe recipeTest = new Recipe(1, urlImg, "Lasagna");
-        Recipe recipeTestA = new Recipe("pasta al forno", "First course", R.drawable.spoonacular);
-        Recipe recipeTestB = new Recipe("risotto", "First course", R.drawable.spoonacular);
-        Recipe recipeTestC = new Recipe("arrosto", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestD = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestE = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestF = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestG = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestH = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestI = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestL = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);
-        Recipe recipeTestM = new Recipe("parmigina", "Main meal", R.drawable.spoonacular);*/
         db = new RecipeRepository(getApplication(), this);
-       /* db.createRecipe(recipeTest);
-        db.createRecipe(recipeTestA);
-        db.createRecipe(recipeTestB);
-        db.createRecipe(recipeTestC);
-        db.createRecipe(recipeTestD);
-        db.createRecipe(recipeTestE);
-        db.createRecipe(recipeTestF);
-        db.createRecipe(recipeTestG);
-        db.createRecipe(recipeTestH);
-        db.createRecipe(recipeTestI);
-        db.createRecipe(recipeTestL);
-        db.createRecipe(recipeTestM);*/
-
 
         dbIngredient = new DatabasePantryRepository(getApplication(), this);
 
@@ -154,11 +134,6 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
         }
 
     }
-
-    public static void setLogged(boolean bool) {
-        logged = bool;
-    }
-
     //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
 
@@ -180,13 +155,12 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
                     switch (item.getItemId()) {
                         case R.id.logout_drawer:
                             FirebaseAuth.getInstance().signOut();
-                            setLogged(false);
-                            startActivity(getIntent());
+                            logged = sharedPreferences.edit().putBoolean(costants.LOGGED, false).commit();
                             finish();
+                            startActivity(getIntent());
                             break;
                         case R.id.my_profile:
                             startActivity(new Intent(getApplicationContext(), UserProfile.class));
-                            finish();
                             break;
 
                         case R.id.food_preferences:
