@@ -76,18 +76,14 @@ public class Costants {
     /* fine stringhe costanti per intent */
 
     /* stringhe costanti  retrofit */
-    //  8b2514bd6d21482e8b4330863ee719b8
     private static final String genericApiKey = "dabd7cf0ddb04d2dbfe85a7597c4067b";
     private static final String myApiKey = "c1ded2413e85406984a2cfc38bdac50a";
     private static final String anotherKey = "fcb6270717784ef3be8488d7befb7477";
     private static final String anotherAnotherKey="8b2514bd6d21482e8b4330863ee719b8";
     private static final String anotheranotherAnotherKey="dbfe8f72b273495b93c195ee2613d24d";
     private static final String anotheranotheranotherAnotherKey="4406ed7d134f45df89cb768b7664aafd";
-
-
-
-    public static final String API_KEY = anotheranotherAnotherKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
+    public static final String API_KEY = myApiKey;
 
     /* fine stringhe costanti per reftrofit */
 
@@ -117,11 +113,22 @@ public class Costants {
     /* stringhe per accesso galleria*/
     public static final int PICK_IMAGE = 100;
     public static int STORAGE_PERMISSION_CODE=113;
+    /* fine stringhe per accesso galleria*/
 
     /* stringhe make recipe */
     public static final String NAME_ERROR= "Enter recipe name";
     public static final String NUMBER_PEOPLE_ERROR= "Enter a number of people";
+    /* fine stringhe make recipe */
 
+    /* stringhe costanti per utente*/
+    public static final String EMAIL_REQUIRED="Email is required!";
+    public static final String VALID_EMAIL="Please enter a valid Email address";
+    public static final String PASSWORD_REQUIRED ="Password is required!";
+    public static final String PASSWORD_LENGTH="Minimum password length is 9 characters";
+    public static final String REENTER_PASSWORD= "Enter password again";
+    public static final String NO_MATCH_PASSWORD= "Password does not match";
+    public static final String INVALID_EMAIL="Please provide a valid email address";
+    /* fine stringhe costanti per utente*/
 
 
     public Costants() {

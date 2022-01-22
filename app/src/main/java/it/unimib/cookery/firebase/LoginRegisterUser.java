@@ -85,25 +85,25 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
         String password = loginPassword.getText().toString().trim();
 
         if(email.isEmpty()) {
-            loginEmail.setError("Email is required");
+            loginEmail.setError(constants.EMAIL_REQUIRED);
             loginEmail.requestFocus();
             return;
         }
 
         if(!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
-            loginEmail.setError("Please enter a valid Email address");
+            loginEmail.setError(constants.VALID_EMAIL);
             loginEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()) {
-            loginPassword.setError("Password is required");
+            loginPassword.setError(constants.PASSWORD_REQUIRED);
             loginPassword.requestFocus();
             return;
         }
 
         if(password.length() < 9) {
-            loginPassword.setError("Minimum password length is 9 characters");
+            loginPassword.setError(constants.PASSWORD_LENGTH);
             loginPassword.requestFocus();
             return;
         }
@@ -124,12 +124,12 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
                         startActivity(new Intent(LoginRegisterUser.this, MainActivity.class));
                     } else {
                         user.sendEmailVerification();
-                        Toast.makeText(LoginRegisterUser.this, "check your email to verify your account", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginRegisterUser.this, R.string.verify_account, Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
 
                 } else {
-                    Toast.makeText(LoginRegisterUser.this, "failed to login, check your credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginRegisterUser.this, R.string.wrong_credentials, Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
 
                 }

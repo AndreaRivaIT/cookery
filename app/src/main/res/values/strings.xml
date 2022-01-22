@@ -158,6 +158,7 @@
     <string name="add_steps">Add steps</string>
     <string name="choose_image">Choose an image </string>
     <string name="save_recipe">Save recipe</string>
+    <string name="empty_field">Step or ingredient are empty</string>
     <!-- fine string makeRecipe -->
 
     <!-- string registrazione e log-in -->
@@ -168,7 +169,19 @@
     <string name="register_lowercase">Register</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="login">LOGIN</string>
+    <string name="verify_account">Check your email to verify your account</string>
+    <string name="wrong_credentials">Failed to login, check your credentials</string>
+    <string name="register_success">User has been registered</string>
+    <string name="register_fail">Registration has failed, try again</string>
+    <string name="update_mail">Email address has been updated</string>
+    <string name="update_mail_fail">Email address update has failed, try again</string>
+    <string name="update_password">Password has been updated</string>
+    <string name="update_password_fail">Password update has failed, try again</string>
+
+
     <!-- fine string registrazione e log-in-->
+
+
 
 
 

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private Button registerButton;
     private ProgressBar progressBar;
     private ImageView back;
+    private Costants costants = new Costants();
 
     private FirebaseAuth mAuth;
 
@@ -78,38 +80,38 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String reenterPassword = editTextReenterPass.getText().toString().trim();
 
         if(email.isEmpty()) {
-            editTextEmail.setError("Email addess is required");
+            editTextEmail.setError(costants.EMAIL_REQUIRED);
             editTextEmail.requestFocus();
             return;
         }
 
         if(password.isEmpty()) {
-            editTextPassword.setError("Password is required");
+            editTextPassword.setError(costants.PASSWORD_REQUIRED);
             editTextPassword.requestFocus();
             return;
         }
 
         if(password.length() < 9) {
-            editTextPassword.setError("Password length should be 9 characters or more");
+            editTextPassword.setError(costants.PASSWORD_LENGTH);
             editTextPassword.requestFocus();
             return;
         }
 
         if(reenterPassword.isEmpty()) {
-            editTextReenterPass.setError("Enter password again");
+            editTextReenterPass.setError(costants.REENTER_PASSWORD);
             editTextReenterPass.requestFocus();
             return;
         }
 
         if(!reenterPassword.equals(password)) {
-            editTextReenterPass.setError("Password does not match");
+            editTextReenterPass.setError(costants.NO_MATCH_PASSWORD);
             editTextReenterPass.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please provide a valid email address");
-            editTextPassword.requestFocus();
+            editTextEmail.setError(costants.INVALID_EMAIL);
+            editTextEmail.requestFocus();
             return;
         }
 
@@ -128,17 +130,17 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                 public void onComplete(@NonNull Task<Void> task) {
 
                                     if(task.isSuccessful()) {
-                                        Toast.makeText(RegisterUser.this, "User has been registered", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterUser.this, R.string.register_success, Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(getApplicationContext(), LoginRegisterUser.class ));
                                         finish();
                                     } else {
-                                        Toast.makeText(RegisterUser.this, "Registration has failed, try again", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterUser.this, R.string.register_fail, Toast.LENGTH_LONG).show();
                                     }
                                     progressBar.setVisibility(View.GONE);
                                 }
                             });
                         } else {
-                            Toast.makeText(RegisterUser.this, "Registration has failed, try again", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterUser.this, R.string.register_fail, Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
