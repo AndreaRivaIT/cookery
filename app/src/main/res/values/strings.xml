@@ -57,13 +57,14 @@
     <string name="Soy_intollerance">Soy</string>
     <string name="Sulfite_intollerance">Sulfite</string>
     <string name="Wheat_intollerance">Wheat</string>
+    <string name="choose_category">Select a category:</string>
 
     <string name="vegan_string">Vegan</string>
     <string name="Ketogenic_string">Ketogenic</string>
     <string name="Paleo_string">Paleo</string>
     <string name="vegetarian_string">Vegetarian</string>
     <string name="pescetarian_string">Pescetarian</string>
-    <string name="glutenFree_string">Glute Free</string>
+    <string name="glutenFree_string">Gluten Free</string>
 
 
     <string name="save_string">Save</string>
