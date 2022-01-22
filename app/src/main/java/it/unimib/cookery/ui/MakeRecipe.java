@@ -1,10 +1,15 @@
 package it.unimib.cookery.ui;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -56,7 +61,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
     private Button searchIngredientBtn, addStepBtn, saveBtn, saveBtnStep, saveRecipe, deleteBtn;
 
-    private RecyclerView ingredientListRV,addIngredientListRV, stepRV;
+    private RecyclerView ingredientListRV, addIngredientListRV, stepRV;
 
     private MakeRecipeSearchAdapter searchChipAdapter;
     private IngredientChipAdapter ingredientChipAdapter;
@@ -79,7 +84,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     private ImageView recipeImage;
     private TextView recipeImageTextView;
     private Uri imageUri;
-    private String uriImageString="";
+    private String uriImageString = "";
 
     private Spinner typeSpinner;
 
@@ -90,6 +95,10 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     private static ArrayList<StepApi> stepsList = new ArrayList<>();
     private static ArrayList<String> stepsListString = new ArrayList<>();
     private static ArrayList<Recipe> recipesList = new ArrayList<>();
+
+
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+
 
     public static void updateArrayList(IngredientApi ingredient) {
         IngredientRecipe ingredientRecipe;
@@ -102,7 +111,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         ingredientsListDb.add(ingredientRecipe);
         ingredientsList.add(ingredient);
     }
-
 
 
     @Override
@@ -120,7 +128,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         numServ = findViewById(R.id.numServ);
         saveRecipe = findViewById(R.id.save_recipe);
         recipeImage = findViewById(R.id.recipeImage);
-        recipeImageTextView= findViewById(R.id.chooseImageText);
+        recipeImageTextView = findViewById(R.id.chooseImageText);
 
 
         //setting up typeSpinner
@@ -131,20 +139,20 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
         //setting db
         db = new RecipeRepository(getApplication(), this);
-        dbSearch = new DatabasePantryRepository(getApplication(),this);
+        dbSearch = new DatabasePantryRepository(getApplication(), this);
         //saving recipe
         saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             //todo settare nel costrurtore L'immagine
             //todo settare il controllo per gli step e gli ingredienti vuoti
             public void onClick(View v) {
-               if(recipeNameEt.getText().toString().isEmpty()) {
-                    Log.d("test", ": "+recipeNameEt.getText().toString());
+                if (recipeNameEt.getText().toString().isEmpty()) {
+                    Log.d("test", ": " + recipeNameEt.getText().toString());
                     recipeNameEt.setError("Enter name Recipe");
                     recipeNameEt.requestFocus();
                     return;
                 }
-                if(numServ.getText().toString().isEmpty()) {
+                if (numServ.getText().toString().isEmpty()) {
                     numServ.setError("Enter number of people");
                     numServ.requestFocus();
                     return;
@@ -161,8 +169,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         ingredientChipAdapter = new IngredientChipAdapter();
         stepAdapter = new RecipeProcedureAdapter();
 
-        // todo fare in modo che le dialog si possoano chiudere solo con i pulsanti salva
-        // todo e cancella (da implementare) e non con il tap fuori dialog
 
         //add ingredient
         searchIngredientBtn.setOnClickListener(v -> {
@@ -178,7 +184,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 // nuovo codice
 
         // todo controllare vari file e settare le stringhe a costanti eccetera
-        // todo aspettare risposta ginelli su cosa deprecata
         recipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,38 +198,40 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
             }
         });
 
+
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+                            imageUri = data.getData();
+                            uriImageString = imageUri.toString();
+                            Glide.with(getApplicationContext())
+                                    .load(imageUri.toString())
+                                    .into(recipeImage);
+
+                            recipeImageTextView.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
     }
 
 
-
-    private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, costants.PICK_IMAGE);
+    public void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        activityResultLauncher.launch(intent);
     }
 
 
+    private void checkPermission(String permission, int requestCode) {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == costants.PICK_IMAGE){
-            imageUri = data.getData();
-            uriImageString=imageUri.toString();
-            Glide.with(this)
-                    .load(imageUri.toString())
-                    .into(recipeImage);
-
-            recipeImageTextView.setVisibility(View.GONE);
-
-
-        }
-    }
-
-    private void checkPermission(String permission, int requestCode){
-
-        if(ContextCompat.checkSelfPermission(MakeRecipe.this, permission) == PackageManager.PERMISSION_DENIED){
+        if (ContextCompat.checkSelfPermission(MakeRecipe.this, permission) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(MakeRecipe.this, new String[]{permission}, requestCode);
-        }else{
+        } else {
             openGallery();
         }
     }
@@ -233,22 +240,18 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode == costants.STORAGE_PERMISSION_CODE){
+        if (requestCode == costants.STORAGE_PERMISSION_CODE) {
 
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
             }
         }
     }
 
 
-    // fine nuovo codice
-
-
     private void makeDb(Recipe recipe) {
         //salvataggio della ricetta
-       db.createRecipe(recipe, ingredientsListDb, stepsList);
-
+        db.createRecipe(recipe, ingredientsListDb, stepsList);
 
 
     }
@@ -281,20 +284,20 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         });
         stepDialog.show();
 
-    deleteBtn= stepDialog.findViewById(R.id.ingredient_dialog_btn_delete);
+        deleteBtn = stepDialog.findViewById(R.id.ingredient_dialog_btn_delete);
 
-    deleteBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            stepDialog.dismiss();
-        }
-    });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stepDialog.dismiss();
+            }
+        });
 
 
     }
 
     private void recipeStepParse(ArrayList<StepApi> stepsList) {
-        for(int j = 0; j < stepsList.size(); j++) {
+        for (int j = 0; j < stepsList.size(); j++) {
             stepsListString.add(stepsList.get(j).getStep());
         }
     }
@@ -332,7 +335,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText.length() > 2) {
+                if (newText.length() > 2) {
                     dbSearch.readIngredientApi(newText);
                 } else {
                     searchChipAdapter.setData(null);
