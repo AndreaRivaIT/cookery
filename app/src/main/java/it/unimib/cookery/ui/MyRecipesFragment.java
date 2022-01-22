@@ -113,25 +113,6 @@ public class MyRecipesFragment extends Fragment implements ResponseCallbackDb {
         // recipeArrayList = risultato query database
 
 
-        //  solo per prova //
-
-       /* recipeArrayList.add(new Recipe("pasta al forno", "First course", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("risotto", "First course", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("arrosto", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));
-        recipeArrayList.add(new Recipe("parmigina", "Main meal", R.drawable.spoonacular));*/
-
-
-        // fine codice solo per prova //
-
-
-
 
         /* creo l'oggetto adapter e lo inizializzo con la view corrente e con l'array list*/
         adapter = new AdapterClass(getContext(), recipeArrayList); /* al posto di recipeArrayList si metterà il risultato della query al database */

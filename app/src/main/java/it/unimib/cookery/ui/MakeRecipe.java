@@ -159,7 +159,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
                 }
                 if (stepsList.isEmpty() || ingredientsList.isEmpty()){
-                    Toast.makeText(MakeRecipe.this, "Step or ingredient are empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MakeRecipe.this, R.string.empty_field, Toast.LENGTH_LONG).show();
                     return;
                 }
                 Recipe newRecipe = new Recipe(recipeNameEt.getText().toString(), typeSpinner.getSelectedItem().toString(), uriImageString, Integer.parseInt(numServ.getText().toString()));
