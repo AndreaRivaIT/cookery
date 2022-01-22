@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 import it.unimib.cookery.ui.MainActivity;
 
 public class LoginRegisterUser extends AppCompatActivity implements View.OnClickListener {
@@ -31,11 +35,14 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
     private ProgressBar progressBar;
     private ImageView back;
     private FirebaseAuth mAuth;
+    private Costants constants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_register_activity);
+
+        constants = new Costants();
 
         register = findViewById(R.id.register);
         register.setOnClickListener(this);
@@ -112,9 +119,9 @@ public class LoginRegisterUser extends AppCompatActivity implements View.OnClick
 
                     if(user.isEmailVerified()) {
                         //redirect to user activity
-                        startActivity(new Intent(LoginRegisterUser.this, MainActivity.class));
-                        MainActivity.setLogged(true);
                         finish();
+                        MainActivity.sharedPreferences.edit().putBoolean(constants.LOGGED, true).commit();
+                        startActivity(new Intent(LoginRegisterUser.this, MainActivity.class));
                     } else {
                         user.sendEmailVerification();
                         Toast.makeText(LoginRegisterUser.this, "check your email to verify your account", Toast.LENGTH_LONG).show();

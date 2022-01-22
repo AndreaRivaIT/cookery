@@ -41,7 +41,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="25dp">
 
                 <ImageView
                     android:id="@+id/recipeImage"
@@ -108,13 +108,30 @@
 
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/type_spinner"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_category"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_regular">
+                </TextView>
+
+                <Spinner
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/type_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/ingredient_button"
