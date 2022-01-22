@@ -86,7 +86,7 @@ public class Costants {
 
 
 
-    public static final String API_KEY = anotherAnotherKey;
+    public static final String API_KEY = anotheranotherAnotherKey;
     public static final String BASE_URL = "https://api.spoonacular.com/";
 
     /* fine stringhe costanti per reftrofit */
