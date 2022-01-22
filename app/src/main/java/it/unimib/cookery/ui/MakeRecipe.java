@@ -143,17 +143,16 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         //saving recipe
         saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
-            //todo settare nel costrurtore L'immagine
             //todo settare il controllo per gli step e gli ingredienti vuoti
             public void onClick(View v) {
                 if (recipeNameEt.getText().toString().isEmpty()) {
                     Log.d("test", ": " + recipeNameEt.getText().toString());
-                    recipeNameEt.setError("Enter name Recipe");
+                    recipeNameEt.setError(costants.NAME_ERROR);
                     recipeNameEt.requestFocus();
                     return;
                 }
                 if (numServ.getText().toString().isEmpty()) {
-                    numServ.setError("Enter number of people");
+                    numServ.setError(costants.NUMBER_PEOPLE_ERROR);
                     numServ.requestFocus();
                     return;
                 }
@@ -181,7 +180,6 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
         });
 
 
-// nuovo codice
 
         // todo controllare vari file e settare le stringhe a costanti eccetera
         recipeImage.setOnClickListener(new View.OnClickListener() {

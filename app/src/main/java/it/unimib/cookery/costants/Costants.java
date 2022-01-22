@@ -118,6 +118,11 @@ public class Costants {
     public static final int PICK_IMAGE = 100;
     public static int STORAGE_PERMISSION_CODE=113;
 
+    /* stringhe make recipe */
+    public static final String NAME_ERROR= "Enter recipe name";
+    public static final String NUMBER_PEOPLE_ERROR= "Enter a number of people";
+
+
 
     public Costants() {
 
