@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,12 +52,28 @@ public class UserProfile extends AppCompatActivity {
             }
         });
 
-        mSaveButton = findViewById(R.id.saveButton);
+        String email = profileEmail.getText().toString().trim();
+        String password = profilePassword.getText().toString().trim();
+
+        mSaveButton = findViewById(R.id.saveButton_user);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUser();
-                finish();
+                if(email.isEmpty()) {
+                    profileEmail.setError("Email is required");
+                    profileEmail.requestFocus();
+                }else if(!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
+                    profileEmail.setError("Please enter a valid email address");
+                    profileEmail.requestFocus();
+                }else if(password.isEmpty()) {
+                    profilePassword.setError("Password is required");
+                    profilePassword.requestFocus();
+                }else if(password.length() < 9) {
+                    profilePassword.setError("Minimum password lenght is 9 characters");
+                } else {
+                    updateUser();
+                    finish();
+                }
             }
         });
 
