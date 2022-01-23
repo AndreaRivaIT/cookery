@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ public class UserProfile extends AppCompatActivity {
     private EditText profileEmail, profilePassword;
     private Button mSaveButton;
     private FirebaseUser user;
+    private ImageView back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,21 @@ public class UserProfile extends AppCompatActivity {
 
         profilePassword = findViewById(R.id.profilePassword);
 
+        back_button = findViewById(R.id.back_button_login_2);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         mSaveButton = findViewById(R.id.saveButton);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateUser();
+                finish();
             }
         });
 
