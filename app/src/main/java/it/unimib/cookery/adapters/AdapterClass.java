@@ -84,12 +84,12 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         /* ottiene l'image view dell'elemento dell'array list e ne setta l'immagine */
 
-    // todo settare un immagine di default se non viene selezionata la foto
+        // todo settare un immagine di default se non viene selezionata la foto
 
         ImageView img =(ImageView) convertView.findViewById(R.id.imageViewRicetta);
         if(!listdata.get(position).getImageUrl().equals("")) {
-        Uri myUri = Uri.parse(listdata.get(position).getImageUrl());
-        img.setImageURI(myUri);
+            Uri myUri = Uri.parse(listdata.get(position).getImageUrl());
+            img.setImageURI(myUri);
 
         }else {
 
@@ -179,4 +179,3 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
 
 }
-

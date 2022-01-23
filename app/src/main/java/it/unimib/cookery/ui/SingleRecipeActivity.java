@@ -236,14 +236,11 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
         rcvChips.setLayoutManager(flexboxLayoutManager);
         rcvChips.setFocusable(false);
         rcvChips.setNestedScrollingEnabled(false);
-
         if(pantryIngredients == null)
             ingredientChipAdapter.setData(ingredienteRecived);
         else
             ingredientChipAdapter.setDataPantry(ingredienteRecived, pantryIngredients);
-
         rcvChips.setAdapter(ingredientChipAdapter);
-
     }*/
 
 
@@ -276,19 +273,19 @@ public class SingleRecipeActivity extends AppCompatActivity implements ResponseC
 
     private void setStepAdapter() {
 
-       if(stepRecived.size()==0)
-           noSteps.setVisibility(View.VISIBLE);
-       else {
-           //Inflate degli steps procedimento della ricetta
-           rcvSteps = findViewById(R.id.rcv_steps);
-           recipeProcedureAdapter = new RecipeProcedureAdapter();
-           LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-           rcvSteps.setLayoutManager(linearLayoutManager);
-           rcvSteps.setFocusable(false);
-           rcvSteps.setNestedScrollingEnabled(false);
-           recipeProcedureAdapter.setData(stepRecived);
-           rcvSteps.setAdapter(recipeProcedureAdapter);
-       }
+        if(stepRecived.size()==0)
+            noSteps.setVisibility(View.VISIBLE);
+        else {
+            //Inflate degli steps procedimento della ricetta
+            rcvSteps = findViewById(R.id.rcv_steps);
+            recipeProcedureAdapter = new RecipeProcedureAdapter();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            rcvSteps.setLayoutManager(linearLayoutManager);
+            rcvSteps.setFocusable(false);
+            rcvSteps.setNestedScrollingEnabled(false);
+            recipeProcedureAdapter.setData(stepRecived);
+            rcvSteps.setAdapter(recipeProcedureAdapter);
+        }
     }
 
 
