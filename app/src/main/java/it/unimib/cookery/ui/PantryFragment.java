@@ -57,8 +57,8 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     static private List<IngredientPantry> freezer = new ArrayList();
 
     private static RecyclerView rvPantry;
-    private RecyclerView rvFridge;
-    private RecyclerView rvFreezer;
+    private static RecyclerView rvFridge;
+    private static RecyclerView rvFreezer;
     private RecyclerView rcvIngredientSearch;
     private List<IngredientApi> ingredientApiSearch = new ArrayList();
 
@@ -190,6 +190,8 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     }
     public static void cleanX(){
         rvPantry.removeAllViews();
+        rvFridge.removeAllViews();
+        rvFreezer.removeAllViews();
     }
     private void closeKeyboard() {
         // this will give us the view which is currently focus in this layout
