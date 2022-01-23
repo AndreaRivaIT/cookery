@@ -2,6 +2,7 @@ package it.unimib.cookery.ui;
 
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     static private List<IngredientPantry> fridge = new ArrayList();
     static private List<IngredientPantry> freezer = new ArrayList();
 
-    private RecyclerView rvPantry;
+    private static RecyclerView rvPantry;
     private RecyclerView rvFridge;
     private RecyclerView rvFreezer;
     private RecyclerView rcvIngredientSearch;
@@ -70,7 +71,7 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     private IngredientApi primo;
     private IngredientApi secondo;
     private IngredientApi terzo;
-
+    private View idLayout;
     public PantryFragment() {
         // Required empty public constructor
     }
@@ -84,6 +85,7 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         root = inflater.inflate(R.layout.fragment_pantry, container, false);
         db = new DatabasePantryRepository(requireActivity().getApplication(), this);
         db.readAllIngredientPantry();
@@ -123,7 +125,9 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
         designBottomSheet = root.findViewById(R.id.design_bottom_sheet);
         LinearLayout linearLayout = root.findViewById(R.id.design_bottom_sheet);
-        bottomSheetBehavior = BottomSheetBehavior.from(linearLayout);
+
+        bottomSheetBehavior = BottomSheetBehavior.from(designBottomSheet);
+        bottomSheetBehavior.setDraggable(false);
         btnClose = root.findViewById(R.id.btn_close);
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,9 +140,9 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 rvPantry.removeAllViews();
 
-
             }
         });
+
         //al focus della  search box espande la bottom sheet
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -172,12 +176,21 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
                 searchView.clearFocus();
             }
         });
+
+        idLayout = root.findViewById(R.id.container_pantry);
+
+        idLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("test", "click");
+                cleanX();
+            }
+        });
         return root;
     }
-
-
-
-
+    public static void cleanX(){
+        rvPantry.removeAllViews();
+    }
     private void closeKeyboard() {
         // this will give us the view which is currently focus in this layout
         View view = this.getActivity().getCurrentFocus();
@@ -191,7 +204,10 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
 
     public static void savedb(IngredientPantry ingredientPantry) {
-         db.create(ingredientPantry);
+        int  idDb = pantry.size() + fridge.size() +freezer.size() + 2;
+        db.create(ingredientPantry);
+        Log.d("test",""+ idDb);
+        ingredientPantry.setIdIngredient(idDb);
         if (ingredientPantry.pantryId == 1) {
             pantry.add(ingredientPantry);
             ingredientPantryAdapter.setData(pantry);
@@ -206,7 +222,6 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
 
     public static void updateQuantity(IngredientPantry ingredientPantry){
         db.update(ingredientPantry);
-
     }
 
     @Override
@@ -236,14 +251,10 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
                 });
             }
         }
-
     }
-
     @Override
     public void onResponsePantry(Object obj) {
-
     }
-
     @Override
     public void onResponseSearchIngredient(Object obj) {
         if (obj != null) {
@@ -258,30 +269,23 @@ public class PantryFragment extends Fragment implements ResponseCallbackDb {
             }
         }
     }
-
-
     public static void deleteIngredient(IngredientPantry ingredientPantry){
         //Log.d("test","delete");
         db.delete(ingredientPantry);
         //db.readAllIngredientPantry();
     }
-
     private void createPantry(List<IngredientPantry> listData) {
         ingredientPantryAdapter.setData(listData);
     }
-
     private void createFridge(List<IngredientPantry> listData) {
         ingredientFridgeAdapter.setData(listData);
     }
-
     private void createFreeze(List<IngredientPantry> listData) {
         ingredientFreezeAdapter.setData(listData);
     }
-
     private void createSearchChips(List listData) {
         searchChipAdapter.setData(listData);
     }
-
     @Override
     public void onFailure(String errorMessage) {
     }

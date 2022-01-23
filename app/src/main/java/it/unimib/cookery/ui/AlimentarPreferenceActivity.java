@@ -38,8 +38,10 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
     private ArrayList<String> preferencesChoosen = new ArrayList<>();
     private String intollerances = "";
     private String diet = "";
-    public static boolean logged;
+    private boolean logged;
     private boolean preferenciesModified;
+    public static SharedPreferences sharedPreferences;
+    private Costants costants = new Costants();
 
 
     private DrawerLayout mDrawerLayout;
@@ -57,6 +59,10 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
 
 
         Log.d("statusDebug", "on create preferences");
+
+        sharedPreferences = getSharedPreferences(costants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+        logged = sharedPreferences.getBoolean(costants.LOGGED, false);
+
 
         setContentView(R.layout.alimentar_preference_activity);
 
@@ -325,9 +331,6 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
 
 
 
-    public static void setLogged(boolean bool) {
-        logged = bool;
-    }
 
     //(Not that dynamic) Dynamic Drawer and header menu that changes when user login or logout
     public void setDrawerMenu() {
@@ -351,9 +354,9 @@ public class AlimentarPreferenceActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.logout_drawer:
                             FirebaseAuth.getInstance().signOut();
-                            setLogged(false);
-                            startActivity(getIntent());
+                            logged = sharedPreferences.edit().putBoolean(costants.LOGGED, false).commit();
                             finish();
+                            startActivity(getIntent());
                             break;
                         case R.id.my_profile:
                             startActivity(new Intent(getApplicationContext(), UserProfile.class));

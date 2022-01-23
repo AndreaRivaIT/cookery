@@ -17,13 +17,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 import it.unimib.cookery.R;
+import it.unimib.cookery.costants.Costants;
 
 public class UserProfile extends AppCompatActivity {
 
     private EditText profileEmail, profilePassword;
     private Button mSaveButton;
     private FirebaseUser user;
+
     private ImageView back_button;
+
+    private Costants costants = new Costants();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +69,14 @@ public class UserProfile extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(UserProfile.this, "Email address has been updated", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserProfile.this, R.string.update_mail, Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(UserProfile.this, "Email address update has failed, try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserProfile.this, R.string.update_mail_fail, Toast.LENGTH_LONG).show();
                             }
                         }
                     });
         } else {
-            profileEmail.setError("Email address is required!");
+            profileEmail.setError(costants.EMAIL_REQUIRED);
             profileEmail.requestFocus();
         }
         if(!(profilePassword.getText().toString().isEmpty())) {
@@ -80,17 +85,17 @@ public class UserProfile extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(UserProfile.this, "Password has been updated", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserProfile.this, R.string.update_password, Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(UserProfile.this, "Password update has failed, try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UserProfile.this, R.string.update_mail_fail, Toast.LENGTH_LONG).show();
                             }
                         }
                     });
         } else if((profilePassword.getText().toString().length()) < 9) {
-            profilePassword.setError("Password length should be 9 characters or more");
+            profilePassword.setError(costants.PASSWORD_LENGTH);
             profilePassword.requestFocus();
         } else {
-            profilePassword.setError("Password is required!");
+            profilePassword.setError(costants.PASSWORD_REQUIRED);
             profilePassword.requestFocus();
         }
     }

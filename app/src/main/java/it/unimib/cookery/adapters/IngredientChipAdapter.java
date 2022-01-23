@@ -112,9 +112,7 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
 
         holder.tvIngredient.setText(ingredient.getName() + ":");
         Log.d("quanità", ""+ingredient.getAmount());
-
         switch (ingredient.getUnit()) {
-
             case "teaspoons":
                 holder.tvQuantity.setText(" " + ingredient.getAmount() + " tsps");
                 break;
@@ -164,7 +162,6 @@ public class IngredientChipAdapter extends RecyclerView.Adapter<IngredientChipAd
     public class IngredientViewHolder extends RecyclerView.ViewHolder {
         private TextView tvIngredient;
         private TextView tvQuantity;
-
         public IngredientViewHolder(@NonNull View itemView) {
             super(itemView);
             tvIngredient = itemView.findViewById(R.id.tv_ingredient);

@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ResponseCallbackD
 
 
         /*creazione ricetta*/
-        String urlImg = "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-lasagne-bolognese/_jcr_content/header-par/image_single.img.jpg/1462958827968.jpg";
+
 
         db = new RecipeRepository(getApplication(), this);
 
