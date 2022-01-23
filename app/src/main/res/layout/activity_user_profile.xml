@@ -28,7 +28,17 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:text="Your profile"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:layout_height="130dp"
+        android:textColor="@color/black"
+        android:background="@drawable/xml_custom_shapes"/>
+
+    <TextView
+        android:layout_marginTop="30dp"
         android:layout_width="300dp"
         android:layout_height="105dp"
         android:layout_gravity="center"
@@ -43,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp" >
+        android:layout_marginTop="40dp" >
 
         <TextView
             android:id="@+id/textViewMail"
@@ -95,12 +105,12 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/saveButton_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/profilePassword"
             android:layout_marginStart="250dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/cookery_blue"
