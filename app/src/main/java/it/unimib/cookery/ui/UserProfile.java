@@ -59,6 +59,7 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                  email = profileEmail.getText().toString().trim();
                  password = profilePassword.getText().toString().trim();
 
