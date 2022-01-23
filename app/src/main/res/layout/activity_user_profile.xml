@@ -29,7 +29,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:text="Your profile"
+        android:text="@string/your_profile"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:textSize="22sp"
@@ -115,13 +115,12 @@
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/cookery_blue"
             android:elevation="8dp"
-            android:enabled="false"
+            android:enabled="true"
+            android:clickable="true"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/save"
             android:textColor="@color/white" />
 
 
     </RelativeLayout>
-
-
 </LinearLayout>

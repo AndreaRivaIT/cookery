@@ -1,6 +1,7 @@
 package it.unimib.cookery.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.content.DialogInterface;
@@ -26,6 +27,7 @@ import android.widget.Toolbar;
 
 import com.google.android.material.chip.Chip;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 

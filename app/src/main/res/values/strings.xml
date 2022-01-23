@@ -179,6 +179,7 @@
     <string name="update_mail_fail">Email address update has failed, try again</string>
     <string name="update_password">Password has been updated</string>
     <string name="update_password_fail">Password update has failed, try again</string>
+    <string name="your_profile">Your profile</string>
 
 
     <!-- fine string registrazione e log-in-->
