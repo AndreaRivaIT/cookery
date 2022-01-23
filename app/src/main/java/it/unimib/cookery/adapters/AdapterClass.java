@@ -88,8 +88,7 @@ public class AdapterClass extends ArrayAdapter<Recipe> implements Filterable {
 
         ImageView img =(ImageView) convertView.findViewById(R.id.imageViewRicetta);
         if(!listdata.get(position).getImageUrl().equals("")) {
-            Uri myUri = Uri.parse(listdata.get(position).getImageUrl());
-            img.setImageURI(myUri);
+            Glide.with(parent.getContext()).load(listdata.get(position).getImageUrl()).into(img);
 
         }else {
 
