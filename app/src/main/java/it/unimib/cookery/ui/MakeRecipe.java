@@ -212,6 +212,10 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
                             // There are no request codes
                             Intent data = result.getData();
                             imageUri = data.getData();
+
+                            getContentResolver().takePersistableUriPermission(imageUri,
+                                    Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
                             uriImageString = imageUri.toString();
                             Glide.with(getApplicationContext())
                                     .load(imageUri.toString())
@@ -226,7 +230,7 @@ public class MakeRecipe extends AppCompatActivity implements ResponseCallbackDb 
 
 
     public void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         activityResultLauncher.launch(intent);
     }
 
